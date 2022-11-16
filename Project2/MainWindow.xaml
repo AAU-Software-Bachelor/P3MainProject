@@ -18,47 +18,67 @@
             <Label Content="Religion" HorizontalAlignment="Left" Margin="473,266,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14"/>
         </Grid>-->
         <Grid Grid.Column="1" Grid.Row="1" Margin="0,61,0,0" Background="#FFADADAD">
-            <Label Grid.Column="1" Grid.Row="0" x:Name="RaceMainMenu" HorizontalAlignment="Left" Margin="78,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" MouseDoubleClick="RaceMainMenu_MouseDoubleClick">
+            <Label Grid.Column="1" Grid.Row="0" x:Name="RaceMainMenu" HorizontalAlignment="Left" Margin="35,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="RaceMainMenu_MouseDoubleClick">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/Race.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <TextBlock HorizontalAlignment="Center"><Run Text="Race"/></TextBlock>
+                    <Image Source="Images\Race.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center"><Run  Text="RACES"/></TextBlock>
+                    </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="277,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="268,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/Ablilities.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <TextBlock HorizontalAlignment="Center"><Run Text="Abilities"/></TextBlock>
+                    <Image Source="Images\Ablilities.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center" ><Run Text="ABILITIES"/></TextBlock>
+                    </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="467,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+            <Label HorizontalAlignment="Left" Margin="500,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/resources.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <TextBlock HorizontalAlignment="Center"><Run Text="Resources"/></TextBlock>
+                    <Image Source="Images\resources.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center" ><Run Text="RESOURCESS"/></TextBlock>
+                    </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="78,257,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="35,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/Items.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <TextBlock HorizontalAlignment="Center"><Run Text="Items"/></TextBlock>
+                    <Image Source="Images\Items.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center" ><Run Text="ITEMS"/></TextBlock>
+                    </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="277,257,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="268,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/Career.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <TextBlock HorizontalAlignment="Center"><Run Text="Career"/></TextBlock>
+                    <Image Source="Images\Career.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center"><Run Text="CAREER"/></TextBlock>
+                    </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="2"  HorizontalAlignment="Left" Margin="467,257,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14">
+            <Label  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="500,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" >
                 <StackPanel Orientation="Vertical">
-                    <Image Source="/religion.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <TextBlock HorizontalAlignment="Center"><Run Text="Religion"/></TextBlock>
+                    <Image Source="Images\religion.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="RELIGION"/></TextBlock>
+                    </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="1" Grid.Row="3"  HorizontalAlignment="Left" Margin="78,368,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="253" Width="272" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="AddMainMenu_MouseDoubleClick">
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="35,400,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="Images\Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
+                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                        <TextBlock HorizontalAlignment="Center" ><Run Text="GALLERY"/></TextBlock>
+                    </Border>
+                </StackPanel>
+            </Label>
+            <!--<Label  HorizontalAlignment="Left" Margin="35,412,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="209" Width="315" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="AddMainMenu_MouseDoubleClick">
                 <StackPanel Orientation="Vertical">
                     <TextBlock HorizontalAlignment="Center"><Run Text="Add"/></TextBlock>
                 </StackPanel>
-            </Label>
+            </Label>-->
         </Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="49*"/>

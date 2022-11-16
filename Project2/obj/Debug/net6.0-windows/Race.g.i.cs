@@ -53,7 +53,7 @@ namespace Project2 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Project2;component/race.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Project2;V1.0.0.0;component/race.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Race.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
