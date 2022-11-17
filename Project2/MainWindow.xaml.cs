@@ -33,14 +33,14 @@ namespace Project2
             this.Content = race;
         }
 
-        private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+       /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string input = "Empty"
+            string input = "Empty";
             input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
 
             string NewLabel = LabelGenerator(input);
             GridTextBlock.Children.Add(NewLabel);
-            
+
             TextBlock myTextBlock = new TextBlock();
             myTextBlock.FontSize = "14";
             myTextBlock.FontWeight = Fontweights.Bold;
@@ -66,7 +66,7 @@ namespace Project2
                 if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.f){
                     f++;
                 }
-                if(string.IsNullOrEmpty(GridTextBlock.Grid.Column.f && string.IsNullOrEmpty(GridTextBlock.Grid.Column.i)
+            if (string.IsNullOrEmpty(GridTextBlock.Grid.Column.f && string.IsNullOrEmpty(GridTextBlock.Grid.Column.i)))
                 {
                     break;
                 }
@@ -75,7 +75,7 @@ namespace Project2
             newlabel.x:name = input;
             return newlabel;
 
-        }
+        }*/
 
     }
 }

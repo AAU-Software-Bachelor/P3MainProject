@@ -1,4 +1,4 @@
-class config
+/*class config
 {
     public config(List<majorTrait> majorTraitList, List<resource> resourceList)
     {
@@ -8,4 +8,4 @@ class config
 
     public List<majorTrait> MTList {get; set;}
     public List<resource> ResList {get; set;}
-}
+}*/

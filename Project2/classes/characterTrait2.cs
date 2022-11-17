@@ -14,7 +14,7 @@ class characterTrait
     public string description{get; set;}
     public int UID{get; set;}
 
-    public void DeleteTrait()
+    /*public void DeleteTrait()
     {
         // no idea whats going on here
         foreach (majorTrait item in nameofconfig.MTList)
@@ -25,7 +25,7 @@ class characterTrait
         image = "";
         description = "";
         UID = 0;
-    }
+    }*/
     
     public void SaveToConfig()
     {
@@ -34,7 +34,7 @@ class characterTrait
 
 }
 
-class majorTrait : characterTrait
+/*class majorTrait : characterTrait
 {
     public majorTrait(string Name, string Image, string Desciption, int uid,
                       List<int> Exclusions, int Type, List<List<string>> Dependencies, List<string> Discounts, int Cost, List<int> AffectedResources, List<int> FreeAbilities)
@@ -70,4 +70,4 @@ class resource : characterTrait
     }
 
     public int type {get; set;}
-}
+}*/
