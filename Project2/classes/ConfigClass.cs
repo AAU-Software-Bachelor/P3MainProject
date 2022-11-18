@@ -5,8 +5,7 @@ class config
 {
 	public config()
 	{
-		MTList = majorTraitList;
-		ResList = resourceList;
+		
 	}
 	public List<majorTrait> MTList = new List<majorTrait>();
 	public List<resource> ResList = new List<resource>();
@@ -15,17 +14,17 @@ class config
 	{
 		try {
 			this.MTList.Add(MT);
-			return 1;
+			return true;
 		}
-        catch { return 0; }
+		catch { return false; }
 	}
 	public bool saveresource(resource Res)
 	{
 		try
 		{
 			this.ResList.Add(Res);
-			return 1;
+			return true;
 		}
-        catch { return 0; }
+		catch { return false; }
 	}
 }
