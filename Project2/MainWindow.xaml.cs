@@ -35,9 +35,9 @@ namespace Project2
 
        private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string input = "Empty"
+            string input = "Empty";
             input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
-            TextBlock myTextBlock =
+            TextBlock myTextBlock = "Empty";
         }
     }
 }

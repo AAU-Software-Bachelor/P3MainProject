@@ -1,3 +1,5 @@
+using System;
+
 class characterTrait
 {
     
@@ -15,21 +17,16 @@ class characterTrait
     public int UID{get; set;}
 
     public void DeleteTrait()
-    {
-        // no idea whats going on here
-        foreach (majorTrait item in nameofconfig.MTList)
-        {
-            
-        }  
-        name = "";
-        image = "";
-        description = "";
-        UID = 0;
+    { 
+        this.name = null;
+        this.image = null;
+        this.description = null;
+        this.UID = null;
     }
     
-    public void SaveToConfig()
+    public void SaveToConfig(int configID)
     {
-        
+        Console.WriteLine("send to this (" + configID + ") configuration file")
     }
 
 }
