@@ -48,5 +48,21 @@ namespace Project2
         {
 
         }
+
+        private void OnClick1(object sender, RoutedEventArgs e)
+        {
+            this.InitializeComponent();
+            this.ListForRaces.Items.Add("New Race");
+
+        }
+
+        private void OnClick2(object sender, RoutedEventArgs e)
+        {
+            foreach (ListViewItem eachItem in ListForRaces.SelectedItems)
+            {
+                ListForRaces.Items.Remove(eachItem);
+            }
+
+        }
     }
 }
