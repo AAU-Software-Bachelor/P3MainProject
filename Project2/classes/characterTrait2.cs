@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 class characterTrait
 {
@@ -18,15 +19,15 @@ class characterTrait
 
     public void DeleteTrait()
     { 
-        this.name = null;
-        this.image = null;
-        this.description = null;
-        this.UID = null;
+        this.name = "";
+        this.image = "";
+        this.description = "";
+        this.UID = 0;
     }
     
     public void SaveToConfig(int configID)
     {
-        Console.WriteLine("send to this (" + configID + ") configuration file")
+        Console.WriteLine("send to this (" + configID + ") configuration file");
     }
 
 }
@@ -47,11 +48,12 @@ class majorTrait : characterTrait
     }
     public List<string> exclusions {get; set;}
     public int type {get; set;}
-    public List<List<string>> dependencies {get; set;}
-    public List<string> discounts {get; set;}
+    public List<string> dependencies = new List<string>();
+
+    public List<string> Discounts = new List<string>();
     public int cost {get; set;}
-    public List<int> affectedResources {get; set;}
-    public List<int> freeAbilities {get; set;}
+    public List<string> AffectedResources = new List<string>();
+    public List<int> FreeAbilities = new List<int>();
 
     public void addDepen(string uuid){
         this.dependencies.Add(uuid);
