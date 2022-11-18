@@ -21,3 +21,13 @@ C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Project2.genru
 C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\ref\Project2.dll
 C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Race.g.cs
 C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Race.baml
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.csproj.AssemblyReference.cache
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Abilities.g.cs
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Race.g.cs
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2_MarkupCompile.cache
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2_MarkupCompile.lref
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.dll
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\refint\Project2.dll
+C:\Users\Mattias\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.pdb

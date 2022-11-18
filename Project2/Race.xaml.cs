@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,12 @@ namespace Project2
             InitializeComponent();
         }
 
+        private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            MainWindow mainWindow = new MainWindow();
+            this.Content = mainWindow;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -46,6 +53,55 @@ namespace Project2
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void OnClick1(object sender, RoutedEventArgs e)
+        {
+            this.InitializeComponent();
+            this.ListForRaces.Items.Add("New Race");
+
+        }
+
+        private void OnClick2(object sender, RoutedEventArgs e)
+        {
+            foreach (ListViewItem eachItem in ListForRaces.SelectedItems)
+            {
+                if(ListForRaces.Items.Count == 1)
+                {
+                    throw new ArgumentOutOfRangeException("Du kan ikke slette denne race.");
+                }
+                else
+                {
+                    ListForRaces.Items.Remove(eachItem);
+                }
+            }
+
+        }
+        private void OnClick3(object sender, RoutedEventArgs e)
+        {
+            this.InitializeComponent();
+            //Hent alle abilities
+            //this.ListStarterAbilities.Items.Add();
+        }
+
+        private void OnClick4(object sender, RoutedEventArgs e)
+        {
+            //starter resources
+            //hent starter resources
+            this.InitializeComponent();
+
+        }
+
+        private void OnClick5(object sender, MouseButtonEventArgs e)
+        {
+            Button button = (Button)sender;
+            var item = button.Tag;
+
+            ListStarterAbilities.Items.Remove(item);
+
+
+
 
         }
     }

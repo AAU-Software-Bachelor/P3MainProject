@@ -10,7 +10,7 @@
 
     <Grid Background="#FFCCCCCC" Margin="0,0,-465,-686">
         <Label Content="Abilities" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="24"/>
-        <Button Content="" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="51" Width="56" Click="Button_Click" BorderBrush="#FFFDFDFD">
+        <Button Content="" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="51" Width="56" BorderBrush="#FFFDFDFD">
             <Button.Background>
                 <ImageBrush ImageSource="/back.png"/>
             </Button.Background>
@@ -23,9 +23,9 @@
                 <Label Content="Affected Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                 <Label Content="Select Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,57,0,0" Height="28" Width="154" FontWeight="Bold"/>
                 <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,53,0,0" Height="32" Width="97" FontWeight="Bold"/>
-                <ComboBox Margin="10,154,202,237" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
-                <ComboBox Margin="10,90,202,301" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
-                <ComboBox Margin="10,212,203,179" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
+                <ComboBox Margin="10,154,202,237" Text="Select Ability"/>
+                <ComboBox Margin="10,90,202,301" Text="Select Ability"/>
+                <ComboBox Margin="10,212,203,179"  Text="Select Ability"/>
                 <Button Content="Add+" HorizontalAlignment="Center" Margin="0,381,0,0" VerticalAlignment="Top" Height="34" Width="98"/>
             </Grid>
         </Border>
@@ -34,12 +34,12 @@
                 <Label Content="Acquisition Cost" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                 <Label Content="Select Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,57,0,0" Height="28" Width="154" FontWeight="Bold"/>
                 <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,53,0,0" Height="32" Width="97" FontWeight="Bold"/>
-                <ComboBox Margin="22,90,191,487" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
-                <ComboBox Margin="22,212,191,365" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
-                <ComboBox Margin="22,330,191,247" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
+                <ComboBox Margin="22,90,191,487"  Text="Select Ability"/>
+                <ComboBox Margin="22,212,191,365"  Text="Select Ability"/>
+                <ComboBox Margin="22,330,191,247"  Text="Select Ability"/>
                 <Button Content="Add" HorizontalAlignment="Center" Margin="0,567,0,0" VerticalAlignment="Top" Height="34" Width="98"/>
-                <ComboBox Margin="60,147,237,430" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
-                <ComboBox Margin="60,272,237,305" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability"/>
+                <ComboBox Margin="60,147,237,430" Text="Select Ability"/>
+                <ComboBox Margin="60,272,237,305"  Text="Select Ability"/>
             </Grid>
         </Border>
 

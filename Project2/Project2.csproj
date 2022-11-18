@@ -17,14 +17,4 @@
     <None Remove="resources.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Ablilities.png" />
-    <Resource Include="back.png" />
-    <Resource Include="Career.png" />
-    <Resource Include="Items.png" />
-    <Resource Include="Race.png" />
-    <Resource Include="religion.png" />
-    <Resource Include="resources.png" />
-  </ItemGroup>
-
 </Project>

@@ -22,7 +22,7 @@
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Race.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
                     <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
-                        <TextBlock HorizontalAlignment="Center"><Run  Text="RACES"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Center"><Run Text="RACES"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
