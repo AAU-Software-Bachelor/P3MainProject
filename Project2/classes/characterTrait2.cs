@@ -6,16 +6,11 @@ class characterTrait
 	
 	public characterTrait(string Name, string Image, string Desciption, int uid)
 	{
-		name  = Name;
-		image = Image;
-		description = Desciption;
-		UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
-		
+		string name  = Name;
+		string image = Image;
+		string description = Desciption;
+		int UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
 	}
-	public string name{get; set;}
-	public string image{get; set;}
-	public string description{get; set;}
-	public int UID{get; set;}
 
 	public void DeleteTrait()
 	{ 
@@ -34,29 +29,28 @@ class characterTrait
 
 class majorTrait : characterTrait
 {
-	public majorTrait(string Name, string Image, string Desciption, int uid,
-					  List<int> Exclusions, int Type, List<List<string>> Dependencies, List<string> Discounts, int Cost, List<int> AffectedResources, List<int> FreeAbilities)
+	public majorTrait(string Name, string Image, string Desciption, int uid, int Type, int Cost, int Costtype)
 					  : base(Name, Image, Desciption, uid)
 	{
-		exclusions = Exclusions;
-		type = Type;
-		dependencies = Dependencies;
-		discounts = Discounts;
-		cost = Cost;
-		affectedResources = AffectedResources;
-		freeAbilities = FreeAbilities;
+		int costType = Costtype;
+		int cost = Cost;
+		int type = Type;
+		object dependentDiscount = new { };
+		List<string> exclusions = new List<string>();
+		List<string> AffectedResources = new List<string>();
+		List<int> FreeAbilities = new List<int>();
 	}
-	public List<string> exclusions {get; set;}
-	public int type {get; set;}
-	public List<string> dependencies = new List<string>();
 
-	public List<string> Discounts = new List<string>();
-	public int cost {get; set;}
-	public List<string> AffectedResources = new List<string>();
-	public List<int> FreeAbilities = new List<int>();
-
-	public void addDepen(string uuid){
-		this.dependencies.Add(uuid);
+	public void addAffectedResources(string uid, int ammount){
+		this.AffectedResources.Add(uid);
+	}
+	public void addFreeAbilities(string uid)
+	{
+		this.FreeAbilities.Add(uid);
+	}
+	public void addExclusions(string uid)
+	{
+		this.exclusions.Add(uid);
 	}
 	
 }
