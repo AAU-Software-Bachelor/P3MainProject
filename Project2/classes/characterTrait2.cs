@@ -35,7 +35,7 @@ class characterTrait
 class majorTrait : characterTrait
 {
 	public majorTrait(string Name, string Image, string Desciption, int uid,
-					  List<int> Exclusions, int Type, List<List<string>> Dependencies, List<string> Discounts, int Cost, List<int> AffectedResources, List<int> FreeAbilities)
+					  List<string> Exclusions, int Type, List<string> Dependencies, List<string> Discounts, int Cost, List<string> AffectedResources, List<int> FreeAbilities)
 					  : base(Name, Image, Desciption, uid)
 	{
 		exclusions = Exclusions;
@@ -49,11 +49,10 @@ class majorTrait : characterTrait
 	public List<string> exclusions {get; set;}
 	public int type {get; set;}
 	public List<string> dependencies = new List<string>();
-
-	public List<string> Discounts = new List<string>();
+	public List<string> discounts = new List<string>();
 	public int cost {get; set;}
-	public List<string> AffectedResources = new List<string>();
-	public List<int> FreeAbilities = new List<int>();
+	public List<string> affectedResources = new List<string>();
+	public List<int> freeAbilities = new List<int>();
 
 	public void addDepen(string uuid){
 		this.dependencies.Add(uuid);
