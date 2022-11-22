@@ -1,65 +1,73 @@
+using System;
+using System.Collections.Generic;
+
 class characterTrait
 {
-    
+
     public characterTrait(string Name, string Image, string Desciption, int uid)
     {
-        name  = Name;
+        name = Name;
         image = Image;
         description = Desciption;
         UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
-        
     }
-    public string name{get; set;}
-    public string image{get; set;}
-    public string description{get; set;}
-    public int UID{get; set;}
 
-    /*public void DeleteTrait()
+    public string name;
+    public string image;
+    public string description;
+    public int UID;
+
+    public void DeleteTrait()
     {
-        // no idea whats going on here
-        foreach (majorTrait item in nameofconfig.MTList)
-        {
-            
-        }  
-        name = "";
-        image = "";
-        description = "";
-        UID = 0;
-    }*/
-    
-    public void SaveToConfig()
+        this.name = "";
+        this.image = "";
+        this.description = "";
+        this.UID = 0;
+    }
+
+    public void SaveToConfig(int configID)
     {
-        
+        Console.WriteLine("send to this (" + configID + ") configuration file");
     }
 
 }
 
-/*class majorTrait : characterTrait
+class majorTrait : characterTrait
 {
     public majorTrait(string Name, string Image, string Desciption, int uid,
-                      List<int> Exclusions, int Type, List<List<string>> Dependencies, List<string> Discounts, int Cost, List<int> AffectedResources, List<int> FreeAbilities)
+                      List<string> Exclusions, int Type, List<string> Dependencies, List<string> Discounts, int Cost, List<string> AffectedResources, List<int> FreeAbilities, int Costtype)
                       : base(Name, Image, Desciption, uid)
     {
-        exclusions = Exclusions;
-        type = Type;
-        dependencies = Dependencies;
-        discounts = Discounts;
-        cost = Cost;
-        affectedResources = AffectedResources;
-        freeAbilities = FreeAbilities;
+        int costType = Costtype;
+        int cost = Cost;
+        int type = Type;
+        object dependentDiscount = new { };
+        exclusions = new List<string>();
+        affectedResources = new List<string>();
+        freeAbilities = new List<int>();
     }
-    public List<string> exclusions {get; set;}
-    public int type {get; set;}
-    public List<List<string>> dependencies {get; set;}
-    public List<string> discounts {get; set;}
-    public int cost {get; set;}
-    public List<int> affectedResources {get; set;}
-    public List<int> freeAbilities {get; set;}
+    public List<string> exclusions { get; set; }
+    public int type { get; set; }
+    public List<string> dependencies = new List<string>();
+    public List<string> discounts = new List<string>();
+    public int cost { get; set; }
+    public List<string> affectedResources = new List<string>();
+    public List<int> freeAbilities = new List<int>();
+    public int Costtype { get; set; }
 
-    public void addDepen(string uuid){
-        this.dependencies.Add(uuid);
+    public void addAffectedResources(string uid, int ammount)
+    {
+        this.affectedResources.Add(uid);
     }
-    
+    public void addFreeAbilities(int UID)
+    {
+        this.freeAbilities.Add(UID);
+    }
+    public void addExclusions(string uid)
+    {
+        this.exclusions.Add(uid);
+    }
+
 }
 
 class resource : characterTrait
@@ -69,5 +77,5 @@ class resource : characterTrait
         type = Type;
     }
 
-    public int type {get; set;}
-}*/
+    public int type { get; set; }
+}
