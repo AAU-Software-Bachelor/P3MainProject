@@ -100,8 +100,19 @@ namespace Project2
 
             ListStarterAbilities.Items.Remove(item);
 
-
-
+        }
+        private void OnClick6(object sender, RoutedEventArgs e)
+        {
+            //majorTrait.deleteContent()
+            //get name
+            //get image
+            //get description
+            //get cost
+            //for loop through Costtype
+            //for loop through freeAbilities
+            //for loop through exclusions
+            //for loop through dependencies / discounts
+            //for loop through affectedResources
 
         }
     }
