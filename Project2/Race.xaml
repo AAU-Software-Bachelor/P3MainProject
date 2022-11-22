@@ -20,8 +20,8 @@
         <ListView x:Name="ListForRaces" Margin="17,99,917,286">
             <ListViewItem IsSelected="True">New Race</ListViewItem>
         </ListView>
-        <Button Content="ADD" HorizontalAlignment="Left" Margin="17,373,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClick1" ClickMode="Press" Background="LightBlue"/>
-        <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,373,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClick2" ClickMode="Press" Background="OrangeRed"/>
+        <Button Content="ADD" HorizontalAlignment="Left" Margin="17,373,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddRaceList" ClickMode="Press" Background="LightBlue"/>
+        <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,373,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteRaceList" ClickMode="Press" Background="OrangeRed"/>
         <Grid Background="PaleGreen" Margin="224,99,32,26">
             <StackPanel Orientation="Vertical" Margin="33,29,737,391">
                 <Image Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
@@ -35,21 +35,13 @@
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
                 <Grid>
                     <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36" ItemsSource="{Binding newListStarterAbilities}">
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-                            <Image Source="/Images/DeleteImage.png" Stretch="Fill" Height="20" Width="22" Margin="20,5,0,0" MouseLeftButtonDown="OnClick5" Tag="{Binding}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-                            <Image Source="/Images/DeleteImage.png" Stretch="Fill" Height="20" Width="22" Margin="20,5,0,0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-                            <Image Source="/Images/DeleteImage.png" Stretch="Fill" Height="20" Width="22" Margin="20,5,0,0"/>
-                        </StackPanel>
+                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36">
+                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
                     </ListView>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClick3" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,190,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,271,71,20">
@@ -64,7 +56,6 @@
                                 <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="22" Margin="1,5,0,0"/>
                                 <Image Source="/Images/Minus.png" Stretch="Fill" Height="19" Width="22" Margin="1,0,0,0"/>
                             </StackPanel>
-                            <Image Source="/Images/DeleteImage.png" Stretch="Fill" Height="20" Width="22" Margin="10,5,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
@@ -73,7 +64,6 @@
                                 <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="22" Margin="1,5,0,0"/>
                                 <Image Source="/Images/Minus.png" Stretch="Fill" Height="19" Width="22" Margin="1,0,0,0"/>
                             </StackPanel>
-                            <Image Source="/Images/DeleteImage.png" Stretch="Fill" Height="20" Width="22" Margin="10,5,0,0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
@@ -82,13 +72,13 @@
                                 <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="22" Margin="1,5,0,0"/>
                                 <Image Source="/Images/Minus.png" Stretch="Fill" Height="19" Width="22" Margin="1,0,0,0"/>
                             </StackPanel>
-                            <Image Source="/Images/DeleteImage.png" Stretch="Fill" Height="20" Width="22" Margin="10,5,0,0"/>
                         </StackPanel>
                     </ListView>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClick4" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterResources" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="Button_Click_1"/>
+            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveRace"/>
         </Grid>
     </Grid>
 </Page>

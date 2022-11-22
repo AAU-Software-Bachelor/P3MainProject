@@ -26,6 +26,11 @@ namespace Project2
             InitializeComponent();
         }
 
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
@@ -41,51 +46,53 @@ namespace Project2
             win.Close();
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnClickAddRaceList(object sender, RoutedEventArgs e)
         {
-
+            ListForRaces.Items.Add("New Race");
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnClickDeleteRaceList(object sender, EventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void OnClick1(object sender, RoutedEventArgs e)
-        {
-            this.InitializeComponent();
-            this.ListForRaces.Items.Add("New Race");
-
-        }
-
-        private void OnClick2(object sender, RoutedEventArgs e)
-        {
-            foreach (ListViewItem eachItem in ListForRaces.SelectedItems)
+            foreach (ListViewItem itemSelected in ListForRaces.SelectedItems)
             {
-                if(ListForRaces.Items.Count == 1)
+                ListForRaces.Items.Remove(itemSelected);
+                /*if (ListForRaces.Items.Count == 1)
                 {
                     throw new ArgumentOutOfRangeException("Du kan ikke slette denne race.");
                 }
                 else
                 {
-                    ListForRaces.Items.Remove(eachItem);
-                }
+                    ListForRaces.Items.Remove(itemSelected);
+                }*/
             }
 
         }
-        private void OnClick3(object sender, RoutedEventArgs e)
+        private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
         {
             this.InitializeComponent();
-            //Hent alle abilities
-            //this.ListStarterAbilities.Items.Add();
+            ComboBox comboBox = new ComboBox();
+            comboBox.Text = "Select Ability";
+            comboBox.IsReadOnly = true;
+            comboBox.IsDropDownOpen = true;
+            comboBox.Margin = new Thickness(5, 5, 0, 0);
+            comboBox.Height = 24;
+            comboBox.Width = 185;
+            comboBox.SelectionChanged += ComboBox_SelectionChanged;
+            this.ListStarterAbilities.Items.Add(comboBox);
+
         }
 
-        private void OnClick4(object sender, RoutedEventArgs e)
+        private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            var item = button.Tag;
+
+            ListStarterAbilities.Items.Remove(item);
+
+        }
+
+
+        private void OnClickAddStarterResources(object sender, RoutedEventArgs e)
         {
             //starter resources
             //hent starter resources
@@ -93,13 +100,18 @@ namespace Project2
 
         }
 
-        private void OnClick5(object sender, MouseButtonEventArgs e)
+        private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             var item = button.Tag;
 
             ListStarterAbilities.Items.Remove(item);
 
+        }
+
+        private void OnClickSaveRace(object sender, RoutedEventArgs e)
+        {
+            //save race
         }
         private void OnClick6(object sender, RoutedEventArgs e)
         {
