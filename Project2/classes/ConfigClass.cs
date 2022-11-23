@@ -1,52 +1,59 @@
 using System;
+using System.Collections.Generic;
 
-class config
+namespace Project2
 {
-    public config(List<majorTrait> majorTraitList, List<resource> resourceList)
-    {
-        MTList.Add(new majorTrait[100], new majorTrait[100], new majorTrait[100], new majorTrait[100])
-    }
+	class config
+	{
+		public config()
+		{
+			MTList.Add(new majorTrait[100]);
+			MTList.Add(new majorTrait[100]);
+			MTList.Add(new majorTrait[100]);
+			MTList.Add(new majorTrait[100]);
+		}
 
-    public List<majorTrait[100]> MTList = new List<majorTrait[100]>();
-    public resource[100] ResArr = new resource[100];
+		public List<majorTrait[]> MTList = new List<majorTrait[]>();
+		public resource[] ResArr = new resource[100];
 
-    public int getUID(string type)
-    {
-        if (type == "r")
-        {
-            for(int i = 0; i < 100; i++)
-            {
-                if (ResArr[i] == null)
-                {
-                    return i;
-                }
-            }
-        }
-        else
-        {
-            for(int i = 0; i < 100; i++)
-            {
-                if (MTList[int(type)][i] == null)
-                {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-    public bool saveToList(object trait)
-    {
-        string[] id = trait.UID.split('-');
-        if (id[0] == "r") //r-****
-        {
-            ResArr[int(id[1])] = trait;
-            return true;
-        }
-        else
-        {
-            MTList[int(id[0])][int(id[1])] = trait;
-            return true;
-        }
-        return false;
-    }
+		public int getUID(string type)
+		{
+			if (type == "r")
+			{
+				for (int i = 0; i < 100; i++)
+				{
+					if (ResArr[i] == null)
+					{
+						return i;
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < 100; i++)
+				{
+					if (MTList[int.Parse(type)][i] == null)
+					{
+						return i;
+					}
+				}
+			}
+			return -1;
+		}
+		public bool saveToList(majorTrait trait)
+		{
+			string[] id = trait.UID.Split('-');
+
+			MTList[int.Parse(id[0])][int.Parse(id[1])] = trait;
+			return true;
+
+		}
+		public bool saveResToList(resource trait)
+		{
+			string[] id = trait.UID.Split('-');
+
+			ResArr[int.Parse(id[1])] = trait;
+			return true;
+		}
+	}
 }

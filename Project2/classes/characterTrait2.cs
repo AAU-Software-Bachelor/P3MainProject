@@ -4,7 +4,7 @@ using System.Collections.Generic;
 class characterTrait
 {
 
-	public characterTrait(int uid)
+	public characterTrait(string uid)
 	{
 		UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
 	}
@@ -32,18 +32,18 @@ class majorTrait : characterTrait
 
 	}
 	public int cost = new int();
-	public List<int> Costtype = new List<int>();
-	public List<int> freeAbilities = new List<int>();
+	public List<int> discounts = new List<int>();
+	public List<string> Costtype = new List<string>();
+	public List<string> freeAbilities = new List<string>();
 	public List<string> exclusions = new List<string>();
 	public List<string> dependencies = new List<string>();
-	public List<string> discounts = new List<string>();
 	public List<string> affectedResources = new List<string>();
 
 	public void addAffectedResources(string uid, int ammount)
 	{
 		this.affectedResources.Add(uid);
 	}
-	public void addFreeAbilities(int uid)
+	public void addFreeAbilities(string uid)
 	{
 		this.freeAbilities.Add(uid);
 	}
@@ -66,11 +66,11 @@ class majorTrait : characterTrait
 		this.image = "";
 		this.description = "";
 		this.cost = 0;
-		this.Costtype = new List<int>();
-		this.freeAbilities = new List<int>();
+		this.Costtype = new List<string>();
+		this.freeAbilities = new List<string>();
 		this.exclusions = new List<string>();
 		this.dependencies = new List<string>();
-		this.discounts = new List<string>();
+		this.discounts = new List<int>();
 		this.affectedResources = new List<string>();
 
 	}

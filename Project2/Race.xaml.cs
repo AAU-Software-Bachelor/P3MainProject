@@ -121,11 +121,20 @@ namespace Project2
             //for loop through exclusions
             //for loop through dependencies / discounts
             //for loop through affectedResources
+            string[] id = UID.Split('-');
+            majorTrait currentMT = currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
+            currentMT.deleteContent();
 
-            var name = this.FindName("textbox1") as TextBox;
+            string name = (this.FindName("nameBox") as TextBox).Text;
+            string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
+            string desc = (this.FindName("descBox") as TextBox).Text;
 
-            name.text = "hell";
+            currentMT.name = name;
+            currentMT.description = playerReq + "\n\n" + desc;
             
+
+
+            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
         }
         
     }
