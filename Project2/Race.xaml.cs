@@ -111,10 +111,6 @@ namespace Project2
 
         private void OnClickSaveRace(object sender, RoutedEventArgs e)
         {
-            //save race
-        }
-        private void OnClick6(object sender, RoutedEventArgs e)
-        {
             //majorTrait.deleteContent()
             //get name
             //get image
@@ -126,6 +122,11 @@ namespace Project2
             //for loop through dependencies / discounts
             //for loop through affectedResources
 
+            var name = this.FindName("textbox1") as TextBox;
+
+            name.text = "hell";
+            
         }
+        
     }
 }

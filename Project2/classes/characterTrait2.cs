@@ -6,24 +6,28 @@ class characterTrait
 
 	public characterTrait(int uid)
 	{
-		UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
+		UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
 	}
 
 	public string name;
 	public string image;
 	public string description;
-	public int UID;
+	public string UID;
 
 	public void SaveToConfig(int configID)
 	{
 		Console.WriteLine("send to this (" + configID + ") configuration file");
 	}
+	public void properDelete()
+    {
+
+    }
 
 }
 
 class majorTrait : characterTrait
 {
-	public majorTrait(int uid) : base(uid)
+	public majorTrait(string uid) : base(uid)
 	{
 
 	}
@@ -74,7 +78,7 @@ class majorTrait : characterTrait
 
 class resource : characterTrait
 {
-	public resource(int uid, int Type) : base(uid)
+	public resource(string uid, int Type) : base(uid)
 	{
 		type = Type;
 	}
