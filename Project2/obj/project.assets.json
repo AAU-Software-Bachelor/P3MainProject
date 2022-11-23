@@ -8,19 +8,24 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Anders\\.nuget\\packages\\": {}
+    "C:\\Users\\Mattias\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Anders\\Desktop\\CMSE\\REAL CMSE project\\Project2\\Project2.csproj",
+      "projectUniqueName": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\Project2.csproj",
       "projectName": "Project2",
-      "projectPath": "C:\\Users\\Anders\\Desktop\\CMSE\\REAL CMSE project\\Project2\\Project2.csproj",
-      "packagesPath": "C:\\Users\\Anders\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Anders\\Desktop\\CMSE\\REAL CMSE project\\Project2\\obj\\",
+      "projectPath": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\Project2.csproj",
+      "packagesPath": "C:\\Users\\Mattias\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Anders\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mattias\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -64,7 +69,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

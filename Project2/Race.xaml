@@ -18,7 +18,7 @@
             </StackPanel>
         </Label>
         <ListView x:Name="ListForRaces" Margin="17,99,917,286">
-            <ListViewItem IsSelected="True">New Race</ListViewItem>
+            <ListViewItem IsSelected="True" x:Uid="1" >New Race</ListViewItem>
         </ListView>
         <Button Content="ADD" HorizontalAlignment="Left" Margin="17,373,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddRaceList" ClickMode="Press" Background="LightBlue"/>
         <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,373,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteRaceList" ClickMode="Press" Background="OrangeRed"/>
@@ -51,26 +51,26 @@
                     <ListView x:Name="ListStarterResources" Margin="10,38,10,36">
                         <StackPanel Orientation="Horizontal">
                             <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-                            <ComboBox IsReadOnly="True" IsDropDownOpen="False" Margin="15,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="40"/>
+                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
                             <StackPanel Orientation="Vertical">
-                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="22" Margin="1,5,0,0"/>
-                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="19" Width="22" Margin="1,0,0,0"/>
+                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
+                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-                            <ComboBox IsReadOnly="True" IsDropDownOpen="False" Margin="15,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="40"/>
+                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
                             <StackPanel Orientation="Vertical">
-                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="22" Margin="1,5,0,0"/>
-                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="19" Width="22" Margin="1,0,0,0"/>
+                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
+                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-                            <ComboBox IsReadOnly="True" IsDropDownOpen="False" Margin="15,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="40"/>
+                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
                             <StackPanel Orientation="Vertical">
-                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="22" Margin="1,5,0,0"/>
-                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="19" Width="22" Margin="1,0,0,0"/>
+                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
+                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
                             </StackPanel>
                         </StackPanel>
                     </ListView>

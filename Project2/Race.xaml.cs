@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
+using Image = System.Windows.Controls.Image;
 
 namespace Project2
 {
@@ -21,6 +25,7 @@ namespace Project2
     /// </summary>
     public partial class Race : Page
     {
+
         public Race()
         {
             InitializeComponent();
@@ -48,15 +53,32 @@ namespace Project2
 
         private void OnClickAddRaceList(object sender, RoutedEventArgs e)
         {
-            ListForRaces.Items.Add("New Race");
+            int i = 1;
+            string y = i.ToString();
+            string f = "New Race";
+            ListForRaces.Items.Add(new ListViewItem
+            {
+                Uid = y,
+                Content = f
+            }) ;
+            i++;
         }
 
         private void OnClickDeleteRaceList(object sender, EventArgs e)
         {
-            foreach (ListViewItem itemSelected in ListForRaces.SelectedItems)
+            var itemsender = sender as Button;
+            var data = itemsender.DataContext;
+            
+            
+
+            foreach (ListViewItem item in ListForRaces.Items)
             {
-                ListForRaces.Items.Remove(itemSelected);
-                /*if (ListForRaces.Items.Count == 1)
+                if(itemsender.Uid == item.Uid)
+                {
+                    ListForRaces.Items.Remove(data);
+                }
+             /*
+                if (ListForRaces.Items.Count == 1)
                 {
                     throw new ArgumentOutOfRangeException("Du kan ikke slette denne race.");
                 }
@@ -94,9 +116,49 @@ namespace Project2
 
         private void OnClickAddStarterResources(object sender, RoutedEventArgs e)
         {
-            //starter resources
-            //hent starter resources
             this.InitializeComponent();
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+
+            ComboBox comboBoxOne = new ComboBox();
+            comboBoxOne.Text = "Select Stat";
+            comboBoxOne.IsReadOnly = true;
+            comboBoxOne.IsDropDownOpen = true;
+            comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
+            comboBoxOne.Height = 24;
+            comboBoxOne.Width = 185;
+            comboBoxOne.SelectionChanged += ComboBox_SelectionChanged;
+
+            stackPanel.Children.Add(comboBoxOne);
+
+            TextBox textBox = new TextBox();
+            textBox.Margin = new Thickness(15, 13, 0, 0);
+            textBox.Width = 40;
+            textBox.Height = 24;
+            textBox.VerticalAlignment = VerticalAlignment.Top;
+
+            stackPanel.Children.Add(textBox);
+
+            StackPanel childStackPanel = new StackPanel();
+            childStackPanel.Orientation = Orientation.Vertical;
+
+            Image imagePlus = new Image();
+            imagePlus.Height = 20;
+            imagePlus.Width = 20;
+            imagePlus.Margin = new Thickness(1, 5, 0, 0);
+            imagePlus.Stretch = Stretch.Fill;
+            childStackPanel.Children.Add(imagePlus);
+
+            Image imageMinus = new Image();
+            imageMinus.Height = 20;
+            imageMinus.Width = 20;
+            imageMinus.Margin = new Thickness(1, 0, 0, 0);
+            imageMinus.Stretch = Stretch.Fill;
+            childStackPanel.Children.Add(imageMinus);
+            
+            stackPanel.Children.Add(childStackPanel);
+
+            this.ListStarterResources.Items.Add(stackPanel);
 
         }
 
