@@ -21,67 +21,68 @@ namespace Project2
     /// </summary>
     public partial class MainWindow : Window
     {
+        config currentConfig = new config();
         public MainWindow()
         {
             InitializeComponent();
-            config currentConfig = new config();
+
 
         }
 
-       
+
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
-            Race race = new Race();
+
+            Race race = new Race(currentConfig);
             this.Content = race;
         }
-        
 
-        
 
-       /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            string input = "Empty";
-            input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
 
-            string NewLabel = LabelGenerator(input);
-            GridTextBlock.Children.Add(NewLabel);
 
-            TextBlock myTextBlock = new TextBlock();
-            myTextBlock.FontSize = "14";
-            myTextBlock.FontWeight = Fontweights.Bold;
-            myTextBlock.Text = input;
+        /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+         {
+             string input = "Empty";
+             input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
 
-            input.Children.Add(myTextBlock);
-        }
+             string NewLabel = LabelGenerator(input);
+             GridTextBlock.Children.Add(NewLabel);
 
-        private void LabelGenerator(string input)
-        {
-            Label newlabel = new Label();
-            newlabel.HorizontalAlignment = "Left";
-            newlabel.VerticalAlignment = "Top";
-            newlabel.FontSize = "14";
-            newlabel.FontWeight = Fontweights.Bold;
-            int i = 0;
-            int f = 0 % 2;
-            while(true);
-                if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.i))
-                {
-                    i++;
-                }
-                if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.f){
-                    f++;
-                }
-            if (string.IsNullOrEmpty(GridTextBlock.Grid.Column.f && string.IsNullOrEmpty(GridTextBlock.Grid.Column.i)))
-                {
-                    break;
-                }
-            newlabel.Column = i;
-            newlabel.Row = f;
-            newlabel.x:name = input;
-            return newlabel;
+             TextBlock myTextBlock = new TextBlock();
+             myTextBlock.FontSize = "14";
+             myTextBlock.FontWeight = Fontweights.Bold;
+             myTextBlock.Text = input;
 
-        }*/
+             input.Children.Add(myTextBlock);
+         }
+
+         private void LabelGenerator(string input)
+         {
+             Label newlabel = new Label();
+             newlabel.HorizontalAlignment = "Left";
+             newlabel.VerticalAlignment = "Top";
+             newlabel.FontSize = "14";
+             newlabel.FontWeight = Fontweights.Bold;
+             int i = 0;
+             int f = 0 % 2;
+             while(true);
+                 if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.i))
+                 {
+                     i++;
+                 }
+                 if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.f){
+                     f++;
+                 }
+             if (string.IsNullOrEmpty(GridTextBlock.Grid.Column.f && string.IsNullOrEmpty(GridTextBlock.Grid.Column.i)))
+                 {
+                     break;
+                 }
+             newlabel.Column = i;
+             newlabel.Row = f;
+             newlabel.x:name = input;
+             return newlabel;
+
+         }*/
 
     }
 }
