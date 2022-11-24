@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+
 class characterTrait
 {
 
@@ -19,9 +20,9 @@ class characterTrait
 		Console.WriteLine("send to this (" + configID + ") configuration file");
 	}
 	public void properDelete()
-    {
+	{
 
-    }
+	}
 
 }
 
@@ -31,47 +32,67 @@ class majorTrait : characterTrait
 	{
 
 	}
-	public int cost = new int();
-	public List<int> discounts = new List<int>();
-	public List<string> Costtype = new List<string>();
-	public List<string> freeAbilities = new List<string>();
-	public List<string> exclusions = new List<string>();
-	public List<string> dependencies = new List<string>();
-	public List<string> affectedResources = new List<string>();
 
-	public void addAffectedResources(string uid, int ammount)
+	class affectedResource
 	{
-		this.affectedResources.Add(uid);
+		public affectedResource(string uid, int amount)
+		{
+			string UID = uid;
+			int Amount = amount;
+		}
+	}
+
+	class cost
+	{
+		public cost(string T, string uid, int amount)
+		{
+			string Type = T;
+			string UID = uid;
+			int Amount = amount;
+		}
+	}
+	class discount
+	{
+		public discount(string uid, string type, int amount)
+		{
+			string Type = type;
+			string UID = uid;
+			int Amount = amount;
+		}
+	}
+	public string dependency = new string("");                          //  !(Exc1 & Exc2 & Exc..n) & ( (Dep1 & Dep2) | (Dep3 | Dep4) & Dep..n )
+	public List<string> freeAbilities = new List<string>();
+	List<cost> Cost = new List<cost>();
+	List<discount> discounts = new List<discount>();
+	List<affectedResource> affectedResources = new List<affectedResource>();
+	public List<dynamic> test = new();
+
+	public void addAffectedResources(string uid, int amount)
+	{
+		this.affectedResources.Add(new affectedResource(uid, amount));
 	}
 	public void addFreeAbilities(string uid)
 	{
 		this.freeAbilities.Add(uid);
 	}
-	public void addExclusions(string uid)
+	public void addDiscount(string uid, string type, int value)
 	{
-		this.exclusions.Add(uid);
+		this.discounts.Add(new discount(uid, type, value));
 	}
-	public void addDependency(string uid, int value)
+	public void addCosttype(string Type, string uid, int amount)
 	{
-		this.dependencies.Add(uid);
-		this.discounts.Add(value);
-	}
-	public void addCosttype(string uid)
-	{
-		this.Costtype.Add(uid);
+		this.Cost.Add(new cost(Type, uid, amount));
 	}
 	public void deleteContent()
 	{
 		this.name = "";
 		this.image = "";
 		this.description = "";
-		this.cost = 0;
-		this.Costtype = new List<string>();
+		this.dependency = "";
 		this.freeAbilities = new List<string>();
-		this.exclusions = new List<string>();
-		this.dependencies = new List<string>();
-		this.discounts = new List<int>();
-		this.affectedResources = new List<string>();
+		this.Cost = new List<cost>();
+		this.discounts = new List<discount>();
+		this.affectedResources = new List<affectedResource>();
 
 	}
 }

@@ -26,10 +26,12 @@ namespace Project2
     public partial class Race : Page
     {
 
-        public Race()
+        public Race(config currentConfig)
         {
+            CurrentConfig = currentConfig;
             InitializeComponent();
         }
+        config CurrentConfig;
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -171,7 +173,7 @@ namespace Project2
 
         }
 
-        private void OnClickSaveRace(object sender, RoutedEventArgs e)
+        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -183,8 +185,10 @@ namespace Project2
             //for loop through exclusions
             //for loop through dependencies / discounts
             //for loop through affectedResources
+
+
             string[] id = UID.Split('-');
-            majorTrait currentMT = currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
+            majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
             currentMT.deleteContent();
 
             string name = (this.FindName("nameBox") as TextBox).Text;
@@ -193,11 +197,11 @@ namespace Project2
 
             currentMT.name = name;
             currentMT.description = playerReq + "\n\n" + desc;
-            
 
 
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
+
+            CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
         }
-        
+
     }
 }
