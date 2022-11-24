@@ -18,43 +18,67 @@
             </StackPanel>
         </Label>
         <ListView x:Name="ListForRaces" Margin="17,99,917,286">
-            <ListViewItem IsSelected="True">New Race</ListViewItem>
+            <ListViewItem IsSelected="True" x:Uid="1" >New Race</ListViewItem>
         </ListView>
-        <Button Content="ADD" HorizontalAlignment="Left" Margin="17,373,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClick1" ClickMode="Press" Background="LightBlue"/>
-        <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,373,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClick2" ClickMode="Press" Background="OrangeRed"/>
+        <Button Content="ADD" HorizontalAlignment="Left" Margin="17,373,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddRaceList" ClickMode="Press" Background="LightBlue"/>
+        <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,373,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteRaceList" ClickMode="Press" Background="OrangeRed"/>
         <Grid Background="PaleGreen" Margin="224,99,32,26">
             <StackPanel Orientation="Vertical" Margin="33,29,737,391">
-                <Image Source="Images\Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
+                <Image Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
                 <ComboBox x:Name="RacesImageComboBox" Text="Choose Icon File..." HorizontalAlignment="Right" Width="105">
                     <ComboBoxItem>Choose Icon File</ComboBoxItem>
-
                 </ComboBox>
             </StackPanel>
-            <TextBox HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
-            <TextBox HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
                 <Grid>
-                    <Label Content="Select Ability" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,12,0,0" Height="28" Width="112" FontWeight="Bold"/>
-                    <ComboBox Margin="10,43,155,148" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability" Height="30"/>
-                    <ComboBox Margin="10,80,155,111" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability" Height="30"/>
-                    <ComboBox Margin="10,115,155,76" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability" Height="30"/>
                     <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClick3" ClickMode="Press" Background="LightBlue"/>
+                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36">
+                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                    </ListView>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,190,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,271,71,20">
-                <Grid Margin="-1,-1,-1,-1">
+                <Grid>
                     <Label Content="Starter Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <Label Content="Select Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-189,177,0,0" Height="28" Width="154" FontWeight="Bold"/>
-                    <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="237,12,0,0" Height="32" Width="97" FontWeight="Bold"/>
-                    <ComboBox Margin="10,38,155,161" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability" Height="30"/>
-                    <ComboBox Margin="10,76,155,123" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability" Height="30"/>
-                    <ComboBox Margin="10,114,155,85" SelectionChanged="ComboBox_SelectionChanged" Text="Select Ability" Height="30"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClick3" ClickMode="Press" Background="LightBlue"/>
+                    <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,12,0,0" Height="32" Width="97" FontWeight="Bold"/>
+                    <ListView x:Name="ListStarterResources" Margin="10,38,10,36">
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
+                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
+                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
+                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
+                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ListView>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterResources" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="Button_Click_1"/>
+            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveRace"/>
         </Grid>
     </Grid>
 </Page>

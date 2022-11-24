@@ -24,14 +24,20 @@ namespace Project2
         public MainWindow()
         {
             InitializeComponent();
+            config currentConfig = new config();
+
         }
 
+       
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             
             Race race = new Race();
             this.Content = race;
         }
+        
+
+        
 
        /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
