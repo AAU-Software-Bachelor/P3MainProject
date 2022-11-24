@@ -12,7 +12,7 @@
         <Label Content="Abilities" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="24"/>
         <Button Content="" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="51" Width="56" Click="Button_Click" BorderBrush="#FFFDFDFD">
             <Button.Background>
-                <ImageBrush ImageSource="/back.png"/>
+                <ImageBrush ImageSource="Images/back.png"/>
             </Button.Background>
         </Button>
         <TextBox HorizontalAlignment="Left" Margin="38,193,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>

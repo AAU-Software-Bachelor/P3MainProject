@@ -64,5 +64,15 @@ namespace Project2
             }
 
         }
+
+        private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void OnClick3(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

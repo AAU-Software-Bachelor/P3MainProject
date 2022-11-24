@@ -21,3 +21,5 @@ C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Project2.genru
 C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\ref\Project2.dll
 C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Race.g.cs
 C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Race.baml
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Abilities.g.cs
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Abilities.baml
