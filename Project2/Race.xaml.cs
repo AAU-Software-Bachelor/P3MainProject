@@ -60,7 +60,7 @@ namespace Project2
             string f = "New Race";
             ListForRaces.Items.Add(new ListViewItem
             {
-                Uid = y,
+                Uid = Guid.NewGuid().ToString(),
                 Content = f
             }) ;
             i++;
@@ -173,7 +173,7 @@ namespace Project2
 
         }
 
-        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        private void OnClickSaveRace(object sender, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -186,17 +186,19 @@ namespace Project2
             //for loop through dependencies / discounts
             //for loop through affectedResources
 
-
+            string UID = "2-001";
             string[] id = UID.Split('-');
             majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
-            currentMT.deleteContent();
+            //currentMT.deleteContent();
 
             string name = (this.FindName("nameBox") as TextBox).Text;
             string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
             string desc = (this.FindName("descBox") as TextBox).Text;
 
-            currentMT.name = name;
-            currentMT.description = playerReq + "\n\n" + desc;
+            (this.FindName("nameBox") as TextBox).Text = Guid.NewGuid().ToString(); //testing
+
+            //currentMT.name = name;
+           // currentMT.description = playerReq + "\n\n" + desc;
 
 
 

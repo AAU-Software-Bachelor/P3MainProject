@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Project2
@@ -13,7 +14,8 @@ namespace Project2
 			MTList.Add(new majorTrait[100]);
 		}
 
-		List<majorTrait[]> MTList = new List<majorTrait[]>(); //inaccesible in race menu due to its protection level
+		public ArrayList TraitList = new ArrayList();
+		public List<majorTrait[]> MTList = new List<majorTrait[]>() ; //inaccesible in race menu due to its protection level
 		resource[] ResArr = new resource[100];
 
 		public int getUID(string type)

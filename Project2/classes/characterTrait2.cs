@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 
-class characterTrait
+public class characterTrait
 {
 
 	public characterTrait(string uid)
@@ -26,7 +26,7 @@ class characterTrait
 
 }
 
-class majorTrait : characterTrait
+public class majorTrait : characterTrait
 {
 	public majorTrait(string uid) : base(uid)
 	{
@@ -44,23 +44,23 @@ class majorTrait : characterTrait
 
 	class cost
 	{
-		public cost(string T, string uid, int amount)
+		public cost(string uid, int amount)
 		{
-			string Type = T;
 			string UID = uid;
 			int Amount = amount;
 		}
 	}
 	class discount
 	{
-		public discount(string uid, string type, int amount)
+		public discount(string Conduid, string uid, int amount)
 		{
-			string Type = type;
+			string CondUID = Conduid;
 			string UID = uid;
 			int Amount = amount;
 		}
 	}
-	public string dependency = new string("");                          //  !(Exc1 & Exc2 & Exc..n) & ( (Dep1 & Dep2) | (Dep3 | Dep4) & Dep..n )
+	public string Type = new string("");
+	public List<List<string>> dependecy = new List<List<string>>();
 	public List<string> freeAbilities = new List<string>();
 	List<cost> Cost = new List<cost>();
 	List<discount> discounts = new List<discount>();
@@ -75,20 +75,20 @@ class majorTrait : characterTrait
 	{
 		this.freeAbilities.Add(uid);
 	}
-	public void addDiscount(string uid, string type, int value)
+	public void addDiscount(string Conduid, string uid, int value)
 	{
-		this.discounts.Add(new discount(uid, type, value));
+		this.discounts.Add(new discount(Conduid, uid, value));
 	}
-	public void addCosttype(string Type, string uid, int amount)
+	public void addCost(string uid, int amount)
 	{
-		this.Cost.Add(new cost(Type, uid, amount));
+		this.Cost.Add(new cost(uid, amount));
 	}
 	public void deleteContent()
 	{
 		this.name = "";
 		this.image = "";
 		this.description = "";
-		this.dependency = "";
+		//this.dependency = "";
 		this.freeAbilities = new List<string>();
 		this.Cost = new List<cost>();
 		this.discounts = new List<discount>();
