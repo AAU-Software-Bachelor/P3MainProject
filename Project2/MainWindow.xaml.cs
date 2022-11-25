@@ -21,32 +21,20 @@ namespace Project2
     /// </summary>
     public partial class MainWindow : Window
     {
+        config currentConfig = new config();
         public MainWindow()
         {
             InitializeComponent();
-            //config currentConfig = new config();
+
 
         }
 
-       
+
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
-            Race race = new 
-                Race();
+
+            Race race = new Race(currentConfig);
             this.Content = race;
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AblilitiesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            And_Or_Select abilities = new And_Or_Select();
-            this.Content = abilities;
-
         }
 
 

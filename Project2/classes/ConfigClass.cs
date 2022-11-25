@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Project2
 {
-	class config
+	public class config
 	{
 		public config()
 		{
@@ -13,8 +13,8 @@ namespace Project2
 			MTList.Add(new majorTrait[100]);
 		}
 
-		public List<majorTrait[]> MTList = new List<majorTrait[]>();
-		public resource[] ResArr = new resource[100];
+		List<majorTrait[]> MTList = new List<majorTrait[]>(); //inaccesible in race menu due to its protection level
+		resource[] ResArr = new resource[100];
 
 		public int getUID(string type)
 		{
@@ -40,7 +40,7 @@ namespace Project2
 			}
 			return -1;
 		}
-		public bool saveToList(majorTrait trait)
+		bool saveToList(majorTrait trait)
 		{
 			string[] id = trait.UID.Split('-');
 
@@ -48,7 +48,7 @@ namespace Project2
 			return true;
 
 		}
-		public bool saveResToList(resource trait)
+		bool saveResToList(resource trait)
 		{
 			string[] id = trait.UID.Split('-');
 

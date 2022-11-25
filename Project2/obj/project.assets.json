@@ -8,31 +8,35 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Mattias\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\matti\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\Project2.csproj",
+      "projectUniqueName": "C:\\Users\\matti\\Source\\Repos\\P3MainProject\\Project2\\Project2.csproj",
       "projectName": "Project2",
-      "projectPath": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\Project2.csproj",
-      "packagesPath": "C:\\Users\\Mattias\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\obj\\",
+      "projectPath": "C:\\Users\\matti\\Source\\Repos\\P3MainProject\\Project2\\Project2.csproj",
+      "packagesPath": "C:\\Users\\matti\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\matti\\Source\\Repos\\P3MainProject\\Project2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Mattias\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\matti\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -69,7 +73,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
