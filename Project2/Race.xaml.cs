@@ -192,8 +192,8 @@ namespace Project2
 
 
 
-            CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }*/
-
+            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
+        }
+        
     }
 }
