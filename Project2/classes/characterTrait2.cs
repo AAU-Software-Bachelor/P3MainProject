@@ -42,27 +42,22 @@ public class majorTrait : characterTrait
 		}
 	}
 
-	class cost
-	{
-		public cost(string uid, int amount)
-		{
-			string UID = uid;
-			int Amount = amount;
-		}
-	}
 	class discount
 	{
-		public discount(string Conduid, string uid, int amount)
+		public discount(string CondUid)
 		{
-			string CondUID = Conduid;
-			string UID = uid;
-			int Amount = amount;
+			string CondUID = CondUid;
 		}
+		public string CondUID = new string("");
+		public int Amount = new int();
+		public list<string> CostUID = new list<string>();
 	}
+
 	public string Type = new string("");
+	public int cost = new int();
+	public List<string> CostTypes = new List<string>();
 	public List<List<string>> dependecy = new List<List<string>>();
 	public List<string> freeAbilities = new List<string>();
-	List<cost> Cost = new List<cost>();
 	List<discount> discounts = new List<discount>();
 	List<affectedResource> affectedResources = new List<affectedResource>();
 	public List<dynamic> test = new();
@@ -75,22 +70,36 @@ public class majorTrait : characterTrait
 	{
 		this.freeAbilities.Add(uid);
 	}
-	public void addDiscount(string Conduid, string uid, int value)
+	public void addDiscount(string Conduid)
 	{
-		this.discounts.Add(new discount(Conduid, uid, value));
+		this.discounts.Add(new discount(Conduid));
 	}
-	public void addCost(string uid, int amount)
+	public void addDiscountType(string CondUid, list<string> CostUid)
+    {
+		foreach (discount id in discounts)
+        {
+			if (id.CondUID == CondUid)
+            {
+				foreach (string cost in CostUid)
+                {
+					id.CostUID.add(cost);
+                }
+				break
+            }
+        }
+    }
+	public void addCostTypes(string uid)
 	{
-		this.Cost.Add(new cost(uid, amount));
+		this.CostTypes.Add(uid);
 	}
 	public void deleteContent()
 	{
 		this.name = "";
 		this.image = "";
 		this.description = "";
-		//this.dependency = "";
+		this.cost = new int();
+		this.CostTypes = new List<string>();
 		this.freeAbilities = new List<string>();
-		this.Cost = new List<cost>();
 		this.discounts = new List<discount>();
 		this.affectedResources = new List<affectedResource>();
 

@@ -186,7 +186,7 @@ namespace Project2
             //for loop through dependencies / discounts
             //for loop through affectedResources
 
-            string UID = "2-001";
+            string UID = "2-001";  //testing UID
             string[] id = UID.Split('-');
             majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
             //currentMT.deleteContent();
