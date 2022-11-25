@@ -27,7 +27,7 @@
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="268,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
+            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="268,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="AblilitiesMainMenu_MouseDoubleClick">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Ablilities.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
                     <Border Background="LightBlue" Padding="50,10,50,10" Width="222">

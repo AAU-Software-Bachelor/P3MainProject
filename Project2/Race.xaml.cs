@@ -183,7 +183,7 @@ namespace Project2
             //for loop through exclusions
             //for loop through dependencies / discounts
             //for loop through affectedResources
-            string[] id = UID.Split('-');
+            /*string[] id = UID.Split('-');
             majorTrait currentMT = currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
             currentMT.deleteContent();
 
@@ -196,8 +196,12 @@ namespace Project2
             
 
 
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
+            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;*/
         }
-        
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

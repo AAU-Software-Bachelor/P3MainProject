@@ -71,3 +71,13 @@ C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows
 C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows\Project2.csproj.CoreCompileInputs.cache
 C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows\Project2.genruntimeconfig.cache
 C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows\ref\Project2.dll
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Abilities.g.cs
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Abilities.baml
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Career.g.cs
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Items.g.cs
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Recources.g.cs
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Religion.g.cs
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Career.baml
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Items.baml
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Recources.baml
+C:\Users\gamma\Desktop\Project2\Project2\obj\Debug\net6.0-windows\Religion.baml
