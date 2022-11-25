@@ -71,3 +71,28 @@ C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows
 C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows\Project2.csproj.CoreCompileInputs.cache
 C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows\Project2.genruntimeconfig.cache
 C:\Users\Anders\Desktop\CMSE\REAL CMSE project\Project2\obj\Debug\net6.0-windows\ref\Project2.dll
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.csproj.AssemblyReference.cache
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Abilities.g.cs
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Race.g.cs
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2_MarkupCompile.cache
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2_MarkupCompile.lref
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.dll
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\refint\Project2.dll
+C:\Users\matti\Source\Repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.pdb
+C:\Users\matti\source\repos\P3MainProject\Project2\bin\Debug\net6.0-windows\Project2.exe
+C:\Users\matti\source\repos\P3MainProject\Project2\bin\Debug\net6.0-windows\Project2.deps.json
+C:\Users\matti\source\repos\P3MainProject\Project2\bin\Debug\net6.0-windows\Project2.runtimeconfig.json
+C:\Users\matti\source\repos\P3MainProject\Project2\bin\Debug\net6.0-windows\Project2.dll
+C:\Users\matti\source\repos\P3MainProject\Project2\bin\Debug\net6.0-windows\Project2.pdb
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Abilities.baml
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\MainWindow.baml
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Race.baml
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.g.resources
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.AssemblyInfoInputs.cache
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.AssemblyInfo.cs
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.csproj.CoreCompileInputs.cache
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.genruntimeconfig.cache
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\ref\Project2.dll

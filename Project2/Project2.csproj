@@ -17,4 +17,8 @@
     <None Remove="resources.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Trashcan\" />
+  </ItemGroup>
+
 </Project>

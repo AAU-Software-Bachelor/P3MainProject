@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using static Project2.Race;
 using static System.Net.Mime.MediaTypeNames;
 using Image = System.Windows.Controls.Image;
 
@@ -30,6 +32,10 @@ namespace Project2
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
+            newrace = new ObservableCollection<newRace>(){
+            new newRace(){Name = "New Race", ID = 1}
+            };
+            lstRaces.ItemsSource = newrace;
         }
         config CurrentConfig;
 
@@ -45,52 +51,38 @@ namespace Project2
             this.Content = mainWindow;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /*private void Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
             mainWindow.Visibility = Visibility.Visible;
             Window win = (Window)this.Parent;
             win.Close();
+        }*/
+
+        private ObservableCollection<newRace> newrace;
+
+        public class newRace
+        {
+            public string Name { get; set; }
+            public int ID { get; set; }
         }
 
-        private void OnClickAddRaceList(object sender, RoutedEventArgs e)
+        private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
-            int i = 1;
-            string y = i.ToString();
-            string f = "New Race";
-            ListForRaces.Items.Add(new ListViewItem
-            {
-                Uid = y,
-                Content = f
-            }) ;
-            i++;
+            int i = newrace.Count + 1;
+            newrace.Add(new newRace() { Name = "New Race", ID = i });
         }
 
-        private void OnClickDeleteRaceList(object sender, EventArgs e)
+        private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
         {
-            var itemsender = sender as Button;
-            var data = itemsender.DataContext;
-            
-            
-
-            foreach (ListViewItem item in ListForRaces.Items)
+            var index = lstRaces.SelectedIndex;
+            if (lstRaces.SelectedIndex >= 1)
             {
-                if(itemsender.Uid == item.Uid)
-                {
-                    ListForRaces.Items.Remove(data);
-                }
-             /*
-                if (ListForRaces.Items.Count == 1)
-                {
-                    throw new ArgumentOutOfRangeException("Du kan ikke slette denne race.");
-                }
-                else
-                {
-                    ListForRaces.Items.Remove(itemSelected);
-                }*/
+                newrace.RemoveAt(index);
             }
-
         }
+
+
         private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
         {
             this.InitializeComponent();
@@ -173,7 +165,7 @@ namespace Project2
 
         }
 
-        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -201,7 +193,7 @@ namespace Project2
 
 
             CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }
+        }*/
 
     }
 }
