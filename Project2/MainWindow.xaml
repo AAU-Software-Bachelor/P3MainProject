@@ -34,11 +34,11 @@
                     </Border>
                 </StackPanel>
             </Label>
-            <Label HorizontalAlignment="Left" Margin="500,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
+            <Label HorizontalAlignment="Left" Margin="500,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="ResourcesMainMenu_MouseDoubleClick">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\resources.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
                     <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
-                        <TextBlock HorizontalAlignment="Center" ><Run Text="RESOURCESS"/></TextBlock>
+                        <TextBlock HorizontalAlignment="Center" ><Run Text="RESOURCES"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
@@ -58,7 +58,7 @@
                     </Border>
                 </StackPanel>
             </Label>
-            <Label  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="500,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" >
+            <Label  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="500,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="ReligionMainMenu_MouseDoubleClick">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\religion.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
                     <Border Background="LightBlue" Padding="50,10,50,10" Width="222">

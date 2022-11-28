@@ -64,12 +64,14 @@ namespace Project2
         public class newRace
         {
             public string Name { get; set; }
+            public int ID { get; set; }
+
         }
 
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
             int i = newrace.Count + 1;
-            newrace.Add(new newRace() { Name = "New Race"});
+            newrace.Add(new newRace() { Name = "New Race", ID = i });
         }
 
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
@@ -100,9 +102,10 @@ namespace Project2
         private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
         {
             var index = ListStarterAbilities.SelectedIndex;
-            ListStarterAbilities.Items.Remove(index);
-          
-
+            if (index >= 0)
+            {
+                ListStarterAbilities.Items.RemoveAt(index);
+            }
         }
 
 
@@ -156,10 +159,12 @@ namespace Project2
 
         private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            var item = button.Tag;
+            var index = ListStarterResources.SelectedIndex;
 
-            ListStarterAbilities.Items.Remove(item);
+            if (index >= 0)
+            {
+                ListStarterResources.Items.RemoveAt(index);
+            }
 
         }
 

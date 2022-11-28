@@ -37,6 +37,19 @@ namespace Project2
             this.Content = race;
         }
 
+        private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            Religion religion = new Religion(currentConfig);
+            this.Content = religion;
+        }
+
+        private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            Resources resources = new Resources(currentConfig);
+            this.Content = resources;
+        }
 
 
 
