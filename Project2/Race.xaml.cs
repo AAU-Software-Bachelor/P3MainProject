@@ -32,12 +32,12 @@ namespace Project2
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            newrace = new ObservableCollection<newRace>(){
-            new newRace(){Name = "New Race", ID = 1}
+            newrace = new ObservableCollection<majorTrait>(){
+            new majorTrait(CurrentConfig.newUID("Race")){ Name = "new race" }
             };
             lstRaces.ItemsSource = newrace;
         }
-        config CurrentConfig;
+        public config CurrentConfig { get; set; }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -59,18 +59,13 @@ namespace Project2
             win.Close();
         }*/
 
-        private ObservableCollection<newRace> newrace;
-
-        public class newRace
-        {
-            public string Name { get; set; }
-            public int ID { get; set; }
-        }
+        private ObservableCollection<majorTrait> newrace;
+        
 
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
             int i = newrace.Count + 1;
-            newrace.Add(new newRace() { Name = "New Race", ID = i });
+            newrace.Add(new majorTrait(CurrentConfig.newUID("Race"))  { Name = "new race" });
         }
 
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
@@ -166,7 +161,7 @@ namespace Project2
             }
         }
 
-        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -179,22 +174,25 @@ namespace Project2
             //for loop through dependencies / discounts
             //for loop through affectedResources
 
-
-            string[] id = UID.Split('-');
-            majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
+            
+            majorTrait currentMT = CurrentConfig.GetTrait(UID);
             currentMT.deleteContent();
+            
 
             string name = (this.FindName("nameBox") as TextBox).Text;
             string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
             string desc = (this.FindName("descBox") as TextBox).Text;
 
-            currentMT.name = name;
-            currentMT.description = playerReq + "\n\n" + desc;
+            foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
+            {
+                string TempUID =  BOX.SelectedValue as string;
+
+            }
 
 
 
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }*/
+            //CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
+        }
         
     }
 }

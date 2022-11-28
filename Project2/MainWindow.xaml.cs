@@ -21,19 +21,17 @@ namespace Project2
     /// </summary>
     public partial class MainWindow : Window
     {
-        config currentConfig = new config();
         public MainWindow()
         {
+            this.CurrentConfig = new config();
             InitializeComponent();
 
-
         }
-
+        public config CurrentConfig { get; set; }
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            Race race = new Race(currentConfig);
+            Race race = new Race(CurrentConfig);
             this.Content = race;
         }
 

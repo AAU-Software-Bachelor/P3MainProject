@@ -11,38 +11,38 @@ namespace Project2
 	{
 		public config()
 		{
-			MTList = new List<majorTrait[]>()
-			{
-				new majorTrait[100],
-				new majorTrait[100],
-				new majorTrait[100],
-				new majorTrait[100]
-            };
-			ResArr = new resource[100];
+			RacList = new List<majorTrait>();
+			AbilList = new List<majorTrait>();
+			CarList = new List<majorTrait>();
+			RelList = new List<majorTrait>();
+			ResList = new List<resource>();
 		}
-		
-		public List<majorTrait[]> MTList { get; set; }
-		public resource[] ResArr { get; set; }
+		public List<majorTrait> RacList { get; set; }
+		public List<majorTrait> AbilList { get; set; }
+		public List<majorTrait> CarList { get; set; }
+		public List<majorTrait> RelList { get; set; }
+		public List<resource> ResList { get; set; }
 
 		public void TestWriteToJson(string fileName)
         {
-			majorTrait TestMT = new majorTrait("1-01");
-			TestMT.name = "SMITE";
-			TestMT.description = "slaa gud modstander med hellig styrke";
+			majorTrait TestMT = new majorTrait("Ability-/GUID2");
+			TestMT.Name = "SMITE";
+			TestMT.Description = "slaa gud modstander med hellig styrke";
 			TestMT.Type = "Ability";
 			TestMT.cost = 4;
-			TestMT.CostTypes = new List<string>() { "KrigerXP", "praestXP"};
-			TestMT.dependecy = new List<List<string>>()
+			TestMT.CostTypes = new List<string>() { "Resource-/GUID4", "Resource-/GUID5" };
+			TestMT.dependency = new List<List<string>>()
 			{
-				new List<string>(){"kriger", "praest"},
-				new List<string>(){"vildt slag", "hellig slag"}
-            };
-			TestMT.freeAbilities = new List<string>() {"hellig inderlighed"};
-			TestMT.addDiscount("2-01");
+				new List<string>(){ "Career-/GUID1", "Career-/GUID2"},
+				new List<string>(){ "Ability-/GUID7", "Ability-/GUID6" },
+				new List<string>(){ "Career-/GUID3", "Ability-/GUID9" }
+			};
+			TestMT.freeAbilities = new List<string>() { "Ability-/GUID5" };
+			TestMT.addDiscount("Career-/GUID2");
 			TestMT.discounts[0].Amount = 2;
-			TestMT.addDiscountType("2-01", new List<string>() { "r-04", "r-05" });
-			TestMT.addAffectedResources("r-01",2);
-			this.MTList[1][01] = TestMT;
+			TestMT.addDiscountType("Career-/GUID2", new List<string>() { "Resource-/GUID4", "Resource-/GUID5" });
+			TestMT.addAffectedResources("Resource-/GUID1", 2);
+			this.RacList.Add(TestMT);
 
 			JsonSerializerOptions options = new JsonSerializerOptions
 			{
@@ -54,45 +54,74 @@ namespace Project2
 			File.WriteAllText(fileName, jsonString);
         }
 
-		public int getUID(string type)
+		public string newUID(string type)
 		{
-			if (type == "r")
-			{
-				for (int i = 0; i < 100; i++)
-				{
-					if (ResArr[i] == null)
-					{
-						return i;
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < 100; i++)
-				{
-					if (MTList[int.Parse(type)][i] == null)
-					{
-						return i;
-					}
-				}
-			}
-			return -1;
+			return type  + "-/" + Guid.NewGuid().ToString();
 		}
 
-		bool saveToList(majorTrait trait)
-		{
-			string[] id = trait.UID.Split('-');
+		public dynamic GetTrait(string uid)
+        {
+			string[] id = uid.Split("-/"); // "race", "religion", "career", "ability", "Resource"
+			switch (id[0])
+			{
+				case "Race":
+					return RacList.Find(i => string.Equals(i.UID, id[1]));
+					break;
 
-			MTList[int.Parse(id[0])][int.Parse(id[1])] = trait;
-			return true;
+				case "Religion":
+					return RelList.Find(i => string.Equals(i.UID, id[1]));
+					break;
 
+				case "Career":
+					return CarList.Find(i => string.Equals(i.UID, id[1]));
+					break;
+
+				case "Ability":
+					return AbilList.Find(i => string.Equals(i.UID, id[1]));
+					break;
+
+				case "Resource":
+					return ResList.Find(i => string.Equals(i.UID, id[1]));
+					break;
+
+				default: return false; 
+
+			}
 		}
-		bool saveResToList(resource trait)
-		{
-			string[] id = trait.UID.Split('-');
 
-			ResArr[int.Parse(id[1])] = trait;
+
+
+		bool saveToList(dynamic trait)
+		{
+			string[] id = trait.UID.Split("-/"); // "race", "religion", "career", "ability"
+
+			switch (id[0])
+			{
+				case "Race":
+					RacList.Add(trait);
+					break;
+
+				case "Religion":
+					RelList.Add(trait);
+					break;
+
+				case "Career":
+					CarList.Add(trait);
+                    break;
+
+				case "Ability":
+					AbilList.Add(trait);
+                    break;
+
+				case "Resource":
+					ResList.Add(trait);
+					break ;
+
+				default: return false;
+
+			}
 			return true;
+
 		}
 	}
 }

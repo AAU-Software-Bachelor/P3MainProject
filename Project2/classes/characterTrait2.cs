@@ -8,14 +8,14 @@ public class characterTrait
 	public characterTrait(string uid)
 	{
 		UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
-		image = "";
-		name = "";
-		description = "";
+		Image = "";
+		Name = "";
+		Description = "";
 	}
 
-	public string name { get; set; }
-	public string image { get; set; }
-	public string description { get; set; }
+	public string Name { get; set; }
+	public string Image { get; set; }
+	public string Description { get; set; }
 	public string UID { get; set; }
 
 	public void SaveToConfig(int configID)
@@ -36,7 +36,7 @@ public class majorTrait : characterTrait
 		Type = new string("");
 		cost = new int();
 		CostTypes = new List<string>();
-		dependecy = new List<List<string>>();
+		dependency = new List<List<string>>();
 		freeAbilities = new List<string>();
 		discounts = new List<discount>();
 		affectedResources = new List<affectedResource>();
@@ -70,7 +70,7 @@ public class majorTrait : characterTrait
 	public string Type { get; set; }
 	public int cost { get; set; }
 	public List<string> CostTypes { get; set; }
-	public List<List<string>> dependecy { get; set; }
+	public List<List<string>> dependency { get; set; }
 	public List<string> freeAbilities { get; set; }
 	public List<discount> discounts { get; set; }
 	public List<affectedResource> affectedResources { get; set; }
@@ -78,10 +78,6 @@ public class majorTrait : characterTrait
 	public void addAffectedResources(string uid, int amount)
 	{
 		this.affectedResources.Add(new affectedResource(uid, amount));
-	}
-	public void addFreeAbilities(string uid)
-	{
-		this.freeAbilities.Add(uid);
 	}
 	public void addDiscount(string Conduid)
 	{
@@ -107,9 +103,9 @@ public class majorTrait : characterTrait
 	}
 	public void deleteContent()
 	{
-		this.name = "";
-		this.image = "";
-		this.description = "";
+		this.Name = "";
+		this.Image = "";
+		this.Description = "";
 		this.cost = new int();
 		this.CostTypes = new List<string>();
 		this.freeAbilities = new List<string>();
