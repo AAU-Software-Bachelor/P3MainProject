@@ -33,7 +33,7 @@ namespace Project2
             CurrentConfig = currentConfig;
             InitializeComponent();
             newrace = new ObservableCollection<newRace>(){
-            new newRace(){Name = "New Race", ID = 1}
+            new newRace(){Name = "New Race"}
             };
             lstRaces.ItemsSource = newrace;
         }
@@ -64,13 +64,12 @@ namespace Project2
         public class newRace
         {
             public string Name { get; set; }
-            public int ID { get; set; }
         }
 
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
             int i = newrace.Count + 1;
-            newrace.Add(new newRace() { Name = "New Race", ID = i });
+            newrace.Add(new newRace() { Name = "New Race"});
         }
 
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
@@ -100,10 +99,9 @@ namespace Project2
 
         private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            var item = button.Tag;
-
-            ListStarterAbilities.Items.Remove(item);
+            var index = ListStarterAbilities.SelectedIndex;
+            ListStarterAbilities.Items.Remove(index);
+          
 
         }
 
@@ -165,6 +163,11 @@ namespace Project2
 
         }
 
+        private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
         /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
@@ -193,7 +196,7 @@ namespace Project2
 
 
             currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }
-        
+        }*/
+
     }
 }

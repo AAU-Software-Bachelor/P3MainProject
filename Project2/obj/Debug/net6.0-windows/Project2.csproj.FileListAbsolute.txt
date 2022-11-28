@@ -96,3 +96,11 @@ C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Proj
 C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.csproj.CoreCompileInputs.cache
 C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Project2.genruntimeconfig.cache
 C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\ref\Project2.dll
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Career.g.cs
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Items.g.cs
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Recources.g.cs
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Religion.g.cs
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Career.baml
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Items.baml
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Recources.baml
+C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Religion.baml

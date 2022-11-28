@@ -17,11 +17,10 @@
                 </Border>
             </StackPanel>
         </Label>
-        <ListView x:Name="lstRaces" Margin="17,99,917,286" Grid.Column="1" Grid.Row="0">
+        <ListView x:Name="lstRaces" Margin="17,99,926,286" Grid.Row="0">
             <ListView.View>
                 <GridView x:Name="grdNames">
-                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="ID"  Width="40" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name" Width="170" DisplayMemberBinding="{Binding Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -30,17 +29,16 @@
         <Grid Background="PaleGreen" Margin="224,99,32,26">
             <StackPanel Orientation="Vertical" Margin="33,29,737,391">
                 <Image Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
-                <Button HorizontalAlignment="Right" Width="105" Click="Button_Click_1" Height="26" Content="Click to Upload" >
-                    
+                <Button HorizontalAlignment="Right" Width="105" Height="26" Content="Click to Upload" >
                 </Button>
             </StackPanel>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem, ElementName=lstRaces}" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
             <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
             <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
                 <Grid>
                     <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36">
+                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36" SelectionChanged="ListStarterAbilities_SelectionChanged">
                         <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
                         <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
                         <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
