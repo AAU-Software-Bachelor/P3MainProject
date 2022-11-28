@@ -17,19 +17,24 @@
                 </Border>
             </StackPanel>
         </Label>
-        <ListView x:Name="ListForRaces" Margin="17,99,917,286">
-            <ListViewItem IsSelected="True" x:Uid="1" >New Race</ListViewItem>
+        <ListView x:Name="lstRaces" Margin="17,99,917,286" Grid.Column="1" Grid.Row="0">
+            <ListView.View>
+                <GridView x:Name="grdNames">
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="ID"  Width="40" DisplayMemberBinding="{Binding ID}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
-        <Button Content="ADD" HorizontalAlignment="Left" Margin="17,373,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddRaceList" ClickMode="Press" Background="LightBlue"/>
-        <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,373,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteRaceList" ClickMode="Press" Background="OrangeRed"/>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,373,0,0" x:Name="btnRacesAdd" Click="btnRaces_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,373,0,0" x:Name="btnRacesDelete" Click="btnRaces_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
         <Grid Background="PaleGreen" Margin="224,99,32,26">
             <StackPanel Orientation="Vertical" Margin="33,29,737,391">
                 <Image Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
-                <ComboBox x:Name="RacesImageComboBox" Text="Choose Icon File..." HorizontalAlignment="Right" Width="105">
-                    <ComboBoxItem>Choose Icon File</ComboBoxItem>
-                </ComboBox>
+                <Button HorizontalAlignment="Right" Width="105"  Height="26" Content="Click to Upload" >
+                    
+                </Button>
             </StackPanel>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=lstRaces}" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
             <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
             <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
@@ -78,7 +83,7 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveRace"/>
+            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88"/>
         </Grid>
     </Grid>
 </Page>
