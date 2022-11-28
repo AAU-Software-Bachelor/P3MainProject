@@ -8,12 +8,15 @@ public class characterTrait
 	public characterTrait(string uid)
 	{
 		UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
+		image = "";
+		name = "";
+		description = "";
 	}
 
-	public string name;
-	public string image;
-	public string description;
-	public string UID;
+	public string name { get; set; }
+	public string image { get; set; }
+	public string description { get; set; }
+	public string UID { get; set; }
 
 	public void SaveToConfig(int configID)
 	{
@@ -30,37 +33,47 @@ public class majorTrait : characterTrait
 {
 	public majorTrait(string uid) : base(uid)
 	{
+		Type = new string("");
+		cost = new int();
+		CostTypes = new List<string>();
+		dependecy = new List<List<string>>();
+		freeAbilities = new List<string>();
+		discounts = new List<discount>();
+		affectedResources = new List<affectedResource>();
+}
 
-	}
-
-	class affectedResource
+	public class affectedResource
 	{
 		public affectedResource(string uid, int amount)
 		{
-			string UID = uid;
-			int Amount = amount;
+			UID = uid;
+			Amount = amount;
 		}
+		public string UID { get; set; }
+		public int Amount { get; set; }
 	}
 
-	class discount
+	public class discount
 	{
-		public discount(string CondUid)
+		public discount(string Conduid)
 		{
-			string CondUID = CondUid;
+			CondUID = Conduid;
+			Amount = 0;
+			CostUID = new List<string>();
 		}
-		public string CondUID = new string("");
-		public int Amount = new int();
-		public list<string> CostUID = new list<string>();
+		public List<string> CostUID { get; set; }
+		public string CondUID { get; set; }
+		public int Amount { get; set; }
+		
 	}
 
-	public string Type = new string("");
-	public int cost = new int();
-	public List<string> CostTypes = new List<string>();
-	public List<List<string>> dependecy = new List<List<string>>();
-	public List<string> freeAbilities = new List<string>();
-	List<discount> discounts = new List<discount>();
-	List<affectedResource> affectedResources = new List<affectedResource>();
-	public List<dynamic> test = new();
+	public string Type { get; set; }
+	public int cost { get; set; }
+	public List<string> CostTypes { get; set; }
+	public List<List<string>> dependecy { get; set; }
+	public List<string> freeAbilities { get; set; }
+	public List<discount> discounts { get; set; }
+	public List<affectedResource> affectedResources { get; set; }
 
 	public void addAffectedResources(string uid, int amount)
 	{
@@ -74,7 +87,7 @@ public class majorTrait : characterTrait
 	{
 		this.discounts.Add(new discount(Conduid));
 	}
-	public void addDiscountType(string CondUid, list<string> CostUid)
+	public void addDiscountType(string CondUid, List<string> CostUid)
     {
 		foreach (discount id in discounts)
         {
@@ -82,9 +95,9 @@ public class majorTrait : characterTrait
             {
 				foreach (string cost in CostUid)
                 {
-					id.CostUID.add(cost);
+					id.CostUID.Add(cost);
                 }
-				break
+				break;
             }
         }
     }
@@ -106,7 +119,7 @@ public class majorTrait : characterTrait
 	}
 }
 
-class resource : characterTrait
+public class resource : characterTrait
 {
 	public resource(string uid, int Type) : base(uid)
 	{
