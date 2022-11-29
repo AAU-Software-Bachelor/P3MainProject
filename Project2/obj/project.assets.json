@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\onM_Doc\\Programmering\\P3 - CMSE\\Project2\\Project2.csproj",
+      "projectUniqueName": "E:\\onM_Doc\\Programmering\\P3test\\P3MainProject\\Project2\\Project2.csproj",
       "projectName": "Project2",
-      "projectPath": "E:\\onM_Doc\\Programmering\\P3 - CMSE\\Project2\\Project2.csproj",
+      "projectPath": "E:\\onM_Doc\\Programmering\\P3test\\P3MainProject\\Project2\\Project2.csproj",
       "packagesPath": "C:\\Users\\2bias\\.nuget\\packages\\",
-      "outputPath": "E:\\onM_Doc\\Programmering\\P3 - CMSE\\Project2\\obj\\",
+      "outputPath": "E:\\onM_Doc\\Programmering\\P3test\\P3MainProject\\Project2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\2bias\\AppData\\Roaming\\NuGet\\NuGet.Config",
