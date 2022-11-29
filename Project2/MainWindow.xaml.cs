@@ -33,7 +33,7 @@ namespace Project2
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            getappPath();
+      
             Race race = new Race(currentConfig); //we need to talk about naming stuff!!
             this.Content = race;
            

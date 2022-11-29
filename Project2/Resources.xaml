@@ -21,7 +21,7 @@
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="Type" Width="80" DisplayMemberBinding="{Binding Content, ElementName=CURRENCYRadioButton}"/>
+                    <GridViewColumn Header="Type" Width="80" DisplayMemberBinding="{Binding ResourceType}"/>
                 </GridView>
             </ListView.View>
         </ListView>

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Project2
 {
@@ -20,18 +24,20 @@ namespace Project2
     /// Interaction logic for Recources.xaml
     /// </summary>
     public partial class Resources : Page
-    {   
+    {
+        public ObservableCollection<resourceTrait> ResourceCollection;
         public Resources(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            newresource = new ObservableCollection<newResource>(){
-            new newResource(){Name = "New Resource", ResourceType = "HP/Stat Bar" }
+            ResourceCollection = new ObservableCollection<resourceTrait>()
+            {
+            new resourceTrait("R-0", 1)
             };
-            lstResources.ItemsSource = newresource;
+            lstResources.ItemsSource = ResourceCollection;
         }
         config CurrentConfig;
-
+        int lastSelectedIndex;
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -61,26 +67,49 @@ namespace Project2
 
         private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
         {
-            int i = newresource.Count + 1;
+      
             newresource.Add(new newResource() { Name = "New Resource", ResourceType = "HP/Stat Bar" });
+            lastSelectedIndex = newresource.Count + 1;
         }
 
         private void btnResource_ClickDelete(object sender, RoutedEventArgs e)
         {
+            
             var index = lstResources.SelectedIndex;
+            if (lstResources.SelectedIndex == null)
+            {
+                index = lastSelectedIndex;
+            }
             if (lstResources.SelectedIndex >= 1)
             {
                 newresource.RemoveAt(index);
             }
         }
+     /*   public string getRadioButton()
+        {
+            *//*string type = newresourc
+*//*
+            return Type;
+        }*/
 
         private void AssignResourceTypeRadioButton(object sender, RoutedEventArgs e)
-        {
+        { 
             RadioButton rb = sender as RadioButton;
-            var content = rb.Content;
+       
+   /*         string content = rb.Content.ToString();*/
+            System.Diagnostics.Debug.WriteLine(rb.Content);
 
             var index = lstResources.SelectedIndex;
-
+            if (lstResources.SelectedIndex == null)
+            {
+                index = lastSelectedIndex;
+            }
+            string ResourceType = rb.Content.ToString();
+            if (lstResources.SelectedIndex >= 0)
+            {
+                newresource[index] = new newResource() { Name = newresource[index].Name, ResourceType = ResourceType };
+            }
+            HPSTATBARRadioButton.IsC
         }
 
         /*private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
