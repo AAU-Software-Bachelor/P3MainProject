@@ -63,6 +63,7 @@ namespace Project2
             win.Close();
         }*/
 
+
         private ObservableCollection<majorTrait> newrace;
 
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
@@ -75,6 +76,7 @@ namespace Project2
         {
             var index = lstRaces.SelectedIndex;
             if (lstRaces.SelectedIndex >= 0)
+
             {
                 newrace.RemoveAt(index);
             }
@@ -104,7 +106,9 @@ namespace Project2
         private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
         {
             var index = ListStarterAbilities.SelectedIndex;
+
             if(index >= 0) 
+
             {
                 ListStarterAbilities.Items.RemoveAt(index);
             }
@@ -169,14 +173,18 @@ namespace Project2
         private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
         {
             var index = ListStarterResources.SelectedIndex;
-
             if (index >= 0)
             {
                 ListStarterResources.Items.RemoveAt(index);
             }
         }
 
-        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -220,8 +228,9 @@ namespace Project2
 
 
 
+
             //CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
         }
-        
+
     }
 }

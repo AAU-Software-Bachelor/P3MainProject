@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <ShowAllFiles>true</ShowAllFiles>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
@@ -16,7 +18,9 @@
     <Compile Update="Race.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Recources.xaml.cs">
+
+    <Compile Update="Resources.xaml.cs">
+
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Religion.xaml.cs">
@@ -33,10 +37,15 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Gallery.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Race.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Recources.xaml">
+
+    <Page Update="Resources.xaml">
+
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Religion.xaml">
