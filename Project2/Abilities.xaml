@@ -1,0 +1,45 @@
+﻿<Page x:Class="Project2.And_Or_Select"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Project2"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Abilities">
+
+    <Grid Background="#FFCCCCCC" Margin="0,0,-465,-686">
+        <Label Content="Abilities" HorizontalAlignment="Left" Margin="71,10,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="24"/>
+
+        <TextBox HorizontalAlignment="Left" Margin="38,193,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+        <TextBox HorizontalAlignment="Left" Margin="236,66,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
+        <TextBox HorizontalAlignment="Left" Margin="38,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="325" Height="201" Text="Description"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="38,505,853,203">
+            <Grid>
+                <Label Content="Affected Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                <Label Content="Select Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,57,0,0" Height="28" Width="154" FontWeight="Bold"/>
+                <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,53,0,0" Height="32" Width="97" FontWeight="Bold"/>
+                <ComboBox Margin="10,154,202,237" Text="Select Ability"/>
+                <ComboBox Margin="10,90,202,301" Text="Select Ability"/>
+                <ComboBox Margin="10,212,203,179"  Text="Select Ability"/>
+                <Button Content="Add+" HorizontalAlignment="Center" Margin="0,381,0,0" VerticalAlignment="Top" Height="34" Width="98"/>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="464,66,425,459">
+            <Grid >
+                <Label Content="Acquisition Cost" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                <Label Content="Select Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,57,0,0" Height="28" Width="154" FontWeight="Bold"/>
+                <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,53,0,0" Height="32" Width="97" FontWeight="Bold"/>
+                <ComboBox Margin="22,90,191,487"  Text="Select Ability"/>
+                <ComboBox Margin="22,212,191,365"  Text="Select Ability"/>
+                <ComboBox Margin="22,330,191,247"  Text="Select Ability"/>
+                <Button Content="Add" HorizontalAlignment="Center" Margin="0,567,0,0" VerticalAlignment="Top" Height="34" Width="98"/>
+                <ComboBox Margin="60,272,237,305"  Text="Select Ability"/>
+            </Grid>
+        </Border>
+        <ComboBox x:Name="ComboxAndOr" Margin="147,110,1040,992" Text="Select Ability" ItemsSource="{Binding Items}">
+        </ComboBox>
+        <Grid/>
+
+    </Grid>
+</Page>

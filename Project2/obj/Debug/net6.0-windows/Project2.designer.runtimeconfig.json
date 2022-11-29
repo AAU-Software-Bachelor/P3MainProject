@@ -1,9 +1,19 @@
 {
   "runtimeOptions": {
     "tfm": "net6.0",
+    "frameworks": [
+      {
+        "name": "Microsoft.NETCore.App",
+        "version": "6.0.0"
+      },
+      {
+        "name": "Microsoft.WindowsDesktop.App",
+        "version": "6.0.0"
+      }
+    ],
     "additionalProbingPaths": [
-      "C:\\Users\\jacob\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\jacob\\.nuget\\packages"
+      "C:\\Users\\2bias\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\2bias\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

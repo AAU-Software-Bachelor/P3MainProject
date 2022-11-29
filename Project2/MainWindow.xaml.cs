@@ -21,23 +21,95 @@ namespace Project2
     /// </summary>
     public partial class MainWindow : Window
     {
+        config currentConfig = new config();
         public MainWindow()
         {
+         
             InitializeComponent();
+            
+
         }
+
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
-            Race race = new Race();
+      
+            Race race = new Race(currentConfig); //we need to talk about naming stuff!!
             this.Content = race;
+           
         }
 
-       private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            GalleryWindow gallery = new GalleryWindow(currentConfig);
+            this.Content = gallery;
+        }
+
+        private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+            Religion religion = new Religion(currentConfig);
+            this.Content = religion;
+        }
+
+        private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+<<<<<<< HEAD
+
+            Resources resources = new Resources(currentConfig);
+            this.Content = resources;
+=======
             string input = "Empty";
             input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
             TextBlock myTextBlock = "Empty";
+>>>>>>> master
         }
+
+     
+
+        /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+         {
+             string input = "Empty";
+             input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
+
+             string NewLabel = LabelGenerator(input);
+             GridTextBlock.Children.Add(NewLabel);
+
+             TextBlock myTextBlock = new TextBlock();
+             myTextBlock.FontSize = "14";
+             myTextBlock.FontWeight = Fontweights.Bold;
+             myTextBlock.Text = input;
+
+             input.Children.Add(myTextBlock);
+         }
+
+         private void LabelGenerator(string input)
+         {
+             Label newlabel = new Label();
+             newlabel.HorizontalAlignment = "Left";
+             newlabel.VerticalAlignment = "Top";
+             newlabel.FontSize = "14";
+             newlabel.FontWeight = Fontweights.Bold;
+             int i = 0;
+             int f = 0 % 2;
+             while(true);
+                 if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.i))
+                 {
+                     i++;
+                 }
+                 if(!string.IsNullOrEmpty(GridTextBlock.Grid.Column.f){
+                     f++;
+                 }
+             if (string.IsNullOrEmpty(GridTextBlock.Grid.Column.f && string.IsNullOrEmpty(GridTextBlock.Grid.Column.i)))
+                 {
+                     break;
+                 }
+             newlabel.Column = i;
+             newlabel.Row = f;
+             newlabel.x:name = input;
+             return newlabel;
+
+         }*/
+
     }
 }
