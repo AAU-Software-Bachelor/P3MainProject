@@ -19,21 +19,22 @@ namespace Project2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
-        public MainWindow()
+        public MainWindow(config currentConfig)
         {
-            this.CurrentConfig = new config();
+            CurrentConfig = currentConfig;
             InitializeComponent();
-
         }
         public config CurrentConfig { get; set; }
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Race race = new Race(CurrentConfig);
-            this.Content = race;
+            Application.Current.MainWindow.Content = race;
         }
+
+
 
 
 
@@ -83,4 +84,5 @@ namespace Project2
          }*/
 
     }
+
 }
