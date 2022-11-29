@@ -1,105 +1,125 @@
 using System;
 using System.Collections.Generic;
 
-<<<<<<< HEAD
 
-class characterTrait
+
+public class characterTrait
 {
 
 	public characterTrait(string uid)
 	{
 		UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
-=======
-class characterTrait
-{
 
-	public characterTrait(int uid)
-	{
-		UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
->>>>>>> master
+		Image = "";
+		Name = "";
+		Description = "";
+	}
+
+	public string Name { get; set; }
+	public string Image { get; set; }
+	public string Description { get; set; }
+	public string UID { get; set; }
+
 	}
 
 	public string name;
 	public string image;
 	public string description;
-<<<<<<< HEAD
-	public string UID;
-=======
-	public int UID;
->>>>>>> master
 
 	public void SaveToConfig(int configID)
 	{
 		Console.WriteLine("send to this (" + configID + ") configuration file");
 	}
-<<<<<<< HEAD
+
 	public void properDelete()
 	{
 
 	}
-=======
->>>>>>> master
-
 }
 
-class majorTrait : characterTrait
+public class majorTrait : characterTrait
 {
-<<<<<<< HEAD
+
 	public majorTrait(string uid) : base(uid)
 	{
+		Type = new string("");
+		cost = new int();
+		CostTypes = new List<string>();
+		dependency = new List<List<string>>();
+		freeAbilities = new List<string>();
+		discounts = new List<discount>();
+		affectedResources = new List<affectedResource>();
+}
 
-	}
-
-	class affectedResource
+	public class affectedResource
 	{
 		public affectedResource(string uid, int amount)
 		{
-			string UID = uid;
-			int Amount = amount;
+			UID = uid;
+			Amount = amount;
 		}
+		public string UID { get; set; }
+		public int Amount { get; set; }
 	}
 
-	class cost
+	public class discount
 	{
-		public cost(string T, string uid, int amount)
+		public discount(string Conduid)
 		{
-			string Type = T;
-			string UID = uid;
-			int Amount = amount;
+			CondUID = Conduid;
+			Amount = 0;
+			CostUID = new List<string>();
 		}
+		public List<string> CostUID { get; set; }
+		public string CondUID { get; set; }
+		public int Amount { get; set; }
+		
 	}
-	class discount
-	{
-		public discount(string uid, string type, int amount)
-		{
-			string Type = type;
-			string UID = uid;
-			int Amount = amount;
-		}
-	}
-	public string dependency = new string("");                          //  !(Exc1 & Exc2 & Exc..n) & ( (Dep1 & Dep2) | (Dep3 | Dep4) & Dep..n )
-	public List<string> freeAbilities = new List<string>();
-	List<cost> Cost = new List<cost>();
-	List<discount> discounts = new List<discount>();
-	List<affectedResource> affectedResources = new List<affectedResource>();
-	public List<dynamic> test = new();
+
+	public string Type { get; set; }
+	public int cost { get; set; }
+	public List<string> CostTypes { get; set; }
+	public List<List<string>> dependency { get; set; }
+	public List<string> freeAbilities { get; set; }
+	public List<discount> discounts { get; set; }
+	public List<affectedResource> affectedResources { get; set; }
 
 	public void addAffectedResources(string uid, int amount)
 	{
 		this.affectedResources.Add(new affectedResource(uid, amount));
 	}
-	public void addFreeAbilities(string uid)
+	public void addDiscount(string Conduid)
 	{
-		this.freeAbilities.Add(uid);
+		this.discounts.Add(new discount(Conduid));
 	}
-	public void addDiscount(string uid, string type, int value)
+	public void addDiscountType(string CondUid, List<string> CostUid)
+    {
+		foreach (discount id in discounts)
+        {
+			if (id.CondUID == CondUid)
+            {
+				foreach (string cost in CostUid)
+                {
+					id.CostUID.Add(cost);
+                }
+				break;
+            }
+        }
+    }
+	public void addCostTypes(string uid)
 	{
-		this.discounts.Add(new discount(uid, type, value));
+
+		this.CostTypes.Add(uid);
 	}
-	public void addCosttype(string Type, string uid, int amount)
+	public void deleteContent()
 	{
+		this.Name = "";
+		this.Image = "";
+		this.Description = "";
+		this.cost = new int();
+		this.CostTypes = new List<string>();
 		this.Cost.Add(new cost(Type, uid, amount));
-=======
+
 	public majorTrait(int uid) : base(uid)
 	{
 
@@ -132,39 +152,25 @@ class majorTrait : characterTrait
 	public void addCosttype(string uid)
 	{
 		this.Costtype.Add(uid);
->>>>>>> master
-	}
-	public void deleteContent()
-	{
-		this.name = "";
-		this.image = "";
-		this.description = "";
-<<<<<<< HEAD
+
+
 		this.dependency = "";
+
 		this.freeAbilities = new List<string>();
-		this.Cost = new List<cost>();
 		this.discounts = new List<discount>();
 		this.affectedResources = new List<affectedResource>();
-=======
-		this.cost = 0;
-		this.Costtype = new List<int>();
-		this.freeAbilities = new List<int>();
-		this.exclusions = new List<string>();
-		this.dependencies = new List<string>();
-		this.discounts = new List<string>();
-		this.affectedResources = new List<string>();
->>>>>>> master
+
 
 	}
 }
 
-class resourceTrait : characterTrait
+
+public class resource : characterTrait
+
 {
-<<<<<<< HEAD
+
 	public resourceTrait(string uid, int Type) : base(uid)
-=======
-	public resource(int uid, int Type) : base(uid)
->>>>>>> master
+
 	{
 		type = Type;
 	}

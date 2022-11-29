@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +23,7 @@ namespace Project2
     /// </summary>
     public partial class Religion : Page
     {
+
         public Religion(config currentConfig)
         {
             CurrentConfig = currentConfig;
@@ -169,4 +172,5 @@ namespace Project2
 
     }
 }
+
 

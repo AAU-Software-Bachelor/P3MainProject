@@ -19,20 +19,19 @@ namespace Project2
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Page
     {
-        config currentConfig = new config();
-        public MainWindow()
+        public MainWindow(config currentConfig)
         {
-         
+
+            CurrentConfig = currentConfig;
             InitializeComponent();
-            
-
         }
-
+        public config CurrentConfig { get; set; }
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
       
             Race race = new Race(currentConfig); //we need to talk about naming stuff!!
             this.Content = race;
@@ -43,6 +42,7 @@ namespace Project2
         {
             GalleryWindow gallery = new GalleryWindow(currentConfig);
             this.Content = gallery;
+
         }
 
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -54,18 +54,16 @@ namespace Project2
 
         private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-<<<<<<< HEAD
-
             Resources resources = new Resources(currentConfig);
             this.Content = resources;
-=======
             string input = "Empty";
             input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
             TextBlock myTextBlock = "Empty";
->>>>>>> master
         }
 
      
+
+
 
         /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
          {
@@ -112,4 +110,5 @@ namespace Project2
          }*/
 
     }
+
 }

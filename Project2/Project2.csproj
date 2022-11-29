@@ -29,11 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Gallery.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Trashcan\" />
+    <Resource Include="Images\Gallery.png" />
   </ItemGroup>
 
   <ItemGroup>

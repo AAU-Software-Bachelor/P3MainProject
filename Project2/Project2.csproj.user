@@ -18,7 +18,9 @@
     <Compile Update="Race.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+
     <Compile Update="Resources.xaml.cs">
+
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Religion.xaml.cs">
@@ -41,7 +43,9 @@
     <Page Update="Race.xaml">
       <SubType>Designer</SubType>
     </Page>
+
     <Page Update="Resources.xaml">
+
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Religion.xaml">

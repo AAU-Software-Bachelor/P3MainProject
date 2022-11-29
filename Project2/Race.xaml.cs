@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using static Project2.Race;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
 
 namespace Project2
@@ -32,12 +33,14 @@ namespace Project2
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            newrace = new ObservableCollection<newRace>(){
-            new newRace(){Name = "New Race"}
+
+            newrace = new ObservableCollection<majorTrait>(){
+            new majorTrait(CurrentConfig.newUID("Race")){ Name = "new race" }
+
             };
             lstRaces.ItemsSource = newrace;
         }
-        config CurrentConfig;
+        public config CurrentConfig { get; set; }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -47,8 +50,8 @@ namespace Project2
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            MainWindow mainWindow = new MainWindow();
-            this.Content = mainWindow;
+            MainWindow mainWindow = new MainWindow(CurrentConfig);
+            Application.Current.MainWindow.Content = mainWindow;
         }
 
         /*private void Button_Click(object sender, RoutedEventArgs e)
@@ -59,26 +62,21 @@ namespace Project2
             win.Close();
         }*/
 
-        private ObservableCollection<newRace> newrace;
 
-        public class newRace
-        {
-            public string Name { get; set; }
-            public int ID { get; set; }
-
-        }
+        private ObservableCollection<majorTrait> newrace;
         
+
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
-           
             int i = newrace.Count + 1;
-            newrace.Add(new newRace() { Name = "New Race", ID = i });
+            newrace.Add(new majorTrait(CurrentConfig.newUID("Race"))  { Name = "new race" });
         }
 
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
         {
             var index = lstRaces.SelectedIndex;
-            if (lstRaces.SelectedIndex >= 1)
+            if (lstRaces.SelectedIndex >= 0)
+
             {
                 newrace.RemoveAt(index);
             }
@@ -103,7 +101,9 @@ namespace Project2
         private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
         {
             var index = ListStarterAbilities.SelectedIndex;
-            if (index >= 0)
+
+            if(index >= 0) 
+
             {
                 ListStarterAbilities.Items.RemoveAt(index);
             }
@@ -161,12 +161,10 @@ namespace Project2
         private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
         {
             var index = ListStarterResources.SelectedIndex;
-
             if (index >= 0)
             {
                 ListStarterResources.Items.RemoveAt(index);
             }
-
         }
 
         private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -187,22 +185,26 @@ namespace Project2
             //for loop through dependencies / discounts
             //for loop through affectedResources
 
-
-            string[] id = UID.Split('-');
-            majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
+            
+            majorTrait currentMT = CurrentConfig.GetTrait(UID);
             currentMT.deleteContent();
+            
 
             string name = (this.FindName("nameBox") as TextBox).Text;
             string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
             string desc = (this.FindName("descBox") as TextBox).Text;
 
-            currentMT.name = name;
-            currentMT.description = playerReq + "\n\n" + desc;
+            foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
+            {
+                string TempUID =  BOX.SelectedValue as string;
+
+            }
 
 
 
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }*/
+
+            //CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
+        }
 
     }
 }
