@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 
 
+
 public class characterTrait
 {
 
 	public characterTrait(string uid)
 	{
 		UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
+
 		Image = "";
 		Name = "";
 		Description = "";
@@ -18,19 +20,26 @@ public class characterTrait
 	public string Description { get; set; }
 	public string UID { get; set; }
 
+	}
+
+	public string name;
+	public string image;
+	public string description;
+
 	public void SaveToConfig(int configID)
 	{
 		Console.WriteLine("send to this (" + configID + ") configuration file");
 	}
+
 	public void properDelete()
 	{
 
 	}
-
 }
 
 public class majorTrait : characterTrait
 {
+
 	public majorTrait(string uid) : base(uid)
 	{
 		Type = new string("");
@@ -99,6 +108,7 @@ public class majorTrait : characterTrait
     }
 	public void addCostTypes(string uid)
 	{
+
 		this.CostTypes.Add(uid);
 	}
 	public void deleteContent()
@@ -108,16 +118,59 @@ public class majorTrait : characterTrait
 		this.Description = "";
 		this.cost = new int();
 		this.CostTypes = new List<string>();
+		this.Cost.Add(new cost(Type, uid, amount));
+
+	public majorTrait(int uid) : base(uid)
+	{
+
+	}
+	public int cost = new int();
+	public List<int> Costtype = new List<int>();
+	public List<int> freeAbilities = new List<int>();
+	public List<string> exclusions = new List<string>();
+	public List<string> dependencies = new List<string>();
+	public List<string> discounts = new List<string>();
+	public List<string> affectedResources = new List<string>();
+
+	public void addAffectedResources(string uid, int ammount)
+	{
+		this.affectedResources.Add(uid);
+	}
+	public void addFreeAbilities(int uid)
+	{
+		this.freeAbilities.Add(uid);
+	}
+	public void addExclusions(string uid)
+	{
+		this.exclusions.Add(uid);
+	}
+	public void addDependency(string uid, int value)
+	{
+		this.dependencies.Add(uid);
+		this.discounts.Add(value);
+	}
+	public void addCosttype(string uid)
+	{
+		this.Costtype.Add(uid);
+
+
+		this.dependency = "";
+
 		this.freeAbilities = new List<string>();
 		this.discounts = new List<discount>();
 		this.affectedResources = new List<affectedResource>();
 
+
 	}
 }
 
+
 public class resource : characterTrait
+
 {
-	public resource(string uid, int Type) : base(uid)
+
+	public resourceTrait(string uid, int Type) : base(uid)
+
 	{
 		type = Type;
 	}
