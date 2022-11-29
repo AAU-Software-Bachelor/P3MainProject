@@ -104,3 +104,38 @@ C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Item
 C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Religion.baml
 C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Resources.g.cs
 C:\Users\matti\source\repos\P3MainProject\Project2\obj\Debug\net6.0-windows\Resources.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.csproj.AssemblyReference.cache
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Abilities.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Career.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Gallery.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Items.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\MainWindow.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Race.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Religion.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\App.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2_MarkupCompile.cache
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2_MarkupCompile.lref
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.dll
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\refint\Project2.dll
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.pdb
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\bin\Debug\net6.0-windows\Project2.exe
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\bin\Debug\net6.0-windows\Project2.deps.json
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\bin\Debug\net6.0-windows\Project2.runtimeconfig.json
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\bin\Debug\net6.0-windows\Project2.dll
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\bin\Debug\net6.0-windows\Project2.pdb
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Resources.g.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Abilities.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Career.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Gallery.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Items.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\MainWindow.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Race.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Religion.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Resources.baml
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.g.resources
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.GeneratedMSBuildEditorConfig.editorconfig
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.AssemblyInfoInputs.cache
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.AssemblyInfo.cs
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.csproj.CoreCompileInputs.cache
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\Project2.genruntimeconfig.cache
+E:\onM_Doc\Programmering\P3 - CMSE\Project2\obj\Debug\net6.0-windows\ref\Project2.dll

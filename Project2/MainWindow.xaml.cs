@@ -24,17 +24,25 @@ namespace Project2
         config currentConfig = new config();
         public MainWindow()
         {
+         
             InitializeComponent();
-
+            
 
         }
 
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            Race race = new Race(currentConfig);
+            getappPath();
+            Race race = new Race(currentConfig); //we need to talk about naming stuff!!
             this.Content = race;
+           
+        }
+
+        private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            GalleryWindow gallery = new GalleryWindow(currentConfig);
+            this.Content = gallery;
         }
 
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -51,7 +59,7 @@ namespace Project2
             this.Content = resources;
         }
 
-
+     
 
         /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
          {

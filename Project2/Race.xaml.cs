@@ -67,9 +67,10 @@ namespace Project2
             public int ID { get; set; }
 
         }
-
+        
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
+           
             int i = newrace.Count + 1;
             newrace.Add(new newRace() { Name = "New Race", ID = i });
         }

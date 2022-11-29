@@ -39,7 +39,7 @@
             <Grid Margin="175,29,516,391" Background="Gray" x:Name="GridRadioButtons">
                 
                 <TextBlock Text="Resource Type" Margin="50,0,0,0"/>
-                <RadioButton x:Name="HPSTATBARRadioButton" Content="HP/Stat Bar" Margin="0,30,0,0" GroupName="ResourceTypeGrpRadioButtons" Checked="'" IsChecked="True"/>
+                <RadioButton x:Name="HPSTATBARRadioButton" Content="HP/Stat Bar" Margin="0,30,0,0" GroupName="ResourceTypeGrpRadioButtons" Checked="AssignResourceTypeRadioButton" IsChecked="True"/>
                 <RadioButton x:Name="XPVARIANTRadioButton" Content="XP Variant" Margin="0,60,0,0" GroupName="ResourceTypeGrpRadioButtons" Checked="AssignResourceTypeRadioButton"/>
                 <RadioButton x:Name="CURRENCYRadioButton" Content="Currency" Margin="90,30,0,0" GroupName="ResourceTypeGrpRadioButtons" Checked="AssignResourceTypeRadioButton"/>
                 <RadioButton x:Name="MISCRadioButton" Content="Misc." Margin="90,60,0,0" GroupName="ResourceTypeGrpRadioButtons" Checked="AssignResourceTypeRadioButton"/>
