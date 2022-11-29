@@ -117,9 +117,9 @@ namespace Project2
 		}
 	}
 
-	public class resource : characterTrait
+	public class resourceTrait : characterTrait
 	{
-		public resource(string uid, int Type) : base(uid)
+		public resourceTrait(string uid, int Type) : base(uid)
 		{
 			type = Type;
 		}

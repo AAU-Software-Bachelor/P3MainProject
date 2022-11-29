@@ -21,16 +21,17 @@ namespace Project2
     /// </summary>
     public partial class And_Or_Select : Page
     {
-        public And_Or_Select()
+        public And_Or_Select(config currentConfig)
         {
             InitializeComponent();
         }
+        public config CurrentConfig { get; set; }
 
         private void AbilitiesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            MainWindow mainWindow = new MainWindow();
-            this.Content = mainWindow;
+            MainWindow mainWindow = new MainWindow(CurrentConfig);
+            Application.Current.MainWindow.Content = mainWindow;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

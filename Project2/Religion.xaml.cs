@@ -33,7 +33,7 @@ namespace Project2
             };
             lstReligion.ItemsSource = newreligion;
         }
-        config CurrentConfig;
+        public config CurrentConfig { get; set; }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -43,8 +43,8 @@ namespace Project2
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            MainWindow mainWindow = new MainWindow();
-            this.Content = mainWindow;
+            MainWindow mainWindow = new MainWindow(CurrentConfig);
+            Application.Current.MainWindow.Content = mainWindow;
         }
 
         /*private void Button_Click(object sender, RoutedEventArgs e)

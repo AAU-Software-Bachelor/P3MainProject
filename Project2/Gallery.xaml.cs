@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using static Project2.Race;
 using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
 
 namespace Project2
@@ -42,7 +43,7 @@ namespace Project2
             lstGallery.ItemsSource = galleryIconlst;
 
         }
-        config CurrentConfig;
+        public config CurrentConfig { get; set; }
 
 
         /* public ObservableCollection<galleryImage> ProcessedImg = new ObservableCollection<galleryImage>();*/
@@ -208,8 +209,8 @@ namespace Project2
         private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            MainWindow mainWindow = new MainWindow();
-            this.Content = mainWindow;
+            MainWindow mainWindow = new MainWindow(CurrentConfig);
+            Application.Current.MainWindow.Content = mainWindow;
         }
     }
 

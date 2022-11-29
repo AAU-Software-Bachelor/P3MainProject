@@ -184,7 +184,7 @@ namespace Project2
 
         }
 
-        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
