@@ -54,9 +54,15 @@ namespace Project2
 
         private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+<<<<<<< HEAD
 
             Resources resources = new Resources(currentConfig);
             this.Content = resources;
+=======
+            string input = "Empty";
+            input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
+            TextBlock myTextBlock = "Empty";
+>>>>>>> master
         }
 
      
