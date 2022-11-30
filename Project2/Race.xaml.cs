@@ -67,6 +67,7 @@ namespace Project2
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
 			newrace.Add(tempRace);
 			CurrentConfig.saveToList(tempRace);
+			lstRaces.SelectedIndex = newrace.Count-1;
 
 		}
         /// <summary>
@@ -128,7 +129,7 @@ namespace Project2
 			ComboBox comboBoxOne = new ComboBox();	//starts on the recouse combobox
 			comboBoxOne.Text = "Select Stat";
 			comboBoxOne.IsReadOnly = true;
-			comboBoxOne.IsDropDownOpen = true;
+			comboBoxOne.IsDropDownOpen = false;
 			comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
 			comboBoxOne.Height = 24;
 			comboBoxOne.Width = 185;
