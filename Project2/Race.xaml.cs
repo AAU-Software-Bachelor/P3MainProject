@@ -33,11 +33,12 @@ namespace Project2
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
+            newrace = new ObservableCollection<majorTrait>();
+            foreach (majorTrait race in CurrentConfig.RacList)
+            {
+                newrace.Add(race);
+            }
 
-            newrace = new ObservableCollection<majorTrait>(){
-            new majorTrait(CurrentConfig.newUID("Race")){ Name = "new race" }
-
-            };
             lstRaces.ItemsSource = newrace;
         }
         public config CurrentConfig { get; set; }
@@ -64,7 +65,6 @@ namespace Project2
 
 
         private ObservableCollection<majorTrait> newrace;
-        
 
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
@@ -87,13 +87,18 @@ namespace Project2
         {
             this.InitializeComponent();
             ComboBox comboBox = new ComboBox();
-            comboBox.Text = "Select Ability";
             comboBox.IsReadOnly = true;
             comboBox.IsDropDownOpen = true;
             comboBox.Margin = new Thickness(5, 5, 0, 0);
             comboBox.Height = 24;
             comboBox.Width = 185;
             comboBox.SelectionChanged += ComboBox_SelectionChanged;
+            comboBox.DisplayMemberPath = "Name";
+            foreach (majorTrait abi in CurrentConfig.AbilList)
+            {
+                comboBox.Items.Add(abi);
+            }
+
             this.ListStarterAbilities.Items.Add(comboBox);
 
         }
@@ -124,6 +129,13 @@ namespace Project2
             comboBoxOne.Height = 24;
             comboBoxOne.Width = 185;
             comboBoxOne.SelectionChanged += ComboBox_SelectionChanged;
+
+            comboBoxOne.DisplayMemberPath = "Name";
+            foreach (majorTrait abi in CurrentConfig.AbilList)
+            {
+                comboBoxOne.Items.Add(abi);
+            }
+
 
             stackPanel.Children.Add(comboBoxOne);
 
@@ -172,7 +184,7 @@ namespace Project2
 
         }
 
-        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -197,6 +209,20 @@ namespace Project2
             foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
             {
                 string TempUID =  BOX.SelectedValue as string;
+                currentMT.freeAbilities.Add(TempUID);
+            }
+
+            foreach (StackPanel PANEL in (this.FindName("ListStarterResources") as ListView).Items)
+            {
+                foreach (ComboBox box in PANEL.Children)
+                {
+                    foreach (TextBox textBox in PANEL.Children)
+                    {
+                        string TempUID = box.SelectedValue as string;
+                        int TempVal = int.Parse(textBox.Text);
+                        currentMT.addAffectedResources(TempUID, TempVal);
+                    }
+                }
 
             }
 

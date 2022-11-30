@@ -31,34 +31,32 @@ namespace Project2
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-      
-            Race race = new Race(currentConfig); //we need to talk about naming stuff!!
-            this.Content = race;
+            Race race = new Race(CurrentConfig); //we need to talk about naming stuff!!
+            Application.Current.MainWindow.Content = race;
            
         }
 
         private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            GalleryWindow gallery = new GalleryWindow(currentConfig);
-            this.Content = gallery;
+            GalleryWindow gallery = new GalleryWindow(CurrentConfig);
+            Application.Current.MainWindow.Content = gallery;
 
         }
 
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            Religion religion = new Religion(currentConfig);
-            this.Content = religion;
+            Religion religion = new Religion(CurrentConfig);
+            Application.Current.MainWindow.Content = religion;
         }
 
         private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Resources resources = new Resources(currentConfig);
-            this.Content = resources;
+            Resources resources = new Resources(CurrentConfig);
+            Application.Current.MainWindow.Content = resources;
             string input = "Empty";
-            input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
-            TextBlock myTextBlock = "Empty";
+            //input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
+            //TextBlock myTextBlock = "Empty";
         }
 
      

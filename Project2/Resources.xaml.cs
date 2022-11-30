@@ -45,8 +45,8 @@ namespace Project2
 
         private void ResourceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            this.Content = mainWindow;
+            MainWindow mainWindow = new MainWindow(CurrentConfig);
+            Application.Current.MainWindow.Content = mainWindow;
         }
 
         /*private void Button_Click(object sender, RoutedEventArgs e)
@@ -109,7 +109,6 @@ namespace Project2
             {
                 newresource[index] = new newResource() { Name = newresource[index].Name, ResourceType = ResourceType };
             }
-            HPSTATBARRadioButton.IsC
         }
 
         /*private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)

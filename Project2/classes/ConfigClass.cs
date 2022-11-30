@@ -16,13 +16,13 @@ namespace Project2
 			AbilList = new List<majorTrait>();
 			CarList = new List<majorTrait>();
 			RelList = new List<majorTrait>();
-			ResList = new List<resource>();
+			ResList = new List<resourceTrait>();
 		}
 		public List<majorTrait> RacList { get; set; }
 		public List<majorTrait> AbilList { get; set; }
 		public List<majorTrait> CarList { get; set; }
 		public List<majorTrait> RelList { get; set; }
-		public List<resource> ResList { get; set; }
+		public List<resourceTrait> ResList { get; set; }
 
 		public void TestWriteToJson(string fileName)
         {

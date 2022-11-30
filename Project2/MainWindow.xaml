@@ -1,4 +1,4 @@
-﻿<Window x:Class="Project2.MainWindow"
+﻿<Page x:Class="Project2.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -85,4 +85,4 @@
             <ColumnDefinition Width="751*"/>
         </Grid.ColumnDefinitions>
     </Grid>
-</Window>
+</Page>
