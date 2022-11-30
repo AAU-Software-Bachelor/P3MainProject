@@ -25,16 +25,16 @@ namespace Project2
     /// <summary>
     /// Interaction logic for Recources.xaml
     /// </summary>
-    public partial class Resources : Page
+    public partial class Resourcewindow : Page
     {
         public ObservableCollection<resourceTrait> ResourceCollection;
-        public Resources(config currentConfig)
+        public Resourcewindow(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
             ResourceCollection = new ObservableCollection<resourceTrait>()
             {
-            new resourceTrait(CurrentConfig.newUID("Resource"), 0){Name = "great resource"}
+            new resourceTrait(CurrentConfig.newUID("Resource"), 0){Name = "New Resource"}
             };
             lstResources.ItemsSource = ResourceCollection;
            
@@ -61,7 +61,7 @@ namespace Project2
 
         private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
         {
-            ResourceCollection.Add(new resourceTrait(CurrentConfig.newUID("Resource"),3) { Name = "new resource" });
+            ResourceCollection.Add(new resourceTrait(CurrentConfig.newUID("Resource"),0) { Name = "New Resource" });
             lastSelectedIndex = ResourceCollection.Count + 1;
         }
 
