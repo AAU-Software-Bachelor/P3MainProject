@@ -32,7 +32,7 @@ namespace Project2
             InitializeComponent();
             ResourceCollection = new ObservableCollection<resourceTrait>()
             {
-            new resourceTrait("R-0", 1)
+            new resourceTrait("R-0")
             };
             lstResources.ItemsSource = ResourceCollection;
         }
