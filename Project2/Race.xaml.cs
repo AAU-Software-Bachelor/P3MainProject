@@ -42,6 +42,7 @@ namespace Project2
 			}
 			lstRaces.ItemsSource = newrace;
 			CurrentIndex = -1;	//skip the next use of CurrentIndex
+			lstRaces.SelectedIndex = 0;
 		}
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }	//keeps track of what index to use
@@ -75,11 +76,11 @@ namespace Project2
 		/// </summary>
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
 		{
-			var index = lstRaces.SelectedIndex;
+            var index = lstRaces.SelectedIndex;
 			if (lstRaces.SelectedIndex >= 0)
 			{
 				newrace.Remove(CurrentConfig.GetTrait(newrace[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
-			}
+			}	
 		}
 
 		/// <summary>
@@ -245,7 +246,7 @@ namespace Project2
 				CurrentIndex = -1;
 				ListStarterAbilities.Items.Clear();
 				ListStarterResources.Items.Clear();
-			}
+            }
 			lstRaces.SelectedIndex = SelIndex;  //applies saved race selection
 		}
 		/// <summary>
