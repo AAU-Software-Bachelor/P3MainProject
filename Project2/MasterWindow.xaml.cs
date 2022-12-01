@@ -31,78 +31,90 @@ namespace Project2
             config CurrentConfig = new();
 
 
-            majorTrait TestMT = new majorTrait(CurrentConfig.newUID("Ability"));
-            TestMT.Name = "SMITE";
-            TestMT.Description = "slaa gud modstander med hellig styrke";
-            TestMT.Type = "Ability";
-            TestMT.cost = 4;
-            TestMT.CostTypes = new List<string>() { "Resource-/GUID4", "Resource-/GUID5" };
-            TestMT.dependency = new List<List<string>>()
+            majorTrait smite = new majorTrait(CurrentConfig.newUID("Ability"));
+            majorTrait EldrichBLAST = new majorTrait(CurrentConfig.newUID("Ability"));
+            majorTrait Warrior = new majorTrait(CurrentConfig.newUID("Career"));
+            majorTrait Warlock = new majorTrait(CurrentConfig.newUID("Career"));
+            majorTrait Dwarf = new majorTrait(CurrentConfig.newUID("Race"));
+            majorTrait Elf = new majorTrait(CurrentConfig.newUID("Race"));
+            resourceTrait health = new resourceTrait(CurrentConfig.newUID("Resource"));
+            resourceTrait mana = new resourceTrait(CurrentConfig.newUID("Resource"));
+            resourceTrait xp = new resourceTrait(CurrentConfig.newUID("Resource"));
+
+            smite.Name = "SMITE";
+            smite.Description = "slaa gud modstander med hellig styrke";
+            smite.Type = "Ability";
+            smite.cost = 4;
+            smite.CostTypes = new List<string>() { xp.UID };
+            smite.dependency = new List<List<string>>()
             {
-                new List<string>(){ "Career-/GUID1", "Career-/GUID2"},
-                new List<string>(){ "Ability-/GUID7", "Ability-/GUID6" },
-                new List<string>(){ "Career-/GUID3", "Ability-/GUID9" }
+                new List<string>(){ Warrior.UID}
             };
-            TestMT.addDiscount("Career-/GUID2");
-            TestMT.discounts[0].Amount = 2;
-            TestMT.addDiscountType("Career-/GUID2", new List<string>() { "Resource-/GUID4", "Resource-/GUID5" });
-            CurrentConfig.AbilList.Add(TestMT);
-
-            TestMT = new majorTrait(CurrentConfig.newUID("Ability"));
-            TestMT.Name = "Eldrich BLAST";
-            TestMT.Description = "it's a BLAST to use";
-            TestMT.Type = "Ability";
-            TestMT.cost = 4;
-            TestMT.CostTypes = new List<string>() { "Resource-/GUID6", "Resource-/GUID7" };
-            TestMT.dependency = new List<List<string>>()
+            smite.addDiscount(Warrior.UID);
+            smite.discounts[0].Amount = 2;
+            smite.addDiscountType(Warrior.UID, new List<string>() { xp.UID});
+            CurrentConfig.AbilList.Add(smite);
+            
+            EldrichBLAST.Name = "Eldrich BLAST";
+            EldrichBLAST.Description = "it's a BLAST to use";
+            EldrichBLAST.Type = "Ability";
+            EldrichBLAST.cost = 4;
+            EldrichBLAST.CostTypes = new List<string>() { xp.UID };
+            EldrichBLAST.dependency = new List<List<string>>()
             {
-                new List<string>(){ "Career-/GUID6", "Career-/GUID4"},
-                new List<string>(){ "Ability-/GUID7", "Ability-/GUID6" },
-                new List<string>(){ "Career-/GUID4", "Ability-/GUID9" }
+                new List<string>(){ Warrior.UID}
             };
-            TestMT.addDiscount("Career-/GUID2");
-            TestMT.discounts[0].Amount = 2;
-            TestMT.addDiscountType("Career-/GUID4", new List<string>() { "Resource-/GUID6", "Resource-/GUID7" });
-            TestMT.addAffectedResources("Resource-/GUID3", 2);
-            CurrentConfig.AbilList.Add(TestMT);
+            EldrichBLAST.addDiscount(Warlock.UID);
+            EldrichBLAST.discounts[0].Amount = 2;
+            EldrichBLAST.addDiscountType(Warlock.UID, new List<string>() { xp.UID});
+            EldrichBLAST.addAffectedResources(mana.UID, 2);
+            CurrentConfig.AbilList.Add(EldrichBLAST);
+            
+            Warrior.Name = "Warrior";
+            Warrior.Description = "am gonna swing a sword";
+            Warrior.Type = "Career";
+            Warrior.addAffectedResources(health.UID, 2);
+            CurrentConfig.CarList.Add(Warrior);
 
-            TestMT = new majorTrait(CurrentConfig.newUID("Career"));
-            TestMT.Name = "Warrior";
-            TestMT.Description = "am gonna swing a sword";
-            TestMT.Type = "Career";
-            TestMT.addAffectedResources("Resource-/GUID1", 1);
-            CurrentConfig.CarList.Add(TestMT);
-
-            TestMT = new majorTrait(CurrentConfig.newUID("Career"));
-            TestMT.Name = "Warlock";
-            TestMT.Description = "-_-";
-            TestMT.Type = "Career";
-            TestMT.dependency = new List<List<string>>()
+            Warlock.Name = "Warlock";
+            Warlock.Description = "-_-";
+            Warlock.Type = "Career";
+            Warlock.dependency = new List<List<string>>()
             {
-                new List<string>(){ "Career-/GUID6"},
-                new List<string>(){ "Career-/GUID4"}
+                new List<string>(){ Warrior.UID}
             };
-            TestMT.addAffectedResources("Resource-/GUID3", 2);
-            CurrentConfig.CarList.Add(TestMT);
+            Warlock.addAffectedResources(mana.UID, 2);
+            CurrentConfig.CarList.Add(Warlock);
 
+            Elf.Name = "Elf";
+            Elf.Description = "the most pompius pricks of all races";
+            Elf.Type = "Race";
+            Elf.freeAbilities = new List<string>() {EldrichBLAST.UID};
+            Elf.addAffectedResources(health.UID, 2);
+            Elf.addAffectedResources(mana.UID, 3);
+            CurrentConfig.RacList.Add(Elf);
 
-            TestMT = new majorTrait(CurrentConfig.newUID("Race"));
-            TestMT.Name = "Elf";
-            TestMT.Description = "the most pompius pricks of all races";
-            TestMT.Type = "Race";
-            TestMT.freeAbilities = new List<string>() { "Ability-/GUID5" };
-            TestMT.addAffectedResources("Resource-/GUID1", 2);
-            TestMT.addAffectedResources("Resource-/GUID3", 3);
-            CurrentConfig.RacList.Add(TestMT);
+            Dwarf.Name = "Dwarf";
+            Dwarf.Description = "this be armor";
+            Dwarf.Type = "Race";
+            Dwarf.freeAbilities = new List<string>() {smite.UID};
+            Dwarf.addAffectedResources(health.UID, 4);
+            CurrentConfig.RacList.Add(Dwarf);
 
-            TestMT = new majorTrait(CurrentConfig.newUID("Race"));
-            TestMT.Name = "Dwarf";
-            TestMT.Description = "this be armor";
-            TestMT.Type = "Race";
-            TestMT.freeAbilities = new List<string>() { "Ability-/GUID2" };
-            TestMT.addAffectedResources("Resource-/GUID1", 4);
-            CurrentConfig.RacList.Add(TestMT);
+            health.Name = "health";
+            health.Description = "ye dead if this be zero";
+            health.type = 1;
+            CurrentConfig.ResList.Add(health);
 
+            mana.Name = "Mana";
+            mana.Description = "le-Magic juice";
+            mana.type = 1;
+            CurrentConfig.ResList.Add(mana);
+
+            xp.Name = "xp";
+            xp.Description = "GAINS!!";
+            xp.type = 2;
+            CurrentConfig.ResList.Add(xp);
 
             MainWindow mainwindow = new MainWindow(CurrentConfig);
             Application.Current.MainWindow.Content = mainwindow;

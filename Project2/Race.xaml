@@ -10,15 +10,15 @@
 	<Grid Background="White" Margin="0,0,413,115">
 		<Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
 		<Label Content="Race editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
-		<Label Grid.Row="0" x:Name="RaceBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="RaceMainMenu_MouseDoubleClick" Width="136" Height="46">
+		<Label Grid.Row="0" x:Name="RaceBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="RaceMainMenu_MouseDoubleClick" Width="136" Height="46">
 			<StackPanel Orientation="Vertical">
 				<Border Background="LightBlue" Padding="10,5,10,5" >
 					<TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
 				</Border>
 			</StackPanel>
 		</Label>
-		<ListView x:Name="lstRaces" Margin="17,99,917,286" Grid.Column="1" Grid.Row="0">
-			<ListView.View>
+		<ListView x:Name="lstRaces" Margin="17,99,917,286" Grid.Column="1" Grid.Row="0" SelectionChanged="OnRaceChanged">
+            <ListView.View>
 				<GridView x:Name="grdNames">
 					<GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
 					<GridViewColumn Header="ID"  Width="40" DisplayMemberBinding="{Binding UID}"/>
@@ -34,9 +34,9 @@
 					
 				</Button>
 			</StackPanel>
-			<TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=lstRaces}" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+			<TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
 			<TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
-			<TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="{Binding SelectedItem.Description, ElementName=lstRaces}"/>
+			<TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text=""/>
 			<Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
 				<Grid>
 					<Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
@@ -49,21 +49,12 @@
 				<Grid>
 					<Label Content="Starter Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
 					<Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,12,0,0" Height="32" Width="97" FontWeight="Bold"/>
-					<ListView x:Name="ListStarterResources" Margin="10,38,10,36">
-						<StackPanel Orientation="Horizontal">
-							<ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
-							<TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
-							<StackPanel Orientation="Vertical">
-								<Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
-								<Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
-							</StackPanel>
-						</StackPanel>
-					</ListView>
+					<ListView x:Name="ListStarterResources" Margin="10,38,10,36"/>
 					<Button Content="ADD" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterResources" ClickMode="Press" Background="LightBlue"/>
 					<Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
 				</Grid>
 			</Border>
-			<Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88"/>
+			<Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveRace"/>
 		</Grid>
 	</Grid>
 </Page>

@@ -34,6 +34,7 @@ namespace Project2
             InitializeComponent();
             ResourceCollection = new ObservableCollection<resourceTrait>()
             {
+
             new resourceTrait(CurrentConfig.newUID("Resource"), 0){Name = "New Resource"}
             };
             lstResources.ItemsSource = ResourceCollection;
