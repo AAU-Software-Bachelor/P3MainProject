@@ -1,0 +1,34 @@
+﻿<Page x:Class="Project2.GalleryWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Project2"
+      mc:Ignorable="d"
+      Title="GalleryWindow" Height="760" Width="1543">
+
+    <Grid Background="White" Margin="0,0,413,115">
+        <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
+        <Label Content="Gallery" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
+        <Label Grid.Row="0" x:Name="GalleryBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="GalleryMainMenu_MouseDoubleClick" Width="136" Height="46">
+            <StackPanel Orientation="Vertical">
+                <Border Background="LightBlue" Padding="10,5,10,5" >
+                    <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
+                </Border>
+            </StackPanel>
+        </Label>
+        <ListView x:Name="lstGallery" Margin="17,99,917,286" Grid.Column="1" Grid.Row="0">
+            <ListView.View>
+                <GridView x:Name="grdNames">
+                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Height="32" Margin="17,373,0,0" x:Name="btnGalleryAdd" Click="btnOpenFile_Click" Content="Upload Picture" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="32" Margin="115,373,0,0" x:Name="btnGalleryDelete" Click="btnGallery_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button Content="Upload Folder" Click="btnOpenFolder_Click" Margin="17,415,1018,198"/>
+        <Grid Background="DarkGray" Margin="224,99,32,26">
+            <Image Source="/images/Gallery.png" Margin="143,66,256,198"/>
+        </Grid>
+    </Grid>
+</Page>
