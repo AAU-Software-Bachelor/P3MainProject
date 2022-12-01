@@ -21,16 +21,14 @@
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="ID"  Width="40" DisplayMemberBinding="{Binding ID}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,373,0,0" x:Name="btnGalleryAdd" Click="btnGallery_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,373,0,0" x:Name="btnGalleryDelete" Click="btnGallery_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Height="32" Margin="17,373,0,0" x:Name="btnGalleryAdd" Click="btnOpenFile_Click" Content="Upload Picture" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="32" Margin="115,373,0,0" x:Name="btnGalleryDelete" Click="btnGallery_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button Content="Upload Folder" Click="btnOpenFolder_Click" Margin="17,415,1018,198"/>
         <Grid Background="DarkGray" Margin="224,99,32,26">
-            <StackPanel Orientation="Vertical" Margin="33,29,737,391">
-                <Button Width="105"  Height="26" Content="Click to Upload" Click="btnOpenFile_Click"/>
-            </StackPanel>
+            <Image Source="/images/Gallery.png" Margin="143,66,256,198"/>
         </Grid>
     </Grid>
 </Page>

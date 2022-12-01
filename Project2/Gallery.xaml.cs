@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -49,11 +50,11 @@ namespace Project2
         /* public ObservableCollection<galleryImage> ProcessedImg = new ObservableCollection<galleryImage>();*/
         public ObservableCollection<galleryIcon> galleryIconlst;
 
-        private void btnGallery_ClickAdd(object sender, RoutedEventArgs e)
+        /*private void btnGallery_ClickAdd(object sender, RoutedEventArgs e)
         {
-            /*int i = galleryIconslst.Count + 1;*/
+            int i = galleryIconslst.Count + 1;
             galleryIconlst.Add(new galleryIcon() { imgName = "Newimg", imgPath= "dont know where" , imgSize=2});
-        }
+        }*/
 
         private void btnGallery_ClickDelete(object sender, RoutedEventArgs e)
         {
@@ -134,49 +135,76 @@ namespace Project2
         }
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
-            openFileDialog.InitialDirectory = @"E:\onM_Doc\Programmering";
+            galleryIconlst.Add(new galleryIcon() { imgName = "Newimg", imgPath = "dont know where", imgSize = 2 });
+            OpenFileDialog theFileDialog = new OpenFileDialog();
+            theFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            theFileDialog.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images";
             
-            if (openFileDialog.ShowDialog() == true)
+            if (theFileDialog.ShowDialog() == true)
                 {
-                 string a = openFileDialog.FileName;
+                string a = theFileDialog.FileName;
                  /*  var b = FileInfo(openFileDialog.FileName);*/
-                 double l = new FileInfo(a).Length;
-                 bool t = a.EndsWith(".jpeg");
-                 debugrutine(a, l, t);
+                double l = new FileInfo(a).Length;
+                bool t = Fileverify(a);
+                bool k = a.EndsWith(".png");
+                debugrutine(a, l, t);
 
                  // cuts away the name of the file and leaves the path
-                 string targetfolder = reduceToPath(a);
+                string targetfolder = reduceToPath(a);
 
                  //adds the image object to the observable list "processedimg"
-                 if (t)
-                     ProcessFile(a, targetfolder);
-                 else throw new Exception("file is not a jpg!!!!");
+                if (t)
+                {
+                    ProcessFile(a, targetfolder);
+                }
+                
+                else throw new Exception("file is not a .JPG or .PNG!!!!");
                  /*ProcessDirectory(targetfolder);    */
 
-                 ShowGalleryList();
+                ShowGalleryList();
 
                 }
             }
+        bool Fileverify(string filename)
+        {
+            if (filename.EndsWith(".jpeg")|| filename.EndsWith(".png"))
+            return true;
+            else 
+                return false;
+        }
+        private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog folderBrowser = new OpenFileDialog();
+            folderBrowser.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images";
+            // Set validate names and check file exists to false otherwise windows will
+            // not let you select "Folder Selection."
+            folderBrowser.ValidateNames = false;
+            folderBrowser.CheckFileExists = false;
+            folderBrowser.CheckPathExists = true;
+            // Always default to Folder Selection.
+            folderBrowser.FileName = "Folder Selection.";
 
 
-
-            /*    private void createGalleryWindow_Click()
-                {
-                    throw new NotImplementedException();
-                }*/
-
-            private string reduceToPath(string filename)
+            if (folderBrowser.ShowDialog() == true)
             {
-                string targetfolder = filename;
-                while (!targetfolder.EndsWith("\\"))
-                {
-                    targetfolder = targetfolder.Remove(targetfolder.Length - 1, 1);
-                    Console.WriteLine(targetfolder);
-                }
-                return targetfolder;
+                string folderPath = reduceToPath(folderBrowser.FileName);
+                // ...
             }
+        }
+        private string reduceToPath(string filename)
+        {
+            string targetfolder = filename;
+            while (!targetfolder.EndsWith("\\"))
+            {
+                targetfolder = targetfolder.Remove(targetfolder.Length - 1, 1);
+                Console.WriteLine(targetfolder);
+            }
+            return targetfolder;
+        }
+    
+
+
+    
             void debugrutine(string a, double l, bool t)
             {
                 /*      btnOpenFile.Background = new ImageBrush(new BitmapImage(new Uri(a)));*/
@@ -201,10 +229,7 @@ namespace Project2
         /// /* if have no IDEA what this is*/
         
         ///////////////////////////////////////////////////////
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
-        }
 
         private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
