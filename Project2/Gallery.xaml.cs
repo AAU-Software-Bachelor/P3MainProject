@@ -26,35 +26,19 @@ using Image = System.Windows.Controls.Image;
 
 namespace Project2
 {
-    /// <summary>
-    /// Interaction logic for Race.xaml
-    /// </summary>
-    /// 
-
     public partial class GalleryWindow : Page
     {
         public GalleryWindow(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            galleryIconlst = new ObservableCollection<galleryIcon>()
-            {
-            new galleryIcon(){ imgName = "Newimg", imgPath= "dont know where" , imgSize=2}
-            };
+            galleryIconlst = new ObservableCollection<galleryIcon>();
             lstGallery.ItemsSource = galleryIconlst;
 
         }
         public config CurrentConfig { get; set; }
 
-
-        /* public ObservableCollection<galleryImage> ProcessedImg = new ObservableCollection<galleryImage>();*/
         public ObservableCollection<galleryIcon> galleryIconlst;
-
-        /*private void btnGallery_ClickAdd(object sender, RoutedEventArgs e)
-        {
-            int i = galleryIconslst.Count + 1;
-            galleryIconlst.Add(new galleryIcon() { imgName = "Newimg", imgPath= "dont know where" , imgSize=2});
-        }*/
 
         private void btnGallery_ClickDelete(object sender, RoutedEventArgs e)
         {
@@ -90,34 +74,13 @@ namespace Project2
         }
 
         //here we want to create an object for each file
-        public void ProcessFile(string fileName, string fileLocation)
+        public void ProcessFile(string fullFileName, string fileLocation)
         {
-            double fileSize = new FileInfo(fileName).Length;
-            fileName = fileName.Replace(fileLocation, "");
-            galleryIconlst.Add(new galleryIcon { imgName = fileName, imgSize = fileSize, imgPath = fileLocation });
-            Console.WriteLine("Processed file '{0}'.", fileName);
+            double fileSize = new FileInfo(fullFileName).Length;
+            string shortFileName = fullFileName.Replace(fileLocation, "");
+            galleryIconlst.Add(new galleryIcon { imgName = shortFileName, imgSize = fileSize, imgPath = fullFileName });
+            Console.WriteLine("Processed file '{0}'.", fullFileName);
         }
-
-
-        // the create on click version
-        private void ShowList_Click(object sender, RoutedEventArgs e)
-        {
-            ShowGalleryList();
-
-
-        }
-
-        public void ShowGalleryList()
-        {
-
-        }
-
-        // can be called from other commands than on click :P
-
-        /*private void deleteimg_Click(object sender, RoutedEventArgs e)
-            {
-
-            }*/
 
         public void getappPath()
         {
@@ -135,36 +98,40 @@ namespace Project2
         }
         private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
-            galleryIconlst.Add(new galleryIcon() { imgName = "Newimg", imgPath = "dont know where", imgSize = 2 });
             OpenFileDialog theFileDialog = new OpenFileDialog();
             theFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
             theFileDialog.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images";
             
             if (theFileDialog.ShowDialog() == true)
                 {
-                string a = theFileDialog.FileName;
+                    string fullFileName = theFileDialog.FileName;
                  /*  var b = FileInfo(openFileDialog.FileName);*/
-                double l = new FileInfo(a).Length;
-                bool t = Fileverify(a);
-                bool k = a.EndsWith(".png");
-                debugrutine(a, l, t);
+                    double l = new FileInfo(fullFileName).Length;
+                    bool t = Fileverify(fullFileName);
+                    bool k = fullFileName.EndsWith(".png");
+                    debugrutine(fullFileName, l, t);
 
                  // cuts away the name of the file and leaves the path
-                string targetfolder = reduceToPath(a);
+                    string targetfolder = reduceToPath(fullFileName);
 
                  //adds the image object to the observable list "processedimg"
-                if (t)
-                {
-                    ProcessFile(a, targetfolder);
-                }
+                    if (t)
+                    {
+                        ProcessFile(fullFileName, targetfolder);
+                    }
                 
-                else throw new Exception("file is not a .JPG or .PNG!!!!");
-                 /*ProcessDirectory(targetfolder);    */
-
-                ShowGalleryList();
-
-                }
+                    else throw new Exception("file is not a .JPG or .PNG!!!!");
+                /*ProcessDirectory(targetfolder);    */
+                selecttheuploadedfile();
             }
+        }
+        void selecttheuploadedfile()
+        {
+            int lastentry = galleryIconlst.Count;
+            System.Diagnostics.Debug.WriteLine("Last entry = " +lastentry);
+            lstGallery.SelectedIndex = lastentry -1; // without "-1", it works if you upload 2 pictures in a row
+
+        }
         bool Fileverify(string filename)
         {
             if (filename.EndsWith(".jpeg")|| filename.EndsWith(".png"))
@@ -190,6 +157,7 @@ namespace Project2
                 string folderPath = reduceToPath(folderBrowser.FileName);
                 // ...
             }
+
         }
         private string reduceToPath(string filename)
         {
@@ -205,24 +173,14 @@ namespace Project2
 
 
     
-            void debugrutine(string a, double l, bool t)
-            {
-                /*      btnOpenFile.Background = new ImageBrush(new BitmapImage(new Uri(a)));*/
-                Console.WriteLine(a);
-                Console.WriteLine(l);
-                Console.WriteLine(t);
-                /*Console.WriteLine(c);*/
-                /*txtEditor.Text = File.ReadAllText(openFileDialog.FileName);*/
-                /*                var byt = File.ReadAllBytes(a);*/
-                /*                var filetext = Encoding.UTF8.GetString(byt);*/
-                /*      foreach (var item in byt)
-                      {
-                          Console.WriteLine(item);
-                      }*/
+        void debugrutine(string a, double l, bool t)
+        {
+            /*      btnOpenFile.Background = new ImageBrush(new BitmapImage(new Uri(a)));*/
+            System.Diagnostics.Debug.WriteLine(a);
+            System.Diagnostics.Debug.WriteLine(l);
+            System.Diagnostics.Debug.WriteLine(t);
 
-
-                /*                Console.WriteLine(filetext);*/
-            }
+        }
 
 
         ///////////////////////////////////////////////////////
