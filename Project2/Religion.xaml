@@ -11,7 +11,7 @@
     <Grid Background="White" Margin="0,0,413,115">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
         <Label Content="Religion editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
-        <Label Grid.Row="0" x:Name="ReligionBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="ReligionMainMenu_MouseDoubleClick" Width="136" Height="46">
+        <Label Grid.Row="0" x:Name="ReligionBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ReligionMainMenu_MouseDoubleClick" Width="136" Height="46">
             <StackPanel Orientation="Vertical">
                 <Border Background="LightBlue" Padding="10,5,10,5" >
                     <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
