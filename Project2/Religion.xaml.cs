@@ -21,28 +21,24 @@ namespace Project2
     /// <summary>
     /// Interaction logic for Religion.xaml
     /// </summary>
-    public partial class Religion : Page
+    public partial class Religionwindow : Page
     {
-
-        public Religion(config currentConfig)
+        public ObservableCollection<majorTrait> ReligionCollection;
+        public Religionwindow(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            newreligion = new ObservableCollection<newReligion>(){
-            new newReligion(){Name = "New Religion"}
+            ReligionCollection = new ObservableCollection<majorTrait>()
+            {
+            new majorTrait(CurrentConfig.newUID("Religion")){Name = "New Religion", Description = ""}
             };
-            lstReligion.ItemsSource = newreligion;
+            lstReligion.ItemsSource = ReligionCollection;
         }
-        public config CurrentConfig { get; set; }
+        config CurrentConfig;
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
             MainWindow mainWindow = new MainWindow(CurrentConfig);
             Application.Current.MainWindow.Content = mainWindow;
         }
@@ -55,17 +51,11 @@ namespace Project2
             win.Close();
         }*/
 
-        private ObservableCollection<newReligion> newreligion;
-
-        public class newReligion
-        {
-            public string Name { get; set; }
-        }
 
         private void btnReligion_ClickAdd(object sender, RoutedEventArgs e)
         {
-            int i = newreligion.Count + 1;
-            newreligion.Add(new newReligion() { Name = "New Religion" });
+            ReligionCollection.Add(new majorTrait(CurrentConfig.newUID("Religion")) { Name = "New Religion", Description = "" });
+            
         }
 
         private void btnReligion_ClickDelete(object sender, RoutedEventArgs e)
@@ -73,7 +63,7 @@ namespace Project2
             var index = lstReligion.SelectedIndex;
             if (lstReligion.SelectedIndex >= 1)
             {
-                newreligion.RemoveAt(index);
+                ReligionCollection.RemoveAt(index);
             }
         }
         private void OnClickAddAffectedResources(object sender, RoutedEventArgs e)
@@ -89,8 +79,7 @@ namespace Project2
             comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
             comboBoxOne.Height = 24;
             comboBoxOne.Width = 185;
-            comboBoxOne.SelectionChanged += ComboBox_SelectionChanged;
-
+            
             stackPanel.Children.Add(comboBoxOne);
 
             TextBox textBox = new TextBox();
