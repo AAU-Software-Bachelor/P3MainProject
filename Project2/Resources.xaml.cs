@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml.Linq;
 
 namespace Project2
@@ -23,25 +25,24 @@ namespace Project2
     /// <summary>
     /// Interaction logic for Recources.xaml
     /// </summary>
-    public partial class Resources : Page
+    public partial class Resourcewindow : Page
     {
         public ObservableCollection<resourceTrait> ResourceCollection;
-        public Resources(config currentConfig)
+        public Resourcewindow(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
             ResourceCollection = new ObservableCollection<resourceTrait>()
             {
-            new resourceTrait("R-0")
+
+            new resourceTrait(CurrentConfig.newUID("Resource"), 0){Name = "New Resource"}
             };
             lstResources.ItemsSource = ResourceCollection;
+           
         }
         config CurrentConfig;
         int lastSelectedIndex;
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+   
 
         private void ResourceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -57,24 +58,16 @@ namespace Project2
             win.Close();
         }*/
 
-        private ObservableCollection<newResource> newresource;
 
-        public class newResource
-        {
-            public string Name { get; set; }
-            public string ResourceType { get; set; }
-        }
 
         private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
         {
-      
-            newresource.Add(new newResource() { Name = "New Resource", ResourceType = "HP/Stat Bar" });
-            lastSelectedIndex = newresource.Count + 1;
+            ResourceCollection.Add(new resourceTrait(CurrentConfig.newUID("Resource"),0) { Name = "New Resource" });
+            lastSelectedIndex = ResourceCollection.Count + 1;
         }
 
         private void btnResource_ClickDelete(object sender, RoutedEventArgs e)
-        {
-            
+        {            
             var index = lstResources.SelectedIndex;
             if (lstResources.SelectedIndex == null)
             {
@@ -82,33 +75,78 @@ namespace Project2
             }
             if (lstResources.SelectedIndex >= 1)
             {
-                newresource.RemoveAt(index);
+                ResourceCollection.RemoveAt(index);
             }
+          
         }
-     /*   public string getRadioButton()
+        public static void DelayAction(int millisecond, Action action)
         {
-            *//*string type = newresourc
-*//*
-            return Type;
-        }*/
+            var timer = new DispatcherTimer();
+            timer.Tick += delegate
 
+            {
+                action.Invoke();
+                timer.Stop();
+            };
+
+            timer.Interval = TimeSpan.FromMilliseconds(millisecond);
+            timer.Start();
+        }
+      
+
+        async void listUpdate_Click(object sender, RoutedEventArgs e)//async, due to await.task
+        {
+            System.Diagnostics.Debug.WriteLine("you clicked an item in the listview, testvar is : ");
+            var item = sender as ListViewItem;
+            await Task.Delay(5);  //the "selection" happens AFTER the click on the list, so we await the selection
+            if (item != null && item.IsSelected)
+            {
+                int testvar = lstResources.SelectedIndex;
+
+                System.Diagnostics.Debug.WriteLine(testvar.ToString());
+                if (ResourceCollection[testvar].type == 0)
+                {
+                    HPSTATBARRadioButton.IsChecked = true;
+                }
+                if (ResourceCollection[testvar].type == 1)
+                {
+                    XPVARIANTRadioButton.IsChecked = true;
+                }
+                if (ResourceCollection[testvar].type == 2)
+                {
+                    CURRENCYRadioButton.IsChecked = true;
+                }
+                if (ResourceCollection[testvar].type == 3)
+                {
+                    MISCRadioButton.IsChecked = true;
+                }
+            }
+
+            
+        }
         private void AssignResourceTypeRadioButton(object sender, RoutedEventArgs e)
         { 
             RadioButton rb = sender as RadioButton;
-       
-   /*         string content = rb.Content.ToString();*/
-            System.Diagnostics.Debug.WriteLine(rb.Content);
 
-            var index = lstResources.SelectedIndex;
-            if (lstResources.SelectedIndex == null)
-            {
-                index = lastSelectedIndex;
-            }
-            string ResourceType = rb.Content.ToString();
+            System.Diagnostics.Debug.WriteLine(rb.Tag);
+            int index = lstResources.SelectedIndex;
+            
+            int typeOfResource = Int16.Parse(rb.Tag.ToString());
+    /*        int position = lstResources.
+            */
             if (lstResources.SelectedIndex >= 0)
             {
-                newresource[index] = new newResource() { Name = newresource[index].Name, ResourceType = ResourceType };
+                ResourceCollection[index] = new resourceTrait(ResourceCollection[index].UID, typeOfResource) { Name = ResourceCollection[index].Name, Description = ResourceCollection[index].Description };
+                
+                
+                foreach (resourceTrait i in ResourceCollection) {
+                    System.Diagnostics.Debug.WriteLine(i.Name);
+                    System.Diagnostics.Debug.WriteLine(i.type);
+                    System.Diagnostics.Debug.WriteLine(i.UID);
+                    System.Diagnostics.Debug.WriteLine(i.Description);
+                }
             }
+            lstResources.SelectedIndex=index;
         }
 
         /*private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -116,7 +154,7 @@ namespace Project2
 
         }*/
 
-        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
         {
             //majorTrait.deleteContent()
             //get name
@@ -130,21 +168,22 @@ namespace Project2
             //for loop through affectedResources
 
 
-            string[] id = UID.Split('-');
+           /* string[] id = UID.Split('-');
             majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
             currentMT.deleteContent();
-
+*/
             string name = (this.FindName("nameBox") as TextBox).Text;
+            System.Diagnostics.Debug.WriteLine(name);
             string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
             string desc = (this.FindName("descBox") as TextBox).Text;
-
+/*
             currentMT.name = name;
             currentMT.description = playerReq + "\n\n" + desc;
 
 
 
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }*/
+            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;*/
+        }
 
     }
 }
