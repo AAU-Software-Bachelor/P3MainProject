@@ -30,5 +30,6 @@
         <Grid Background="DarkGray" Margin="224,99,32,26">
             <Image Source="{Binding SelectedItem.imgPath, ElementName=lstGallery}" Margin="21,12,483,138" Width="350" Height="350"/>
         </Grid>
+        <Button Content="Save to config file" Click="saveConfig_Click" Margin="20,482,1002,134" Background="Green"/>
     </Grid>
 </Page>

@@ -17,7 +17,9 @@ namespace Project2
 			CarList = new List<majorTrait>();
 			RelList = new List<majorTrait>();
 			ResList = new List<resourceTrait>();
+			IconList = new List<galleryIcon>();
 		}
+		public List<galleryIcon> IconList { get; set; }
 		public List<majorTrait> RacList { get; set; }
 		public List<majorTrait> AbilList { get; set; }
 		public List<majorTrait> CarList { get; set; }

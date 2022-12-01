@@ -6,6 +6,8 @@ using System.Globalization;
 using System.IO;
 
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,7 +35,13 @@ namespace Project2
             CurrentConfig = currentConfig;
             InitializeComponent();
             galleryIconlst = new ObservableCollection<galleryIcon>();
+            foreach (galleryIcon imgName in CurrentConfig.IconList) //adds all icons to ObservableCollection
+            {
+                galleryIconlst.Add(imgName);
+            }
+                                  
             lstGallery.ItemsSource = galleryIconlst;
+            lstGallery.SelectedIndex = 0;
 
         }
         public config CurrentConfig { get; set; }
@@ -185,13 +193,28 @@ namespace Project2
 
         ///////////////////////////////////////////////////////
         /// /* if have no IDEA what this is*/
-        
-        ///////////////////////////////////////////////////////
 
+        ///////////////////////////////////////////////////////
+        private void saveConfig_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
+            int index = lstGallery.SelectedIndex;
+/*            System.Diagnostics.Debug.WriteLine("tried to save index " + index);
+            System.Diagnostics.Debug.WriteLine("tried to save file " + galleryIconlst[index].imgPath);
+            foreach (galleryIcon imgName in galleryIconlst) 
+            {
+                CurrentConfig.IconList[item] = galleryIconlst[index];
+                System.Diagnostics.Debug.WriteLine("tried to save index " + index);
+                System.Diagnostics.Debug.WriteLine("tried to save file " + galleryIconlst[index].imgPath);
+            }
+            */
+
+
+        }
 
         private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
             MainWindow mainWindow = new MainWindow(CurrentConfig);
             Application.Current.MainWindow.Content = mainWindow;
         }
