@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -17,12 +19,14 @@ namespace Project2
 			CarList = new List<majorTrait>();
 			RelList = new List<majorTrait>();
 			ResList = new List<resourceTrait>();
+			IconList = new List<galleryIcon>();
 		}
 		public List<majorTrait> RacList { get; set; }
 		public List<majorTrait> AbilList { get; set; }
 		public List<majorTrait> CarList { get; set; }
 		public List<majorTrait> RelList { get; set; }
 		public List<resourceTrait> ResList { get; set; }
+		public List<galleryIcon> IconList { get; set; }
 
 		public void TestWriteToJson(string fileName)
         {
@@ -40,8 +44,25 @@ namespace Project2
 		{
 			return type  + "-/" + Guid.NewGuid().ToString();
 		}
+		public dynamic getIcon(string imgName, bool isDelete=false)
+		{
+			int index;
+			index = IconList.FindIndex(i => string.Equals(i.imgName, imgName));
+			galleryIcon SelectedIcon = this.IconList[index];
+            if (isDelete)
+            {
+                this.IconList.RemoveAt(index);
+            }
+            return SelectedIcon;
+        }
 
-		public dynamic GetTrait(string uid, bool isDelete = false)
+        public bool saveIcontoList(dynamic galleryIcon)
+        {
+            IconList.Add(galleryIcon);
+            return true;
+        }
+
+        public dynamic GetTrait(string uid, bool isDelete = false)
         {
 			string[] id = uid.Split("-/"); // "race", "religion", "career", "ability", "Resource"
 			int index;
@@ -97,9 +118,9 @@ namespace Project2
 			}
 		}
 
+      
 
-
-		public bool saveToList(dynamic trait)
+        public bool saveToList(dynamic trait)
 		{
 			string[] id = trait.UID.Split("-/"); // "race", "religion", "career", "ability"
 
