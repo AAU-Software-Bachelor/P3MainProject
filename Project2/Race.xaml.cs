@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,36 +16,36 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using static Project2.majorTrait;
-using static Project2.Race;
+using static Project2.RaceWindow;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
 
 namespace Project2
 {
+
 	/// <summary>
 	/// Interaction logic for Race.xaml
 	/// </summary>
-	public partial class Race : Page
+	public partial class Racepage : Page
 	{
 
-		public Race(config currentConfig) //Race window constructor
+		public Racepage(config currentConfig) //Race window constructor
 		{
 			CurrentConfig = currentConfig;
 			InitializeComponent();
-			raceLst = new ObservableCollection<majorTrait>();
+			RaceCollection = new ObservableCollection<majorTrait>();
 			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection newrace
 			{
-				raceLst.Add(race);
+				RaceCollection.Add(race);
 			}
-			lstRaces.ItemsSource = raceLst;
+			lstRaces.ItemsSource = RaceCollection;
 			CurrentIndex = -1;	//skip the next use of CurrentIndex
 			lstRaces.SelectedIndex = 0;
 		}
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }	//keeps track of what index to use
-		private ObservableCollection<majorTrait> raceLst;   //itemSource for lstRaces ListVeiw
+		private ObservableCollection<majorTrait> RaceCollection;   //itemSource for lstRaces ListVeiw
 
 		/// <summary>
 		/// sets page to MainWindow
@@ -64,22 +63,24 @@ namespace Project2
 		/// </summary>
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			int i = raceLst.Count + 1;
+			int i = RaceCollection.Count + 1;
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
-			raceLst.Add(tempRace);
+			RaceCollection.Add(tempRace);
 			CurrentConfig.saveToList(tempRace);
-			lstRaces.SelectedIndex = raceLst.Count-1;
+			lstRaces.SelectedIndex = RaceCollection.Count-1;
 
 		}
         /// <summary>
 		/// deletes race from both CurrentConfig and newrace
 		/// </summary>
+
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
-		{
+        {
             var index = lstRaces.SelectedIndex;
+
 			if (lstRaces.SelectedIndex >= 0)
 			{
-				raceLst.Remove(CurrentConfig.GetTrait(raceLst[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
+				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
 			}	
 		}
 
@@ -312,10 +313,10 @@ namespace Project2
 					}
 				}
 				CurrentConfig.RacList[index] = currentMT;
-				raceLst.Clear();	// clears the list
+				RaceCollection.Clear();	// clears the list
 				foreach (majorTrait race in CurrentConfig.RacList)	//rewrites the list.
 				{
-					raceLst.Add(race);
+					RaceCollection.Add(race);
 				}
 
 
@@ -328,15 +329,121 @@ namespace Project2
 		/// Validates input in "amount" textbox to only allow integers.
 		/// </summary>
 		private void NumberValidationTextBox(object sender, EventArgs e)
+
         {
-            try
+            this.InitializeComponent();
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+
+            ComboBox comboBoxOne = new ComboBox();
+            comboBoxOne.Text = "Select Stat";
+            comboBoxOne.IsReadOnly = true;
+            comboBoxOne.IsDropDownOpen = true;
+            comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
+            comboBoxOne.Height = 24;
+            comboBoxOne.Width = 185;
+            comboBoxOne.SelectionChanged += ComboBox_SelectionChanged;
+
+            comboBoxOne.DisplayMemberPath = "Name";
+            foreach (majorTrait abi in CurrentConfig.AbilList)
             {
-				int.Parse((sender as TextBox).Text); //if Parse is unsuccessful, text is something other than integer
+                comboBoxOne.Items.Add(abi);
             }
-            catch
+
+
+            stackPanel.Children.Add(comboBoxOne);
+
+            TextBox textBox = new TextBox();
+            textBox.Margin = new Thickness(15, 13, 0, 0);
+            textBox.Width = 40;
+            textBox.Height = 24;
+            textBox.VerticalAlignment = VerticalAlignment.Top;
+
+            stackPanel.Children.Add(textBox);
+
+            StackPanel childStackPanel = new StackPanel();
+            childStackPanel.Orientation = Orientation.Vertical;
+
+            Image imagePlus = new Image();
+            imagePlus.Height = 20;
+            imagePlus.Width = 20;
+            imagePlus.Margin = new Thickness(1, 5, 0, 0);
+            imagePlus.Stretch = Stretch.Fill;
+            childStackPanel.Children.Add(imagePlus);
+
+            Image imageMinus = new Image();
+            imageMinus.Height = 20;
+            imageMinus.Width = 20;
+            imageMinus.Margin = new Thickness(1, 0, 0, 0);
+            imageMinus.Stretch = Stretch.Fill;
+            childStackPanel.Children.Add(imageMinus);
+            
+            stackPanel.Children.Add(childStackPanel);
+
+            this.ListStarterResources.Items.Add(stackPanel);
+
+        }
+
+        private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
+        {
+            var index = ListStarterResources.SelectedIndex;
+            if (index >= 0)
             {
-				(sender as TextBox).Text = "";
+                ListStarterResources.Items.RemoveAt(index);
             }
+        }
+
+        private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+        {
+            //majorTrait.deleteContent()
+            //get name
+            //get image
+            //get description
+            //get cost
+            //for loop through Costtype
+            //for loop through freeAbilities
+            //for loop through exclusions
+            //for loop through dependencies / discounts
+            //for loop through affectedResources
+
+            
+            majorTrait currentMT = CurrentConfig.GetTrait(UID);
+            currentMT.deleteContent();
+            
+
+            string name = (this.FindName("nameBox") as TextBox).Text;
+            string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
+            string desc = (this.FindName("descBox") as TextBox).Text;
+
+            foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
+            {
+                string TempUID =  BOX.SelectedValue as string;
+                currentMT.freeAbilities.Add(TempUID);
+            }
+
+            foreach (StackPanel PANEL in (this.FindName("ListStarterResources") as ListView).Items)
+            {
+                foreach (ComboBox box in PANEL.Children)
+                {
+                    foreach (TextBox textBox in PANEL.Children)
+                    {
+                        string TempUID = box.SelectedValue as string;
+                        int TempVal = int.Parse(textBox.Text);
+                        currentMT.addAffectedResources(TempUID, TempVal);
+                    }
+                }
+
+            }
+
+
+
+
+            //CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
         }
 
     }

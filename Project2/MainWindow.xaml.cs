@@ -31,7 +31,7 @@ namespace Project2
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Race race = new Race(CurrentConfig); //we need to talk about naming stuff!!
+            RaceWindow race = new RaceWindow(CurrentConfig); //we need to talk about naming stuff!!
             Application.Current.MainWindow.Content = race;
            
         }
@@ -46,13 +46,13 @@ namespace Project2
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            Religion religion = new Religion(CurrentConfig);
+            Religionwindow religion = new Religionwindow(CurrentConfig);
             Application.Current.MainWindow.Content = religion;
         }
 
         private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Resources resources = new Resources(CurrentConfig);
+            Resourcewindow resources = new Resourcewindow(CurrentConfig);
             Application.Current.MainWindow.Content = resources;
             string input = "Empty";
             //input = Interaction.InputBox("Name:", "Name: (REQUIRED?)", "Default", x_coordinate, y_coordinate);
