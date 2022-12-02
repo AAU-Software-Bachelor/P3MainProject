@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,26 +17,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using static Project2.RaceWindow;
+using static Project2.majorTrait;
+using static Project2.RacePage;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
 
 namespace Project2
 {
-
 	/// <summary>
 	/// Interaction logic for Race.xaml
 	/// </summary>
-	public partial class Racepage : Page
+	public partial class RacePage : Page
 	{
 
-		public Racepage(config currentConfig) //Race window constructor
+		public RacePage(config currentConfig) //Race window constructor
 		{
 			CurrentConfig = currentConfig;
 			InitializeComponent();
 			RaceCollection = new ObservableCollection<majorTrait>();
-			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection newrace
+			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
 			{
 				RaceCollection.Add(race);
 			}
@@ -73,15 +74,14 @@ namespace Project2
         /// <summary>
 		/// deletes race from both CurrentConfig and newrace
 		/// </summary>
-
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
-        {
+		{
             var index = lstRaces.SelectedIndex;
-
-			if (lstRaces.SelectedIndex >= 0)
+			//lstRaces.SelectedIndex = index > 0 ? index - 1 : index;   //experiment. please keep
+			if (index >= 0)
 			{
-				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
-			}	
+				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in RaceCollection
+            }	
 		}
 
 		/// <summary>
@@ -198,7 +198,7 @@ namespace Project2
 			int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
 			if (lstRaces.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
 			{
-				if (CurrentIndex >= 0)	//skips saving the previus selected race if -1 (that is if the race was just deleted)
+				if (CurrentIndex >= 0)	//skips saving the previus selected race if -1
 				{
 					SaveRace(CurrentIndex);
 					ListStarterAbilities.Items.Clear();
@@ -329,121 +329,15 @@ namespace Project2
 		/// Validates input in "amount" textbox to only allow integers.
 		/// </summary>
 		private void NumberValidationTextBox(object sender, EventArgs e)
-
         {
-            this.InitializeComponent();
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.Orientation = Orientation.Horizontal;
-
-            ComboBox comboBoxOne = new ComboBox();
-            comboBoxOne.Text = "Select Stat";
-            comboBoxOne.IsReadOnly = true;
-            comboBoxOne.IsDropDownOpen = true;
-            comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
-            comboBoxOne.Height = 24;
-            comboBoxOne.Width = 185;
-            comboBoxOne.SelectionChanged += ComboBox_SelectionChanged;
-
-            comboBoxOne.DisplayMemberPath = "Name";
-            foreach (majorTrait abi in CurrentConfig.AbilList)
+            try
             {
-                comboBoxOne.Items.Add(abi);
+				int.Parse((sender as TextBox).Text); //if Parse is unsuccessful, text is something other than integer
             }
-
-
-            stackPanel.Children.Add(comboBoxOne);
-
-            TextBox textBox = new TextBox();
-            textBox.Margin = new Thickness(15, 13, 0, 0);
-            textBox.Width = 40;
-            textBox.Height = 24;
-            textBox.VerticalAlignment = VerticalAlignment.Top;
-
-            stackPanel.Children.Add(textBox);
-
-            StackPanel childStackPanel = new StackPanel();
-            childStackPanel.Orientation = Orientation.Vertical;
-
-            Image imagePlus = new Image();
-            imagePlus.Height = 20;
-            imagePlus.Width = 20;
-            imagePlus.Margin = new Thickness(1, 5, 0, 0);
-            imagePlus.Stretch = Stretch.Fill;
-            childStackPanel.Children.Add(imagePlus);
-
-            Image imageMinus = new Image();
-            imageMinus.Height = 20;
-            imageMinus.Width = 20;
-            imageMinus.Margin = new Thickness(1, 0, 0, 0);
-            imageMinus.Stretch = Stretch.Fill;
-            childStackPanel.Children.Add(imageMinus);
-            
-            stackPanel.Children.Add(childStackPanel);
-
-            this.ListStarterResources.Items.Add(stackPanel);
-
-        }
-
-        private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
-        {
-            var index = ListStarterResources.SelectedIndex;
-            if (index >= 0)
+            catch
             {
-                ListStarterResources.Items.RemoveAt(index);
+				(sender as TextBox).Text = "";
             }
-        }
-
-        private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
-        {
-            //majorTrait.deleteContent()
-            //get name
-            //get image
-            //get description
-            //get cost
-            //for loop through Costtype
-            //for loop through freeAbilities
-            //for loop through exclusions
-            //for loop through dependencies / discounts
-            //for loop through affectedResources
-
-            
-            majorTrait currentMT = CurrentConfig.GetTrait(UID);
-            currentMT.deleteContent();
-            
-
-            string name = (this.FindName("nameBox") as TextBox).Text;
-            string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
-            string desc = (this.FindName("descBox") as TextBox).Text;
-
-            foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
-            {
-                string TempUID =  BOX.SelectedValue as string;
-                currentMT.freeAbilities.Add(TempUID);
-            }
-
-            foreach (StackPanel PANEL in (this.FindName("ListStarterResources") as ListView).Items)
-            {
-                foreach (ComboBox box in PANEL.Children)
-                {
-                    foreach (TextBox textBox in PANEL.Children)
-                    {
-                        string TempUID = box.SelectedValue as string;
-                        int TempVal = int.Parse(textBox.Text);
-                        currentMT.addAffectedResources(TempUID, TempVal);
-                    }
-                }
-
-            }
-
-
-
-
-            //CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
         }
 
     }

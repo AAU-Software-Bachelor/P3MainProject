@@ -1,4 +1,4 @@
-﻿<Page x:Class="Project2.Religionwindow"
+﻿<Page x:Class="Project2.Religion"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Project2"
 
       mc:Ignorable="d"
-      Title="Religionwindow" Height="760" Width="1543">
+      Title="Religion" Height="760" Width="1543">
 
     <Grid Background="White" Margin="0,0,413,115">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
@@ -34,14 +34,14 @@
                 </Button>
             </StackPanel>
             <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=lstReligion}" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Height="178" Text="{Binding SelectedItem.Description, ElementName=lstReligion}"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Height="178" Text="Description"/>
             <Border BorderThickness="1" Margin="437,52,68,239">
                 <Grid Background="White">
                     <Label Content="Affected Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,12,0,0" Height="32" Width="97" FontWeight="Bold"/>
                     <ListView x:Name="ListAffectedResources" Margin="10,38,10,36">
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0"  Height="24" Width="185"/>
+                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
                             <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
                             <StackPanel Orientation="Vertical">
                                 <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
@@ -49,7 +49,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185"/>
+                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
                             <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
                             <StackPanel Orientation="Vertical">
                                 <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
@@ -57,7 +57,7 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0"  Height="24" Width="185"/>
+                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" SelectionChanged="ComboBox_SelectionChanged" Height="24" Width="185"/>
                             <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
                             <StackPanel Orientation="Vertical">
                                 <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>

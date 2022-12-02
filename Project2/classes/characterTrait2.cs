@@ -41,12 +41,13 @@ namespace Project2
 			dependency = new List<List<string>>();
 			freeAbilities = new List<string>();
 			discounts = new List<discount>();
-			affectedResources = new List<affectedResource>();
+			affectedResources = new List<AffectedResource>();
+			playerReq = new string("");
 		}
 
-		public class affectedResource
+		public class AffectedResource
 		{
-			public affectedResource(string uid, int amount)
+			public AffectedResource(string uid, int amount)
 			{
 				UID = uid;
 				Amount = amount;
@@ -75,11 +76,12 @@ namespace Project2
 		public List<List<string>> dependency { get; set; }
 		public List<string> freeAbilities { get; set; }
 		public List<discount> discounts { get; set; }
-		public List<affectedResource> affectedResources { get; set; }
+		public List<AffectedResource> affectedResources { get; set; }
+		public string playerReq { get; set; }
 
 		public void addAffectedResources(string uid, int amount)
 		{
-			this.affectedResources.Add(new affectedResource(uid, amount));
+			this.affectedResources.Add(new AffectedResource(uid, amount));
 		}
 		public void addDiscount(string Conduid)
 		{
@@ -112,16 +114,15 @@ namespace Project2
 			this.CostTypes = new List<string>();
 			this.freeAbilities = new List<string>();
 			this.discounts = new List<discount>();
-			this.affectedResources = new List<affectedResource>();
+			this.affectedResources = new List<AffectedResource>();
 
 		}
 	}
 
 	public class resourceTrait : characterTrait
 	{
-		public resourceTrait(string uid, int Type) : base(uid)
+		public resourceTrait(string uid) : base(uid)
 		{
-			type = Type;
 		}
 
 		public int type { get; set; }
