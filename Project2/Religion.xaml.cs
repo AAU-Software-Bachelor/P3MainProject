@@ -75,7 +75,7 @@ namespace Project2
             ComboBox comboBoxOne = new ComboBox();
             comboBoxOne.Text = "Select Stat";
             comboBoxOne.IsReadOnly = true;
-            comboBoxOne.IsDropDownOpen = true;
+            comboBoxOne.IsDropDownOpen = false;
             comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
             comboBoxOne.Height = 24;
             comboBoxOne.Width = 185;
