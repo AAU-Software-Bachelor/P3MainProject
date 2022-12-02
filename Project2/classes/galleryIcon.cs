@@ -10,7 +10,7 @@
             public string imgPath { get; set; }
 
 
-            public void DeleteImage()
+            /*public void DeleteImage()
             {
 
 
@@ -18,7 +18,7 @@
                 imgSize = 0;
                 imgPath = "";
 
-            }
+            }*/
 
 
 
