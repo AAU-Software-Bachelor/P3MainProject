@@ -50,7 +50,7 @@ namespace Project2
 
         private void btnGallery_ClickDelete(object sender, RoutedEventArgs e)
         {
-            var index = lstGallery.SelectedIndex;s
+            var index = lstGallery.SelectedIndex;
             if (lstGallery.SelectedIndex >= 0)
             {
                 galleryIconlst.RemoveAt(index);
@@ -88,6 +88,8 @@ namespace Project2
             double fileSize = new FileInfo(fullFileName).Length;
             string shortFileName = fullFileName.Replace(fileLocation, "");
             galleryIcon tempIcon = new galleryIcon { imgName = shortFileName, imgSize = fileSize, imgPath = fullFileName };
+            copyimage(fullFileName, shortFileName);
+
             galleryIconlst.Add(tempIcon);
             CurrentConfig.saveIcontoList(tempIcon);
             Console.WriteLine("Processed file '{0}'.", fullFileName);
@@ -119,20 +121,20 @@ namespace Project2
                 string fullFileName = theFileDialog.FileName;
                 /*  var b = FileInfo(openFileDialog.FileName);*/
                 double l = new FileInfo(fullFileName).Length;
-                bool t = Fileverify(fullFileName);
+                
                 bool k = fullFileName.EndsWith(".png");
-                debugrutine(fullFileName, l, t);
+              /*  debugrutine(fullFileName, l, t);*/
 
                 // cuts away the name of the file and leaves the path
                 string targetfolder = reduceToPath(fullFileName);
+                bool t = Fileverify(fullFileName,targetfolder);
 
                 //adds the image object to the observable list "processedimg"
                 if (t)
                 {
                     ProcessFile(fullFileName, targetfolder);
                 }
-
-                else throw new Exception("file is not a .JPG or .PNG!!!!");
+                else MessageBox.Show("something went wrong with the file " + fullFileName.ToString() +" and I dont know why.");
                 /*ProcessDirectory(targetfolder);    */
                 selecttheuploadedfile();
                 
@@ -146,12 +148,31 @@ namespace Project2
             lstGallery.SelectedIndex = lastentry - 1; // without "-1", it works if you upload 2 pictures in a row
 
         }
-        bool Fileverify(string filename)
+        bool Fileverify(string fullFileName, string folder)
+        {
+            double fileSize = new FileInfo(fullFileName).Length;
+            string shortFileName = fullFileName.Replace(folder, "");
+            if (IsImageFile(fullFileName))
+            {            
+                foreach (galleryIcon Icon in galleryIconlst)
+                {
+                    if (Icon.imgName == shortFileName)
+                    {
+                        MessageBox.Show("your project already contains an image with the name" + shortFileName.ToString());
+                        return false;
+                    }                    
+                }
+                return true;
+            }
+            return false;
+        }
+        bool IsImageFile(string filename)
         {
             if (filename.EndsWith(".jpeg") || filename.EndsWith(".png"))
                 return true;
             else
-                return false;
+                MessageBox.Show("the file " + filename.ToString() + " is not a .png or .jpg");
+            return false;
         }
         private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
         {
@@ -197,26 +218,23 @@ namespace Project2
         }
 
 
+        void copyimage(string imgFullPath, string imgName, string destination = "E:\\onM_Doc\\Programmering\\config destination\\")
+        {
+            File.Copy(imgFullPath, (destination + imgName), true);// true = Will overwrite if the destination file already exists.
+            System.Diagnostics.Debug.WriteLine("Copy complete !");
+        }
 
-        ///////////////////////////////////////////////////////
-        /// /* if have no IDEA what this is*/
-
-        ///////////////////////////////////////////////////////
         private void saveConfig_Click(object sender, RoutedEventArgs e)
         {
-
-
-            int index = lstGallery.SelectedIndex;
-            /*            System.Diagnostics.Debug.WriteLine("tried to save index " + index);
+                        int index = lstGallery.SelectedIndex;    
+                    /*System.Diagnostics.Debug.WriteLine("tried to save index " + index);
                         System.Diagnostics.Debug.WriteLine("tried to save file " + galleryIconlst[index].imgPath);
                         foreach (galleryIcon imgName in galleryIconlst) 
                         {
                             CurrentConfig.IconList[item] = galleryIconlst[index];
                             System.Diagnostics.Debug.WriteLine("tried to save index " + index);
                             System.Diagnostics.Debug.WriteLine("tried to save file " + galleryIconlst[index].imgPath);
-                        }
-                        */
-
+                        }*/
 
         }
 
