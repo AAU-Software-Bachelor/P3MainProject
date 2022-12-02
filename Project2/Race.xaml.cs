@@ -35,18 +35,18 @@ namespace Project2
 		{
 			CurrentConfig = currentConfig;
 			InitializeComponent();
-			newrace = new ObservableCollection<majorTrait>();
+			raceLst = new ObservableCollection<majorTrait>();
 			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection newrace
 			{
-				newrace.Add(race);
+				raceLst.Add(race);
 			}
-			lstRaces.ItemsSource = newrace;
+			lstRaces.ItemsSource = raceLst;
 			CurrentIndex = -1;	//skip the next use of CurrentIndex
 			lstRaces.SelectedIndex = 0;
 		}
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }	//keeps track of what index to use
-		private ObservableCollection<majorTrait> newrace;   //itemSource for lstRaces ListVeiw
+		private ObservableCollection<majorTrait> raceLst;   //itemSource for lstRaces ListVeiw
 
 		/// <summary>
 		/// sets page to MainWindow
@@ -64,11 +64,11 @@ namespace Project2
 		/// </summary>
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			int i = newrace.Count + 1;
+			int i = raceLst.Count + 1;
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
-			newrace.Add(tempRace);
+			raceLst.Add(tempRace);
 			CurrentConfig.saveToList(tempRace);
-			lstRaces.SelectedIndex = newrace.Count-1;
+			lstRaces.SelectedIndex = raceLst.Count-1;
 
 		}
         /// <summary>
@@ -79,7 +79,7 @@ namespace Project2
             var index = lstRaces.SelectedIndex;
 			if (lstRaces.SelectedIndex >= 0)
 			{
-				newrace.Remove(CurrentConfig.GetTrait(newrace[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
+				raceLst.Remove(CurrentConfig.GetTrait(raceLst[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
 			}	
 		}
 
@@ -197,7 +197,7 @@ namespace Project2
 			int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
 			if (lstRaces.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
 			{
-				if (CurrentIndex >= 0)	//skips saving the previus selected race if -1
+				if (CurrentIndex >= 0)	//skips saving the previus selected race if -1 (that is if the race was just deleted)
 				{
 					SaveRace(CurrentIndex);
 					ListStarterAbilities.Items.Clear();
@@ -312,10 +312,10 @@ namespace Project2
 					}
 				}
 				CurrentConfig.RacList[index] = currentMT;
-				newrace.Clear();	// clears the list
+				raceLst.Clear();	// clears the list
 				foreach (majorTrait race in CurrentConfig.RacList)	//rewrites the list.
 				{
-					newrace.Add(race);
+					raceLst.Add(race);
 				}
 
 
