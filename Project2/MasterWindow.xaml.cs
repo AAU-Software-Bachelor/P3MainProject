@@ -103,17 +103,17 @@ namespace Project2
 
             health.Name = "health";
             health.Description = "ye dead if this be zero";
-            health.type = 1;
+            health.type = 0;
             CurrentConfig.ResList.Add(health);
 
             mana.Name = "Mana";
             mana.Description = "le-Magic juice";
-            mana.type = 1;
+            mana.type = 0;
             CurrentConfig.ResList.Add(mana);
 
             xp.Name = "xp";
             xp.Description = "GAINS!!";
-            xp.type = 2;
+            xp.type = 1;
             CurrentConfig.ResList.Add(xp);
 
             MainWindow mainwindow = new MainWindow(CurrentConfig);

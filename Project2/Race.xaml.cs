@@ -18,7 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using static Project2.majorTrait;
-using static Project2.Race;
+using static Project2.RacePage;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
@@ -28,25 +28,25 @@ namespace Project2
 	/// <summary>
 	/// Interaction logic for Race.xaml
 	/// </summary>
-	public partial class Race : Page
+	public partial class RacePage : Page
 	{
 
-		public Race(config currentConfig) //Race window constructor
+		public RacePage(config currentConfig) //Race window constructor
 		{
 			CurrentConfig = currentConfig;
 			InitializeComponent();
-			newrace = new ObservableCollection<majorTrait>();
-			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection newrace
+			RaceCollection = new ObservableCollection<majorTrait>();
+			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
 			{
-				newrace.Add(race);
+				RaceCollection.Add(race);
 			}
-			lstRaces.ItemsSource = newrace;
+			lstRaces.ItemsSource = RaceCollection;
 			CurrentIndex = -1;	//skip the next use of CurrentIndex
 			lstRaces.SelectedIndex = 0;
 		}
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }	//keeps track of what index to use
-		private ObservableCollection<majorTrait> newrace;   //itemSource for lstRaces ListVeiw
+		private ObservableCollection<majorTrait> RaceCollection;   //itemSource for lstRaces ListVeiw
 
 		/// <summary>
 		/// sets page to MainWindow
@@ -64,11 +64,11 @@ namespace Project2
 		/// </summary>
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			int i = newrace.Count + 1;
+			int i = RaceCollection.Count + 1;
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
-			newrace.Add(tempRace);
+			RaceCollection.Add(tempRace);
 			CurrentConfig.saveToList(tempRace);
-			lstRaces.SelectedIndex = newrace.Count-1;
+			lstRaces.SelectedIndex = RaceCollection.Count-1;
 
 		}
         /// <summary>
@@ -77,10 +77,11 @@ namespace Project2
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
 		{
             var index = lstRaces.SelectedIndex;
-			if (lstRaces.SelectedIndex >= 0)
+			//lstRaces.SelectedIndex = index > 0 ? index - 1 : index;   //experiment. please keep
+			if (index >= 0)
 			{
-				newrace.Remove(CurrentConfig.GetTrait(newrace[index].UID, true));	//gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
-			}	
+				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in RaceCollection
+            }	
 		}
 
 		/// <summary>
@@ -312,10 +313,10 @@ namespace Project2
 					}
 				}
 				CurrentConfig.RacList[index] = currentMT;
-				newrace.Clear();	// clears the list
+				RaceCollection.Clear();	// clears the list
 				foreach (majorTrait race in CurrentConfig.RacList)	//rewrites the list.
 				{
-					newrace.Add(race);
+					RaceCollection.Add(race);
 				}
 
 
