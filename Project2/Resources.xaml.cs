@@ -17,135 +17,144 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using static Project2.ResourcePage;
+using static Project2.resourceTrait;
+
+
 
 namespace Project2
 {
-    /// <summary>
-    /// Interaction logic for Recources.xaml
-    /// </summary>
-    public partial class Resources : Page
-    {
-        public ObservableCollection<resourceTrait> ResourceCollection;
-        public Resources(config currentConfig)
-        {
-            CurrentConfig = currentConfig;
-            InitializeComponent();
-            ResourceCollection = new ObservableCollection<resourceTrait>()
-            {
-            new resourceTrait("R-0")
-            };
-            lstResources.ItemsSource = ResourceCollection;
-        }
-        config CurrentConfig;
-        int lastSelectedIndex;
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+	/// <summary>
+	/// Interaction logic for Recources.xaml
+	/// </summary>
+	public partial class ResourcePage : Page
+	{
+		public ResourcePage(config currentConfig)
+		{
+			CurrentConfig = currentConfig;
+			InitializeComponent();
+			ResourceCollection = new ObservableCollection<resourceTrait>();
+			foreach (resourceTrait Resource in CurrentConfig.ResList) //adds all Recources to ObservableCollection ResourceCollection
+			{
+				ResourceCollection.Add(Resource);
+			}
+			lstResources.ItemsSource = ResourceCollection;
+			CurrentIndex = -1;  //skip the next use of CurrentIndex
+			lstResources.SelectedIndex = 0;
+		}
+		config CurrentConfig { get; set; }
+		int CurrentIndex { get; set; }  //keeps track of what index to use
+		public ObservableCollection<resourceTrait> ResourceCollection;
 
-        }
+		private void ResourceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			MainWindow mainWindow = new MainWindow(CurrentConfig);
+			Application.Current.MainWindow.Content = mainWindow;
+		}
 
-        private void ResourceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow(CurrentConfig);
-            Application.Current.MainWindow.Content = mainWindow;
-        }
+		private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
+		{
+			resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("Resource")) { Name = "new resource"};
+			ResourceCollection.Add(newResource);
+			CurrentConfig.saveToList(newResource);
+			lstResources.SelectedIndex = ResourceCollection.Count - 1;
+		}
 
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Visibility = Visibility.Visible;
-            Window win = (Window)this.Parent;
-            win.Close();
-        }*/
+		private void btnResource_ClickDelete(object sender, RoutedEventArgs e)
+		{
+			var index = lstResources.SelectedIndex;
+			if (index >= 0)
+			{
+				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
+			}
+		}
 
-        private ObservableCollection<newResource> newresource;
+            private void OnResourceChanged (object sender, RoutedEventArgs e)
+		{
+			int SelIndex = lstResources.SelectedIndex;  //saves selected resource so it is not lost
+			if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
+			{
+				if (CurrentIndex >= 0)  //skips saving the previus selected resource if -1
+				{
+					SaveResource(CurrentIndex);
 
-        public class newResource
-        {
-            public string Name { get; set; }
-            public string ResourceType { get; set; }
-        }
+				}
+				CurrentIndex = lstResources.SelectedIndex;
+				resourceTrait currentRT = CurrentConfig.ResList[CurrentIndex]; //gets the trait to be loaded
 
-        private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
-        {
-      
-            newresource.Add(new newResource() { Name = "New Resource", ResourceType = "HP/Stat Bar" });
-            lastSelectedIndex = newresource.Count + 1;
-        }
+				(this.FindName("nameBox") as TextBox).Text = currentRT.Name; //sets text to the name from the current MajorTrait object
+				(this.FindName("descBox") as TextBox).Text = currentRT.Description;  //sets text to the description from the current MajorTrait object
 
-        private void btnResource_ClickDelete(object sender, RoutedEventArgs e)
-        {
-            
-            var index = lstResources.SelectedIndex;
-            if (lstResources.SelectedIndex == null)
-            {
-                index = lastSelectedIndex;
+                foreach (RadioButton rd in (this.FindName("GridRadioButtons") as Grid).Children.OfType<RadioButton>())
+                {
+                    if (int.Parse(rd.Tag.ToString()) == currentRT.type)
+                    {
+                        rd.IsChecked = true;
+                    }
+                }
             }
-            if (lstResources.SelectedIndex >= 1)
-            {
-                newresource.RemoveAt(index);
-            }
-        }
-     /*   public string getRadioButton()
-        {
-            *//*string type = newresourc
-*//*
-            return Type;
-        }*/
-
-        private void AssignResourceTypeRadioButton(object sender, RoutedEventArgs e)
-        { 
-            RadioButton rb = sender as RadioButton;
-       
-   /*         string content = rb.Content.ToString();*/
-            System.Diagnostics.Debug.WriteLine(rb.Content);
-
-            var index = lstResources.SelectedIndex;
-            if (lstResources.SelectedIndex == null)
-            {
-                index = lastSelectedIndex;
-            }
-            string ResourceType = rb.Content.ToString();
-            if (lstResources.SelectedIndex >= 0)
-            {
-                newresource[index] = new newResource() { Name = newresource[index].Name, ResourceType = ResourceType };
-            }
-        }
-
-        /*private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }*/
-
-        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
-        {
-            //majorTrait.deleteContent()
-            //get name
-            //get image
-            //get description
-            //get cost
-            //for loop through Costtype
-            //for loop through freeAbilities
-            //for loop through exclusions
-            //for loop through dependencies / discounts
-            //for loop through affectedResources
-
-
-            string[] id = UID.Split('-');
-            majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
-            currentMT.deleteContent();
-
-            string name = (this.FindName("nameBox") as TextBox).Text;
-            string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
-            string desc = (this.FindName("descBox") as TextBox).Text;
-
-            currentMT.name = name;
-            currentMT.description = playerReq + "\n\n" + desc;
+			else
+			{
+				CurrentIndex = -1;
+			}
+			lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
+		}
 
 
 
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }*/
 
-    }
+		private void OnClickSaveResource(object sender, RoutedEventArgs e)
+		{
+			SaveResource();
+		}
+
+		/// <summary>
+		/// Saves everything in the indexed race to the current config. if no index is given then it saves the currently selected race.
+		/// </summary>
+		private void SaveResource(int index = -1)
+		{
+			int SelIndex = lstResources.SelectedIndex;  //saves selected race so it is not lost
+
+			string UID = "";
+			if (index == -1)    //is true when funtion is called via a button
+			{
+				if (lstResources.SelectedIndex >= 0)
+				{
+					UID = CurrentConfig.ResList[lstResources.SelectedIndex].UID;    //uses the selected index to find the wanted UID
+					index = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, UID));
+				}
+			}
+			else
+			{
+				UID = CurrentConfig.ResList[index].UID; //uses the given index to find the wanted UID
+			}
+			if (UID != "")
+			{
+				resourceTrait currentRT = CurrentConfig.GetTrait(UID);
+
+				currentRT.Name = (this.FindName("nameBox") as TextBox).Text;
+				currentRT.Description = (this.FindName("descBox") as TextBox).Text;
+
+				foreach (RadioButton rd in (this.FindName("GridRadioButtons") as Grid).Children.OfType<RadioButton>())
+				{
+					if (rd.IsChecked == true)
+					{
+						currentRT.type = int.Parse(rd.Tag.ToString());
+					}
+				}
+
+				CurrentConfig.ResList[index] = currentRT;
+				ResourceCollection.Clear();    // clears the list
+				foreach (resourceTrait res in CurrentConfig.ResList)  //rewrites the list.
+				{
+					ResourceCollection.Add(res);
+				}
+
+
+				CurrentConfig.TestWriteToJson("testConfig.json");
+				lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
+			}
+		}
+	}
 }
 
