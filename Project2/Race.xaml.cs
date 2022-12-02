@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
-using static Project2.Race;
+using static Project2.RaceWindow;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
@@ -26,20 +26,20 @@ namespace Project2
     /// <summary>
     /// Interaction logic for Race.xaml
     /// </summary>
-    public partial class Race : Page
+    public partial class RaceWindow : Page
     {
 
-        public Race(config currentConfig)
+        public RaceWindow(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            newrace = new ObservableCollection<majorTrait>();
+            raceLst = new ObservableCollection<majorTrait>();
             foreach (majorTrait race in CurrentConfig.RacList)
             {
-                newrace.Add(race);
+                raceLst.Add(race);
             }
 
-            lstRaces.ItemsSource = newrace;
+            lstRaces.ItemsSource = raceLst;
         }
         public config CurrentConfig { get; set; }
 
@@ -64,12 +64,12 @@ namespace Project2
         }*/
 
 
-        private ObservableCollection<majorTrait> newrace;
+        private ObservableCollection<majorTrait> raceLst;
 
         private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
         {
-            int i = newrace.Count + 1;
-            newrace.Add(new majorTrait(CurrentConfig.newUID("Race"))  { Name = "new race" });
+            int i = raceLst.Count + 1;
+            raceLst.Add(new majorTrait(CurrentConfig.newUID("Race"))  { Name = "new race" });
         }
 
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
@@ -78,7 +78,7 @@ namespace Project2
             if (lstRaces.SelectedIndex >= 0)
 
             {
-                newrace.RemoveAt(index);
+                raceLst.RemoveAt(index);
             }
         }
 

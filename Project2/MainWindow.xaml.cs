@@ -31,7 +31,7 @@ namespace Project2
 
         private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Race race = new Race(CurrentConfig); //we need to talk about naming stuff!!
+            RaceWindow race = new RaceWindow(CurrentConfig); //we need to talk about naming stuff!!
             Application.Current.MainWindow.Content = race;
            
         }
