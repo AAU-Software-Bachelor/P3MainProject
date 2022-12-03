@@ -10,7 +10,7 @@
     <Grid Background="White" Margin="0,0,10,10">
         <Label Content="Gallery" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="165" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="186,37,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="15"/>
-        <Label Grid.Row="0" x:Name="GalleryBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseDoubleClick="GalleryMainMenu_MouseDoubleClick" Width="136" Height="46">
+        <Label Grid.Row="0" x:Name="GalleryBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="GalleryMainMenu_MouseDoubleClick" Width="136" Height="46">
             <StackPanel Orientation="Vertical">
                 <Border Background="LightBlue" Padding="10,5,10,5" >
                     <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
