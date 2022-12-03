@@ -25,11 +25,12 @@
             </ListView.View>
         </ListView>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Height="32" Margin="17,464,0,0" x:Name="btnGalleryAdd" Click="btnOpenFile_Click" Content="Upload Picture" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="32" Margin="131,464,0,0" x:Name="btnGalleryDelete" Click="btnGallery_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Height="32" Margin="158,522,0,0" x:Name="btnGalleryDelete" Click="btnGallery_ClickDeleteFile" Content="DELETE File" Background="OrangeRed"></Button>
         <Button Content="Upload Folder" Click="btnOpenFolder_Click" Margin="17,514,1404,196"/>
         <Grid Background="DarkGray" Margin="334,99,32,26">
             <Image Source="{Binding SelectedItem.imgPath, ElementName=lstGallery}" Margin="21,12,483,138" Width="350" Height="350"/>
         </Grid>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="104" Height="40" Margin="158,464,0,0" x:Name="btnGalleryDelete_Copy" Click="btnGallery_ClickDeleteObject" Content="Delete Object" Background="OrangeRed"/>
 
     </Grid>
 </Page>

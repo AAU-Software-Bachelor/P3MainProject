@@ -49,20 +49,36 @@ namespace Project2
 
         public ObservableCollection<galleryIcon> galleryIconlst;
         
-        private void btnGallery_ClickDelete(object sender, RoutedEventArgs e)
+        private void btnGallery_ClickDeleteObject(object sender, RoutedEventArgs e)
         {
             var index = lstGallery.SelectedIndex;
             if (lstGallery.SelectedIndex >= 0)
             {
                 string temppath = (galleryIconlst[index].imgPath);
+                System.Diagnostics.Debug.WriteLine("the object is located at: "+galleryIconlst[index].imgPath);
                 File.SetAttributes(temppath, FileAttributes.Normal); //makes file not read-only permission.                
                 galleryIconlst.RemoveAt(index);
                 CurrentConfig.IconList.RemoveAt(index);
                 selectPrevobject();
                 System.Diagnostics.Debug.WriteLine(File.GetAttributes(temppath).ToString());
-                
+                CurrentConfig.temppath=temppath;
 
-               File.Delete(temppath);
+              /* File.Delete(temppath);*/
+
+            }
+        }
+        private void btnGallery_ClickDeleteFile(object sender, RoutedEventArgs e)
+        {
+            var index = lstGallery.SelectedIndex;
+            if (lstGallery.SelectedIndex >= 0)
+            {
+                string temppath = CurrentConfig.temppath;
+                File.SetAttributes(temppath, FileAttributes.Normal); //makes file not read-only permission.                
+                System.Diagnostics.Debug.WriteLine("will now delete "+ temppath);
+                System.Diagnostics.Debug.WriteLine(temppath);
+
+
+                 File.Delete(temppath);
 
             }
         }
@@ -106,7 +122,8 @@ namespace Project2
         public void ProcessFile(string fullFileName, string fileLocation)
         {
             double fileSize = new FileInfo(fullFileName).Length;
-            string shortFileName = fullFileName.Replace(fileLocation, "");
+       /*     string shortFileName = fullFileName.Replace(fileLocation, "");*/
+            string shortFileName = System.IO.Path.GetFileName(fullFileName);
             if (fileIsDuplicate(shortFileName) ==false)
             {
                 copyimage(fullFileName, shortFileName, CurrentConfig.saveDestination);

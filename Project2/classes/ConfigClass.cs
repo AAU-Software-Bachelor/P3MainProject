@@ -21,6 +21,7 @@ namespace Project2
 			ResList = new List<resourceTrait>();
 			IconList = new List<galleryIcon>();
 			saveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			temppath = new string(string.Empty);
 		}
 		public string saveDestination { get; set; }
         public List<majorTrait> RacList { get; set; }
@@ -29,7 +30,7 @@ namespace Project2
 		public List<majorTrait> RelList { get; set; }
 		public List<resourceTrait> ResList { get; set; }
 		public List<galleryIcon> IconList { get; set; }
-
+		public string temppath { get; set; }
 		public void TestWriteToJson(string fileName)
         {
 
