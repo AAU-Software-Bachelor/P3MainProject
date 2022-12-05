@@ -7,10 +7,10 @@
 	  mc:Ignorable="d"
 	  Title="Item" Height="760" Width="1543">
 
-    <Grid Background="White" Margin="0,0,413,115">
+    <Grid Background="White" Margin="0,0,10,10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="389*"/>
+            <ColumnDefinition Width="1144*"/>
         </Grid.ColumnDefinitions>
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
         <Label Content="Item editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
@@ -29,26 +29,35 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,373,0,0" x:Name="btnItemsAdd" Click="btnItems_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,373,0,0" x:Name="btnItemsDelete" Click="btnItems_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
-        <Grid Background="#643237" Margin="224,0,32,26" Grid.ColumnSpan="2" Height="520" VerticalAlignment="Bottom">
-            <StackPanel Orientation="Vertical" Margin="33,29,737,391">
-                <Image Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
-                <Button HorizontalAlignment="Right" Width="105"  Height="26" Content="Click to Upload" >
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,469,0,0" x:Name="btnItemsAdd" Click="btnItems_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,469,0,0" x:Name="btnItemsDelete" Click="btnItems_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Grid Background="#643237" Margin="224,0,32,131" Grid.ColumnSpan="2" Height="520" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1110*"/>
+                <ColumnDefinition Width="167*"/>
+            </Grid.ColumnDefinitions>
 
-                </Button>
-            </StackPanel>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+
+            <Border BorderBrush="Black" BorderThickness="1" Margin="32,10,914,351"></Border>
+            <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="39,21,921,385"/>
+            <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="39,137,921,357"/>
+
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,182,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
             <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text=""/>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
-                <Grid>
-                    <Label Content="Gained Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,190,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="346,38,441,266">
+                <Grid Margin="1,-2,-1,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32*"/>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="209*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Gained Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14" Grid.ColumnSpan="3"/>
+                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36" Grid.ColumnSpan="3"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue" Grid.ColumnSpan="2"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="21,190,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed" Grid.Column="1"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="434,271,71,20">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="346,271,441,20">
                 <Grid>
                     <Label Content="Gained Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,12,0,0" Height="32" Width="97" FontWeight="Bold"/>

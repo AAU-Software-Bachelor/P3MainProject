@@ -71,8 +71,8 @@ namespace Project2
 			}
 		}
 
-            private void OnResourceChanged (object sender, RoutedEventArgs e)
-			{
+        private void OnResourceChanged (object sender, RoutedEventArgs e)
+		{
 			int SelIndex = lstResources.SelectedIndex;  //saves selected resource so it is not lost
 			if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
 			{
@@ -112,7 +112,6 @@ namespace Project2
 			}
 			lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
 		}
-
 
 		public void ChangeIcon_click(object sender, RoutedEventArgs e)
 		{

@@ -184,7 +184,16 @@ namespace Project2
                 }
                 CurrentIndex = lstItems.SelectedIndex;
                 majorTrait currentMT = CurrentConfig.IteList[CurrentIndex]; //gets the trait to be loaded
+                if (currentMT.Image != string.Empty) //the trait doesnt nesseserily have a default value
+                {
+                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentMT.Image, UriKind.Absolute));
 
+                }
+                else
+                {
+
+                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.placeholderImage, UriKind.Relative));
+                }
                 (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
                 (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
@@ -260,6 +269,7 @@ namespace Project2
                 majorTrait currentMT = CurrentConfig.GetTrait(UID);
                 currentMT.deleteContent();
 
+                currentMT.Image = (this.FindName("ChosenImage") as Image).Source.ToString();
                 currentMT.Type = "Item";
                 currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
                 currentMT.Description = (this.FindName("descBox") as TextBox).Text;
@@ -314,6 +324,16 @@ namespace Project2
             {
                 (sender as TextBox).Text = "";
             }
+        }
+
+        public void ChangeIcon_click(object sender, RoutedEventArgs e)
+        {
+            GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
+
+            string imgSource = newWindow.uploadFile(sender, e);
+            System.Diagnostics.Debug.WriteLine("we have an image at: " + imgSource);
+            ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
+            CurrentConfig.IteList[CurrentIndex].Image = imgSource;
         }
 
     }
