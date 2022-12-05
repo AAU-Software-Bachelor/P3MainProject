@@ -39,6 +39,7 @@ namespace Project2
             majorTrait Elf = new majorTrait(CurrentConfig.newUID("Race"));
             majorTrait CultOfSigmar = new majorTrait(CurrentConfig.newUID("Religion"));
             resourceTrait health = new resourceTrait(CurrentConfig.newUID("Resource"));
+            majorTrait hammer = new majorTrait(CurrentConfig.newUID("Item"));
             resourceTrait mana = new resourceTrait(CurrentConfig.newUID("Resource"));
             resourceTrait xp = new resourceTrait(CurrentConfig.newUID("Resource"));
 
@@ -121,6 +122,10 @@ namespace Project2
             xp.Description = "GAINS!!";
             xp.type = 1;
             CurrentConfig.ResList.Add(xp);
+
+            hammer.Name = "hammer";
+            hammer.Description = "Le-Bonk";
+            CurrentConfig.IteList.Add(hammer);
 
             MainWindow mainwindow = new MainWindow(CurrentConfig);
             Application.Current.MainWindow.Content = mainwindow;

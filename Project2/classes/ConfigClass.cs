@@ -18,7 +18,8 @@ namespace Project2
 			AbilList = new List<majorTrait>();
 			CarList = new List<majorTrait>();
 			RelList = new List<majorTrait>();
-			ResList = new List<resourceTrait>();
+            IteList = new List<majorTrait> ();
+            ResList = new List<resourceTrait>();
 			IconList = new List<galleryIcon>();
 			saveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
 			temppath = new string(string.Empty);
@@ -28,7 +29,8 @@ namespace Project2
 		public List<majorTrait> AbilList { get; set; }
 		public List<majorTrait> CarList { get; set; }
 		public List<majorTrait> RelList { get; set; }
-		public List<resourceTrait> ResList { get; set; }
+		public List<majorTrait> IteList { get; set; }
+        public List<resourceTrait> ResList { get; set; }
 		public List<galleryIcon> IconList { get; set; }
 		public string temppath { get; set; }
 		public void TestWriteToJson(string fileName)
@@ -105,7 +107,17 @@ namespace Project2
 					{
 						this.AbilList.RemoveAt(index);
 					}
+
 					return SelAbi;
+
+				case "Item":
+                    index = IteList.FindIndex(i => string.Equals(i.UID, uid));
+                    majorTrait SelIte = this.IteList[index];
+                    if (isDelete)
+                    {
+                        this.IteList.RemoveAt(index);
+                    }
+                    return SelIte;
 
 				case "Resource":
 					index = ResList.FindIndex(i => string.Equals(i.UID, uid));
@@ -116,7 +128,7 @@ namespace Project2
 					}
 					return SelRes;
 
-				default: return false; 
+                default: return false; 
 
 			}
 		}
@@ -145,7 +157,11 @@ namespace Project2
 					AbilList.Add(trait);
                     break;
 
-				case "Resource":
+                case "Item":
+                    IteList.Add(trait);
+                    break;
+
+                case "Resource":
 					ResList.Add(trait);
 					break ;
 
