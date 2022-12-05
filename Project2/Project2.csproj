@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Trashcan\" />
+    <PackageReference Include="ControlzEx" Version="5.0.2" />
     <Resource Include="Images\Gallery.png" />
   </ItemGroup>
 

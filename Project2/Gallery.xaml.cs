@@ -1,17 +1,18 @@
 ﻿using Microsoft.Win32;
+/*using Project2.classes;*/
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
-
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+/*using WinForms = System.Windows.Forms;
+using System.Windows.Forms;*/
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -20,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Shell;
 using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
@@ -46,19 +48,54 @@ namespace Project2
         public config CurrentConfig { get; set; }
 
         public ObservableCollection<galleryIcon> galleryIconlst;
-
-        private void btnGallery_ClickDelete(object sender, RoutedEventArgs e)
+        
+        private void btnGallery_ClickDeleteObject(object sender, RoutedEventArgs e)
         {
             var index = lstGallery.SelectedIndex;
             if (lstGallery.SelectedIndex >= 0)
             {
+                string temppath = (galleryIconlst[index].imgPath);
+                System.Diagnostics.Debug.WriteLine("the object is located at: "+galleryIconlst[index].imgPath);
+                File.SetAttributes(temppath, FileAttributes.Normal); //makes file not read-only permission.                
                 galleryIconlst.RemoveAt(index);
                 CurrentConfig.IconList.RemoveAt(index);
+                selectPrevobject();
+                System.Diagnostics.Debug.WriteLine(File.GetAttributes(temppath).ToString());
+                CurrentConfig.temppath=temppath;
+
+              /* File.Delete(temppath);*/
+
+            }
+        }
+        private void btnGallery_ClickDeleteFile(object sender, RoutedEventArgs e)
+        {
+            var index = lstGallery.SelectedIndex;
+            if (lstGallery.SelectedIndex >= 0)
+            {
+                string temppath = CurrentConfig.temppath;
+                File.SetAttributes(temppath, FileAttributes.Normal); //makes file not read-only permission.                
+                System.Diagnostics.Debug.WriteLine("will now delete "+ temppath);
+                System.Diagnostics.Debug.WriteLine(temppath);
+
+
+               /*  File.Delete(temppath);*/
+
             }
         }
 
 
+        void selectPrevobject()
+        {
+            if (lstGallery.SelectedIndex > 0)
+            {
+                lstGallery.SelectedIndex -= 1;
+            }
+            else if(galleryIconlst.Count > 0)
+            {
+                lstGallery.SelectedIndex = 0;
+            }
 
+        }
         //Adds all jpeg files in the target directory
         public void ProcessDirectory(string targetDirectory)
         {
@@ -70,7 +107,7 @@ namespace Project2
             foreach (string fileName in fileEntries)
             {
 
-                if (fileName.EndsWith(".png") || fileName.EndsWith(".jpeg"))
+                if (Fileverify(fileName, targetDirectory))
                     ProcessFile(fileName, targetDirectory);
             }
 
@@ -85,13 +122,16 @@ namespace Project2
         public void ProcessFile(string fullFileName, string fileLocation)
         {
             double fileSize = new FileInfo(fullFileName).Length;
-            string shortFileName = fullFileName.Replace(fileLocation, "");
-            galleryIcon tempIcon = new galleryIcon { imgName = shortFileName, imgSize = fileSize, imgPath = fullFileName };
-            copyimage(fullFileName, shortFileName);
-
+       /*     string shortFileName = fullFileName.Replace(fileLocation, "");*/
+            string shortFileName = System.IO.Path.GetFileName(fullFileName);
+            if (fileIsDuplicate(shortFileName) ==false)
+            {
+                copyimage(fullFileName, shortFileName, CurrentConfig.saveDestination);
+            }            
+            galleryIcon tempIcon = new galleryIcon { imgName = shortFileName, imgSize = fileSize, imgPath = (CurrentConfig.saveDestination + shortFileName) };
             galleryIconlst.Add(tempIcon);
             CurrentConfig.saveIcontoList(tempIcon);
-            Console.WriteLine("Processed file '{0}'.", fullFileName);
+            System.Diagnostics.Debug.WriteLine("Processed file:  " + shortFileName +" size: "+ fileSize);
             SaveIcon();
         }
 
@@ -126,29 +166,44 @@ namespace Project2
 
                 // cuts away the name of the file and leaves the path
                 string targetfolder = reduceToPath(fullFileName);
-                bool t = Fileverify(fullFileName,targetfolder);
+                /*bool t = Fileverify(fullFileName,targetfolder);*/
 
-                //adds the image object to the observable list "processedimg"
-                if (t)
+            
+                if (Fileverify(fullFileName, targetfolder))
                 {
-                    ProcessFile(fullFileName, targetfolder);
+                    
+                    ProcessFile(fullFileName, targetfolder);//adds the image object to the observable list "processedimg"
+
                 }
-                else MessageBox.Show("something went wrong with the file " + fullFileName.ToString() +" and I dont know why.");
+                /*  else MessageBox.Show("something went wrong with the file " + fullFileName.ToString() +" and I dont know why.");*/
                 /*ProcessDirectory(targetfolder);    */
                 selecttheuploadedfile();
                 
              
             }
         }
+        bool fileIsDuplicate(string shortfilename)
+        {   
+            
+            if (File.Exists(CurrentConfig.saveDestination + shortfilename))
+            {
+                File.SetAttributes((CurrentConfig.saveDestination + shortfilename), FileAttributes.Normal);
+                return true;
+            }
+            else return false;
+
+        }
         void selecttheuploadedfile()
         {
             int lastentry = galleryIconlst.Count;
             System.Diagnostics.Debug.WriteLine("Last entry = " + lastentry);
             lstGallery.SelectedIndex = lastentry - 1; // without "-1", it works if you upload 2 pictures in a row
-
         }
+
+       
         bool Fileverify(string fullFileName, string folder)
         {
+
             double fileSize = new FileInfo(fullFileName).Length;
             string shortFileName = fullFileName.Replace(folder, "");
             if (IsImageFile(fullFileName))
@@ -163,7 +218,8 @@ namespace Project2
                 }
                 return true;
             }
-            return false;
+            else
+                return false;
         }
         bool IsImageFile(string filename)
         {
@@ -173,26 +229,31 @@ namespace Project2
                 MessageBox.Show("the file " + filename.ToString() + " is not a .png or .jpg");
             return false;
         }
-        private void btnOpenFolder_Click(object sender, RoutedEventArgs e)
+        private void btnOpenFolder_Click(object sender, System.EventArgs e)
         {
-            OpenFileDialog folderBrowser = new OpenFileDialog();
-            folderBrowser.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images";
-            // Set validate names and check file exists to false otherwise windows will
-            // not let you select "Folder Selection."
-            folderBrowser.ValidateNames = false;
-            folderBrowser.CheckFileExists = false;
-            folderBrowser.CheckPathExists = true;
-            // Always default to Folder Selection.
-            folderBrowser.FileName = "Folder Selection.";
-
-
-            if (folderBrowser.ShowDialog() == true)
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images"; // Use current value for initial dir
+            dialog.Title = "Select a Directory"; // instead of default "Save As"
+            dialog.Filter = "Directory|*.this.directory"; // Prevents displaying files
+            dialog.FileName = "select"; // Filename will then be "select.this.directory"
+            if (dialog.ShowDialog() == true)
             {
-                string folderPath = reduceToPath(folderBrowser.FileName);
-                // ...
+                string path = dialog.FileName;
+                // Remove fake filename from resulting path
+                path = path.Replace("\\select.this.directory", "");
+                path = path.Replace(".this.directory", "");
+                // If user has changed the filename, create the new directory
+                if (!System.IO.Directory.Exists(path))
+                {
+                    System.IO.Directory.CreateDirectory(path);
+                }
+                // Our final value is in path
+                ProcessDirectory(path);
             }
 
         }
+
+        
         private string reduceToPath(string filename)
         {
             string targetfolder = filename;
@@ -217,9 +278,11 @@ namespace Project2
         }
 
 
-        void copyimage(string imgFullPath, string imgName, string destination = "E:\\onM_Doc\\Programmering\\config destination\\")
+        void copyimage(string imgFullPath, string imgName, string destination)
         {
+     
             File.Copy(imgFullPath, (destination + imgName), true);// true = Will overwrite if the destination file already exists.
+            File.SetAttributes((destination + imgName), FileAttributes.Normal);
             System.Diagnostics.Debug.WriteLine("Copy complete !");
         }
 

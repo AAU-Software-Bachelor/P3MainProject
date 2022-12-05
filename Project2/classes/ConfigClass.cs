@@ -20,14 +20,17 @@ namespace Project2
 			RelList = new List<majorTrait>();
 			ResList = new List<resourceTrait>();
 			IconList = new List<galleryIcon>();
+			saveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			temppath = new string(string.Empty);
 		}
-		public List<majorTrait> RacList { get; set; }
+		public string saveDestination { get; set; }
+        public List<majorTrait> RacList { get; set; }
 		public List<majorTrait> AbilList { get; set; }
 		public List<majorTrait> CarList { get; set; }
 		public List<majorTrait> RelList { get; set; }
 		public List<resourceTrait> ResList { get; set; }
 		public List<galleryIcon> IconList { get; set; }
-
+		public string temppath { get; set; }
 		public void TestWriteToJson(string fileName)
         {
 
