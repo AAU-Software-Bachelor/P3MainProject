@@ -107,8 +107,11 @@ namespace Project2
             foreach (string fileName in fileEntries)
             {
 
-                if (Fileverify(fileName, targetDirectory))
+                if (Fileverify(fileName, targetDirectory) == 1)
+                {
                     ProcessFile(fileName, targetDirectory);
+                }
+                    
             }
 
             // Recurse into subdirectories of this directory.
@@ -119,7 +122,7 @@ namespace Project2
         }
 
         //here we want to create an object for each file
-        public void ProcessFile(string fullFileName, string fileLocation)
+        public int ProcessFile(string fullFileName, string fileLocation)
         {
             double fileSize = new FileInfo(fullFileName).Length;
        /*     string shortFileName = fullFileName.Replace(fileLocation, "");*/
@@ -132,7 +135,9 @@ namespace Project2
             galleryIconlst.Add(tempIcon);
             CurrentConfig.saveIcontoList(tempIcon);
             System.Diagnostics.Debug.WriteLine("Processed file:  " + shortFileName +" size: "+ fileSize);
-            SaveIcon();
+            SaveIcon(); 
+            return galleryIconlst.Count;
+            
         }
 
         public void getappPath()
@@ -149,77 +154,110 @@ namespace Project2
 
             return imgPath;
         }
-        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
+        public void btnOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+            uploadFile(sender, e);
+        }
+
+        public string uploadFile(object sender, RoutedEventArgs e)
         {
             OpenFileDialog theFileDialog = new OpenFileDialog();
             theFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
-            theFileDialog.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images";
+            theFileDialog.InitialDirectory = CurrentConfig.saveDestination;
 
             if (theFileDialog.ShowDialog() == true)
             {
                 string fullFileName = theFileDialog.FileName;
                 /*  var b = FileInfo(openFileDialog.FileName);*/
-                double l = new FileInfo(fullFileName).Length;
-                
-                bool k = fullFileName.EndsWith(".png");
-              /*  debugrutine(fullFileName, l, t);*/
+
+
+
+                string shortFileName = System.IO.Path.GetFileName(fullFileName);
+                /*  debugrutine(fullFileName, l, t);*/
 
                 // cuts away the name of the file and leaves the path
                 string targetfolder = reduceToPath(fullFileName);
-                /*bool t = Fileverify(fullFileName,targetfolder);*/
 
-            
-                if (Fileverify(fullFileName, targetfolder))
+                MessageBox.Show("I will now verify you file " + shortFileName.ToString());
+
+                if (Fileverify(fullFileName, targetfolder) == 1)//file is an image and does not exist as object
                 {
-                    
                     ProcessFile(fullFileName, targetfolder);//adds the image object to the observable list "processedimg"
-
+                    System.Diagnostics.Debug.WriteLine("Debug log if statement == 1");
+                    return (targetfolder + shortFileName);
+                }
+                else if (Fileverify(fullFileName, targetfolder) == 2)//file exists as object
+                {
+                    MessageBox.Show("Your project already contains an icon object with the name" + shortFileName.ToString());
+                    System.Diagnostics.Debug.WriteLine("Debug log if statement == 2");
+                    return (targetfolder + shortFileName); //for when called by other pages to set icon
+                }
+                else if (Fileverify(fullFileName, targetfolder) == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("Debug log if statement == 0");
+                    System.Diagnostics.Debug.WriteLine(fullFileName + " is not an image file");
+                    return "error gallery 180";
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Debug log if statement not == 0,1,2");
+                    return "error 181";
                 }
                 /*  else MessageBox.Show("something went wrong with the file " + fullFileName.ToString() +" and I dont know why.");*/
                 /*ProcessDirectory(targetfolder);    */
-                selecttheuploadedfile();
-                
-             
+
             }
+            System.Diagnostics.Debug.WriteLine("Debug log if not == 198, 184, 194 or 189");
+            
+            return "error gallery 207";
+
         }
+
+
         bool fileIsDuplicate(string shortfilename)
         {   
             
             if (File.Exists(CurrentConfig.saveDestination + shortfilename))
-            {
-                File.SetAttributes((CurrentConfig.saveDestination + shortfilename), FileAttributes.Normal);
+            {                
                 return true;
             }
             else return false;
 
         }
-        void selecttheuploadedfile()
+        public void selecttheuploadedfile(int index)
+        {            
+            System.Diagnostics.Debug.WriteLine("file found at index = " + index);
+            lstGallery.SelectedIndex = index - 1; // without "-1", it works if you upload 2 pictures in a row            
+        }
+        public void selectlastentry()
         {
-            int lastentry = galleryIconlst.Count;
-            System.Diagnostics.Debug.WriteLine("Last entry = " + lastentry);
-            lstGallery.SelectedIndex = lastentry - 1; // without "-1", it works if you upload 2 pictures in a row
+          
+            lstGallery.SelectedIndex = galleryIconlst.Count - 1; // without "-1", it works if you upload 2 pictures in a row            
         }
 
-       
-        bool Fileverify(string fullFileName, string folder)
+
+        int Fileverify(string fullFileName, string folder)
         {
 
             double fileSize = new FileInfo(fullFileName).Length;
             string shortFileName = fullFileName.Replace(folder, "");
             if (IsImageFile(fullFileName))
-            {            
+            {
+                int i=0;
                 foreach (galleryIcon Icon in galleryIconlst)
                 {
+                    i++;
                     if (Icon.imgName == shortFileName)
                     {
-                        MessageBox.Show("your project already contains an image with the name" + shortFileName.ToString());
-                        return false;
+                        
+                        selecttheuploadedfile(i);
+                        return 2;// is image file, already exist as object
                     }                    
                 }
-                return true;
+                return 1; // is image file, does not exist as object
             }
             else
-                return false;
+                return 0;// is NOT image file
         }
         bool IsImageFile(string filename)
         {
