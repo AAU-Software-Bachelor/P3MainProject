@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="698" Width="800">
+        Title="MainWindow" Height="760" Width="1100">
     <Grid Background="#FF4A4A4A">
          <Button Content="Select save destination" Click="selectFolder_Click" Margin="20,482,977,136" Background="Green"/>
         <Label Grid.Column="1" Content="Main Menu" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="24"></Label>
