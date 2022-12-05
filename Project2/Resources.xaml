@@ -8,9 +8,7 @@
 	  mc:Ignorable="d"
 	  Title="Resourcewindow" Height="760" Width="1543">
 
-    <Grid Background="White" Margin="0,0,413,115">
-        <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
-        <Label Content="Resource editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
+    <Grid Background="White" Margin="0,0,10,10">
         <Label Grid.Row="0" x:Name="ResourcesBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ResourceMainMenu_MouseDoubleClick" Width="136" Height="46">
             <StackPanel Orientation="Vertical">
                 <Border Background="LightBlue" Padding="10,5,10,5" >
@@ -19,7 +17,7 @@
             </StackPanel>
         </Label>
 
-        <ListView x:Name="lstResources" Margin="18,99,925,286" Grid.Row="0" SelectionChanged="OnResourceChanged">
+        <ListView x:Name="lstResources" Margin="18,99,1319,286" Grid.Row="0" SelectionChanged="OnResourceChanged">
             <ListView.View>
                 <GridView x:Name="grdNames" >
                     <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
@@ -27,19 +25,19 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,373,0,0" x:Name="btnResourceAdd" Click="btnResource_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,373,0,0" x:Name="btnResourceDelete" Click="btnResource_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,469,0,0" x:Name="btnResourceAdd" Click="btnResource_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,469,0,0" x:Name="btnResourceDelete" Click="btnResource_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
         <Grid Background="BurlyWood" Margin="224,99,32,26">
-            <Border BorderBrush="Black" BorderThickness="1" Margin="20,10,704,373"></Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="20,10,1016,430"></Border>
 
-            <Image Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="27,19,714,408"/>
-            <Button Height="26" Content="Change Icon" Click="ChangeIcon_click"  Margin="27,112,714,382"/>
+            <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="23,17,1020,457"/>
+            <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,165,1020,440"/>
 
 
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="34,190,0,0" TextWrapping="Wrap" Text="resource name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" Text="resource description" VerticalAlignment="Top" Width="365" Height="178"/>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveResource"/>
-            <Grid Margin="175,29,516,391" Background="Gray" x:Name="GridRadioButtons">
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,227,0,0" TextWrapping="Wrap" Text="resource name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="25,245,0,0" TextWrapping="Wrap" Text="resource description" VerticalAlignment="Top" Width="365" Height="178"/>
+            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="31,428,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveResource"/>
+            <Grid Margin="434,62,518,417" Background="Gray" x:Name="GridRadioButtons">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="85"/>
                     <ColumnDefinition Width="85"/>
@@ -56,6 +54,8 @@
                 <RadioButton Grid.Row="2" Grid.Column="1" x:Name="MISCRadioButton" Tag="3" Content="Misc." GroupName="ResourceTypeGrpRadioButtons"/>
             </Grid>
         </Grid>
+        <Label Content="Resource Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="295" FontWeight="Bold" FontSize="38"/>
+        <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="296,37,0,0" VerticalAlignment="Top" Height="46" Width="206" FontWeight="Bold" FontSize="15"/>
     </Grid>
 </Page>
 

@@ -23,7 +23,10 @@ namespace Project2
 			IconList = new List<galleryIcon>();
 			saveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
 			temppath = new string(string.Empty);
+			placeholderImage = new string("/Images/Gallery.png");
 		}
+
+
 		public string saveDestination { get; set; }
         public List<majorTrait> RacList { get; set; }
 		public List<majorTrait> AbilList { get; set; }
@@ -33,6 +36,8 @@ namespace Project2
         public List<resourceTrait> ResList { get; set; }
 		public List<galleryIcon> IconList { get; set; }
 		public string temppath { get; set; }
+		public string placeholderImage { get;  }
+
 		public void TestWriteToJson(string fileName)
         {
 

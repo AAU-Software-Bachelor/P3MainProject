@@ -7,13 +7,11 @@
 	  mc:Ignorable="d"
 	  Title="Race" Height="760" Width="1543">
 
-    <Grid Background="White" Margin="0,0,413,115">
+    <Grid Background="White" Margin="0,0,10,10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="39*"/>
-            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="388*"/>
+            <ColumnDefinition Width="1145*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
-        <Label Content="Race editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
         <Label Grid.Row="0" x:Name="RaceBacktoMainMenu" HorizontalAlignment="Left" Margin="175,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="RaceMainMenu_MouseDoubleClick" Width="136" Height="46" Grid.Column="1">
             <StackPanel Orientation="Vertical">
                 <Border Background="LightBlue" Padding="10,5,10,5" >
@@ -29,18 +27,16 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,373,0,0" x:Name="btnRacesAdd" Click="btnRaces_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,373,0,0" x:Name="btnRacesDelete" Click="btnRaces_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
-        <Grid Background="PaleGreen" Margin="224,0,32,26" Grid.ColumnSpan="2" Height="520" VerticalAlignment="Bottom">
-            <StackPanel Orientation="Vertical" Margin="33,29,737,391">
-                <Image Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
-                <Button HorizontalAlignment="Right" Width="105"  Height="26" Content="Click to Upload" >
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,467,0,0" x:Name="btnRacesAdd" Click="btnRaces_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,467,0,0" x:Name="btnRacesDelete" Click="btnRaces_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Grid Background="PaleGreen" Margin="233,99,10,0" Grid.ColumnSpan="2" Height="518" VerticalAlignment="Top">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="18,16,1109,364"></Border>
 
-                </Button>
-            </StackPanel>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text=""/>
+            <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="23,20,1112,394"/>
+            <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,126,1112,370"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,181,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="214,40,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="182" Height="150"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="191" Text=""/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
                 <Grid>
                     <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
@@ -60,5 +56,7 @@
             </Border>
             <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveRace"/>
         </Grid>
+        <Label Content="Race Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="229" FontWeight="Bold" FontSize="38"/>
+        <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="221,37,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="15"/>
     </Grid>
 </Page>
