@@ -71,7 +71,7 @@ namespace Project2
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            Religion religion = new Religion(CurrentConfig);
+            ReligionPage religion = new ReligionPage(CurrentConfig);
             Application.Current.MainWindow.Content = religion;
         }
 

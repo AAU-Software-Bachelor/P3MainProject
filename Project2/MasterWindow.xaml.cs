@@ -37,6 +37,7 @@ namespace Project2
             majorTrait Warlock = new majorTrait(CurrentConfig.newUID("Career"));
             majorTrait Dwarf = new majorTrait(CurrentConfig.newUID("Race"));
             majorTrait Elf = new majorTrait(CurrentConfig.newUID("Race"));
+            majorTrait CultOfSigmar = new majorTrait(CurrentConfig.newUID("Religion"));
             resourceTrait health = new resourceTrait(CurrentConfig.newUID("Resource"));
             resourceTrait mana = new resourceTrait(CurrentConfig.newUID("Resource"));
             resourceTrait xp = new resourceTrait(CurrentConfig.newUID("Resource"));
@@ -100,6 +101,11 @@ namespace Project2
             Dwarf.freeAbilities = new List<string>() {smite.UID};
             Dwarf.addAffectedResources(health.UID, 4);
             CurrentConfig.RacList.Add(Dwarf);
+
+            CultOfSigmar.Name = "Cult Of Sigmar";
+            CultOfSigmar.Description = "The Cult of Sigmar, also sometimes called the Church of Sigmar, the Holy Temple of Sigmar, the Clergy of Sigmar or simply the Sigmarite Cult, is the state church of the Empire that administrates the worship of that realm's patron god, Sigmar Heldenhammer.";
+            CultOfSigmar.addAffectedResources(health.UID, 2);
+            CurrentConfig.saveToList(CultOfSigmar);
 
             health.Name = "health";
             health.Description = "ye dead if this be zero";

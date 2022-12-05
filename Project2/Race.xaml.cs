@@ -64,7 +64,6 @@ namespace Project2
 		/// </summary>
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			int i = RaceCollection.Count + 1;
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
 			RaceCollection.Add(tempRace);
 			CurrentConfig.saveToList(tempRace);
@@ -77,7 +76,6 @@ namespace Project2
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
 		{
             var index = lstRaces.SelectedIndex;
-			//lstRaces.SelectedIndex = index > 0 ? index - 1 : index;   //experiment. please keep
 			if (index >= 0)
 			{
 				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in RaceCollection
@@ -151,29 +149,9 @@ namespace Project2
 			textBox.Height = 24;
 			textBox.VerticalAlignment = VerticalAlignment.Top;
 			textBox.TextChanged += NumberValidationTextBox;
-			
-
 
             stackPanel.Children.Add(textBox);   //makes the textbox a child of the stackpanel
 
-			StackPanel childStackPanel = new StackPanel();
-			childStackPanel.Orientation = Orientation.Vertical;
-
-			Image imagePlus = new Image();
-			imagePlus.Height = 20;
-			imagePlus.Width = 20;
-			imagePlus.Margin = new Thickness(1, 5, 0, 0);
-			imagePlus.Stretch = Stretch.Fill;
-			childStackPanel.Children.Add(imagePlus);
-
-			Image imageMinus = new Image();
-			imageMinus.Height = 20;
-			imageMinus.Width = 20;
-			imageMinus.Margin = new Thickness(1, 0, 0, 0);
-			imageMinus.Stretch = Stretch.Fill;
-			childStackPanel.Children.Add(imageMinus);
-			
-			stackPanel.Children.Add(childStackPanel);
 
 			this.ListStarterResources.Items.Add(stackPanel);
 			lstRaces.SelectedIndex = SelIndex;	//applies saved race selection

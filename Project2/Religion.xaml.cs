@@ -15,30 +15,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Project2.majorTrait;
 
 namespace Project2
 {
     /// <summary>
     /// Interaction logic for Religion.xaml
     /// </summary>
-    public partial class Religion : Page
+    public partial class ReligionPage : Page
     {
 
-        public Religion(config currentConfig)
+        public ReligionPage(config currentConfig)
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            newreligion = new ObservableCollection<newReligion>(){
-            new newReligion(){Name = "New Religion"}
-            };
-            lstReligion.ItemsSource = newreligion;
+            ReligionCollection = new ObservableCollection<majorTrait>();
+            foreach (majorTrait religion in CurrentConfig.RelList) //adds all religion to ObservableCollection ReligionCollection
+            {
+                ReligionCollection.Add(religion);
+            }
+            lstReligion.ItemsSource = ReligionCollection;
+            CurrentIndex = -1;  //skip the next use of CurrentIndex
+            lstReligion.SelectedIndex = 0;
         }
         public config CurrentConfig { get; set; }
+        int CurrentIndex { get; set; }
+        private ObservableCollection<majorTrait> ReligionCollection;
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -47,33 +50,20 @@ namespace Project2
             Application.Current.MainWindow.Content = mainWindow;
         }
 
-        /*private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Visibility = Visibility.Visible;
-            Window win = (Window)this.Parent;
-            win.Close();
-        }*/
-
-        private ObservableCollection<newReligion> newreligion;
-
-        public class newReligion
-        {
-            public string Name { get; set; }
-        }
-
         private void btnReligion_ClickAdd(object sender, RoutedEventArgs e)
         {
-            int i = newreligion.Count + 1;
-            newreligion.Add(new newReligion() { Name = "New Religion" });
+            majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("Religion")) { Name = "new religion" };   //makes the new religion object
+            ReligionCollection.Add(tempReligion);
+            CurrentConfig.saveToList(tempReligion);
+            lstReligion.SelectedIndex = ReligionCollection.Count - 1;
         }
 
         private void btnReligion_ClickDelete(object sender, RoutedEventArgs e)
         {
             var index = lstReligion.SelectedIndex;
-            if (lstReligion.SelectedIndex >= 1)
+            if (index >= 0)
             {
-                newreligion.RemoveAt(index);
+                ReligionCollection.Remove(CurrentConfig.GetTrait(ReligionCollection[index].UID, true)); //gets the religion to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ReligionCollection
             }
         }
         private void OnClickAddAffectedResources(object sender, RoutedEventArgs e)
@@ -82,41 +72,33 @@ namespace Project2
             StackPanel stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
 
-            ComboBox comboBoxOne = new ComboBox();
+            ComboBox comboBoxOne = new ComboBox();  //starts on the recouse combobox
             comboBoxOne.Text = "Select Stat";
             comboBoxOne.IsReadOnly = true;
             comboBoxOne.IsDropDownOpen = false;
             comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
             comboBoxOne.Height = 24;
             comboBoxOne.Width = 185;
-            comboBoxOne.SelectionChanged += ComboBox_SelectionChanged;
+
+            comboBoxOne.DisplayMemberPath = "Name";
+            foreach (resourceTrait res in CurrentConfig.ResList)
+            {
+                comboBoxOne.Items.Add(res);
+            }
 
             stackPanel.Children.Add(comboBoxOne);
 
             TextBox textBox = new TextBox();
-            textBox.Margin = new Thickness(15, 13, 0, 0);
+            textBox.Margin = new Thickness(15, 5, 0, 0);
             textBox.Width = 40;
             textBox.Height = 24;
             textBox.VerticalAlignment = VerticalAlignment.Top;
+            textBox.TextChanged += NumberValidationTextBox;
 
             stackPanel.Children.Add(textBox);
 
             StackPanel childStackPanel = new StackPanel();
             childStackPanel.Orientation = Orientation.Vertical;
-
-            Image imagePlus = new Image();
-            imagePlus.Height = 20;
-            imagePlus.Width = 20;
-            imagePlus.Margin = new Thickness(1, 5, 0, 0);
-            imagePlus.Stretch = Stretch.Fill;
-            childStackPanel.Children.Add(imagePlus);
-
-            Image imageMinus = new Image();
-            imageMinus.Height = 20;
-            imageMinus.Width = 20;
-            imageMinus.Margin = new Thickness(1, 0, 0, 0);
-            imageMinus.Stretch = Stretch.Fill;
-            childStackPanel.Children.Add(imageMinus);
 
             stackPanel.Children.Add(childStackPanel);
 
@@ -135,41 +117,123 @@ namespace Project2
 
         }
 
-        /*private void ListStarterAbilities_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnReligionChanged(object sender, RoutedEventArgs e)
         {
+            int SelIndex = lstReligion.SelectedIndex;  //saves selected race so it is not lost
+            if (lstReligion.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
+            {
+                if (CurrentIndex >= 0)  //skips saving the previus selected race if -1
+                {
+                    SaveReligion(CurrentIndex);
+                    ListAffectedResources.Items.Clear();
+                }
+                CurrentIndex = lstReligion.SelectedIndex;
+                majorTrait currentMT = CurrentConfig.RelList[CurrentIndex]; //gets the trait to be loaded
 
-        }*/
+                (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
+                (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
-        /*private void OnClickSaveRace(object sender, string UID, RoutedEventArgs e)
+                foreach (AffectedResource affRes in currentMT.affectedResources)	//makes the needed comboboxes to hold the starter resources
+                {
+                    OnClickAddAffectedResources(sender, e);
+                }
+                int ind = 0;
+                foreach (StackPanel PANEL in (this.FindName("ListAffectedResources") as ListView).Items)
+                {
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+                        {
+                            AffectedResource tempAffRes = currentMT.affectedResources[ind];
+                            box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
+                            textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
+                        }
+                    }
+                    ind++;
+                }
+            }
+            else
+            {
+                CurrentIndex = -1;
+                ListAffectedResources.Items.Clear();
+            }
+            lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
+        }
+
+        private void OnClickSaveReligion(object sender, RoutedEventArgs e)
         {
-            //majorTrait.deleteContent()
-            //get name
-            //get image
-            //get description
-            //get cost
-            //for loop through Costtype
-            //for loop through freeAbilities
-            //for loop through exclusions
-            //for loop through dependencies / discounts
-            //for loop through affectedResources
+            SaveReligion();
+        }
+
+        private void SaveReligion(int index = -1)
+        {
+            int SelIndex = lstReligion.SelectedIndex;  //saves selected race so it is not lost
+
+            string UID = "";
+            if (index == -1)    //is true when funtion is called via a button
+            {
+                if (lstReligion.SelectedIndex >= 0)
+                {
+                    UID = CurrentConfig.RelList[lstReligion.SelectedIndex].UID;    //uses the selected index to find the wanted UID
+                    index = CurrentConfig.RelList.FindIndex(i => string.Equals(i.UID, UID));
+                }
+            }
+            else
+            {
+                UID = CurrentConfig.RelList[index].UID; //uses the given index to find the wanted UID
+            }
+            if (UID != "")
+            {
+                majorTrait currentMT = CurrentConfig.GetTrait(UID);
+                currentMT.deleteContent();
+
+                currentMT.Type = "Religion";
+                currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
+                currentMT.Description = (this.FindName("descBox") as TextBox).Text;
 
 
-            string[] id = UID.Split('-');
-            majorTrait currentMT = CurrentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])];
-            currentMT.deleteContent();
+                foreach (StackPanel PANEL in (this.FindName("ListAffectedResources") as ListView).Items)
+                {
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+                        {
+                            if (box.SelectedIndex >= 0 & textBox.Text != "")
+                            {
+                                string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
+                                int TempVal = int.Parse(textBox.Text);  //gets the value
+                                currentMT.addAffectedResources(TempUID, TempVal);   //saves the affected rescources and their values
+                            }
+                        }
+                    }
+                }
 
-            string name = (this.FindName("nameBox") as TextBox).Text;
-            string playerReq = (this.FindName("playerReqBox") as TextBox).Text;
-            string desc = (this.FindName("descBox") as TextBox).Text;
+                CurrentConfig.RelList[index] = currentMT;
+                ReligionCollection.Clear(); // clears the list
+                foreach (majorTrait religion in CurrentConfig.RelList)  //rewrites the list.
+                {
+                    ReligionCollection.Add(religion);
+                }
 
-            currentMT.name = name;
-            currentMT.description = playerReq + "\n\n" + desc;
 
-
-
-            currentConfig.MTList[int.Parse(id[0])][int.Parse(id[1])] = currentMT;
-        }*/
-
+                CurrentConfig.TestWriteToJson("testConfig.json");
+                lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
+            }
+        }
+        /// <summary>
+		/// Validates input in "amount" textbox to only allow integers.
+		/// </summary>
+		private void NumberValidationTextBox(object sender, EventArgs e)
+        {
+            try
+            {
+                int.Parse((sender as TextBox).Text); //if Parse is unsuccessful, text is something other than integer
+            }
+            catch
+            {
+                (sender as TextBox).Text = "";
+            }
+        }
     }
 }
 
