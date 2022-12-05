@@ -134,7 +134,7 @@ namespace Project2
             galleryIcon tempIcon = new galleryIcon { imgName = shortFileName, imgSize = fileSize, imgPath = (CurrentConfig.saveDestination + shortFileName) };
             galleryIconlst.Add(tempIcon);
             CurrentConfig.saveIcontoList(tempIcon);
-            System.Diagnostics.Debug.WriteLine("Processed file:  " + shortFileName +" size: "+ fileSize);
+            //System.Diagnostics.Debug.WriteLine("Processed file:  " + shortFileName +" size: "+ fileSize);
             SaveIcon(); 
             return galleryIconlst.Count;
             
@@ -143,15 +143,14 @@ namespace Project2
         public void getappPath()
         {
             string appPath = AppDomain.CurrentDomain.BaseDirectory;
-            System.Diagnostics.Debug.WriteLine("this is the main app path:  ");
-            System.Diagnostics.Debug.WriteLine(appPath);
+            //System.Diagnostics.Debug.WriteLine("this is the main app path:  ");
+            //System.Diagnostics.Debug.WriteLine(appPath);
 
         }
         public string getimagePath(string mainpath)
         {
             string imgPath = mainpath + "Images\\";
-            System.Diagnostics.Debug.WriteLine(imgPath);
-
+            //System.Diagnostics.Debug.WriteLine(imgPath);
             return imgPath;
         }
         public void btnOpenFile_Click(object sender, RoutedEventArgs e)
@@ -178,37 +177,31 @@ namespace Project2
                 // cuts away the name of the file and leaves the path
                 string targetfolder = reduceToPath(fullFileName);
 
-                MessageBox.Show("I will now verify you file " + shortFileName.ToString());
+                /*  MessageBox.Show("I will now verify you file " + shortFileName.ToString());*/
 
                 if (Fileverify(fullFileName, targetfolder) == 1)//file is an image and does not exist as object
                 {
                     ProcessFile(fullFileName, targetfolder);//adds the image object to the observable list "processedimg"
-                    System.Diagnostics.Debug.WriteLine("Debug log if statement == 1");
                     return (targetfolder + shortFileName);
                 }
                 else if (Fileverify(fullFileName, targetfolder) == 2)//file exists as object
                 {
-                    MessageBox.Show("Your project already contains an icon object with the name" + shortFileName.ToString());
-                    System.Diagnostics.Debug.WriteLine("Debug log if statement == 2");
+                    MessageBox.Show("Your project already contains an icon object with the name" + shortFileName.ToString() +" i have used the existing icon:)");
                     return (targetfolder + shortFileName); //for when called by other pages to set icon
                 }
                 else if (Fileverify(fullFileName, targetfolder) == 0)
                 {
-                    System.Diagnostics.Debug.WriteLine("Debug log if statement == 0");
                     System.Diagnostics.Debug.WriteLine(fullFileName + " is not an image file");
                     return "error gallery 180";
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Debug log if statement not == 0,1,2");
                     return "error 181";
                 }
                 /*  else MessageBox.Show("something went wrong with the file " + fullFileName.ToString() +" and I dont know why.");*/
                 /*ProcessDirectory(targetfolder);    */
 
-            }
-            System.Diagnostics.Debug.WriteLine("Debug log if not == 198, 184, 194 or 189");
-            
+            }            
             return "error gallery 207";
 
         }

@@ -32,7 +32,7 @@
         <Grid Background="BurlyWood" Margin="224,99,32,26">
             <Border BorderBrush="Black" BorderThickness="1" Margin="20,10,704,373"></Border>
 
-            <Image Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="27,19,714,408"/>
+            <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="27,19,714,408"/>
             <Button Height="26" Content="Change Icon" Click="ChangeIcon_click"  Margin="27,112,714,382"/>
 
 
