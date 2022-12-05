@@ -78,7 +78,7 @@ namespace Project2
                 System.Diagnostics.Debug.WriteLine(temppath);
 
 
-                 File.Delete(temppath);
+               /*  File.Delete(temppath);*/
 
             }
         }
