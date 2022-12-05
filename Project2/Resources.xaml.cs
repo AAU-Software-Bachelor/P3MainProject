@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using static Project2.ResourcePage;
 using static Project2.resourceTrait;
+using static Project2.GalleryWindow;
+using static Project2.galleryIcon;
 
 
 
@@ -101,9 +103,17 @@ namespace Project2
 		}
 
 
+		public void ChangeIcon_click(object sender, RoutedEventArgs e)
+		{
+			GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
+		
+			string imgSource = newWindow.uploadFile(sender, e);
+			System.Diagnostics.Debug.WriteLine("we have an image at: " +imgSource);
+            ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
 
+        }
 
-		private void OnClickSaveResource(object sender, RoutedEventArgs e)
+        private void OnClickSaveResource(object sender, RoutedEventArgs e)
 		{
 			SaveResource();
 		}
