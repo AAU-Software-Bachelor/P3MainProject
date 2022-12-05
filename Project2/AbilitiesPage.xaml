@@ -40,14 +40,10 @@
                     <Label Content="Requirments" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <ListView x:Name="ListRequirments" Margin="10,38,10,36">
                         <StackPanel x:Name="ReqAO1" VerticalAlignment="Center" Orientation="Horizontal">
-                            <ComboBox x:Name="Combobox1" Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185" Loaded="Combobox1_Loaded">
-                            </ComboBox>
+                            <ComboBox x:Name="Combobox1" Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185" Loaded="Combobox1_Loaded"/>
                         </StackPanel>
                         <StackPanel x:Name="ReqAO2" VerticalAlignment="Center" Orientation="Horizontal">
-                            <ComboBox x:Name="Combobox2" Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Loaded="Combobox2_Loaded" Height="24" Width="185">
-                                <ComboBoxItem>Race</ComboBoxItem>
-                                <ComboBoxItem>Ability</ComboBoxItem>
-                            </ComboBox>
+                            <ComboBox x:Name="Combobox2" Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Loaded="Combobox2_Loaded" Height="24" Width="185"/>
                         </StackPanel>
                         <StackPanel x:Name="ReqAO3" VerticalAlignment="Center" Orientation="Horizontal">
                             <ComboBox x:Name="Combobox3" Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Loaded="Combobox3_Loaded" Height="24" Width="185"/>

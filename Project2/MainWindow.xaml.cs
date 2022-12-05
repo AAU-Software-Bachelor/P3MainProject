@@ -36,6 +36,13 @@ namespace Project2
            
         }
 
+        private void AbilityMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AbilitiesPage abilityPage = new AbilitiesPage(CurrentConfig);
+            Application.Current.MainWindow.Content = abilityPage;
+
+        }
+
         private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             GalleryWindow gallery = new GalleryWindow(CurrentConfig);
