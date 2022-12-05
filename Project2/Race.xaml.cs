@@ -65,8 +65,8 @@ namespace Project2
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
-			RaceCollection.Add(tempRace);
 			CurrentConfig.saveToList(tempRace);
+			RaceCollection.Add(tempRace);
 			lstRaces.SelectedIndex = RaceCollection.Count-1;
 
 		}
@@ -79,6 +79,7 @@ namespace Project2
 			if (index >= 0)
 			{
 				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in RaceCollection
+                lstRaces.SelectedIndex = RaceCollection.Count - 1;
             }	
 		}
 

@@ -42,6 +42,13 @@ namespace Project2
             Application.Current.MainWindow.Content = gallery;
 
         }
+
+        private void ItemMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ItemPage item = new ItemPage(CurrentConfig);
+            Application.Current.MainWindow.Content = item;
+
+        }
         private void selectFolder_Click(object sender, System.EventArgs e)
         {
             var dialog = new Microsoft.Win32.SaveFileDialog();

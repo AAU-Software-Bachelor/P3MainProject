@@ -53,8 +53,8 @@ namespace Project2
         private void btnReligion_ClickAdd(object sender, RoutedEventArgs e)
         {
             majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("Religion")) { Name = "new religion" };   //makes the new religion object
-            ReligionCollection.Add(tempReligion);
             CurrentConfig.saveToList(tempReligion);
+            ReligionCollection.Add(tempReligion);
             lstReligion.SelectedIndex = ReligionCollection.Count - 1;
         }
 
@@ -64,6 +64,7 @@ namespace Project2
             if (index >= 0)
             {
                 ReligionCollection.Remove(CurrentConfig.GetTrait(ReligionCollection[index].UID, true)); //gets the religion to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ReligionCollection
+                lstReligion.SelectedIndex = ReligionCollection.Count - 1;
             }
         }
         private void OnClickAddAffectedResources(object sender, RoutedEventArgs e)
