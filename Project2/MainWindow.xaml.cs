@@ -52,7 +52,7 @@ namespace Project2
         private void selectFolder_Click(object sender, System.EventArgs e)
         {
             var dialog = new Microsoft.Win32.SaveFileDialog();
-            dialog.InitialDirectory = @"E:\onM_Doc\Programmering\P3 - CMSE\Project2\Images"; // Use current value for initial dir
+            dialog.InitialDirectory = CurrentConfig.saveDestination; // Use current value for initial dir
             dialog.Title = "Select a Directory"; // instead of default "Save As"
             dialog.Filter = "Directory|*.this.directory"; // Prevents displaying files
             dialog.FileName = "select"; // Filename will then be "select.this.directory"
