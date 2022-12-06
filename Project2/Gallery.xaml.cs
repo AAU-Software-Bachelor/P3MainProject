@@ -36,7 +36,7 @@ namespace Project2
             CurrentConfig = currentConfig;
             InitializeComponent();
             galleryIconlst = new ObservableCollection<galleryIcon>();
-            foreach (galleryIcon imgName in CurrentConfig.IconList) //adds all icons to ObservableCollection
+            foreach (galleryIcon imgName in CurrentConfig.IcoList) //adds all icons to ObservableCollection
             {
                 galleryIconlst.Add(imgName);
             }
@@ -58,7 +58,7 @@ namespace Project2
                 System.Diagnostics.Debug.WriteLine("the object is located at: "+galleryIconlst[index].imgPath);
                 File.SetAttributes(temppath, FileAttributes.Normal); //makes file not read-only permission.                
                 galleryIconlst.RemoveAt(index);
-                CurrentConfig.IconList.RemoveAt(index);
+                CurrentConfig.IcoList.RemoveAt(index);
                 selectPrevobject();
                 System.Diagnostics.Debug.WriteLine(File.GetAttributes(temppath).ToString());
                 CurrentConfig.temppath=temppath;
@@ -340,13 +340,13 @@ namespace Project2
             {
                 if (lstGallery.SelectedIndex >= 0)
                 {
-                    IconName = CurrentConfig.IconList[lstGallery.SelectedIndex].imgName;    //uses the selected index to find the wanted imgName
-                    index = CurrentConfig.IconList.FindIndex(i => string.Equals(i.imgName, IconName));
+                    IconName = CurrentConfig.IcoList[lstGallery.SelectedIndex].imgName;    //uses the selected index to find the wanted imgName
+                    index = CurrentConfig.IcoList.FindIndex(i => string.Equals(i.imgName, IconName));
                 }
             }
             else
             {
-                IconName = CurrentConfig.IconList[index].imgName; //uses the given index to find the wanted UID
+                IconName = CurrentConfig.IcoList[index].imgName; //uses the given index to find the wanted UID
             }
             if (IconName != "")
             {
@@ -360,9 +360,9 @@ namespace Project2
                 currentIcon.imgSize = galleryIconlst[index].imgSize;
           
 
-                CurrentConfig.IconList[index] = currentIcon;
+                CurrentConfig.IcoList[index] = currentIcon;
                 galleryIconlst.Clear();    // clears the list
-                foreach (galleryIcon imgName in CurrentConfig.IconList)  //rewrites the list.
+                foreach (galleryIcon imgName in CurrentConfig.IcoList)  //rewrites the list.
                 {
                    galleryIconlst.Add(imgName);
                     System.Diagnostics.Debug.WriteLine("added an icon from config to galleryIconlist");

@@ -56,7 +56,7 @@ namespace Project2
 
 		private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("Resource")) { Name = "new resource"};
+			resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("ResList")) { Name = "new resource"};
 			ResourceCollection.Add(newResource);
 			CurrentConfig.saveToList(newResource);
 			lstResources.SelectedIndex = ResourceCollection.Count - 1;

@@ -31,21 +31,20 @@ namespace Project2
             config CurrentConfig = new();
 
 
-            majorTrait smite = new majorTrait(CurrentConfig.newUID("Ability"));
-            majorTrait EldrichBLAST = new majorTrait(CurrentConfig.newUID("Ability"));
-            majorTrait Warrior = new majorTrait(CurrentConfig.newUID("Career"));
-            majorTrait Warlock = new majorTrait(CurrentConfig.newUID("Career"));
-            majorTrait Dwarf = new majorTrait(CurrentConfig.newUID("Race"));
-            majorTrait Elf = new majorTrait(CurrentConfig.newUID("Race"));
-            majorTrait CultOfSigmar = new majorTrait(CurrentConfig.newUID("Religion"));
-            resourceTrait health = new resourceTrait(CurrentConfig.newUID("Resource"));
-            majorTrait hammer = new majorTrait(CurrentConfig.newUID("Item"));
-            resourceTrait mana = new resourceTrait(CurrentConfig.newUID("Resource"));
-            resourceTrait xp = new resourceTrait(CurrentConfig.newUID("Resource"));
+            majorTrait smite = new majorTrait(CurrentConfig.newUID("AbiList"));
+            majorTrait EldrichBLAST = new majorTrait(CurrentConfig.newUID("AbiList"));
+            majorTrait Warrior = new majorTrait(CurrentConfig.newUID("CarList"));
+            majorTrait Warlock = new majorTrait(CurrentConfig.newUID("CarList"));
+            majorTrait Dwarf = new majorTrait(CurrentConfig.newUID("RacList"));
+            majorTrait Elf = new majorTrait(CurrentConfig.newUID("RacList"));
+            majorTrait CultOfSigmar = new majorTrait(CurrentConfig.newUID("RelList"));
+            resourceTrait health = new resourceTrait(CurrentConfig.newUID("ResList"));
+            majorTrait hammer = new majorTrait(CurrentConfig.newUID("IteList"));
+            resourceTrait mana = new resourceTrait(CurrentConfig.newUID("ResList"));
+            resourceTrait xp = new resourceTrait(CurrentConfig.newUID("ResList"));
 
             smite.Name = "SMITE";
             smite.Description = "slaa gud modstander med hellig styrke";
-            smite.Type = "Ability";
             smite.cost = 4;
             smite.CostTypes = new List<string>() { xp.UID };
             smite.dependency = new List<List<string>>()
@@ -55,11 +54,10 @@ namespace Project2
             smite.addDiscount(Warrior.UID);
             smite.discounts[0].Amount = 2;
             smite.addDiscountType(Warrior.UID, new List<string>() { xp.UID});
-            CurrentConfig.AbilList.Add(smite);
+            CurrentConfig.AbiList.Add(smite);
             
             EldrichBLAST.Name = "Eldrich BLAST";
             EldrichBLAST.Description = "it's a BLAST to use";
-            EldrichBLAST.Type = "Ability";
             EldrichBLAST.cost = 4;
             EldrichBLAST.CostTypes = new List<string>() { xp.UID };
             EldrichBLAST.dependency = new List<List<string>>()
@@ -70,17 +68,15 @@ namespace Project2
             EldrichBLAST.discounts[0].Amount = 2;
             EldrichBLAST.addDiscountType(Warlock.UID, new List<string>() { xp.UID});
             EldrichBLAST.addAffectedResources(mana.UID, 2);
-            CurrentConfig.AbilList.Add(EldrichBLAST);
+            CurrentConfig.AbiList.Add(EldrichBLAST);
             
             Warrior.Name = "Warrior";
             Warrior.Description = "am gonna swing a sword";
-            Warrior.Type = "Career";
             Warrior.addAffectedResources(health.UID, 2);
             CurrentConfig.CarList.Add(Warrior);
 
             Warlock.Name = "Warlock";
             Warlock.Description = "-_-";
-            Warlock.Type = "Career";
             Warlock.dependency = new List<List<string>>()
             {
                 new List<string>(){ Warrior.UID}
@@ -90,7 +86,6 @@ namespace Project2
 
             Elf.Name = "Elf";
             Elf.Description = "the most pompius pricks of all races";
-            Elf.Type = "Race";
             Elf.freeAbilities = new List<string>() {EldrichBLAST.UID};
             Elf.addAffectedResources(health.UID, 2);
             Elf.addAffectedResources(mana.UID, 3);
@@ -98,7 +93,6 @@ namespace Project2
 
             Dwarf.Name = "Dwarf";
             Dwarf.Description = "this be armor";
-            Dwarf.Type = "Race";
             Dwarf.freeAbilities = new List<string>() {smite.UID};
             Dwarf.addAffectedResources(health.UID, 4);
             CurrentConfig.RacList.Add(Dwarf);

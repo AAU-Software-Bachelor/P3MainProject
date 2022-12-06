@@ -64,7 +64,7 @@ namespace Project2
 		/// </summary>
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
+			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("RacList")) { Name = "new race" };	//makes the new race object
 			CurrentConfig.saveToList(tempRace);
 			RaceCollection.Add(tempRace);
 			lstRaces.SelectedIndex = RaceCollection.Count-1;
@@ -97,7 +97,7 @@ namespace Project2
 			comboBox.Height = 24;
 			comboBox.Width = 185;
 			comboBox.DisplayMemberPath = "Name";
-			foreach (majorTrait abi in CurrentConfig.AbilList)	//adds all abilities from CurrentConfig to the combobox
+			foreach (majorTrait abi in CurrentConfig.AbiList)	//adds all abilities from CurrentConfig to the combobox
 			{
 				comboBox.Items.Add(abi);
 			}
@@ -208,7 +208,7 @@ namespace Project2
 				foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
 				{
 					TempUID = currentMT.freeAbilities[ind];
-					BOX.SelectedIndex = CurrentConfig.AbilList.FindIndex(i => string.Equals(i.UID, TempUID));	//selects the free abilities in the comboboxes
+					BOX.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, TempUID));	//selects the free abilities in the comboboxes
 					ind++;
 				}
 				foreach (AffectedResource affRes in currentMT.affectedResources)	//makes the needed comboboxes to hold the starter resources
@@ -272,7 +272,6 @@ namespace Project2
 				currentMT.deleteContent();
 
 				currentMT.Image = (this.FindName("ChosenImage") as Image).Source.ToString();
-                currentMT.Type = "Race";
 				currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
 				currentMT.playerReq = (this.FindName("playerReqBox") as TextBox).Text;
 				currentMT.Description = (this.FindName("descBox") as TextBox).Text;
@@ -281,7 +280,7 @@ namespace Project2
 				{
 					if (BOX.SelectedIndex >= 0)
 					{
-						string TempUID = CurrentConfig.AbilList[BOX.SelectedIndex].UID;
+						string TempUID = CurrentConfig.AbiList[BOX.SelectedIndex].UID;
 						currentMT.freeAbilities.Add(TempUID); // saves the free abilities
 					}
 				}

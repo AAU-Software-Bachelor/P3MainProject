@@ -29,7 +29,7 @@ namespace Project2
             CurrentConfig = currentConfig;
             InitializeComponent();
             AbilityCollection = new ObservableCollection<majorTrait>();
-            foreach (majorTrait ability in CurrentConfig.AbilList) //adds all abilities to ObservableCollection AbilityCollection
+            foreach (majorTrait ability in CurrentConfig.AbiList) //adds all abilities to ObservableCollection AbilityCollection
             {
                 AbilityCollection.Add(ability);
             }
@@ -51,7 +51,7 @@ namespace Project2
 
         private void btnAbility_ClickAdd(object sender, EventArgs e)
         {
-            majorTrait tempAbility = new majorTrait(CurrentConfig.newUID("Ability")) { Name = "new ability" };   //makes the new ability object
+            majorTrait tempAbility = new majorTrait(CurrentConfig.newUID("AbiList")) { Name = "new ability" };   //makes the new ability object
             CurrentConfig.saveToList(tempAbility);
             AbilityCollection.Add(tempAbility);
             lstAbility.SelectedIndex = AbilityCollection.Count - 1;
@@ -161,7 +161,7 @@ namespace Project2
 				}
 				if (Combobox1.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -203,7 +203,7 @@ namespace Project2
 				}
 				if (Combobox2.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -244,7 +244,7 @@ namespace Project2
 				}
 				if (Combobox3.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -285,7 +285,7 @@ namespace Project2
 				}
 				if (Combobox4.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -327,7 +327,7 @@ namespace Project2
 				}
 				if (Combobox5.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -368,7 +368,7 @@ namespace Project2
 				}
 				if (Combobox6.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -409,7 +409,7 @@ namespace Project2
 				}
 				if (Combobox7.SelectedItem == "Ability")
 				{
-					foreach (majorTrait abi in CurrentConfig.AbilList)
+					foreach (majorTrait abi in CurrentConfig.AbiList)
 					{
 						comboBox.Items.Add(abi);
 					}
@@ -636,7 +636,7 @@ namespace Project2
 			}
 			else if (name[1] == "ABILITY")
 			{
-				foreach (majorTrait abi in CurrentConfig.AbilList)
+				foreach (majorTrait abi in CurrentConfig.AbiList)
 				{
 					comboBoxOne.Items.Add(abi);
 				}

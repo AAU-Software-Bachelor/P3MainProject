@@ -35,7 +35,6 @@ namespace Project2
 	{
 		public majorTrait(string uid) : base(uid)
 		{
-			Type = new string("");
 			cost = new int();
 			CostTypes = new List<string>();
 			dependency = new List<List<string>>();
@@ -70,7 +69,6 @@ namespace Project2
 
 		}
 
-		public string Type { get; set; }
 		public int cost { get; set; }
 		public List<string> CostTypes { get; set; }
 		public List<List<string>> dependency { get; set; }

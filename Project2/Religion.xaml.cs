@@ -52,7 +52,7 @@ namespace Project2
 
         private void btnReligion_ClickAdd(object sender, RoutedEventArgs e)
         {
-            majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("Religion")) { Name = "new religion" };   //makes the new religion object
+            majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("RelList")) { Name = "new religion" };   //makes the new religion object
             CurrentConfig.saveToList(tempReligion);
             ReligionCollection.Add(tempReligion);
             lstReligion.SelectedIndex = ReligionCollection.Count - 1;
@@ -198,7 +198,6 @@ namespace Project2
                 currentMT.deleteContent();
 
                 currentMT.Image = (this.FindName("ChosenImage") as Image).Source.ToString();
-                currentMT.Type = "Religion";
                 currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
                 currentMT.Description = (this.FindName("descBox") as TextBox).Text;
 
