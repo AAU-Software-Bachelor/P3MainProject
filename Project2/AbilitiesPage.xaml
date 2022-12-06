@@ -17,20 +17,19 @@
                 </Border>
             </StackPanel>
         </Label>
-        <ListView x:Name="lstAbility" Margin="17,99,917,286" Grid.Column="1" Grid.Row="0">
+        <ListView x:Name="lstAbility" Margin="17,99,981,312" Grid.Row="0">
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="ID"  Width="40" DisplayMemberBinding="{Binding UID}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,373,0,0" x:Name="btnAbilityAdd" Click="btnAbility_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,373,0,0" x:Name="btnAbilityDelete" Click="btnAbility_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,443,0,0" x:Name="btnAbilityAdd" Click="btnAbility_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,443,0,0" x:Name="btnAbilityDelete" Click="btnAbility_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
         <Grid Background="#FFFF84FF" Margin="224,99,32,26">
             <StackPanel Orientation="Vertical" Margin="33,29,737,391">
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
-                <Button Width="105"  Height="26" Content="Click to Upload" Click="Button_Click_1"/>
+                <Button Width="105"  Height="26" Content="Click to Upload"/>
             </StackPanel>
             <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" Text="{Binding SelectedItem.Name, ElementName=lstAblity}" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
             <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="156,29,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="127" Height="119"/>
@@ -38,7 +37,7 @@
             <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,10,254">
                 <Grid>
                     <Label Content="Requirments" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListRequirments" Margin="10,38,10,36">
+                    <ListView x:Name="ListRequirments" Margin="10,38,10,41">
                         <StackPanel x:Name="ReqAO1" VerticalAlignment="Center" Orientation="Horizontal">
                             <ComboBox x:Name="Combobox1" Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185" Loaded="Combobox1_Loaded"/>
                         </StackPanel>
@@ -65,38 +64,37 @@
                     <Button Content="ADD Requirment" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Height="26" Width="114" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirmentsList"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="475,393,174,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="33,393,578,10">
                 <Grid>
-                    <Label Content="Acquisition Cost" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListResources" Margin="10,38,10,36" >
-                        <ComboBox Text="Select Ability" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185"/>
-                    </ListView>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,184,0,0" VerticalAlignment="Top" Height="21" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClickAddResourcesList"/>
+                    <Label Content="Granted Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <ListView x:Name="ListGrantedResources" Margin="10,38,10,32"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,193,0,0" VerticalAlignment="Top" Height="21" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddGrantedResouce"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="58,244,0,0" VerticalAlignment="Top" Height="21" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteGrantedResouce"/>
+
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="33,393,514,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="352,378,264,10">
                 <Grid>
-                    <Label Content="Starter Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView Margin="10,38,10,32">
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185"/>
-                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
-                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox Text="Select Stat" IsReadOnly="True" IsDropDownOpen="True" Margin="5,5,0,0" Height="24" Width="185"/>
-                            <TextBox Margin="15,13,0,0" VerticalAlignment="Top" Width="40" Height="24"/>
-                            <StackPanel Orientation="Vertical">
-                                <Image Source="/Images/Plus.png" Stretch="Fill" Height="20" Width="20" Margin="1,5,0,0"/>
-                                <Image Source="/Images/Minus.png" Stretch="Fill" Height="20" Width="20" Margin="1,0,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </ListView>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,193,0,0" VerticalAlignment="Top" Height="21" Width="35" ClickMode="Press" Background="LightBlue"/>
-
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="68*"/>
+                        <ColumnDefinition Width="19*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Discounts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <ListView x:Name="ListDiscounts" Margin="10,38,10,37" Grid.ColumnSpan="2"/>
+                    <Button Content="ADD RACE" HorizontalAlignment="Left" Margin="51,204,0,0" VerticalAlignment="Top" Height="21" Width="64" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount"/>
+                    <Button Content="ADD ABILITY" Margin="120,203,22,0" VerticalAlignment="Top" Height="22" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount"/>
+                    <Button Content="ADD CAREER" HorizontalAlignment="Left" Margin="203,204,0,0" VerticalAlignment="Top" Height="21" Width="76" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount" Grid.ColumnSpan="2"/>
+                    <Button Width="46" VerticalAlignment="Top" Margin="0,204,0,0" Height="21" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteDiscount" Background="red"/>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="660,378,10,10">
+                <Grid Margin="0,-3,-14,3">
+                    <Label Content="Acquisition Cost :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <TextBox x:Name="costBox" Height="20" Margin="135,15,43,200" />
+                    <Label Content="Accepted currencies:" Margin="10,35,82,210" FontWeight="Bold"/>
+                    <ListView x:Name="ListResources" Margin="10,43,23,36"/>
+                    <Button Content="ADD" Margin="10,205,0,0" VerticalAlignment="Top" Height="20" ClickMode="Press" Background="LightBlue" Click="OnClick_AddCostType" HorizontalAlignment="Left" Width="35"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,204,0,0" VerticalAlignment="Top" Height="21" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteCostType"/>
                 </Grid>
             </Border>
         </Grid>
