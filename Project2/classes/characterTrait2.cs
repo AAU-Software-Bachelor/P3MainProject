@@ -37,7 +37,8 @@ namespace Project2
 		{
 			Cost = new int();
 			CostTypes = new List<string>();
-			Dependency = new List<List<string>>();
+            Exlusions = new List<string>();
+            Dependency = new List<List<string>>();
 			FreeAbilities = new List<string>();
 			Discounts = new List<AmountUID>();
 			AffectedResources = new List<AmountUID>();
@@ -58,7 +59,8 @@ namespace Project2
 
 		public int Cost { get; set; }
 		public List<string> CostTypes { get; set; }
-		public List<List<string>> Dependency { get; set; }
+        public List<string> Exlusions { get; set; }
+        public List<List<string>> Dependency { get; set; }
 		public List<string> FreeAbilities { get; set; }
 		public List<AmountUID> Discounts { get; set; }
 		public List<AmountUID> AffectedResources { get; set; }
@@ -84,7 +86,8 @@ namespace Project2
 			this.Description = "";
 			this.Cost = new int();
 			this.CostTypes = new List<string>();
-			this.FreeAbilities = new List<string>();
+            this.Exlusions = new List<string>();
+            this.FreeAbilities = new List<string>();
 			this.Discounts = new List<AmountUID>();
 			this.AffectedResources = new List<AmountUID>();
 			this.Dependency = new List<List<string>>();

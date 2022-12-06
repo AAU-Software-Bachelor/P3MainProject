@@ -29,23 +29,30 @@ namespace Project2
         }
         public config CurrentConfig { get; set; }
 
-        private void RaceMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void RaceMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
         {
             RacePage race = new RacePage(CurrentConfig); //we need to talk about naming stuff!!
             Application.Current.MainWindow.Content = race;
            
         }
 
-        private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void GalleryMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
         {
             GalleryWindow gallery = new GalleryWindow(CurrentConfig);
             Application.Current.MainWindow.Content = gallery;
 
         }
 
-        private void ItemMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ItemMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
         {
             ItemPage item = new ItemPage(CurrentConfig);
+            Application.Current.MainWindow.Content = item;
+
+        }
+
+        private void CareerMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
+        {
+            CareerPage item = new CareerPage(CurrentConfig);
             Application.Current.MainWindow.Content = item;
 
         }
@@ -75,14 +82,14 @@ namespace Project2
             }
 
         }
-        private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ReligionMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
         {
 
             ReligionPage religion = new ReligionPage(CurrentConfig);
             Application.Current.MainWindow.Content = religion;
         }
 
-        private void AbilityMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void AbilityMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
         {
             AbilitiesPage ability = new AbilitiesPage(CurrentConfig);
             Application.Current.MainWindow.Content = ability;

@@ -7,7 +7,7 @@
 	  mc:Ignorable="d" 
 	  Title="AbilitiesPage" Height="760" Width="1543">
 
-    <Grid Background="White" Margin="0,0,390,10">
+    <Grid Background="White" Margin="0,0,10,10">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
         <Label Content="Ablity editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
         <Label Grid.Row="0" x:Name="AblityBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="AbilitiesMainMenu_MouseDoubleClick" Width="136" Height="46">
@@ -24,14 +24,14 @@
         </ListView>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,443,0,0" x:Name="btnAbilityAdd" Click="btnAbility_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,443,0,0" x:Name="btnAbilityDelete" Click="btnAbility_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
-        <Grid Background="#FFFF84FF" Margin="224,99,32,26">
-            <StackPanel Orientation="Vertical" Margin="33,29,737,391">
+        <Grid Background="#FFFF84FF" Margin="224,99,40,26">
+            <StackPanel Orientation="Vertical" Margin="33,29,1124,391">
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
                 <Button Width="105"  Height="26" Content="Click to Upload"/>
             </StackPanel>
             <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
             <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,10,254">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,382,254">
                 <Grid>
                     <Label Content="Requirements" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <ListView x:Name="ListRequirements" Margin="10,38,10,41"/>
@@ -40,7 +40,7 @@
                     <Button Content="Delete Requirement Line" HorizontalAlignment="Left" Margin="361,304,0,0" VerticalAlignment="Top" Height="26" Width="135" ClickMode="Press" Background="red" Click="OnClickDeleteRequirmentsList"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="33,393,578,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="33,393,950,10">
                 <Grid>
                     <Label Content="Granted Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <ListView x:Name="ListGrantedResources" Margin="10,38,10,32"/>
@@ -49,7 +49,7 @@
 
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="352,378,264,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="352,378,636,10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="68*"/>
@@ -63,7 +63,7 @@
                     <Button Width="46" VerticalAlignment="Top" Margin="0,204,0,0" Height="21" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteDiscount" Background="red"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="660,378,10,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="660,378,382,10">
                 <Grid Margin="0,-3,-14,3">
                     <Label Content="Acquisition Cost :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <TextBox x:Name="costBox" Height="20" Margin="135,15,43,200" TextChanged="NumberValidationTextBox"/>
@@ -73,8 +73,26 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,204,0,0" VerticalAlignment="Top" Height="21" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteCostType"/>
                 </Grid>
             </Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="660,378,382,10">
+                <Grid Margin="0,-3,-14,3">
+                    <Label Content="Acquisition Cost :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <TextBox x:Name="costBox1" Height="20" Margin="135,15,43,200" TextChanged="NumberValidationTextBox"/>
+                    <Label Content="Accepted currencies:" Margin="10,35,82,210" FontWeight="Bold"/>
+                    <ListView x:Name="ListCosts1" Margin="10,43,23,36"/>
+                    <Button Content="ADD" Margin="10,205,0,0" VerticalAlignment="Top" Height="20" ClickMode="Press" Background="LightBlue" Click="OnClick_AddCostType" HorizontalAlignment="Left" Width="35"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,204,0,0" VerticalAlignment="Top" Height="21" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteCostType"/>
+                </Grid>
+            </Border>
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" x:Name="btnAbilityDelete_Copy" Click="OnClickSaveAbility" Content="SAVE" Background="SpringGreen"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="1129,128,123,385">
+            <Grid>
+                <Label Content="Exclusions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                <ListView x:Name="ListExclusion" Margin="10,38,10,37"/>
+                <Button Content="ADD Exclusion" HorizontalAlignment="Left" Margin="51,204,0,0" VerticalAlignment="Top" Height="21" Width="64" ClickMode="Press" Background="LightBlue" Click="OnClick_AddExclusion"/>
+                <Button Width="46" VerticalAlignment="Top" Margin="0,204,0,0" Height="21" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteExclusion" Background="red"/>
+            </Grid>
+        </Border>
     </Grid>
 
 
