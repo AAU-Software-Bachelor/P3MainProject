@@ -15,28 +15,28 @@ namespace Project2
 		public config()
 		{
 			RacList = new List<majorTrait>();
-			AbilList = new List<majorTrait>();
+			AbiList = new List<majorTrait>();
 			CarList = new List<majorTrait>();
 			RelList = new List<majorTrait>();
             IteList = new List<majorTrait> ();
             ResList = new List<resourceTrait>();
-			IconList = new List<galleryIcon>();
-			saveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
-			temppath = new string(string.Empty);
-			placeholderImage = new string("/Images/Gallery.png");
+			IcoList = new List<galleryIcon>();
+			SaveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			Temppath = new string(string.Empty);
+			PlaceholderImage = new string("/Images/Gallery.png");
 		}
 
 
-		public string saveDestination { get; set; }
+		public string SaveDestination { get; set; }
         public List<majorTrait> RacList { get; set; }
-		public List<majorTrait> AbilList { get; set; }
+		public List<majorTrait> AbiList { get; set; }
 		public List<majorTrait> CarList { get; set; }
 		public List<majorTrait> RelList { get; set; }
 		public List<majorTrait> IteList { get; set; }
         public List<resourceTrait> ResList { get; set; }
-		public List<galleryIcon> IconList { get; set; }
-		public string temppath { get; set; }
-		public string placeholderImage { get;  }
+		public List<galleryIcon> IcoList { get; set; }
+		public string Temppath { get; set; }
+		public string PlaceholderImage { get;  }
 
 		public void TestWriteToJson(string fileName)
         {
@@ -57,18 +57,18 @@ namespace Project2
 		public dynamic getIcon(string imgName, bool isDelete=false)
 		{
 			int index;
-			index = IconList.FindIndex(i => string.Equals(i.imgName, imgName));
-			galleryIcon SelectedIcon = this.IconList[index];
+			index = IcoList.FindIndex(i => string.Equals(i.imgName, imgName));
+			galleryIcon SelectedIcon = this.IcoList[index];
             if (isDelete)
             {
-                this.IconList.RemoveAt(index);
+                this.IcoList.RemoveAt(index);
             }
             return SelectedIcon;
         }
 
         public bool saveIcontoList(dynamic galleryIcon)
         {
-            IconList.Add(galleryIcon);
+            IcoList.Add(galleryIcon);
             return true;
         }
 
@@ -78,7 +78,7 @@ namespace Project2
 			int index;
 			switch (id[0])
 			{
-				case "Race":
+				case "RacList":
 					index = RacList.FindIndex(i => string.Equals(i.UID, uid));
 					majorTrait SelRac = this.RacList[index];
 					if (isDelete)
@@ -87,7 +87,7 @@ namespace Project2
                     }
 					return SelRac;
 
-				case "Religion":
+				case "RelList":
 					index = RelList.FindIndex(i => string.Equals(i.UID, uid));
 					majorTrait SelRel = this.RelList[index];
 					if (isDelete)
@@ -96,7 +96,7 @@ namespace Project2
 					}
 					return SelRel;
 
-				case "Career":
+				case "CarList":
 					index = CarList.FindIndex(i => string.Equals(i.UID, uid));
 					majorTrait SelCar = this.CarList[index];
 					if (isDelete)
@@ -105,17 +105,17 @@ namespace Project2
 					}
 					return SelCar;
 
-				case "Ability":
-					index = AbilList.FindIndex(i => string.Equals(i.UID, uid));
-					majorTrait SelAbi = this.AbilList[index];
+				case "AbiList":
+					index = AbiList.FindIndex(i => string.Equals(i.UID, uid));
+					majorTrait SelAbi = this.AbiList[index];
 					if (isDelete)
 					{
-						this.AbilList.RemoveAt(index);
+						this.AbiList.RemoveAt(index);
 					}
 
 					return SelAbi;
 
-				case "Item":
+				case "IteList":
                     index = IteList.FindIndex(i => string.Equals(i.UID, uid));
                     majorTrait SelIte = this.IteList[index];
                     if (isDelete)
@@ -124,7 +124,7 @@ namespace Project2
                     }
                     return SelIte;
 
-				case "Resource":
+				case "ResList":
 					index = ResList.FindIndex(i => string.Equals(i.UID, uid));
 					resourceTrait SelRes = this.ResList[index];
 					if (isDelete)
@@ -146,27 +146,27 @@ namespace Project2
 
 			switch (id[0])
 			{
-				case "Race":
+				case "RacList":
 					RacList.Add(trait);
 					break;
 
-				case "Religion":
+				case "RelList":
 					RelList.Add(trait);
 					break;
 
-				case "Career":
+				case "CarList":
 					CarList.Add(trait);
                     break;
 
-				case "Ability":
-					AbilList.Add(trait);
+				case "AbiList":
+					AbiList.Add(trait);
                     break;
 
-                case "Item":
+                case "IteList":
                     IteList.Add(trait);
                     break;
 
-                case "Resource":
+                case "ResList":
 					ResList.Add(trait);
 					break ;
 

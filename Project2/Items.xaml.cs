@@ -63,7 +63,7 @@ namespace Project2
         /// </summary>
         private void btnItems_ClickAdd(object sender, RoutedEventArgs e)
         {
-            majorTrait tempItem = new majorTrait(CurrentConfig.newUID("Item")) { Name = "new Item" };   //makes the new Item object
+            majorTrait tempItem = new majorTrait(CurrentConfig.newUID("IteList")) { Name = "new Item" };   //makes the new Item object
             CurrentConfig.saveToList(tempItem);
             ItemCollection.Add(tempItem);
             lstItems.SelectedIndex = ItemCollection.Count - 1;
@@ -96,7 +96,7 @@ namespace Project2
             comboBox.Height = 24;
             comboBox.Width = 185;
             comboBox.DisplayMemberPath = "Name";
-            foreach (majorTrait abi in CurrentConfig.AbilList)  //adds all abilities from CurrentConfig to the combobox
+            foreach (majorTrait abi in CurrentConfig.AbiList)  //adds all abilities from CurrentConfig to the combobox
             {
                 comboBox.Items.Add(abi);
             }
@@ -184,20 +184,11 @@ namespace Project2
                 }
                 CurrentIndex = lstItems.SelectedIndex;
                 majorTrait currentMT = CurrentConfig.IteList[CurrentIndex]; //gets the trait to be loaded
-                if (currentMT.Image != string.Empty) //the trait doesnt nesseserily have a default value
-                {
-                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentMT.Image, UriKind.Absolute));
 
-                }
-                else
-                {
-
-                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.placeholderImage, UriKind.Relative));
-                }
                 (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
                 (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
-                foreach (string FreeAbil in currentMT.freeAbilities)    //makes the needed comboboxes to hold the free abilities
+                foreach (string FreeAbil in currentMT.FreeAbilities)    //makes the needed comboboxes to hold the free abilities
                 {
                     OnClickAddStarterAbilities(sender, e);
                 }
@@ -205,11 +196,11 @@ namespace Project2
                 string TempUID;
                 foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
                 {
-                    TempUID = currentMT.freeAbilities[ind];
-                    BOX.SelectedIndex = CurrentConfig.AbilList.FindIndex(i => string.Equals(i.UID, TempUID));   //selects the free abilities in the comboboxes
+                    TempUID = currentMT.FreeAbilities[ind];
+                    BOX.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, TempUID));   //selects the free abilities in the comboboxes
                     ind++;
                 }
-                foreach (AffectedResource affRes in currentMT.affectedResources)	//makes the needed comboboxes to hold the starter resources
+                foreach (AmountUID affRes in currentMT.AffectedResources)	//makes the needed comboboxes to hold the starter resources
                 {
                     OnClickAddStarterResources(sender, e);
                 }
@@ -220,7 +211,7 @@ namespace Project2
                     {
                         foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
                         {
-                            AffectedResource tempAffRes = currentMT.affectedResources[ind];
+                            AmountUID tempAffRes = currentMT.AffectedResources[ind];
                             box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
                             textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
                         }
@@ -269,8 +260,6 @@ namespace Project2
                 majorTrait currentMT = CurrentConfig.GetTrait(UID);
                 currentMT.deleteContent();
 
-                currentMT.Image = (this.FindName("ChosenImage") as Image).Source.ToString();
-                currentMT.Type = "Item";
                 currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
                 currentMT.Description = (this.FindName("descBox") as TextBox).Text;
 
@@ -278,8 +267,8 @@ namespace Project2
                 {
                     if (BOX.SelectedIndex >= 0)
                     {
-                        string TempUID = CurrentConfig.AbilList[BOX.SelectedIndex].UID;
-                        currentMT.freeAbilities.Add(TempUID); // saves the free abilities
+                        string TempUID = CurrentConfig.AbiList[BOX.SelectedIndex].UID;
+                        currentMT.FreeAbilities.Add(TempUID); // saves the free abilities
                     }
                 }
 
@@ -326,14 +315,9 @@ namespace Project2
             }
         }
 
-        public void ChangeIcon_click(object sender, RoutedEventArgs e)
+        private void ChangeIcon_click(object sender, RoutedEventArgs e)
         {
-            GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
 
-            string imgSource = newWindow.uploadFile(sender, e);
-            System.Diagnostics.Debug.WriteLine("we have an image at: " + imgSource);
-            ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
-            CurrentConfig.IteList[CurrentIndex].Image = imgSource;
         }
 
     }

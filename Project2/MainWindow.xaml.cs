@@ -36,13 +36,6 @@ namespace Project2
            
         }
 
-        private void AbilityMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            AbilitiesPage abilityPage = new AbilitiesPage(CurrentConfig);
-            Application.Current.MainWindow.Content = abilityPage;
-
-        }
-
         private void GalleryMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             GalleryWindow gallery = new GalleryWindow(CurrentConfig);
@@ -59,7 +52,7 @@ namespace Project2
         private void selectFolder_Click(object sender, System.EventArgs e)
         {
             var dialog = new Microsoft.Win32.SaveFileDialog();
-            dialog.InitialDirectory = CurrentConfig.saveDestination; // Use current value for initial dir
+            dialog.InitialDirectory = CurrentConfig.SaveDestination; // Use current value for initial dir
             dialog.Title = "Select a Directory"; // instead of default "Save As"
             dialog.Filter = "Directory|*.this.directory"; // Prevents displaying files
             dialog.FileName = "select"; // Filename will then be "select.this.directory"
@@ -78,7 +71,7 @@ namespace Project2
                 // Our final value is in path
                 MessageBox.Show("the path is " + path);
 
-                CurrentConfig.saveDestination = path;
+                CurrentConfig.SaveDestination = path;
             }
 
         }
@@ -87,6 +80,12 @@ namespace Project2
 
             ReligionPage religion = new ReligionPage(CurrentConfig);
             Application.Current.MainWindow.Content = religion;
+        }
+
+        private void AbilityMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            AbilitiesPage ability = new AbilitiesPage(CurrentConfig);
+            Application.Current.MainWindow.Content = ability;
         }
 
         private void ResourcesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)

@@ -64,7 +64,7 @@ namespace Project2
 		/// </summary>
 		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("Race")) { Name = "new race" };	//makes the new race object
+			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("RacList")) { Name = "new race" };	//makes the new race object
 			CurrentConfig.saveToList(tempRace);
 			RaceCollection.Add(tempRace);
 			lstRaces.SelectedIndex = RaceCollection.Count-1;
@@ -97,7 +97,7 @@ namespace Project2
 			comboBox.Height = 24;
 			comboBox.Width = 185;
 			comboBox.DisplayMemberPath = "Name";
-			foreach (majorTrait abi in CurrentConfig.AbilList)	//adds all abilities from CurrentConfig to the combobox
+			foreach (majorTrait abi in CurrentConfig.AbiList)	//adds all abilities from CurrentConfig to the combobox
 			{
 				comboBox.Items.Add(abi);
 			}
@@ -174,7 +174,7 @@ namespace Project2
 		/// </summary>
 		private void OnRaceChanged(object sender, RoutedEventArgs e)
 		{
-            int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
+			int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
 			if (lstRaces.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
 			{
 				if (CurrentIndex >= 0)	//skips saving the previus selected race if -1
@@ -184,22 +184,14 @@ namespace Project2
 					ListStarterResources.Items.Clear();
 				}
 				CurrentIndex = lstRaces.SelectedIndex;
-				majorTrait currentMT = CurrentConfig.RacList[CurrentIndex]; //gets the trait to be loaded
-                (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
-                if (currentMT.Image != string.Empty) //the trait doesnt nesseserily have a default value
-                {
-                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentMT.Image, UriKind.Absolute));
-                
-                }
-                else
-                {
-				
-                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.placeholderImage, UriKind.Relative));
-                }
-                (this.FindName("playerReqBox") as TextBox).Text = currentMT.playerReq; //sets text to the PlayerReq from the current MajorTrait object
+				majorTrait currentMT = CurrentConfig.RacList[CurrentIndex];	//gets the trait to be loaded
+
+				(this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
+
+				(this.FindName("playerReqBox") as TextBox).Text = currentMT.PlayerReq; //sets text to the PlayerReq from the current MajorTrait object
                 (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
-                foreach (string FreeAbil in currentMT.freeAbilities)	//makes the needed comboboxes to hold the free abilities
+                foreach (string FreeAbil in currentMT.FreeAbilities)	//makes the needed comboboxes to hold the free abilities
 				{
 					OnClickAddStarterAbilities(sender, e);
 				}
@@ -207,11 +199,11 @@ namespace Project2
 				string TempUID;
 				foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
 				{
-					TempUID = currentMT.freeAbilities[ind];
-					BOX.SelectedIndex = CurrentConfig.AbilList.FindIndex(i => string.Equals(i.UID, TempUID));	//selects the free abilities in the comboboxes
+					TempUID = currentMT.FreeAbilities[ind];
+					BOX.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, TempUID));	//selects the free abilities in the comboboxes
 					ind++;
 				}
-				foreach (AffectedResource affRes in currentMT.affectedResources)	//makes the needed comboboxes to hold the starter resources
+				foreach (AmountUID affRes in currentMT.AffectedResources)	//makes the needed comboboxes to hold the starter resources
                 {
 					OnClickAddStarterResources(sender, e);
 				}
@@ -222,7 +214,7 @@ namespace Project2
 					{
 						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
 						{
-							AffectedResource tempAffRes = currentMT.affectedResources[ind];
+							AmountUID tempAffRes = currentMT.AffectedResources[ind];
 							box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
 							textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
 						}
@@ -236,8 +228,7 @@ namespace Project2
 				ListStarterResources.Items.Clear();
             }
 			lstRaces.SelectedIndex = SelIndex;  //applies saved race selection
-    
-        }
+		}
 		/// <summary>
 		/// works as a middle man between butons and SaveRace 
 		/// </summary>
@@ -271,18 +262,16 @@ namespace Project2
 				majorTrait currentMT = CurrentConfig.GetTrait(UID);
 				currentMT.deleteContent();
 
-				currentMT.Image = (this.FindName("ChosenImage") as Image).Source.ToString();
-                currentMT.Type = "Race";
 				currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
-				currentMT.playerReq = (this.FindName("playerReqBox") as TextBox).Text;
+				currentMT.PlayerReq = (this.FindName("playerReqBox") as TextBox).Text;
 				currentMT.Description = (this.FindName("descBox") as TextBox).Text;
 
 				foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
 				{
 					if (BOX.SelectedIndex >= 0)
 					{
-						string TempUID = CurrentConfig.AbilList[BOX.SelectedIndex].UID;
-						currentMT.freeAbilities.Add(TempUID); // saves the free abilities
+						string TempUID = CurrentConfig.AbiList[BOX.SelectedIndex].UID;
+						currentMT.FreeAbilities.Add(TempUID); // saves the free abilities
 					}
 				}
 
@@ -329,15 +318,10 @@ namespace Project2
             }
         }
 
-        public void ChangeIcon_click(object sender, RoutedEventArgs e)
-        {
-            GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
+		private void ChangeIcon_click(object sender, RoutedEventArgs e)
+		{
 
-            string imgSource = newWindow.uploadFile(sender, e);
-            System.Diagnostics.Debug.WriteLine("we have an image at: " + imgSource);
-            ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
-            CurrentConfig.RacList[CurrentIndex].Image = imgSource;
-        }
+		}
 
     }
 }

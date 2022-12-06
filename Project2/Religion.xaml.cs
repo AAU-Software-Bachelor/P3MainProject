@@ -52,7 +52,7 @@ namespace Project2
 
         private void btnReligion_ClickAdd(object sender, RoutedEventArgs e)
         {
-            majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("Religion")) { Name = "new religion" };   //makes the new religion object
+            majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("RelList")) { Name = "new religion" };   //makes the new religion object
             CurrentConfig.saveToList(tempReligion);
             ReligionCollection.Add(tempReligion);
             lstReligion.SelectedIndex = ReligionCollection.Count - 1;
@@ -130,20 +130,11 @@ namespace Project2
                 }
                 CurrentIndex = lstReligion.SelectedIndex;
                 majorTrait currentMT = CurrentConfig.RelList[CurrentIndex]; //gets the trait to be loaded
-                if (currentMT.Image != string.Empty) //the trait doesnt nesseserily have a default value
-                {
-                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentMT.Image, UriKind.Absolute));
 
-                }
-                else
-                {
-
-                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.placeholderImage, UriKind.Relative));
-                }
                 (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
                 (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
-                foreach (AffectedResource affRes in currentMT.affectedResources)	//makes the needed comboboxes to hold the starter resources
+                foreach (AmountUID affRes in currentMT.AffectedResources)	//makes the needed comboboxes to hold the starter resources
                 {
                     OnClickAddAffectedResources(sender, e);
                 }
@@ -154,7 +145,7 @@ namespace Project2
                     {
                         foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
                         {
-                            AffectedResource tempAffRes = currentMT.affectedResources[ind];
+                            AmountUID tempAffRes = currentMT.AffectedResources[ind];
                             box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
                             textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
                         }
@@ -197,8 +188,6 @@ namespace Project2
                 majorTrait currentMT = CurrentConfig.GetTrait(UID);
                 currentMT.deleteContent();
 
-                currentMT.Image = (this.FindName("ChosenImage") as Image).Source.ToString();
-                currentMT.Type = "Religion";
                 currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
                 currentMT.Description = (this.FindName("descBox") as TextBox).Text;
 
@@ -246,14 +235,9 @@ namespace Project2
             }
         }
 
-        public void ChangeIcon_click(object sender, RoutedEventArgs e)
+        private void ChangeIcon_click(object sender, RoutedEventArgs e)
         {
-            GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
 
-            string imgSource = newWindow.uploadFile(sender, e);
-            System.Diagnostics.Debug.WriteLine("we have an image at: " + imgSource);
-            ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
-            CurrentConfig.RelList[CurrentIndex].Image = imgSource;
         }
     }
 }

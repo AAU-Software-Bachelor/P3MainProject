@@ -35,19 +35,18 @@ namespace Project2
 	{
 		public majorTrait(string uid) : base(uid)
 		{
-			Type = new string("");
-			cost = new int();
+			Cost = new int();
 			CostTypes = new List<string>();
-			dependency = new List<List<string>>();
-			freeAbilities = new List<string>();
-			discounts = new List<discount>();
-			affectedResources = new List<AffectedResource>();
-			playerReq = new string("");
+			Dependency = new List<List<string>>();
+			FreeAbilities = new List<string>();
+			Discounts = new List<AmountUID>();
+			AffectedResources = new List<AmountUID>();
+			PlayerReq = new string("");
 		}
 
-		public class AffectedResource
+		public class AmountUID
 		{
-			public AffectedResource(string uid, int amount)
+			public AmountUID(string uid, int amount)
 			{
 				UID = uid;
 				Amount = amount;
@@ -56,51 +55,24 @@ namespace Project2
 			public int Amount { get; set; }
 		}
 
-		public class discount
-		{
-			public discount(string Conduid)
-			{
-				CondUID = Conduid;
-				Amount = 0;
-				CostUID = new List<string>();
-			}
-			public List<string> CostUID { get; set; }
-			public string CondUID { get; set; }
-			public int Amount { get; set; }
 
-		}
-
-		public string Type { get; set; }
-		public int cost { get; set; }
+		public int Cost { get; set; }
 		public List<string> CostTypes { get; set; }
-		public List<List<string>> dependency { get; set; }
-		public List<string> freeAbilities { get; set; }
-		public List<discount> discounts { get; set; }
-		public List<AffectedResource> affectedResources { get; set; }
-		public string playerReq { get; set; }
+		public List<List<string>> Dependency { get; set; }
+		public List<string> FreeAbilities { get; set; }
+		public List<AmountUID> Discounts { get; set; }
+		public List<AmountUID> AffectedResources { get; set; }
+		public string PlayerReq { get; set; }
 
 		public void addAffectedResources(string uid, int amount)
 		{
-			this.affectedResources.Add(new AffectedResource(uid, amount));
+			this.AffectedResources.Add(new AmountUID(uid, amount));
 		}
-		public void addDiscount(string Conduid)
+		public void addDiscount(string Conduid, int amount)
 		{
-			this.discounts.Add(new discount(Conduid));
+			this.Discounts.Add(new AmountUID(Conduid, amount));
 		}
-		public void addDiscountType(string CondUid, List<string> CostUid)
-		{
-			foreach (discount id in discounts)
-			{
-				if (id.CondUID == CondUid)
-				{
-					foreach (string cost in CostUid)
-					{
-						id.CostUID.Add(cost);
-					}
-					break;
-				}
-			}
-		}
+		
 		public void addCostTypes(string uid)
 		{
 			this.CostTypes.Add(uid);
@@ -110,13 +82,13 @@ namespace Project2
 			this.Name = "";
 			this.Image = "";
 			this.Description = "";
-			this.cost = new int();
+			this.Cost = new int();
 			this.CostTypes = new List<string>();
-			this.freeAbilities = new List<string>();
-			this.discounts = new List<discount>();
-			this.affectedResources = new List<AffectedResource>();
-
-		}
+			this.FreeAbilities = new List<string>();
+			this.Discounts = new List<AmountUID>();
+			this.AffectedResources = new List<AmountUID>();
+			this.Dependency = new List<List<string>>();
+        }
 	}
 
 	public class resourceTrait : characterTrait
@@ -125,6 +97,6 @@ namespace Project2
 		{
 		}
 
-		public int type { get; set; }
+		public int Type { get; set; }
 	}
 }

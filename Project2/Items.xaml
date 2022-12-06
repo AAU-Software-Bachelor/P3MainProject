@@ -66,7 +66,7 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveItem"/>
+            <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-105,370,0,0" VerticalAlignment="Top" Height="21" Width="92" Click="OnClickSaveItem"/>
         </Grid>
     </Grid>
 </Page>

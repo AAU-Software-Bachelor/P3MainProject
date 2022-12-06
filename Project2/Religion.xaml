@@ -42,7 +42,7 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,301,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteAffectedResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveReligion"/>
+            <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-103,316,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="OnClickSaveReligion"/>
         </Grid>
         <Label Content="Religion Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="295" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="282,37,0,0" VerticalAlignment="Top" Height="46" Width="206" FontWeight="Bold" FontSize="15"/>

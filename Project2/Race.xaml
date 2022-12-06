@@ -54,7 +54,7 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <Button Background="SpringGreen" Content="Save" HorizontalAlignment="Left" Margin="33,462,0,0" VerticalAlignment="Top" Height="38" Width="88" Click="OnClickSaveRace"/>
+            <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-113,368,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="OnClickSaveRace"/>
         </Grid>
         <Label Content="Race Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="229" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="221,37,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="15"/>
