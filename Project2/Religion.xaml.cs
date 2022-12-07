@@ -187,7 +187,6 @@ namespace Project2
             {
                 majorTrait currentMT = CurrentConfig.GetTrait(UID);
                 currentMT.deleteContent();
-
                 currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
                 currentMT.Description = (this.FindName("descBox") as TextBox).Text;
 
