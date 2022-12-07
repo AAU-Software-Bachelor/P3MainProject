@@ -107,6 +107,7 @@ namespace Project2
         private void Export(object sender, MouseButtonEventArgs e)
         {
             CurrentConfig.TestWriteToJson("TestConfig.json");
+            MessageBox.Show("Config JSON file exported");
         }
 
      
