@@ -20,15 +20,6 @@ namespace Project2
 		public string Description { get; set; }
 		public string UID { get; set; }
 
-		public void SaveToConfig(int configID)
-		{
-			Console.WriteLine("send to this (" + configID + ") configuration file");
-		}
-		public void properDelete()
-		{
-
-		}
-
 	}
 
 	public class majorTrait : characterTrait
@@ -37,8 +28,8 @@ namespace Project2
 		{
 			Cost = new int();
 			CostTypes = new List<string>();
-            Exlusions = new List<string>();
-            Dependency = new List<List<string>>();
+            Exclusions = new List<string>();
+            Dependencies = new List<List<string>>();
 			FreeAbilities = new List<string>();
 			Discounts = new List<AmountUID>();
 			AffectedResources = new List<AmountUID>();
@@ -56,29 +47,15 @@ namespace Project2
 			public int Amount { get; set; }
 		}
 
-
 		public int Cost { get; set; }
 		public List<string> CostTypes { get; set; }
-        public List<string> Exlusions { get; set; }
-        public List<List<string>> Dependency { get; set; }
+        public List<string> Exclusions { get; set; }
+        public List<List<string>> Dependencies { get; set; }
 		public List<string> FreeAbilities { get; set; }
 		public List<AmountUID> Discounts { get; set; }
 		public List<AmountUID> AffectedResources { get; set; }
 		public string PlayerReq { get; set; }
 
-		public void addAffectedResources(string uid, int amount)
-		{
-			this.AffectedResources.Add(new AmountUID(uid, amount));
-		}
-		public void addDiscount(string Conduid, int amount)
-		{
-			this.Discounts.Add(new AmountUID(Conduid, amount));
-		}
-		
-		public void addCostTypes(string uid)
-		{
-			this.CostTypes.Add(uid);
-		}
 		public void deleteContent()
 		{
 			this.Name = "";
@@ -86,11 +63,11 @@ namespace Project2
 			this.Description = "";
 			this.Cost = new int();
 			this.CostTypes = new List<string>();
-            this.Exlusions = new List<string>();
+            this.Exclusions = new List<string>();
             this.FreeAbilities = new List<string>();
 			this.Discounts = new List<AmountUID>();
 			this.AffectedResources = new List<AmountUID>();
-			this.Dependency = new List<List<string>>();
+			this.Dependencies = new List<List<string>>();
         }
 	}
 

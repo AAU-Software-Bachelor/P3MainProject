@@ -201,7 +201,7 @@ namespace Project2
                             {
                                 string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
                                 int TempVal = int.Parse(textBox.Text);  //gets the value
-                                currentMT.addAffectedResources(TempUID, TempVal);   //saves the affected rescources and their values
+                                currentMT.AffectedResources.Add(new AmountUID(TempUID, TempVal));   //saves the affected rescources and their values
                             }
                         }
                     }

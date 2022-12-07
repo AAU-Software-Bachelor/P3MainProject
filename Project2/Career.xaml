@@ -7,102 +7,92 @@
 	  mc:Ignorable="d" 
 	  Title="CareerPage" Height="760" Width="1543">
 
-    <Grid Background="White" Margin="0,0,0,10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1106*"/>
-            <ColumnDefinition Width="47*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Background="White" Margin="0,0,10,10">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
-        <Label Content="Career Editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
+        <Label Content="Ablity editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
         <Label Grid.Row="0" x:Name="AblityBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="CareerMainMenu_MouseDoubleClick" Width="136" Height="46">
             <Border Background="LightBlue" Padding="10,5,10,5" >
                 <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
             </Border>
         </Label>
-        <ListView x:Name="lstCareer" Margin="17,99,1261,312" Grid.Row="0" SelectionChanged="OnCareerChanged">
+        <ListView x:Name="lstCareer" Margin="17,99,1321,312" Grid.Row="0" SelectionChanged="OnCareerChanged">
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,443,0,0" x:Name="btnCareerAdd" Click="btnCareer_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,443,0,0" x:Name="btnCareerAdd" Click="btnCareer_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,443,0,0" x:Name="btnCareerDelete" Click="btnCareer_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
-        <Grid Background="#7353F3" Margin="224,99,32,26" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Vertical" Margin="33,29,737,391">
+        <Grid Background="#7353F3" Margin="224,99,40,26">
+            <StackPanel Orientation="Vertical" Margin="33,29,1124,391">
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
                 <Button Width="105"  Height="26" Content="Click to Upload"/>
             </StackPanel>
             <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,384,254">
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,296,254">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="631*"/>
-                        <ColumnDefinition Width="266*"/>
-                    </Grid.ColumnDefinitions>
                     <Label Content="Requirements" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListRequirements" Margin="10,38,10,41" Grid.ColumnSpan="2"/>
-                    <Button Content="ADD Requirement" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Height="26" Width="114" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirment"/>
-                    <Button Content="ADD Requirement Line" HorizontalAlignment="Left" Margin="150,304,0,0" VerticalAlignment="Top" Height="26" Width="128" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirmentsList"/>
-                    <Button Content="Delete Requirement Line" HorizontalAlignment="Left" Margin="330,304,0,0" VerticalAlignment="Top" Height="26" Width="135" ClickMode="Press" Background="red" Click="OnClickDeleteRequirmentsList" Grid.ColumnSpan="2"/>
+                    <ListView x:Name="ListRequirements" Margin="10,38,10,41"/>
+                    <Button Content="ADD Requirement" HorizontalAlignment="Left" Margin="143,304,0,0" VerticalAlignment="Top" Height="26" Width="114" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirment"/>
+                    <Button Content="ADD Requirement Line" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Height="26" Width="128" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirmentsList"/>
+                    <Button Content="Delete Requirement Line" HorizontalAlignment="Left" Margin="447,304,0,0" VerticalAlignment="Top" Height="26" Width="135" ClickMode="Press" Background="red" Click="OnClickDeleteRequirmentsList"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="33,393,964,10">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="978,381,10,10">
                 <Grid>
                     <Label Content="Granted Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListGrantedResources" Margin="10,38,10,32"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,193,0,0" VerticalAlignment="Top" Height="21" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddGrantedResouce"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="58,244,0,0" VerticalAlignment="Top" Height="21" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteGrantedResouce"/>
+                    <ListView x:Name="ListGrantedResources" Margin="10,38,10,35"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddGrantedResouce"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteGrantedResouce"/>
 
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="660,378,384,10">
-                <Grid Margin="0,-3,-14,3">
-                    <Label Content="Acquisition Cost :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <TextBox x:Name="costBox" Height="20" Margin="135,15,43,200" TextChanged="NumberValidationTextBox"/>
-                    <Label Content="Accepted currencies:" Margin="10,35,82,210" FontWeight="Bold"/>
-                    <ListView x:Name="ListCosts" Margin="10,43,23,36"/>
-                    <Button Content="ADD" Margin="10,205,0,0" VerticalAlignment="Top" Height="20" ClickMode="Press" Background="LightBlue" Click="OnClick_AddCostType" HorizontalAlignment="Left" Width="35"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="60,204,0,0" VerticalAlignment="Top" Height="21" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteCostType"/>
-                </Grid>
-            </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="920,29,86,359">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="379,381,528,10">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="68*"/>
                         <ColumnDefinition Width="19*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Exclusions" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListExclusion" Margin="10,38,10,37" Grid.ColumnSpan="2"/>
-                    <Button Content="ADD RACE" HorizontalAlignment="Left" Margin="51,204,0,0" VerticalAlignment="Top" Height="21" Width="64" ClickMode="Press" Background="LightBlue" Click="OnClick_AddExclusion"/>
-                    <Button Width="46" VerticalAlignment="Top" Margin="0,204,0,0" Height="21" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteExclusion" Background="red"/>
+                    <Label Content="Discounts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <ListView x:Name="ListDiscounts" Margin="10,38,10,35" Grid.ColumnSpan="2"/>
+                    <Button Content="ADD RACE" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="64" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount"/>
+                    <Button Content="ADD ABILITY" Margin="79,202,0,0" VerticalAlignment="Top" Height="20" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount" HorizontalAlignment="Left" Width="78"/>
+                    <Button Content="ADD CAREER" HorizontalAlignment="Left" Margin="162,202,0,0" VerticalAlignment="Top" Height="20" Width="76" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount"/>
+                    <Button Width="46" VerticalAlignment="Top" Margin="243,202,0,0" Height="20" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteDiscount" Background="red" Grid.ColumnSpan="2"/>
                 </Grid>
             </Border>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="920,271,86,133">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="746,381,296,10">
+                <Grid Margin="0,-3,-14,3">
+                    <Label Content="Acquisition Cost :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <TextBox x:Name="costBox" Height="20" Margin="135,15,43,200" TextChanged="NumberValidationTextBox"/>
+                    <Label Content="Accepted currencies:" Margin="10,35,82,210" FontWeight="Bold"/>
+                    <ListView x:Name="ListCosts" Margin="10,43,23,32"/>
+                    <Button Content="ADD" Margin="10,205,0,0" VerticalAlignment="Top" Height="20" ClickMode="Press" Background="LightBlue" Click="OnClick_AddCostType" HorizontalAlignment="Left" Width="35"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,205,0,0" VerticalAlignment="Top" Height="20" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteCostType"/>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="102,381,895,10">
                 <Grid>
                     <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,36"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,190,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
+                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,35"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
+                </Grid>
+            </Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="978,29,10,254">
+                <Grid>
+                    <Label Content="Exclusion" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <ListView x:Name="ListExclusion" Margin="10,38,10,41" Grid.ColumnSpan="2"/>
+                    <Button Content="ADD RACE" HorizontalAlignment="Left" Margin="0,304,0,0" VerticalAlignment="Top" Height="26" Width="64" ClickMode="Press" Background="LightBlue" Click="OnClick_AddExclusion"/>
+                    <Button Content="ADD ABILITY" Margin="69,304,134,0" VerticalAlignment="Top" Height="26" ClickMode="Press" Background="LightBlue" Click="OnClick_AddExclusion"/>
+                    <Button Content="ADD CAREER" HorizontalAlignment="Left" Margin="150,304,0,0" VerticalAlignment="Top" Height="26" Width="76" ClickMode="Press" Background="LightBlue" Click="OnClick_AddExclusion" Grid.ColumnSpan="2"/>
+                    <Button Width="46" VerticalAlignment="Top" Margin="233,304,0,0" Height="26" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteExclusion" Background="red"/>
                 </Grid>
             </Border>
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" x:Name="btnCareerSave" Click="OnClickSaveCareer" Content="SAVE" Background="SpringGreen"/>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="577,477,622,36">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="68*"/>
-                    <ColumnDefinition Width="19*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="Discounts" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                <ListView x:Name="ListDiscounts" Margin="10,38,10,37" Grid.ColumnSpan="2"/>
-                <Button Content="ADD RACE" HorizontalAlignment="Left" Margin="51,204,0,0" VerticalAlignment="Top" Height="21" Width="64" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount"/>
-                <Button Content="ADD ABILITY" Margin="120,203,22,0" VerticalAlignment="Top" Height="22" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount"/>
-                <Button Content="ADD CAREER" HorizontalAlignment="Left" Margin="203,204,0,0" VerticalAlignment="Top" Height="21" Width="76" ClickMode="Press" Background="LightBlue" Click="OnClick_AddDiscount" Grid.ColumnSpan="2"/>
-                <Button Width="46" VerticalAlignment="Top" Margin="0,204,0,0" Height="21" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteDiscount" Background="red"/>
-            </Grid>
-        </Border>
     </Grid>
 
 

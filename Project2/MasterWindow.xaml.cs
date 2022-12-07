@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Project2.majorTrait;
 
 namespace Project2
 {
@@ -47,56 +48,56 @@ namespace Project2
             smite.Description = "slaa gud modstander med hellig styrke";
             smite.Cost = 5;
             smite.CostTypes = new List<string>() { xp.UID };
-            smite.Dependency = new List<List<string>>()
+            smite.Dependencies = new List<List<string>>()
             {
                 new List<string>(){ Warrior.UID}
             };
-            smite.addDiscount(Warrior.UID, 3);
-            smite.addAffectedResources(health.UID, 2);
+            smite.Discounts.Add(new AmountUID(Warrior.UID, 3));
+            smite.AffectedResources.Add(new AmountUID(health.UID, 2));
             CurrentConfig.AbiList.Add(smite);
             
             EldrichBLAST.Name = "Eldrich BLAST";
             EldrichBLAST.Description = "it's a BLAST to use";
             EldrichBLAST.Cost = 4;
             EldrichBLAST.CostTypes = new List<string>() { xp.UID };
-            EldrichBLAST.Dependency = new List<List<string>>()
+            EldrichBLAST.Dependencies = new List<List<string>>()
             {
                 new List<string>(){ Warlock.UID}
             };
-            EldrichBLAST.addDiscount(Warlock.UID, 2);
-            EldrichBLAST.addAffectedResources(mana.UID, 2);
+            EldrichBLAST.Discounts.Add(new AmountUID(Warlock.UID, 2));
+            EldrichBLAST.AffectedResources.Add(new AmountUID(mana.UID, 2));
             CurrentConfig.AbiList.Add(EldrichBLAST);
             
             Warrior.Name = "Warrior";
             Warrior.Description = "am gonna swing a sword";
-            Warrior.addAffectedResources(health.UID, 2);
+            Warrior.AffectedResources.Add(new AmountUID(health.UID, 2));
             CurrentConfig.CarList.Add(Warrior);
 
             Warlock.Name = "Warlock";
             Warlock.Description = "-_-";
-            Warlock.Dependency = new List<List<string>>()
+            Warlock.Dependencies = new List<List<string>>()
             {
                 new List<string>(){ Warrior.UID}
             };
-            Warlock.addAffectedResources(mana.UID, 2);
+            Warlock.AffectedResources.Add(new AmountUID(mana.UID, 2));
             CurrentConfig.CarList.Add(Warlock);
 
             Elf.Name = "Elf";
             Elf.Description = "the most pompius pricks of all races";
             Elf.FreeAbilities = new List<string>() {EldrichBLAST.UID};
-            Elf.addAffectedResources(health.UID, 2);
-            Elf.addAffectedResources(mana.UID, 3);
+            Elf.AffectedResources.Add(new AmountUID(health.UID, 2));
+            Elf.AffectedResources.Add(new AmountUID(mana.UID, 3));
             CurrentConfig.RacList.Add(Elf);
 
             Dwarf.Name = "Dwarf";
             Dwarf.Description = "this be armor";
             Dwarf.FreeAbilities = new List<string>() {smite.UID};
-            Dwarf.addAffectedResources(health.UID, 4);
+            Dwarf.AffectedResources.Add(new AmountUID(health.UID, 4));
             CurrentConfig.RacList.Add(Dwarf);
 
             CultOfSigmar.Name = "Cult Of Sigmar";
             CultOfSigmar.Description = "The Cult of Sigmar, also sometimes called the Church of Sigmar, the Holy Temple of Sigmar, the Clergy of Sigmar or simply the Sigmarite Cult, is the state church of the Empire that administrates the worship of that realm's patron god, Sigmar Heldenhammer.";
-            CultOfSigmar.addAffectedResources(health.UID, 2);
+            CultOfSigmar.AffectedResources.Add(new AmountUID(health.UID, 2));
             CurrentConfig.saveToList(CultOfSigmar);
 
             health.Name = "health";
