@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Versioning;
@@ -16,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Shell;
+using static Project2.majorTrait;
 
 namespace Project2
 {
@@ -24,512 +27,150 @@ namespace Project2
 	/// </summary>
 	public partial class AbilitiesPage : Page
 	{
-        public AbilitiesPage(config currentConfig) //bility window constructor
-        {
-            CurrentConfig = currentConfig;
-            InitializeComponent();
-            AbilityCollection = new ObservableCollection<majorTrait>();
-            foreach (majorTrait ability in CurrentConfig.AbiList) //adds all abilities to ObservableCollection AbilityCollection
-            {
-                AbilityCollection.Add(ability);
-            }
-            lstAbility.ItemsSource = AbilityCollection;
-            CurrentIndex = -1;  //skip the next use of CurrentIndex
-            lstAbility.SelectedIndex = 0;
-        }
-        public config CurrentConfig { get; set; }
-        int CurrentIndex { get; set; }  //keeps track of what index to use
-        private ObservableCollection<majorTrait> AbilityCollection;   //itemSource for lstAbility ListVeiw
+		public AbilitiesPage(config currentConfig) //bility window constructor
+		{
+			CurrentConfig = currentConfig;
+			InitializeComponent();
+			AbilityCollection = new ObservableCollection<majorTrait>();
+			foreach (majorTrait ability in CurrentConfig.AbiList) //adds all abilities to ObservableCollection AbilityCollection
+			{
+				AbilityCollection.Add(ability);
+			}
+			lstAbility.ItemsSource = AbilityCollection;
+			CurrentIndex = -1;  //skip the next use of CurrentIndex
+			lstAbility.SelectedIndex = 0;
+		}
+		public config CurrentConfig { get; set; }
+		int CurrentIndex { get; set; }  //keeps track of what index to use
+		private ObservableCollection<majorTrait> AbilityCollection;   //itemSource for lstAbility ListVeiw
 
 
-        private void AbilitiesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-            MainWindow mainWindow = new MainWindow(CurrentConfig);
-            Application.Current.MainWindow.Content = mainWindow;
-        }
-
-        private void btnAbility_ClickAdd(object sender, EventArgs e)
-        {
-            majorTrait tempAbility = new majorTrait(CurrentConfig.newUID("AbiList")) { Name = "new ability" };   //makes the new ability object
-            CurrentConfig.saveToList(tempAbility);
-            AbilityCollection.Add(tempAbility);
-            lstAbility.SelectedIndex = AbilityCollection.Count - 1;
-        }
-
-        private void btnAbility_ClickDelete(object sender, EventArgs e)
-        {
-            var index = lstAbility.SelectedIndex;
-            if (index >= 0)
-            {
-                AbilityCollection.Remove(CurrentConfig.GetTrait(AbilityCollection[index].UID, true)); //gets the ability to be deleteted via GetTrait while it deletes it, and deletes its counterpart in AbilityCollection
-                lstAbility.SelectedIndex = AbilityCollection.Count - 1;
-            }
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		private void AbilitiesMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 
+			MainWindow mainWindow = new MainWindow(CurrentConfig);
+			Application.Current.MainWindow.Content = mainWindow;
+		}
+
+		private void btnAbility_ClickAdd(object sender, EventArgs e)
+		{
+			majorTrait tempAbility = new majorTrait(CurrentConfig.newUID("AbiList")) { Name = "new ability" };   //makes the new ability object
+			CurrentConfig.saveToList(tempAbility);
+			AbilityCollection.Add(tempAbility);
+			lstAbility.SelectedIndex = AbilityCollection.Count - 1;
+		}
+
+		private void btnAbility_ClickDelete(object sender, EventArgs e)
+		{
+			var index = lstAbility.SelectedIndex;
+			if (index >= 0)
+			{
+				AbilityCollection.Remove(CurrentConfig.GetTrait(AbilityCollection[index].UID, true)); //gets the ability to be deleteted via GetTrait while it deletes it, and deletes its counterpart in AbilityCollection
+				lstAbility.SelectedIndex = AbilityCollection.Count - 1;
+			}
+		}
+
+		private void ComboBox_TypeChanged(object sender, EventArgs e)
+		{
+			string nextType = "";
+			foreach (ComboBox ReqBox in ((sender as ComboBox).Parent as StackPanel).Children.OfType<ComboBox>())
+			{
+				if (ReqBox == sender)
+				{
+					nextType = ReqBox.SelectedItem.ToString();
+				}
+				else if (nextType != "" & ReqBox.Name == "selection")
+				{
+					ReqBox.Items.Clear();
+					if (nextType == "Race")
+					{
+						foreach (majorTrait rac in CurrentConfig.RacList)
+						{
+							ReqBox.Items.Add(rac);
+						}
+					}
+					if (nextType == "Ability")
+					{
+						foreach (majorTrait abi in CurrentConfig.AbiList)
+						{
+							ReqBox.Items.Add(abi);
+						}
+					}
+					if (nextType == "Career")
+					{
+						foreach (majorTrait car in CurrentConfig.CarList)
+						{
+							ReqBox.Items.Add(car);
+						}
+					}
+					if (nextType == "Religion")
+					{
+						foreach (majorTrait rel in CurrentConfig.RelList)
+						{
+							ReqBox.Items.Add(rel);
+						}
+					}
+					break;
+				}
+			}
 
 		}
 
-
-
-		private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-		{
-
-
-		}
-
-		private object and = "AND";
-		public string or = "OR";
-		private string RaceC = "Race";
-		private string AbilityC = "Ability";
-		public string[] names = { "Race", "Ability" };
-		private void OnClickAddResourcesList(object sender, RoutedEventArgs e)
+		private void OnClickAddRequirmentsList(object sender, EventArgs e)
 		{
 			this.InitializeComponent();
-			ComboBox comboBox = new ComboBox();
-			comboBox.IsReadOnly = true;
-			comboBox.IsDropDownOpen = true;
-			comboBox.Margin = new Thickness(5, 5, 0, 0);
-			comboBox.Height = 24;
-			comboBox.Width = 185;
-			comboBox.SelectionChanged += ComboBox_SelectionChanged;
-			comboBox.DisplayMemberPath = "Name";
-			foreach (resourceTrait res in CurrentConfig.ResList)
-			{
-				comboBox.Items.Add(res);
-			}
-			ComboBox comboBoxAO = new ComboBox();
-			comboBoxAO.IsReadOnly = true;
-			comboBoxAO.IsDropDownOpen = true;
-			comboBoxAO.Margin = new Thickness(5, 5, 0, 0);
-			comboBoxAO.Height = 26;
-			comboBoxAO.Width = 50;
-			comboBoxAO.SelectionChanged += ComboBox1_SelectionChanged;
-			comboBoxAO.Items.Add(or);
-
-
-			this.ListResources.Items.Add(comboBoxAO);
-			this.ListResources.Items.Add(comboBox);
-
+			StackPanel ReqStackPanel = new StackPanel();
+			ReqStackPanel.Orientation = Orientation.Horizontal;
+			ListRequirements.Items.Add(ReqStackPanel);
+			ListRequirements.SelectedIndex = ListRequirements.Items.Count - 1;
+			OnClickAddRequirment(sender, e);
 		}
 
-		private void OnClickAddRequirmentsList(object sender, RoutedEventArgs e)
+		private void OnClickDeleteRequirmentsList(object sender, RoutedEventArgs e)
+		{
+			var index = ListRequirements.SelectedIndex;
+			if (index >= 0)
+			{
+				ListRequirements.Items.RemoveAt(index);
+			}
+		}
+
+		private void OnClickAddRequirment(object sender, EventArgs e)
 		{
 			this.InitializeComponent();
-			//StackPanel stackPanel = new StackPanel();
-			//stackPanel.Orientation = Orientation.Horizontal;
 
-			ComboBox comboBox = new ComboBox();
-			comboBox.IsReadOnly = true;
-			comboBox.IsDropDownOpen = true;
-			comboBox.Margin = new Thickness(5, 5, 0, 0);
-			comboBox.Height = 24;
-			comboBox.Width = 185;
-			comboBox.VerticalAlignment = VerticalAlignment.Top;
-			comboBox.SelectionChanged += ComboBox_SelectionChanged;
-			comboBox.DisplayMemberPath = "Name";
-
-
-
-			ComboBox comboBoxAO = new ComboBox();
-			comboBoxAO.IsReadOnly = true;
-			comboBoxAO.IsDropDownOpen = true;
-			comboBoxAO.Margin = new Thickness(5, 5, 0, 0);
-			comboBoxAO.Height = 26;
-			comboBoxAO.Width = 50;
-			comboBoxAO.VerticalAlignment = VerticalAlignment.Top;
-			comboBoxAO.SelectionChanged += ComboBox1_SelectionChanged;
-			comboBoxAO.Items.Add(and);
-			comboBoxAO.Items.Add(or);
-
-
-			//stackPanel.Children.Add(comboBoxAO);
-			//stackPanel.Children.Add(comboBox);
-
-
-			if (ListRequirments.SelectedValue == ReqAO1)
+			if (ListRequirements.SelectedValue != null)
 			{
-				if (Combobox1.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox1.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox1.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox1.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox1.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
 
-				ReqAO1.Children.Add(comboBoxAO);
-				ReqAO1.Children.Add(comboBox);
+				ComboBox comboBoxSelection = new ComboBox();
+				comboBoxSelection.Name = "selection";
+				comboBoxSelection.IsReadOnly = true;
+				comboBoxSelection.IsDropDownOpen = false;
+				comboBoxSelection.Margin = new Thickness(5, 5, 0, 0);
+				comboBoxSelection.Height = 26;
+				comboBoxSelection.Width = 185;
+				comboBoxSelection.VerticalAlignment = VerticalAlignment.Top;
+				comboBoxSelection.DisplayMemberPath = "Name";
+
+
+				ComboBox comboBoxType = new ComboBox();
+				comboBoxType.Name = "type";
+				comboBoxType.IsReadOnly = true;
+				comboBoxType.IsDropDownOpen = false;
+				comboBoxType.Margin = new Thickness(5, 5, 0, 0);
+				comboBoxType.Height = 26;
+				comboBoxType.Width = 26;
+				comboBoxType.VerticalAlignment = VerticalAlignment.Top;
+				comboBoxType.SelectionChanged += ComboBox_TypeChanged;
+				comboBoxType.Items.Add("Race");
+				comboBoxType.Items.Add("Ability");
+				comboBoxType.Items.Add("Career");
+				comboBoxType.Items.Add("Religion");
+
+				(ListRequirements.SelectedValue as StackPanel).Children.Add(comboBoxType);
+				(ListRequirements.SelectedValue as StackPanel).Children.Add(comboBoxSelection);
 
 			}
-			if (ListRequirments.SelectedValue == ReqAO2)
-			{
-				if (Combobox2.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox2.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox2.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox2.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox2.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
-				ReqAO2.Children.Add(comboBoxAO);
-				ReqAO2.Children.Add(comboBox);
-
-			}
-			if (ListRequirments.SelectedValue == ReqAO3)
-			{
-				if (Combobox3.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox3.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox3.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox3.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox3.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
-				ReqAO3.Children.Add(comboBoxAO);
-				ReqAO3.Children.Add(comboBox);
-
-			}
-			if (ListRequirments.SelectedValue == ReqAO4)
-			{
-				if (Combobox4.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox4.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox4.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox4.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox4.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
-
-				ReqAO4.Children.Add(comboBoxAO);
-				ReqAO4.Children.Add(comboBox);
-
-			}
-			if (ListRequirments.SelectedValue == ReqAO5)
-			{
-				if (Combobox5.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox5.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox5.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox5.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox5.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
-				ReqAO5.Children.Add(comboBoxAO);
-				ReqAO5.Children.Add(comboBox);
-
-			}
-			if (ListRequirments.SelectedValue == ReqAO6)
-			{
-				if (Combobox6.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox6.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox6.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox6.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox6.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
-				ReqAO6.Children.Add(comboBoxAO);
-				ReqAO6.Children.Add(comboBox);
-
-			}
-			if (ListRequirments.SelectedValue == ReqAO7)
-			{
-				if (Combobox7.SelectedItem == "Race")
-				{
-					foreach (majorTrait rac in CurrentConfig.RacList)
-					{
-						comboBox.Items.Add(rac);
-					}
-				}
-				if (Combobox7.SelectedItem == "Ability")
-				{
-					foreach (majorTrait abi in CurrentConfig.AbiList)
-					{
-						comboBox.Items.Add(abi);
-					}
-				}
-				if (Combobox7.SelectedItem == "Resources")
-				{
-					foreach (resourceTrait res in CurrentConfig.ResList)
-					{
-						comboBox.Items.Add(res);
-					}
-				}
-				if (Combobox7.SelectedItem == "Career")
-				{
-					foreach (majorTrait car in CurrentConfig.CarList)
-					{
-						comboBox.Items.Add(car);
-					}
-				}
-				if (Combobox7.SelectedItem == "Religion")
-				{
-					foreach (majorTrait rel in CurrentConfig.RelList)
-					{
-						comboBox.Items.Add(rel);
-					}
-				}
-				ReqAO7.Children.Add(comboBoxAO);
-				ReqAO7.Children.Add(comboBox);
-
-			}
-
-		}
-
-		private void Combobox1_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox1.Items.Add("Race"); Combobox1.Items.Add("Ability"); Combobox1.Items.Add("Resources"); Combobox1.Items.Add("Career"); Combobox1.Items.Add("Religion");
-		}
-		private void Combobox2_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox2.Items.Add("Race"); Combobox2.Items.Add("Ability"); Combobox2.Items.Add("Resources"); Combobox2.Items.Add("Career"); Combobox2.Items.Add("Religion");
-		}
-
-		private void Combobox3_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox3.Items.Add("Race"); Combobox3.Items.Add("Ability"); Combobox3.Items.Add("Resources"); Combobox3.Items.Add("Career"); Combobox3.Items.Add("Religion");
-		}
-
-		private void Combobox4_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox4.Items.Add("Race"); Combobox4.Items.Add("Ability"); Combobox4.Items.Add("Resources"); Combobox4.Items.Add("Career"); Combobox4.Items.Add("Religion");
-		}
-
-		private void Combobox5_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox5.Items.Add("Race"); Combobox5.Items.Add("Ability"); Combobox5.Items.Add("Resources"); Combobox5.Items.Add("Career"); Combobox5.Items.Add("Religion");
-		}
-
-		private void Combobox6_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox6.Items.Add("Race"); Combobox6.Items.Add("Ability"); Combobox6.Items.Add("Resources"); Combobox6.Items.Add("Career"); Combobox6.Items.Add("Religion");
-		}
-
-		private void Combobox7_Loaded(object sender, RoutedEventArgs e)
-		{
-			Combobox7.Items.Add("Race"); Combobox7.Items.Add("Ability"); Combobox7.Items.Add("Resources"); Combobox7.Items.Add("Career"); Combobox7.Items.Add("Religion");
-		}
-		private void OnClickAddNewRequirments(object sender, RoutedEventArgs e)
-		{
-
-			/*StackPanel stackPanel = new StackPanel();
-			stackPanel.Orientation = Orientation.Horizontal;
-			ComboBox ComboxType = new ComboBox();
-			ComboxType.IsReadOnly = true;
-			ComboxType.IsDropDownOpen = true;
-			ComboxType.Margin = new Thickness(5, 5, 0, 0);
-			ComboxType.Height = 24;
-			ComboxType.Width = 185;
-			ComboxType.VerticalAlignment = VerticalAlignment.Top;
-			ComboxType.SelectionChanged += ComboBox_SelectionChanged;
-			ComboxType.Items.Add("Race");
-			ComboxType.Items.Add("Ability");
-			ComboxType.Items.Add("Items");
-			ComboxType.Items.Add("Career");
-
-			Button button = new Button();
-			button.IsEnabled = true;
-			button.Margin = new Thickness(5, 5, 0, 0);
-			button.Height = 26;
-			button.Width = 50;
-			button.VerticalAlignment = VerticalAlignment.Top;
-			button.Content = "Click me";
-			button.Click += OnClickAddRequirmentsList;
-
-
-			StackPanel stackPanel = new StackPanel();
-			stackPanel.Orientation = Orientation.Horizontal;
-			stackPanel.Name = "RequirmentsAO";
-			ComboBox comboBox = new ComboBox();
-			comboBox.IsReadOnly = true;
-			comboBox.IsDropDownOpen = true;
-			comboBox.Margin = new Thickness(5, 5, 0, 0);
-			comboBox.Height = 24;
-			comboBox.Width = 185;
-			comboBox.VerticalAlignment = VerticalAlignment.Top;
-			comboBox.SelectionChanged += ComboBox_SelectionChanged;
-			comboBox.DisplayMemberPath = "Name";
-			foreach (resourceTrait res in CurrentConfig.ResList)
-			{
-				comboBox.Items.Add(res);
-			}
-
-			stackPanel.Children.Add(ComboxType);
-			stackPanel.Children.Add(button);*/
-
-
-
-		}
-
-		private void ComboBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-		{
-
 		}
 
 		private void OnClick_AddCostType(object sender, EventArgs e)
@@ -551,21 +192,21 @@ namespace Project2
 				comboBoxOne.Items.Add(res);
 			}
 
-			this.ListResources.Items.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
+			this.ListCosts.Items.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
 			lstAbility.SelectedIndex = SelIndex;	//applies saved ability selection
 		}
 
 		private void OnClick_DeleteCostType(object sender, EventArgs e)
 		{
-			var index = ListResources.SelectedIndex;
+			var index = ListCosts.SelectedIndex;
 			if (index >= 0)
 			{
-				ListResources.Items.RemoveAt(index);
+				ListCosts.Items.RemoveAt(index);
 			}
 		}
-		private void OnClick_AddGrantedResouce(object sender, RoutedEventArgs e)
+		private void OnClick_AddGrantedResouce(object sender, EventArgs e)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected race so it is not lost
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
 			this.InitializeComponent();
 			StackPanel stackPanel = new StackPanel();
 			stackPanel.Orientation = Orientation.Horizontal;
@@ -598,12 +239,12 @@ namespace Project2
 
 
 			this.ListGrantedResources.Items.Add(stackPanel);
-			lstAbility.SelectedIndex = SelIndex;  //applies saved race selection
+			lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
 		}
 		/// <summary>
 		/// deletes selected Starter Resources 
 		/// </summary>
-		private void OnClick_DeleteGrantedResouce(object sender, RoutedEventArgs e)
+		private void OnClick_DeleteGrantedResouce(object sender, EventArgs e)
 		{
 			var index = ListGrantedResources.SelectedIndex;
 			if (index >= 0)
@@ -611,12 +252,63 @@ namespace Project2
 				ListGrantedResources.Items.RemoveAt(index);
 			}
 		}
-		private void OnClick_AddDiscount(object sender, RoutedEventArgs e)
+
+        private void OnClick_AddExclusion(object sender, EventArgs e)
+        {
+            this.InitializeComponent();
+
+            if (ListExclusion.SelectedValue != null)
+            {
+                StackPanel ExlusStackPanel = new StackPanel();
+                ExlusStackPanel.Orientation = Orientation.Horizontal;
+
+
+                ComboBox comboBoxSelection = new ComboBox();
+                comboBoxSelection.Name = "selection";
+                comboBoxSelection.IsReadOnly = true;
+                comboBoxSelection.IsDropDownOpen = false;
+                comboBoxSelection.Margin = new Thickness(5, 5, 0, 0);
+                comboBoxSelection.Height = 26;
+                comboBoxSelection.Width = 185;
+                comboBoxSelection.VerticalAlignment = VerticalAlignment.Top;
+                comboBoxSelection.DisplayMemberPath = "Name";
+
+
+                ComboBox comboBoxType = new ComboBox();
+                comboBoxType.Name = "type";
+                comboBoxType.IsReadOnly = true;
+                comboBoxType.IsDropDownOpen = false;
+                comboBoxType.Margin = new Thickness(5, 5, 0, 0);
+                comboBoxType.Height = 26;
+                comboBoxType.Width = 26;
+                comboBoxType.VerticalAlignment = VerticalAlignment.Top;
+                comboBoxType.SelectionChanged += ComboBox_TypeChanged;
+                comboBoxType.Items.Add("Race");
+                comboBoxType.Items.Add("Ability");
+                comboBoxType.Items.Add("Career");
+                comboBoxType.Items.Add("Religion");
+
+                ExlusStackPanel.Children.Add(comboBoxType);
+                ExlusStackPanel.Children.Add(comboBoxSelection);
+				ListExclusion.Items.Add(ExlusStackPanel);
+            }
+        }
+
+        private void OnClick_DeleteExclusion(object sender, EventArgs e)
+        {
+            var index = ListExclusion.SelectedIndex;
+            if (index >= 0)
+            {
+                ListExclusion.Items.RemoveAt(index);
+            }
+        }
+
+        private void OnClick_AddDiscount(object sender, EventArgs e)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected race so it is not lost
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
 			this.InitializeComponent();
-			StackPanel stackPanel = new StackPanel();
-			stackPanel.Orientation = Orientation.Horizontal;
+			StackPanel stackPanelDiscounts = new StackPanel();
+			stackPanelDiscounts.Orientation = Orientation.Horizontal;
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the recouse combobox
 			comboBoxOne.Text = "Select Stat";
@@ -627,7 +319,7 @@ namespace Project2
 			comboBoxOne.Width = 185;
 			comboBoxOne.DisplayMemberPath = "Name";
 			string[] name = ((sender as Button).Content.ToString()).Split(' ');
-					if (name[1] == "CAREER")
+			if (name[1] == "CAREER")
 			{
 				foreach (majorTrait car in CurrentConfig.CarList)
 				{
@@ -649,7 +341,7 @@ namespace Project2
 				}
 			}
 
-			stackPanel.Children.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
+			stackPanelDiscounts.Children.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
 
 			TextBox textBox = new TextBox();    //starts on the number only textbox
 			textBox.Margin = new Thickness(15, 13, 0, 0);
@@ -658,11 +350,11 @@ namespace Project2
 			textBox.VerticalAlignment = VerticalAlignment.Top;
 			textBox.TextChanged += NumberValidationTextBox;
 
-			stackPanel.Children.Add(textBox);   //makes the textbox a child of the stackpanel
+			stackPanelDiscounts.Children.Add(textBox);   //makes the textbox a child of the stackpanel
 
 
-			this.ListDiscounts.Items.Add(stackPanel);
-			lstAbility.SelectedIndex = SelIndex;  //applies saved race selection
+			this.ListDiscounts.Items.Add(stackPanelDiscounts);
+			lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
 		}
 
 		/// <summary>
@@ -677,9 +369,183 @@ namespace Project2
 			}
 		}
 
-		private void OnAbilityChanged(object sender, EventArgs e)
-		{
+        bool amworkingonchange = false;
+        private void OnAbilityChanged(object sender, RoutedEventArgs e)
+        {
+            if (amworkingonchange == false)
+            {
 
+                amworkingonchange = true;
+				abilityChange(sender, e);
+
+                //Task.Delay(2);
+                amworkingonchange = false;
+            }
+
+        }
+
+
+        private void abilityChange(object sender, EventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine("last selected index: "+ CurrentIndex);
+			System.Diagnostics.Debug.WriteLine("listAbility index: " + lstAbility.SelectedIndex);
+			if (lstAbility.SelectedIndex >= 0)    //lstAbility.SelectedIndex returns -1 if nothing is selected
+			{
+				if (CurrentIndex >= 0)
+				{
+					SaveAbility(CurrentIndex);
+					ListRequirements.Items.Clear();
+					ListGrantedResources.Items.Clear();
+					ListDiscounts.Items.Clear();
+					ListCosts.Items.Clear();
+				}
+				CurrentIndex = lstAbility.SelectedIndex;
+				majorTrait currentMT = CurrentConfig.AbiList[CurrentIndex]; //gets the trait to be loaded
+				System.Diagnostics.Debug.WriteLine("the newly selected index: " + CurrentIndex);
+				System.Diagnostics.Debug.WriteLine("Majortrait name " + CurrentConfig.AbiList[CurrentIndex].Name);
+		 
+				(this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
+				(this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
+
+				foreach (AmountUID AffRes in currentMT.AffectedResources)
+				{
+					OnClick_AddGrantedResouce(sender, e);
+				}
+				int ind = 0;
+				string TempUID;
+				foreach (StackPanel PANEL in (this.FindName("ListGrantedResources") as ListView).Items)
+				{
+					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+					{
+						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+						{
+							AmountUID tempAffRes = currentMT.AffectedResources[ind];
+							box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
+							textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
+						}
+					}
+					ind++;
+				}
+
+				(this.FindName("costBox") as TextBox).Text = currentMT.Cost.ToString();
+				foreach (string CostType in currentMT.CostTypes)
+				{
+					OnClick_AddCostType(sender, e);
+				}
+				ind = 0;
+				foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
+				{
+					TempUID = currentMT.CostTypes[ind];
+					BOX.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, TempUID));
+					ind++;
+				}
+
+				foreach (AmountUID Disc in currentMT.Discounts)
+				{
+					string[] Condui = Disc.UID.Split("-/");
+					if (Condui[0] == "RacList")
+					{
+						Button nsender = new Button() { Content = "ADD RACE" };
+						OnClick_AddDiscount(nsender, e);
+					}
+					else if (Condui[0] == "AbiList")
+
+					{
+						Button nsender = new Button() { Content = "ADD ABILITY" };
+						OnClick_AddDiscount(nsender, e);
+					}
+					else if (Condui[0] == "CarList")
+					{
+						Button nsender = new Button() { Content = "ADD CAREER" };
+						OnClick_AddDiscount(nsender, e);
+					}
+
+				}
+				ind = 0;
+				foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
+				{
+					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+					{
+						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+						{
+							AmountUID tempDisc = currentMT.Discounts[ind];
+							string[] ID = tempDisc.UID.Split("-/");
+							if (ID[0] == "CarList")
+							{
+								box.SelectedIndex = CurrentConfig.CarList.FindIndex(i => string.Equals(i.UID, tempDisc.UID));
+							}
+							else if (ID[0] == "RacList")
+							{
+								box.SelectedIndex = CurrentConfig.RacList.FindIndex(i => string.Equals(i.UID, tempDisc.UID));
+							}
+							else if (ID[0] == "RelList")
+							{
+								box.SelectedIndex = CurrentConfig.RelList.FindIndex(i => string.Equals(i.UID, tempDisc.UID));
+							}
+							textBox.Text = tempDisc.Amount.ToString();	//sets the right amounts in the textboxes
+						}
+					}
+					ind++;
+				}
+
+				foreach (List<string> list in currentMT.Dependency)
+				{
+					OnClickAddRequirmentsList(sender , e);
+					for (int i = 1; i < list.Count; i++)
+					{
+						OnClickAddRequirment(sender , e);
+					}
+				}
+
+				ind = 0;
+				int ind2 = 0;
+				string[] id;
+				foreach (StackPanel PANEL in (this.FindName("ListRequirements") as ListView).Items)
+				{
+					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+					{
+						if (box.Name == "type")
+						{
+							id = currentMT.Dependency[ind][ind2].Split("-/");
+							switch (id[0])
+							{
+								case "RacList":
+									box.SelectedIndex = 0;
+									break;
+
+								case "RelList":
+									box.SelectedIndex = 3;
+									break;
+
+								case "CarList":
+									box.SelectedIndex = 2;
+									break;
+
+								case "AbiList":
+									box.SelectedIndex = 1;
+									break;
+							}
+							ComboBox_TypeChanged(box, e);
+						}
+						else if (box.Name == "selection")
+						{
+							box.SelectedItem = CurrentConfig.GetTrait(currentMT.Dependency[ind][ind2]);
+							ind2++;
+						}
+					}
+					ind2 = 0;
+					ind++;
+				}
+
+			}
+			else
+			{
+				CurrentIndex = -1;
+				ListRequirements.Items.Clear();
+				ListGrantedResources.Items.Clear();
+				ListDiscounts.Items.Clear();
+				ListCosts.Items.Clear();
+			}
 		}
 
 		private void OnClickSaveAbility(object sender, EventArgs e)
@@ -687,10 +553,113 @@ namespace Project2
 			SaveAbility();
 		}
 
-		private void SaveAbility(int Index = -1)
+		private void SaveAbility(int index = -1)
 		{
+			{
+				int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
 
+				string UID = "";
+				if (index == -1)    //is true when funtion is called via a button
+				{
+					if (lstAbility.SelectedIndex >= 0)
+					{
+						UID = CurrentConfig.AbiList[lstAbility.SelectedIndex].UID;    //uses the selected index to find the wanted UID
+						index = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, UID));
+					}
+				}
+				else
+				{
+					UID = CurrentConfig.AbiList[index].UID; //uses the given index to find the wanted UID
+				}
+				if (UID != "")
+				{
+                    System.Diagnostics.Debug.WriteLine(CurrentConfig.AbiList[index].ToString());
+                    majorTrait currentMT = CurrentConfig.GetTrait(UID);
+					currentMT.deleteContent();
+
+					currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
+					currentMT.Description = (this.FindName("descBox") as TextBox).Text;
+					currentMT.Cost = int.Parse((this.FindName("costBox") as TextBox).Text);
+
+					foreach (StackPanel PANEL in (this.FindName("ListGrantedResources") as ListView).Items)
+					{
+						foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+						{
+							foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+							{
+								if (box.SelectedIndex >= 0 & textBox.Text != "")
+								{
+									string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
+									int TempVal = int.Parse(textBox.Text);  //gets the value
+									currentMT.addAffectedResources(TempUID, TempVal);   //saves the affected rescources and their values
+								}
+							}
+						}
+                    }
+                    System.Diagnostics.Debug.WriteLine(CurrentConfig.AbiList[index].ToString());
+
+                    foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
+					{
+						string TempUID = CurrentConfig.ResList[BOX.SelectedIndex].UID;
+						currentMT.CostTypes.Add(TempUID);
+					}
+
+					foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
+					{
+						foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+						{
+							foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+							{
+								currentMT.addDiscount((box.SelectedItem as majorTrait).UID, int.Parse(textBox.Text));
+							}
+						}
+                    }
+                    System.Diagnostics.Debug.WriteLine(CurrentConfig.AbiList[index].ToString());
+
+                    foreach (StackPanel PANEL in (this.FindName("ListExclusion") as ListView).Items)
+                    {
+                        foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                        {
+                            if (box.Name == "selection")
+                            {
+                                currentMT.Exlusions.Add((box.SelectedItem as majorTrait).UID);
+                            }
+                        }
+                    }
+
+                    int ind = 0;
+					foreach (StackPanel PANEL in (this.FindName("ListRequirements") as ListView).Items)
+					{
+						currentMT.Dependency.Add(new List<string>());
+						foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+						{
+							if (box.Name == "selection")
+							{
+								currentMT.Dependency[ind].Add((box.SelectedItem as majorTrait).UID);///crahses
+							}
+						}
+						if(currentMT.Dependency[ind].Count == 0)
+						{
+							currentMT.Dependency.RemoveAt(ind);
+						}
+						ind++;
+                    }
+                    System.Diagnostics.Debug.WriteLine(CurrentConfig.AbiList[index].ToString());
+
+
+                    CurrentConfig.AbiList[index] = currentMT;
+                    System.Diagnostics.Debug.WriteLine(CurrentConfig.AbiList[index].ToString());
+                    AbilityCollection.Clear(); // clears the list
+					foreach (majorTrait ability in CurrentConfig.AbiList)  //rewrites the list.
+					{
+						AbilityCollection.Add(ability);
+					}
+
+					lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
+				}
+			}
 		}
+
 		/// <summary>
 		/// Validates input in "amount" textbox to only allow integers.
 		/// </summary>
@@ -705,6 +674,5 @@ namespace Project2
 				(sender as TextBox).Text = "";
 			}
 		}
-
 	}
 }

@@ -71,7 +71,7 @@ namespace Project2
 			}
 		}
 
-        private void OnResourceChanged (object sender, RoutedEventArgs e)
+            private void OnResourceChanged (object sender, RoutedEventArgs e)
 		{
 			int SelIndex = lstResources.SelectedIndex;  //saves selected resource so it is not lost
 			if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
@@ -82,29 +82,18 @@ namespace Project2
 
 				}
 				CurrentIndex = lstResources.SelectedIndex;
-				if (CurrentConfig.ResList.Count > 0)
-				{
-					resourceTrait currentRT = CurrentConfig.ResList[CurrentIndex]; //gets the trait to be loaded
-					if (currentRT.Image != string.Empty)
-					{
-						(this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentRT.Image, UriKind.Absolute));
-					}
-					else
-					{
-						(this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.placeholderImage, UriKind.Relative));
-					}
-					(this.FindName("nameBox") as TextBox).Text = currentRT.Name; //sets text to the name from the current MajorTrait object
-					(this.FindName("descBox") as TextBox).Text = currentRT.Description;  //sets text to the description from the current MajorTrait object
-				
+				resourceTrait currentRT = CurrentConfig.ResList[CurrentIndex]; //gets the trait to be loaded
 
-					foreach (RadioButton rd in (this.FindName("GridRadioButtons") as Grid).Children.OfType<RadioButton>())
-					{
-						if (int.Parse(rd.Tag.ToString()) == currentRT.type)
-						{
-							rd.IsChecked = true;
-						}
-					}
-				}
+				(this.FindName("nameBox") as TextBox).Text = currentRT.Name; //sets text to the name from the current MajorTrait object
+				(this.FindName("descBox") as TextBox).Text = currentRT.Description;  //sets text to the description from the current MajorTrait object
+
+                foreach (RadioButton rd in (this.FindName("GridRadioButtons") as Grid).Children.OfType<RadioButton>())
+                {
+                    if (int.Parse(rd.Tag.ToString()) == currentRT.Type)
+                    {
+                        rd.IsChecked = true;
+                    }
+                }
             }
 			else
 			{
@@ -113,6 +102,7 @@ namespace Project2
 			lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
 		}
 
+
 		public void ChangeIcon_click(object sender, RoutedEventArgs e)
 		{
 			GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
@@ -120,7 +110,7 @@ namespace Project2
 			string imgSource = newWindow.uploadFile(sender, e);
 			System.Diagnostics.Debug.WriteLine("we have an image at: " +imgSource);
             ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
-			CurrentConfig.ResList[CurrentIndex].Image = imgSource;
+
         }
 
         private void OnClickSaveResource(object sender, RoutedEventArgs e)
@@ -159,7 +149,7 @@ namespace Project2
 				{
 					if (rd.IsChecked == true)
 					{
-						currentRT.type = int.Parse(rd.Tag.ToString());
+						currentRT.Type = int.Parse(rd.Tag.ToString());
 					}
 				}
 

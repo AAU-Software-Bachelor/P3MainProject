@@ -21,13 +21,13 @@ namespace Project2
             IteList = new List<majorTrait> ();
             ResList = new List<resourceTrait>();
 			IcoList = new List<galleryIcon>();
-			saveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
-			temppath = new string(string.Empty);
-			placeholderImage = new string("/Images/Gallery.png");
+			SaveDestination = new string(System.Reflection.Assembly.GetExecutingAssembly().Location);
+			Temppath = new string(string.Empty);
+			PlaceholderImage = new string("/Images/Gallery.png");
 		}
 
 
-		public string saveDestination { get; set; }
+		public string SaveDestination { get; set; }
         public List<majorTrait> RacList { get; set; }
 		public List<majorTrait> AbiList { get; set; }
 		public List<majorTrait> CarList { get; set; }
@@ -35,8 +35,8 @@ namespace Project2
 		public List<majorTrait> IteList { get; set; }
         public List<resourceTrait> ResList { get; set; }
 		public List<galleryIcon> IcoList { get; set; }
-		public string temppath { get; set; }
-		public string placeholderImage { get;  }
+		public string Temppath { get; set; }
+		public string PlaceholderImage { get;  }
 
 		public void TestWriteToJson(string fileName)
         {

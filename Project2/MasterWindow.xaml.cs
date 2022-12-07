@@ -45,28 +45,25 @@ namespace Project2
 
             smite.Name = "SMITE";
             smite.Description = "slaa gud modstander med hellig styrke";
-            smite.cost = 4;
+            smite.Cost = 5;
             smite.CostTypes = new List<string>() { xp.UID };
-            smite.dependency = new List<List<string>>()
+            smite.Dependency = new List<List<string>>()
             {
                 new List<string>(){ Warrior.UID}
             };
-            smite.addDiscount(Warrior.UID);
-            smite.discounts[0].Amount = 2;
-            smite.addDiscountType(Warrior.UID, new List<string>() { xp.UID});
+            smite.addDiscount(Warrior.UID, 3);
+            smite.addAffectedResources(health.UID, 2);
             CurrentConfig.AbiList.Add(smite);
             
             EldrichBLAST.Name = "Eldrich BLAST";
             EldrichBLAST.Description = "it's a BLAST to use";
-            EldrichBLAST.cost = 4;
+            EldrichBLAST.Cost = 4;
             EldrichBLAST.CostTypes = new List<string>() { xp.UID };
-            EldrichBLAST.dependency = new List<List<string>>()
+            EldrichBLAST.Dependency = new List<List<string>>()
             {
-                new List<string>(){ Warrior.UID}
+                new List<string>(){ Warlock.UID}
             };
-            EldrichBLAST.addDiscount(Warlock.UID);
-            EldrichBLAST.discounts[0].Amount = 2;
-            EldrichBLAST.addDiscountType(Warlock.UID, new List<string>() { xp.UID});
+            EldrichBLAST.addDiscount(Warlock.UID, 2);
             EldrichBLAST.addAffectedResources(mana.UID, 2);
             CurrentConfig.AbiList.Add(EldrichBLAST);
             
@@ -77,7 +74,7 @@ namespace Project2
 
             Warlock.Name = "Warlock";
             Warlock.Description = "-_-";
-            Warlock.dependency = new List<List<string>>()
+            Warlock.Dependency = new List<List<string>>()
             {
                 new List<string>(){ Warrior.UID}
             };
@@ -86,14 +83,14 @@ namespace Project2
 
             Elf.Name = "Elf";
             Elf.Description = "the most pompius pricks of all races";
-            Elf.freeAbilities = new List<string>() {EldrichBLAST.UID};
+            Elf.FreeAbilities = new List<string>() {EldrichBLAST.UID};
             Elf.addAffectedResources(health.UID, 2);
             Elf.addAffectedResources(mana.UID, 3);
             CurrentConfig.RacList.Add(Elf);
 
             Dwarf.Name = "Dwarf";
             Dwarf.Description = "this be armor";
-            Dwarf.freeAbilities = new List<string>() {smite.UID};
+            Dwarf.FreeAbilities = new List<string>() {smite.UID};
             Dwarf.addAffectedResources(health.UID, 4);
             CurrentConfig.RacList.Add(Dwarf);
 
@@ -104,17 +101,17 @@ namespace Project2
 
             health.Name = "health";
             health.Description = "ye dead if this be zero";
-            health.type = 0;
+            health.Type = 0;
             CurrentConfig.ResList.Add(health);
 
             mana.Name = "Mana";
             mana.Description = "le-Magic juice";
-            mana.type = 0;
+            mana.Type = 0;
             CurrentConfig.ResList.Add(mana);
 
             xp.Name = "xp";
             xp.Description = "GAINS!!";
-            xp.type = 1;
+            xp.Type = 1;
             CurrentConfig.ResList.Add(xp);
 
             hammer.Name = "hammer";
