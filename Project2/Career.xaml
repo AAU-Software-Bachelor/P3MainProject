@@ -9,8 +9,8 @@
 
     <Grid Background="White" Margin="0,0,10,10">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
-        <Label Content="Ablity editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
-        <Label Grid.Row="0" x:Name="AblityBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="CareerMainMenu_MouseDoubleClick" Width="136" Height="46">
+        <Label Content="Career editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
+        <Label Grid.Row="0" x:Name="CareerBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="CareerMainMenu_MouseDoubleClick" Width="136" Height="46">
             <Border Background="LightBlue" Padding="10,5,10,5" >
                 <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
             </Border>
