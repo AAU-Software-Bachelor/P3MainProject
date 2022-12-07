@@ -52,7 +52,7 @@
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="268,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ReligionMainMenu_MouseClick">
+            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="268,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="CareerMainMenu_MouseClick">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Career.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
                     <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
