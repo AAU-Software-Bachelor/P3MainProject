@@ -375,8 +375,6 @@ namespace Project2
                     System.Diagnostics.Debug.WriteLine("added an icon from config to galleryIconlist");
                 }
 
-
-                CurrentConfig.TestWriteToJson("testConfiggallery.json");
                 lstGallery.SelectedIndex = SelIndex;  //applies saved race selection
             }
         }

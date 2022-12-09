@@ -160,8 +160,6 @@ namespace Project2
 					ResourceCollection.Add(res);
 				}
 
-
-				CurrentConfig.TestWriteToJson("testConfig.json");
 				lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
 			}
 		}

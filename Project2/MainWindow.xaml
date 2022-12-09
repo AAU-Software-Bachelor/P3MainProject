@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="760" Width="1100">
     <Grid Background="#FF4A4A4A">
-         <Button Content="Select save destination" Click="selectFolder_Click" Margin="20,482,977,136" Background="Green"/>
+        <Button Content="Select save destination" Click="selectFolder_Click" Margin="20,482,977,136" Background="Green"/>
         <Label Grid.Column="1" Content="Main Menu" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="24"></Label>
         <Frame x:Name="Main"/>
         <!--<Grid Grid.Column="1" Margin="0,61,0,0" Background="#FFADADAD">
@@ -20,42 +20,42 @@
         </Grid>-->
         <Grid Grid.Column="1" Grid.Row="1" Margin="0,61,0,0" Background="#FFADADAD">
             <Button Content="Select save destination" Click="selectFolder_Click" Margin="0,0,617,601" Background="Green"/>
-            <Label Grid.Column="1" Grid.Row="0" x:Name="RaceMainMenu" HorizontalAlignment="Left" Margin="35,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="RaceMainMenu_MouseClick">
+            <Label Grid.Column="1" Grid.Row="0" x:Name="RaceMainMenu" HorizontalAlignment="Left" Margin="35,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Race.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="RaceMainMenu_MouseClick">
                         <TextBlock HorizontalAlignment="Center"><Run Text="RACES"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="268,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="AbilityMainMenu_MouseClick">
+            <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="268,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Ablilities.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="AbilityMainMenu_MouseClick">
                         <TextBlock HorizontalAlignment="Center" ><Run Text="ABILITIES"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
-            <Label HorizontalAlignment="Left" Margin="500,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ResourcesMainMenu_MouseDoubleClick">
+            <Label HorizontalAlignment="Left" Margin="500,111,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
                     <Image Source="\Images\resources.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="ResourcesMainMenu_MouseDoubleClick">
                         <TextBlock HorizontalAlignment="Center" ><Run Text="RESOURCES"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="35,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ItemMainMenu_MouseClick">
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="35,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Items.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="ItemMainMenu_MouseClick">
                         <TextBlock HorizontalAlignment="Center" ><Run Text="ITEMS"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="268,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="CareerMainMenu_MouseClick">
+            <Label Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="268,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" >
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Career.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="CareerMainMenu_MouseClick">
                         <TextBlock HorizontalAlignment="Center"><Run Text="CAREER"/></TextBlock>
                     </Border>
                 </StackPanel>
@@ -63,24 +63,30 @@
             <Label  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Left" Margin="500,260,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ReligionMainMenu_MouseClick">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\religion.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="ReligionMainMenu_MouseClick">
                         <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="RELIGION"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="35,400,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="GalleryMainMenu_MouseClick">
+            <Label Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="35,400,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="GalleryMainMenu_MouseClick" >
                         <TextBlock HorizontalAlignment="Center" ><Run Text="GALLERY"/></TextBlock>
                     </Border>
                 </StackPanel>
             </Label>
-            <Label Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="268,400,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="Export">
+            <Label HorizontalAlignment="Left" Margin="500,400,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20">
                 <StackPanel Orientation="Vertical">
                     <Image Source="Images\Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="72" Width="109"/>
-                    <Border Background="LightBlue" Padding="50,10,50,10" Width="222">
-                        <TextBlock HorizontalAlignment="Center"><Run Text="EXPORT"/></TextBlock>
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="onclickSave">
+                        <TextBlock HorizontalAlignment="Center"><Run Text="SAVE"/></TextBlock>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="50,10,50,10" Width="222" MouseLeftButtonUp="onclickLoad">
+                        <TextBlock HorizontalAlignment="Center" Text="LOAD"/>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="black" Background="LightBlue" Padding="10,10,10,10" Width="222" MouseLeftButtonUp="onclickZip">
+                        <TextBlock HorizontalAlignment="Center" Text="ZIP FOR EXPORT"/>
                     </Border>
                 </StackPanel>
             </Label>

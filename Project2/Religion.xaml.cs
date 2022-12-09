@@ -214,8 +214,6 @@ namespace Project2
                     ReligionCollection.Add(religion);
                 }
 
-
-                CurrentConfig.TestWriteToJson("testConfig.json");
                 lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
             }
         }

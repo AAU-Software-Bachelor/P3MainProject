@@ -35,8 +35,9 @@
                 <Grid>
                     <Label Content="Requirements" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <ListView x:Name="ListRequirements" Margin="10,38,10,41"/>
-                    <Button Content="ADD Requirement" HorizontalAlignment="Left" Margin="143,304,0,0" VerticalAlignment="Top" Height="26" Width="114" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirment"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="148,304,0,0" VerticalAlignment="Top" Height="26" Width="41" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirment"/>
                     <Button Content="ADD Requirement Line" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Height="26" Width="128" ClickMode="Press" Background="LightBlue" Click="OnClickAddRequirmentsList"/>
+                    <ComboBox x:Name="RequireTypeBox" IsDropDownOpen="False" IsReadOnly="True" HorizontalAlignment="Left" Margin="189,304,0,0" VerticalAlignment="Top" Height="26" Width="128"/>
                     <Button Content="Delete Requirement Line" HorizontalAlignment="Left" Margin="447,304,0,0" VerticalAlignment="Top" Height="26" Width="135" ClickMode="Press" Background="red" Click="OnClickDeleteRequirmentsList"/>
                 </Grid>
             </Border>

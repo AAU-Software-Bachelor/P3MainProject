@@ -321,8 +321,6 @@ namespace Project2
 					RaceCollection.Add(race);
 				}
 
-
-				CurrentConfig.TestWriteToJson("testConfig.json");
 				lstRaces.SelectedIndex = SelIndex;  //applies saved race selection
 			}
 		}
