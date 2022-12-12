@@ -111,7 +111,7 @@ namespace Project2
         private void onclickSave(object sender, MouseButtonEventArgs e)
         {
             CurrentConfig.TestWriteToJson();
-            MessageBox.Show("Config JSON file exported");
+            MessageBox.Show("Config JSON file saved to destination");
         }
 
         private void onclickLoad(object sender, MouseButtonEventArgs e)
@@ -125,7 +125,7 @@ namespace Project2
                 string fullFileName = theFileDialog.FileName;
                 string jsonString = File.ReadAllText(fullFileName);
                 CurrentConfig = JsonSerializer.Deserialize<config>(jsonString);
-                MessageBox.Show("Config JSON file read and imported");
+                MessageBox.Show("Config JSON file read and loaded");
             }
         }
 

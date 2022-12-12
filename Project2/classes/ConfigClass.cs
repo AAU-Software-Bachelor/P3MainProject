@@ -47,7 +47,7 @@ namespace Project2
             };
             if (name == "")
 			{
-				OpenFileDialog theFileDialog = new OpenFileDialog();
+                SaveFileDialog theFileDialog = new SaveFileDialog();
 				theFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
 				theFileDialog.InitialDirectory = this.SaveDestination;
 
