@@ -103,16 +103,19 @@ namespace Project2
             health.Name = "health";
             health.Description = "ye dead if this be zero";
             health.Type = 0;
+            health.TypeName = "Stat";
             CurrentConfig.ResList.Add(health);
 
             mana.Name = "Mana";
             mana.Description = "le-Magic juice";
             mana.Type = 0;
+            mana.TypeName = "Stat";
             CurrentConfig.ResList.Add(mana);
 
             xp.Name = "xp";
             xp.Description = "GAINS!!";
             xp.Type = 1;
+            xp.TypeName = "XP";
             CurrentConfig.ResList.Add(xp);
 
             hammer.Name = "hammer";
