@@ -293,9 +293,6 @@ namespace Project2
                 {
                     ItemCollection.Add(Item);
                 }
-
-
-                CurrentConfig.TestWriteToJson("testConfig.json");
                 lstItems.SelectedIndex = SelIndex;  //applies saved Item selection
             }
         }

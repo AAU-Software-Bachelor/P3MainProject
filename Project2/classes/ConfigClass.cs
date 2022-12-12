@@ -1,3 +1,4 @@
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,16 +39,30 @@ namespace Project2
 		public string Temppath { get; set; }
 		public string PlaceholderImage { get;  }
 
-		public void TestWriteToJson(string fileName)
+		public void TestWriteToJson(string name = "")
         {
-
-			JsonSerializerOptions options = new JsonSerializerOptions
+            JsonSerializerOptions options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+            if (name == "")
 			{
-				WriteIndented = true
-			};
-			
-			string jsonString = JsonSerializer.Serialize(this, options);
-			File.WriteAllText(fileName, jsonString);
+                SaveFileDialog theFileDialog = new SaveFileDialog();
+				theFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+				theFileDialog.InitialDirectory = this.SaveDestination;
+
+				if (theFileDialog.ShowDialog() == true)
+				{
+					string fullFileName = theFileDialog.FileName;
+					string jsonString = JsonSerializer.Serialize(this, options);
+					File.WriteAllText(fullFileName, jsonString);
+				}
+			}
+			else
+			{
+                string jsonString = JsonSerializer.Serialize(this, options);
+                File.WriteAllText(this.SaveDestination + name, jsonString);
+            }
         }
 
 		public string newUID(string type)

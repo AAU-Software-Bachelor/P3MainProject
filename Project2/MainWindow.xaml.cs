@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic;
+using Microsoft.Win32;
 
 namespace Project2
 {
@@ -104,15 +108,45 @@ namespace Project2
             //TextBlock myTextBlock = "Empty";
         }
 
-        private void Export(object sender, MouseButtonEventArgs e)
+        private void onclickSave(object sender, MouseButtonEventArgs e)
         {
-            CurrentConfig.TestWriteToJson("TestConfig.json");
-            MessageBox.Show("Config JSON file exported");
+            CurrentConfig.TestWriteToJson();
+            MessageBox.Show("Config JSON file saved to destination");
         }
 
-     
+        private void onclickLoad(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog theFileDialog = new OpenFileDialog();
+            theFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+            theFileDialog.InitialDirectory = CurrentConfig.SaveDestination;
 
+            if (theFileDialog.ShowDialog() == true)
+            {
+                string fullFileName = theFileDialog.FileName;
+                string jsonString = File.ReadAllText(fullFileName);
+                CurrentConfig = JsonSerializer.Deserialize<config>(jsonString);
+                MessageBox.Show("Config JSON file read and loaded");
+            }
+        }
 
+        private void onclickZip(object sender, MouseButtonEventArgs e)
+        {
+            if (File.Exists(CurrentConfig.SaveDestination + "test.zip"))
+            {
+                File.Delete(CurrentConfig.SaveDestination + "test.zip");
+            }
+            using (ZipArchive zip = ZipFile.Open(CurrentConfig.SaveDestination + "test.zip", ZipArchiveMode.Create))
+            {
+                CurrentConfig.TestWriteToJson("test.json");
+                zip.CreateEntryFromFile((CurrentConfig.SaveDestination + "test.json"), "Configuration.json");
+                foreach (galleryIcon icon in CurrentConfig.IcoList)
+                {
+                    zip.CreateEntryFromFile(icon.imgPath, icon.imgName);
+                }
+            }
+            MessageBox.Show("current loaded configuration and asotiated icons have been compressed to zip");
+
+        }
 
         /* private void AddMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
          {
