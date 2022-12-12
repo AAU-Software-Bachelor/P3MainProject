@@ -486,7 +486,6 @@ namespace Project2
 						OnClick_AddExclusion(nsender, e);
 					}
 					else if (typeid[0] == "AbiList")
-
 					{
 						Button nsender = new Button() { Content = "ADD ABILITY" };
 						OnClick_AddExclusion(nsender, e);
@@ -502,7 +501,7 @@ namespace Project2
 				ListView ltr = (this.FindName("ListExclusion") as ListView);
 				foreach (ComboBox box in ltr.Items)
 				{
-					string tempID = currentMT.Exclusions[ind];
+					string tempID = currentMT.Exclusions[ind]; //test
 					string[] ID = tempID.Split("-/");
 					if (ID[0] == "CarList")
 					{
