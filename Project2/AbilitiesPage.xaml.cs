@@ -594,107 +594,105 @@ namespace Project2
 
 		private void SaveAbility(int index = -1)
 		{
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
+
+			string UID = "";
+			if (index == -1)    //is true when funtion is called via a button
 			{
-				int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
-
-				string UID = "";
-				if (index == -1)    //is true when funtion is called via a button
+				if (lstAbility.SelectedIndex >= 0)
 				{
-					if (lstAbility.SelectedIndex >= 0)
-					{
-						UID = CurrentConfig.AbiList[lstAbility.SelectedIndex].UID;    //uses the selected index to find the wanted UID
-						index = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, UID));
-					}
+					UID = CurrentConfig.AbiList[lstAbility.SelectedIndex].UID;    //uses the selected index to find the wanted UID
+					index = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, UID));
 				}
-				else
-				{
-					UID = CurrentConfig.AbiList[index].UID; //uses the given index to find the wanted UID
-				}
-				if (UID != "")
-				{
-					majorTrait currentMT = CurrentConfig.GetTrait(UID);
-					currentMT.deleteContent();
+			}
+			else
+			{
+				UID = CurrentConfig.AbiList[index].UID; //uses the given index to find the wanted UID
+			}
+			if (UID != "")
+			{
+				majorTrait currentMT = CurrentConfig.GetTrait(UID);
+				currentMT.deleteContent();
 
-					currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
-					currentMT.Description = (this.FindName("descBox") as TextBox).Text;
-					currentMT.Cost = int.Parse((this.FindName("costBox") as TextBox).Text);
+				currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
+				currentMT.Description = (this.FindName("descBox") as TextBox).Text;
+				currentMT.Cost = int.Parse((this.FindName("costBox") as TextBox).Text);
 
-					foreach (StackPanel PANEL in (this.FindName("ListGrantedResources") as ListView).Items)
+				foreach (StackPanel PANEL in (this.FindName("ListGrantedResources") as ListView).Items)
+				{
+					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
 					{
-						foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
 						{
-							foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+							if (box.SelectedIndex >= 0 & textBox.Text != "")
 							{
-								if (box.SelectedIndex >= 0 & textBox.Text != "")
-								{
-									string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
-									int TempVal = int.Parse(textBox.Text);  //gets the value
-									currentMT.AffectedResources.Add(new AmountUID(TempUID, TempVal));   //saves the affected rescources and their values
-								}
+								string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
+								int TempVal = int.Parse(textBox.Text);  //gets the value
+								currentMT.AffectedResources.Add(new AmountUID(TempUID, TempVal));   //saves the affected rescources and their values
 							}
 						}
 					}
+				}
 
-					foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
+				foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
+				{
+					if (BOX.SelectedIndex >= 0)
 					{
-						if (BOX.SelectedIndex >= 0)
-						{
-							string TempUID = CurrentConfig.ResList[BOX.SelectedIndex].UID;
-							currentMT.CostTypes.Add(TempUID);
-						}
+						string TempUID = CurrentConfig.ResList[BOX.SelectedIndex].UID;
+						currentMT.CostTypes.Add(TempUID);
 					}
+				}
 
-					foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
+				foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
+				{
+					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
 					{
-						foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
 						{
-							foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+							if (box.SelectedItem != null & textBox.Text != "")
 							{
-                                if (box.SelectedItem != null & textBox.Text != "")
-                                {
-									currentMT.Discounts.Add(new AmountUID((box.SelectedItem as majorTrait).UID, int.Parse(textBox.Text)));
-								}
+								currentMT.Discounts.Add(new AmountUID((box.SelectedItem as majorTrait).UID, int.Parse(textBox.Text)));
 							}
 						}
 					}
+				}
 
-					foreach (ComboBox box in (this.FindName("ListExclusion") as ListView).Items.OfType<ComboBox>())
+				foreach (ComboBox box in (this.FindName("ListExclusion") as ListView).Items.OfType<ComboBox>())
+				{
+					if (box.SelectedItem != null)
+					{
+						currentMT.Exclusions.Add((box.SelectedItem as majorTrait).UID);
+					}
+				}
+
+				int ind = 0;
+				foreach (StackPanel PANEL in (this.FindName("ListRequirements") as ListView).Items)
+				{
+					currentMT.Dependencies.Add(new List<string>());
+					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
 					{
 						if (box.SelectedItem != null)
 						{
-							currentMT.Exclusions.Add((box.SelectedItem as majorTrait).UID);
+							currentMT.Dependencies[ind].Add((box.SelectedItem as majorTrait).UID);
 						}
 					}
-
-                    int ind = 0;
-                    foreach (StackPanel PANEL in (this.FindName("ListRequirements") as ListView).Items)
-                    {
-                        currentMT.Dependencies.Add(new List<string>());
-                        foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-                        {
-                            if (box.SelectedItem != null)
-                            {
-                                currentMT.Dependencies[ind].Add((box.SelectedItem as majorTrait).UID);
-                            }
-                        }
-                        if (currentMT.Dependencies[ind].Count == 0)
-                        {
-                            currentMT.Dependencies.RemoveAt(ind);
-                            ind--;
-                        }
-                        ind++;
-                    }
-
-
-                    CurrentConfig.AbiList[index] = currentMT;
-					AbilityCollection.Clear(); // clears the list
-					foreach (majorTrait ability in CurrentConfig.AbiList)  //rewrites the list.
+					if (currentMT.Dependencies[ind].Count == 0)
 					{
-						AbilityCollection.Add(ability);
+						currentMT.Dependencies.RemoveAt(ind);
+						ind--;
 					}
-
-					lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
+					ind++;
 				}
+
+
+				CurrentConfig.AbiList[index] = currentMT;
+				AbilityCollection.Clear(); // clears the list
+				foreach (majorTrait ability in CurrentConfig.AbiList)  //rewrites the list.
+				{
+					AbilityCollection.Add(ability);
+				}
+
+				lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
 			}
 		}
 
