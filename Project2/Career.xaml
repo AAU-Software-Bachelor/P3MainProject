@@ -76,7 +76,7 @@
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" Margin="102,381,895,10">
                 <Grid>
-                    <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <Label Content="Given Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <ListView x:Name="ListStarterAbilities" Margin="10,38,10,35"/>
                     <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
