@@ -1,0 +1,213 @@
+{
+  "saveDestination": "C:\\Users\\Mattias\\source\\repos\\P3MainProject\\Project2\\bin\\Debug\\net6.0-windows\\Project2.dll",
+  "RacList": [
+    {
+      "cost": 0,
+      "CostTypes": [],
+      "dependency": [],
+      "freeAbilities": [
+        "AbiList-/65d6a41c-7703-42ed-b13a-ebea4cebebe7"
+      ],
+      "discounts": [],
+      "affectedResources": [
+        {
+          "UID": "ResList-/63ec8ff1-70bf-42a6-b26b-6f89a3d82050",
+          "Amount": 2
+        },
+        {
+          "UID": "ResList-/ee461863-5fca-4ec3-95b5-0e1a34ecbb20",
+          "Amount": 3
+        }
+      ],
+      "playerReq": "",
+      "Name": "Elf",
+      "Image": "pack://application:,,,/Images/Gallery.png",
+      "Description": "the most pompius pricks of all races",
+      "UID": "RacList-/66a96a5d-8e7a-4735-a794-d58d1ac24b1f"
+    },
+    {
+      "cost": 0,
+      "CostTypes": [],
+      "dependency": [],
+      "freeAbilities": [
+        "AbiList-/5f5e7765-1c29-4e91-b722-859d450b5440"
+      ],
+      "discounts": [],
+      "affectedResources": [
+        {
+          "UID": "ResList-/63ec8ff1-70bf-42a6-b26b-6f89a3d82050",
+          "Amount": 4
+        }
+      ],
+      "playerReq": "",
+      "Name": "Dwarf",
+      "Image": "pack://application:,,,/Images/Gallery.png",
+      "Description": "this be armor",
+      "UID": "RacList-/a5812b46-dab4-4bb6-9601-7e965a58f579"
+    }
+  ],
+  "AbiList": [
+    {
+      "cost": 4,
+      "CostTypes": [
+        "ResList-/ea58f168-223a-494b-a433-9fd0f975fec0"
+      ],
+      "dependency": [
+        [
+          "CarList-/16503595-b035-443e-a6eb-21ea26fc19a0"
+        ]
+      ],
+      "freeAbilities": [],
+      "discounts": [
+        {
+          "CostUID": [
+            "ResList-/ea58f168-223a-494b-a433-9fd0f975fec0"
+          ],
+          "CondUID": "CarList-/16503595-b035-443e-a6eb-21ea26fc19a0",
+          "Amount": 2
+        }
+      ],
+      "affectedResources": [],
+      "playerReq": "",
+      "Name": "SMITE",
+      "Image": "",
+      "Description": "slaa gud modstander med hellig styrke",
+      "UID": "AbiList-/5f5e7765-1c29-4e91-b722-859d450b5440"
+    },
+    {
+      "cost": 4,
+      "CostTypes": [
+        "ResList-/ea58f168-223a-494b-a433-9fd0f975fec0"
+      ],
+      "dependency": [
+        [
+          "CarList-/16503595-b035-443e-a6eb-21ea26fc19a0"
+        ]
+      ],
+      "freeAbilities": [],
+      "discounts": [
+        {
+          "CostUID": [
+            "ResList-/ea58f168-223a-494b-a433-9fd0f975fec0"
+          ],
+          "CondUID": "CarList-/e167d8f2-d011-4dad-ae66-f3e6be9b0c2c",
+          "Amount": 2
+        }
+      ],
+      "affectedResources": [
+        {
+          "UID": "ResList-/ee461863-5fca-4ec3-95b5-0e1a34ecbb20",
+          "Amount": 2
+        }
+      ],
+      "playerReq": "",
+      "Name": "Eldrich BLAST",
+      "Image": "",
+      "Description": "it\u0027s a BLAST to use",
+      "UID": "AbiList-/65d6a41c-7703-42ed-b13a-ebea4cebebe7"
+    }
+  ],
+  "CarList": [
+    {
+      "cost": 0,
+      "CostTypes": [],
+      "dependency": [],
+      "freeAbilities": [],
+      "discounts": [],
+      "affectedResources": [
+        {
+          "UID": "ResList-/63ec8ff1-70bf-42a6-b26b-6f89a3d82050",
+          "Amount": 2
+        }
+      ],
+      "playerReq": "",
+      "Name": "Warrior",
+      "Image": "",
+      "Description": "am gonna swing a sword",
+      "UID": "CarList-/16503595-b035-443e-a6eb-21ea26fc19a0"
+    },
+    {
+      "cost": 0,
+      "CostTypes": [],
+      "dependency": [
+        [
+          "CarList-/16503595-b035-443e-a6eb-21ea26fc19a0"
+        ]
+      ],
+      "freeAbilities": [],
+      "discounts": [],
+      "affectedResources": [
+        {
+          "UID": "ResList-/ee461863-5fca-4ec3-95b5-0e1a34ecbb20",
+          "Amount": 2
+        }
+      ],
+      "playerReq": "",
+      "Name": "Warlock",
+      "Image": "",
+      "Description": "-_-",
+      "UID": "CarList-/e167d8f2-d011-4dad-ae66-f3e6be9b0c2c"
+    }
+  ],
+  "RelList": [
+    {
+      "cost": 0,
+      "CostTypes": [],
+      "dependency": [],
+      "freeAbilities": [],
+      "discounts": [],
+      "affectedResources": [
+        {
+          "UID": "ResList-/63ec8ff1-70bf-42a6-b26b-6f89a3d82050",
+          "Amount": 2
+        }
+      ],
+      "playerReq": "",
+      "Name": "Cult Of Sigmar",
+      "Image": "",
+      "Description": "The Cult of Sigmar, also sometimes called the Church of Sigmar, the Holy Temple of Sigmar, the Clergy of Sigmar or simply the Sigmarite Cult, is the state church of the Empire that administrates the worship of that realm\u0027s patron god, Sigmar Heldenhammer.",
+      "UID": "RelList-/9470a030-de0b-4d2e-96a2-3ec56358eb06"
+    }
+  ],
+  "IteList": [
+    {
+      "cost": 0,
+      "CostTypes": [],
+      "dependency": [],
+      "freeAbilities": [],
+      "discounts": [],
+      "affectedResources": [],
+      "playerReq": "",
+      "Name": "hammer",
+      "Image": "",
+      "Description": "Le-Bonk",
+      "UID": "IteList-/a5360ce9-a23a-4014-ab14-29acf93b57d5"
+    }
+  ],
+  "ResList": [
+    {
+      "type": 0,
+      "Name": "health",
+      "Image": "",
+      "Description": "ye dead if this be zero",
+      "UID": "ResList-/63ec8ff1-70bf-42a6-b26b-6f89a3d82050"
+    },
+    {
+      "type": 0,
+      "Name": "Mana",
+      "Image": "",
+      "Description": "le-Magic juice",
+      "UID": "ResList-/ee461863-5fca-4ec3-95b5-0e1a34ecbb20"
+    },
+    {
+      "type": 1,
+      "Name": "xp",
+      "Image": "",
+      "Description": "GAINS!!",
+      "UID": "ResList-/ea58f168-223a-494b-a433-9fd0f975fec0"
+    }
+  ],
+  "IcoList": [],
+  "temppath": "",
+  "placeholderImage": "/Images/Gallery.png"
+}
