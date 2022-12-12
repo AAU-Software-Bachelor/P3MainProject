@@ -21,8 +21,7 @@ using static Project2.ResourcePage;
 using static Project2.resourceTrait;
 using static Project2.GalleryWindow;
 using static Project2.galleryIcon;
-
-
+using System.Diagnostics;
 
 namespace Project2
 {
@@ -152,6 +151,24 @@ namespace Project2
 						currentRT.Type = int.Parse(rd.Tag.ToString());
 					}
 				}
+
+                switch (currentRT.Type)
+                {
+					case 0:
+						currentRT.TypeName = "Stat";
+                        break;
+                    case 1:
+                        currentRT.TypeName = "XP";
+                        break;
+                    case 2:
+                        currentRT.TypeName = "Currency";
+                        break;
+                    case 3:
+                        currentRT.TypeName = "Misc";
+                        break;
+
+                }
+
 
 				CurrentConfig.ResList[index] = currentRT;
 				ResourceCollection.Clear();    // clears the list

@@ -78,5 +78,6 @@ namespace Project2
 		}
 
 		public int Type { get; set; }
-	}
+        public string TypeName { get; set; }
+    }
 }

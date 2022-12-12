@@ -23,7 +23,6 @@
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
-                    <GridViewColumn Header="ID"  Width="40" DisplayMemberBinding="{Binding UID}"/>
                 </GridView>
             </ListView.View>
         </ListView>
