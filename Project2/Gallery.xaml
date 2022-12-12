@@ -25,8 +25,7 @@
             </ListView.View>
         </ListView>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Height="32" Margin="17,464,0,0" x:Name="btnGalleryAdd" Click="btnOpenFile_Click" Content="Upload Picture" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="98" Height="32" Margin="158,522,0,0" x:Name="btnGalleryDelete" Click="btnGallery_ClickDeleteFile" Content="DELETE File" Background="OrangeRed"></Button>
-        <Button Content="Upload Folder" Click="btnOpenFolder_Click" Margin="17,514,1404,196"/>
+        <Button Content="Upload Folder" Click="btnUploadFolder_Click" Margin="17,514,1404,196"/>
         <Grid Background="DarkGray" Margin="334,99,32,26">
             <Image Source="{Binding SelectedItem.imgPath, ElementName=lstGallery}" Margin="21,12,483,138" Width="350" Height="350"/>
         </Grid>
