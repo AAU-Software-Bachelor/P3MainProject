@@ -9,46 +9,42 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Career.xaml.cs">
+    <Compile Update="CareerPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Items.xaml.cs">
+    <Compile Update="ItemsPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Race.xaml.cs">
+    <Compile Update="RacePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-
-    <Compile Update="Resources.xaml.cs">
-
+    <Compile Update="ResourcesPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Religion.xaml.cs">
+    <Compile Update="ReligionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Career.xaml">
+    <Page Update="CareerPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Items.xaml">
+    <Page Update="ItemsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Gallery.xaml">
+    <Page Update="GalleryPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Race.xaml">
+    <Page Update="RacePage.xaml">
       <SubType>Designer</SubType>
     </Page>
-
-    <Page Update="Resources.xaml">
-
+    <Page Update="ResourcesPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Religion.xaml">
+    <Page Update="ReligionPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
