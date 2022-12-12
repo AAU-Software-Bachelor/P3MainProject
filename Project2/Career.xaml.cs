@@ -126,9 +126,6 @@ namespace Project2
 			}
 		}
 
-
-
-
         private void OnClickAddRequirment(object sender, EventArgs e)
         {
             this.InitializeComponent();
@@ -624,7 +621,8 @@ namespace Project2
 				ListDiscounts.Items.Clear();
 				ListCosts.Items.Clear();
 				ListExclusion.Items.Clear();
-			}
+                ListStarterAbilities.Items.Clear();
+            }
 		}
 
 		private void OnClickSaveCareer(object sender, EventArgs e)
