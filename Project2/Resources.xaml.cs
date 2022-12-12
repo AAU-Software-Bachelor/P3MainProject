@@ -19,6 +19,8 @@ using System.Windows.Shapes;
 using System.Xml.Linq;
 using static Project2.ResourcePage;
 using static Project2.resourceTrait;
+using static Project2.GalleryWindow;
+using static Project2.galleryIcon;
 
 
 
@@ -54,7 +56,7 @@ namespace Project2
 
 		private void btnResource_ClickAdd(object sender, RoutedEventArgs e)
 		{
-			resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("Resource")) { Name = "new resource"};
+			resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("ResList")) { Name = "new resource"};
 			ResourceCollection.Add(newResource);
 			CurrentConfig.saveToList(newResource);
 			lstResources.SelectedIndex = ResourceCollection.Count - 1;
@@ -87,7 +89,7 @@ namespace Project2
 
                 foreach (RadioButton rd in (this.FindName("GridRadioButtons") as Grid).Children.OfType<RadioButton>())
                 {
-                    if (int.Parse(rd.Tag.ToString()) == currentRT.type)
+                    if (int.Parse(rd.Tag.ToString()) == currentRT.Type)
                     {
                         rd.IsChecked = true;
                     }
@@ -101,9 +103,17 @@ namespace Project2
 		}
 
 
+		public void ChangeIcon_click(object sender, RoutedEventArgs e)
+		{
+			GalleryWindow newWindow = new GalleryWindow(CurrentConfig);
+		
+			string imgSource = newWindow.uploadFile(sender, e);
+			System.Diagnostics.Debug.WriteLine("we have an image at: " +imgSource);
+            ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
 
+        }
 
-		private void OnClickSaveResource(object sender, RoutedEventArgs e)
+        private void OnClickSaveResource(object sender, RoutedEventArgs e)
 		{
 			SaveResource();
 		}
@@ -139,7 +149,7 @@ namespace Project2
 				{
 					if (rd.IsChecked == true)
 					{
-						currentRT.type = int.Parse(rd.Tag.ToString());
+						currentRT.Type = int.Parse(rd.Tag.ToString());
 					}
 				}
 
@@ -150,8 +160,6 @@ namespace Project2
 					ResourceCollection.Add(res);
 				}
 
-
-				CurrentConfig.TestWriteToJson("testConfig.json");
 				lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
 			}
 		}
