@@ -422,7 +422,10 @@ namespace Project2
 					ListDiscounts.Items.Clear();
 					ListCosts.Items.Clear();
 					ListStarterAbilities.Items.Clear();
-				}
+                    ListExclusion.Items.Clear();
+
+
+                }
 				CurrentIndex = lstCareer.SelectedIndex;
 				majorTrait currentMT = CurrentConfig.CarList[CurrentIndex]; //gets the trait to be loaded
 
