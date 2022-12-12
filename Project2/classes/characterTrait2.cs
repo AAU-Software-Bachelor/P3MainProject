@@ -1,73 +1,82 @@
-class characterTrait
+using System;
+using System.Collections.Generic;
+
+
+namespace Project2
 {
-    
-    public characterTrait(string Name, string Image, string Desciption, int uid)
-    {
-        name  = Name;
-        image = Image;
-        description = Desciption;
-        UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
-        
-    }
-    public string name{get; set;}
-    public string image{get; set;}
-    public string description{get; set;}
-    public int UID{get; set;}
+	public class characterTrait
+	{
 
-    public void DeleteTrait()
-    {
-        // no idea whats going on here
-        foreach (majorTrait item in nameofconfig.MTList)
-        {
-            
-        }  
-        name = "";
-        image = "";
-        description = "";
-        UID = 0;
-    }
-    
-    public void SaveToConfig()
-    {
-        
-    }
+		public characterTrait(string uid)
+		{
+			UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
+			Image = "";
+			Name = "";
+			Description = "";
+		}
 
-}
+		public string Name { get; set; }
+		public string Image { get; set; }
+		public string Description { get; set; }
+		public string UID { get; set; }
 
-class majorTrait : characterTrait
-{
-    public majorTrait(string Name, string Image, string Desciption, int uid,
-                      List<int> Exclusions, int Type, List<List<string>> Dependencies, List<string> Discounts, int Cost, List<int> AffectedResources, List<int> FreeAbilities)
-                      : base(Name, Image, Desciption, uid)
-    {
-        exclusions = Exclusions;
-        type = Type;
-        dependencies = Dependencies;
-        discounts = Discounts;
-        cost = Cost;
-        affectedResources = AffectedResources;
-        freeAbilities = FreeAbilities;
-    }
-    public List<string> exclusions {get; set;}
-    public int type {get; set;}
-    public List<List<string>> dependencies {get; set;}
-    public List<string> discounts {get; set;}
-    public int cost {get; set;}
-    public List<int> affectedResources {get; set;}
-    public List<int> freeAbilities {get; set;}
+	}
 
-    public void addDepen(string uuid){
-        this.dependencies.Add(uuid);
-    }
-    
-}
+	public class majorTrait : characterTrait
+	{
+		public majorTrait(string uid) : base(uid)
+		{
+			Cost = new int();
+			CostTypes = new List<string>();
+            Exclusions = new List<string>();
+            Dependencies = new List<List<string>>();
+			FreeAbilities = new List<string>();
+			Discounts = new List<AmountUID>();
+			AffectedResources = new List<AmountUID>();
+			PlayerReq = new string("");
+		}
 
-class resource : characterTrait
-{
-    public resource(string Name, string Image, string Desciption, int uid, int Type) : base(Name, Image, Desciption, uid)
-    {
-        type = Type;
-    }
+		public class AmountUID
+		{
+			public AmountUID(string uid, int amount)
+			{
+				UID = uid;
+				Amount = amount;
+			}
+			public string UID { get; set; }
+			public int Amount { get; set; }
+		}
 
-    public int type {get; set;}
+		public int Cost { get; set; }
+		public List<string> CostTypes { get; set; }
+        public List<string> Exclusions { get; set; }
+        public List<List<string>> Dependencies { get; set; }
+		public List<string> FreeAbilities { get; set; }
+		public List<AmountUID> Discounts { get; set; }
+		public List<AmountUID> AffectedResources { get; set; }
+		public string PlayerReq { get; set; }
+
+		public void deleteContent()
+		{
+			this.Name = "";
+			this.Image = "";
+			this.Description = "";
+			this.Cost = new int();
+			this.CostTypes = new List<string>();
+            this.Exclusions = new List<string>();
+            this.FreeAbilities = new List<string>();
+			this.Discounts = new List<AmountUID>();
+			this.AffectedResources = new List<AmountUID>();
+			this.Dependencies = new List<List<string>>();
+        }
+	}
+
+	public class resourceTrait : characterTrait
+	{
+		public resourceTrait(string uid) : base(uid)
+		{
+		}
+
+		public int Type { get; set; }
+	}
 }

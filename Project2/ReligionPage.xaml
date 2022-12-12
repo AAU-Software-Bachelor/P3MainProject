@@ -1,0 +1,51 @@
+﻿<Page x:Class="Project2.ReligionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Project2"
+
+      mc:Ignorable="d"
+      Title="Religion" Height="760" Width="1543">
+
+    <Grid Background="White" Margin="0,0,10,10">
+        <Label Grid.Row="0" x:Name="ReligionBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="ReligionMainMenu_MouseDoubleClick" Width="136" Height="46">
+            <StackPanel Orientation="Vertical">
+                <Border Background="LightBlue" Padding="10,5,10,5" >
+                    <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
+                </Border>
+            </StackPanel>
+        </Label>
+        <ListView x:Name="lstReligion" Margin="17,99,1314,338" Grid.Row="0" SelectionChanged="OnReligionChanged">
+            <ListView.View>
+                <GridView x:Name="grdNames">
+                    <GridViewColumn Header="Name" Width="170" DisplayMemberBinding="{Binding Name}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,415,0,0" x:Name="btnReligionAdd" Click="btnReligion_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,415,0,0" x:Name="btnReligionDelete" Click="btnReligion_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Grid Background="Gray" Margin="224,99,32,26">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="20,10,1069,444"></Border>
+
+            <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="25,19,1076,474"/>
+            <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="24,154,1075,446"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,195,0,0" TextWrapping="Wrap" Text="new relegion" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Height="178" Text="Description"/>
+            <Border BorderThickness="1" Margin="437,52,68,239">
+                <Grid Background="White" Margin="0,0,442,-1">
+                    <Label Content="Affected Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,12,0,0" Height="32" Width="97" FontWeight="Bold"/>
+                    <ListView x:Name="ListAffectedResources" Margin="10,38,10,36">
+                    </ListView>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,301,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddAffectedResources" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,301,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteAffectedResources" ClickMode="Press" Background="OrangeRed"/>
+                </Grid>
+            </Border>
+            <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-103,316,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="OnClickSaveReligion"/>
+        </Grid>
+        <Label Content="Religion Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="295" FontWeight="Bold" FontSize="38"/>
+        <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="282,37,0,0" VerticalAlignment="Top" Height="46" Width="206" FontWeight="Bold" FontSize="15"/>
+
+    </Grid>
+</Page>
