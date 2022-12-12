@@ -83,11 +83,30 @@ namespace Project2
                 lstRaces.SelectedIndex = RaceCollection.Count - 1;
             }	
 		}
+        private void btnRaces_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstRaces.SelectedIndex;
+			if (index >= 0)
+			{
+				majorTrait tempRace = new majorTrait(CurrentConfig.newUID("RacList"))
+				{
+					Name = CurrentConfig.RacList[index].Name,
+					Description = CurrentConfig.RacList[index].Description,
+					AffectedResources = CurrentConfig.RacList[index].AffectedResources,
+					FreeAbilities = CurrentConfig.RacList[index].FreeAbilities,
+					PlayerReq = CurrentConfig.RacList[index].PlayerReq
+				};
+				CurrentConfig.saveToList(tempRace);
+				RaceCollection.Add(tempRace);
+				lstRaces.SelectedIndex = RaceCollection.Count - 1;
+			}
 
-		/// <summary>
-		/// adds a combobox with all Abilities fron CurrentConfig as selectables
-		/// </summary>
-		private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
+        }
+
+        /// <summary>
+        /// adds a combobox with all Abilities fron CurrentConfig as selectables
+        /// </summary>
+        private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
 		{
 			int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
 			ComboBox comboBox = new ComboBox();

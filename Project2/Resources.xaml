@@ -56,6 +56,7 @@
         </Grid>
         <Label Content="Resource Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="295" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="296,37,0,0" VerticalAlignment="Top" Height="46" Width="206" FontWeight="Bold" FontSize="15"/>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,495,0,0" Click="btnResource_ClickCopy" Content="COPY" Background="LightBlue" />
     </Grid>
 </Page>
 

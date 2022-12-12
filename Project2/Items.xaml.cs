@@ -81,6 +81,24 @@ namespace Project2
                 lstItems.SelectedIndex = ItemCollection.Count - 1;
             }
         }
+        private void btnItems_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstItems.SelectedIndex;
+            if (index >= 0)
+            {
+                majorTrait tempItem = new majorTrait(CurrentConfig.newUID("IteList"))
+                {
+                    Name = CurrentConfig.IteList[index].Name,
+                    Description = CurrentConfig.IteList[index].Description,
+                    AffectedResources = CurrentConfig.IteList[index].AffectedResources,
+                    FreeAbilities = CurrentConfig.IteList[index].FreeAbilities
+                };   //makes the new Item object
+                CurrentConfig.saveToList(tempItem);
+                ItemCollection.Add(tempItem);
+                lstItems.SelectedIndex = ItemCollection.Count - 1;
+            }
+
+        }
 
         /// <summary>
         /// adds a combobox with all Abilities fron CurrentConfig as selectables

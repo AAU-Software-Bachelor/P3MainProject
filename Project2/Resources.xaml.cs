@@ -69,8 +69,26 @@ namespace Project2
 				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
 			}
 		}
+        private void btnResource_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstResources.SelectedIndex;
+			if (index >= 0)
+			{
+				resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("ResList"))
+				{
+					Description = CurrentConfig.ResList[index].Description,
+					Name = CurrentConfig.ResList[index].Name,
+					Type = ResourceCollection[index].Type,
+					TypeName = CurrentConfig.ResList[index].TypeName
+                };
 
-            private void OnResourceChanged (object sender, RoutedEventArgs e)
+				ResourceCollection.Add(newResource);
+				CurrentConfig.saveToList(newResource);
+				lstResources.SelectedIndex = ResourceCollection.Count - 1;
+			}
+        }
+
+        private void OnResourceChanged (object sender, RoutedEventArgs e)
 		{
 			int SelIndex = lstResources.SelectedIndex;  //saves selected resource so it is not lost
 			if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected

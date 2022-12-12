@@ -75,9 +75,30 @@ namespace Project2
 				lstCareer.SelectedIndex = CareerCollection.Count - 1;
 			}
 		}
+        private void btnCareer_ClickCopy(object sender, EventArgs e)
+        {
+            var index = lstCareer.SelectedIndex;
+			if (index >= 0)
+			{
+				majorTrait tempCareer = new majorTrait(CurrentConfig.newUID("CarList"))
+				{
+					Name = CurrentConfig.CarList[index].Name,
+					Description = CurrentConfig.CarList[index].Description,
+					FreeAbilities = CurrentConfig.CarList[index].FreeAbilities,
+					Discounts = CurrentConfig.CarList[index].Discounts,
+					Dependencies = CurrentConfig.CarList[index].Dependencies,
+					AffectedResources = CurrentConfig.CarList[index].AffectedResources,
+					Exclusions = CurrentConfig.CarList[index].Exclusions,
+					Cost = CurrentConfig.CarList[index].Cost,
+					CostTypes = CurrentConfig.CarList[index].CostTypes
+                };   //makes the new Career object
+				CurrentConfig.saveToList(tempCareer);
+				CareerCollection.Add(tempCareer);
+				lstCareer.SelectedIndex = CareerCollection.Count - 1;
+			}
+        }
 
-
-		private void OnClickAddStarterAbilities(object sender, EventArgs e)
+        private void OnClickAddStarterAbilities(object sender, EventArgs e)
 		{
 			int SelIndex = lstCareer.SelectedIndex;  //saves selected caeer so it is not lost
 			ComboBox comboBox = new ComboBox();
