@@ -67,6 +67,23 @@ namespace Project2
                 lstReligion.SelectedIndex = ReligionCollection.Count - 1;
             }
         }
+        private void btnReligion_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstReligion.SelectedIndex;
+            if (index >= 0)
+            {
+                majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("RelList"))
+                {
+                    AffectedResources = CurrentConfig.RelList[index].AffectedResources,
+                    Name = CurrentConfig.RelList[index].Name,
+                    Description = CurrentConfig.RelList[index].Description
+                };   //makes the new religion object
+                CurrentConfig.saveToList(tempReligion);
+                ReligionCollection.Add(tempReligion);
+                lstReligion.SelectedIndex = ReligionCollection.Count - 1;
+            }
+        }
+
         private void OnClickAddAffectedResources(object sender, RoutedEventArgs e)
         {
             this.InitializeComponent();

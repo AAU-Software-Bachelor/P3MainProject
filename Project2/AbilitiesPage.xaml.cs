@@ -74,8 +74,30 @@ namespace Project2
 				lstAbility.SelectedIndex = AbilityCollection.Count - 1;
 			}
 		}
+		private void btnAbility_ClickCopy(object sender, EventArgs e)
+		{
+			var index = lstAbility.SelectedIndex;
+			if (index >= 0)
+            {
+				majorTrait tempAbility = new majorTrait(CurrentConfig.newUID("AbiList"))
+				{
+					AffectedResources = CurrentConfig.AbiList[index].AffectedResources,
+					Dependencies = CurrentConfig.AbiList[index].Dependencies,
+					Exclusions = CurrentConfig.AbiList[index].Exclusions,
+					Discounts = CurrentConfig.AbiList[index].Discounts,
+					Name = CurrentConfig.AbiList[index].Name,
+					Description = CurrentConfig.AbiList[index].Description,
+					Cost = CurrentConfig.AbiList[index].Cost,
+					CostTypes = CurrentConfig.AbiList[index].CostTypes
+                };
 
-		private void OnClickAddRequirmentsList(object sender, EventArgs e)
+                CurrentConfig.saveToList(tempAbility);
+				AbilityCollection.Add(tempAbility);
+				lstAbility.SelectedIndex = AbilityCollection.Count - 1;
+			}
+        }
+
+        private void OnClickAddRequirmentsList(object sender, EventArgs e)
 		{
 			this.InitializeComponent();
 			StackPanel ReqStackPanel = new StackPanel();
