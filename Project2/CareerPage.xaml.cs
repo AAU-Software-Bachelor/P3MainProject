@@ -628,7 +628,11 @@ namespace Project2
                 {
                     foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
                     {
-                        box.SelectedItem = CurrentConfig.GetTrait(currentMT.Dependencies[ind][ind2]);
+                        try
+                        {
+                            box.SelectedItem = CurrentConfig.GetTrait(currentMT.Dependencies[ind][ind2]);
+                        }
+                        catch { }
                         ind2++;
                     }
                     ind2 = 0;
