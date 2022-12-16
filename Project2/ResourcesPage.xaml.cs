@@ -66,8 +66,8 @@ namespace Project2
 			var index = lstResources.SelectedIndex;
 			if (index >= 0)
 			{
-				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
-			}
+				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the Resource to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ResourceCollection
+            }
 		}
         private void btnResource_ClickCopy(object sender, RoutedEventArgs e)
         {
@@ -90,8 +90,8 @@ namespace Project2
 
         private void OnResourceChanged (object sender, RoutedEventArgs e)
 		{
-			int SelIndex = lstResources.SelectedIndex;  //saves selected resource so it is not lost
-			if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
+			int SelIndex = lstResources.SelectedIndex;  //saves selected index so it is not lost
+            if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
 			{
 				if (CurrentIndex >= 0)  //skips saving the previus selected resource if -1
 				{
@@ -116,8 +116,8 @@ namespace Project2
 			{
 				CurrentIndex = -1;
 			}
-			lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
-		}
+			lstResources.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 
 		public void ChangeIcon_click(object sender, RoutedEventArgs e)
@@ -135,14 +135,14 @@ namespace Project2
 			SaveResource();
 		}
 
-		/// <summary>
-		/// Saves everything in the indexed race to the current config. if no index is given then it saves the currently selected race.
-		/// </summary>
-		private void SaveResource(int index = -1)
+        /// <summary>
+        /// Saves everything in the indexed Resource to the current config. if no index is given then it saves the currently selected Resource.
+        /// </summary>
+        private void SaveResource(int index = -1)
 		{
-			int SelIndex = lstResources.SelectedIndex;  //saves selected race so it is not lost
+			int SelIndex = lstResources.SelectedIndex;  //saves selected index so it is not lost
 
-			string UID = "";
+            string UID = "";
 			if (index == -1)    //is true when funtion is called via a button
 			{
 				if (lstResources.SelectedIndex >= 0)
@@ -195,8 +195,8 @@ namespace Project2
 					ResourceCollection.Add(res);
 				}
 
-				lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
-			}
+				lstResources.SelectedIndex = SelIndex;  //applies saved index selection
+            }
 		}
 	}
 }

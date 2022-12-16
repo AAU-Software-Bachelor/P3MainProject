@@ -100,8 +100,8 @@ namespace Project2
 
         private void OnClickAddStarterAbilities(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected caeer so it is not lost
-			ComboBox comboBox = new ComboBox();
+			int SelIndex = lstCareer.SelectedIndex;  //saves selected index so it is not lost
+            ComboBox comboBox = new ComboBox();
 			comboBox.IsReadOnly = true;
 			comboBox.IsDropDownOpen = false;
 			comboBox.Margin = new Thickness(5, 5, 0, 0);
@@ -114,8 +114,8 @@ namespace Project2
 			}
 
 			this.ListStarterAbilities.Items.Add(comboBox);
-			lstCareer.SelectedIndex = SelIndex;  //applies saved career selection
-		}
+			lstCareer.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 		/// <summary>
 		/// Deletes selected starterAbility
 		/// </summary>
@@ -128,6 +128,9 @@ namespace Project2
 			}
 		}
 
+        /// <summary>
+        /// adds a row to hold a or requrement
+        /// </summary>
         private void OnClickAddRequirmentsList(object sender, EventArgs e)
         {
             this.InitializeComponent();
@@ -138,6 +141,9 @@ namespace Project2
             ListRequirements.SelectedIndex = ListRequirements.Items.Count - 1;
         }
 
+        /// <summary>
+        /// Deletes the selected row
+        /// </summary>
         private void OnClickDeleteRequirmentsList(object sender, RoutedEventArgs e)
 		{
 			var index = ListRequirements.SelectedIndex;
@@ -147,6 +153,9 @@ namespace Project2
 			}
 		}
 
+        /// <summary>
+        /// Adds a and requrement to the selected row
+        /// </summary>
         private void OnClickAddRequirment(object sender, EventArgs e)
         {
             this.InitializeComponent();
@@ -220,8 +229,8 @@ namespace Project2
 
         private void OnClick_AddCostType(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstCareer.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the currency combobox
 			comboBoxOne.Text = "Select currency";
@@ -238,8 +247,8 @@ namespace Project2
 			}
 
 			this.ListCosts.Items.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
-			lstCareer.SelectedIndex = SelIndex;    //applies saved Career selection
-		}
+			lstCareer.SelectedIndex = SelIndex;    //applies saved index selection
+        }
 
 		private void OnClick_DeleteCostType(object sender, EventArgs e)
 		{
@@ -251,8 +260,8 @@ namespace Project2
 		}
 		private void OnClick_AddGrantedResouce(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstCareer.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 			StackPanel stackPanel = new StackPanel();
 			stackPanel.Orientation = Orientation.Horizontal;
 
@@ -270,7 +279,6 @@ namespace Project2
 				comboBoxOne.Items.Add(res);
 			}
 
-
 			stackPanel.Children.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
 
 			TextBox textBox = new TextBox();    //starts on the number only textbox
@@ -284,8 +292,8 @@ namespace Project2
 
 
 			this.ListGrantedResources.Items.Add(stackPanel);
-			lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-		}
+			lstCareer.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 		/// <summary>
 		/// deletes selected Starter Resources 
 		/// </summary>
@@ -300,8 +308,8 @@ namespace Project2
 
 		private void OnClick_AddExclusion(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstCareer.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the recouse combobox
 			comboBoxOne.Text = "Select Stat";
@@ -336,8 +344,8 @@ namespace Project2
 
 			this.ListExclusion.Items.Add(comboBoxOne);
 			ListExclusion.SelectedIndex = ListExclusion.Items.Count - 1;
-			lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-		}
+			lstCareer.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		private void OnClick_DeleteExclusion(object sender, EventArgs e)
 		{
@@ -351,8 +359,8 @@ namespace Project2
 
 		private void OnClick_AddDiscount(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstCareer.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 			StackPanel stackPanelDiscounts = new StackPanel();
 			stackPanelDiscounts.Orientation = Orientation.Horizontal;
 
@@ -400,8 +408,8 @@ namespace Project2
 
 
 			this.ListDiscounts.Items.Add(stackPanelDiscounts);
-			lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-		}
+			lstCareer.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		/// <summary>
 		/// deletes selected Starter Resources 
@@ -659,9 +667,9 @@ namespace Project2
 
 		private void SaveCareer(int index = -1)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
+			int SelIndex = lstCareer.SelectedIndex;  //saves selected index so it is not lost
 
-			string UID = "";
+            string UID = "";
 			if (index == -1)    //is true when funtion is called via a button
 			{
 				if (lstCareer.SelectedIndex >= 0)
@@ -766,8 +774,8 @@ namespace Project2
 					CareerCollection.Add(Career);
 				}
 
-				lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-			}
+				lstCareer.SelectedIndex = SelIndex;  //applies saved index selection
+            }
 		}
 
 		/// <summary>
