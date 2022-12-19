@@ -11,7 +11,10 @@ using System.Text.Json.Serialization;
 
 namespace Project2
 {
-	public class config
+    /// <summary>
+    /// Interaction logic for the configuration
+    /// </summary>
+    public class config
 	{
 		public config()
 		{
@@ -39,7 +42,10 @@ namespace Project2
 		public string Temppath { get; set; }
 		public string PlaceholderImage { get;  }
 
-		public void TestWriteToJson(string name = "")
+        /// <summary>
+        /// Serialize and Write the entire current configuration to a place the user chooses or to the chosen save destination with a given "name"
+        /// </summary>
+        public void WriteToJson(string name = "")
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
@@ -65,7 +71,10 @@ namespace Project2
             }
         }
 
-		public string newUID(string type)
+        /// <summary>
+        /// creates and returns a UID given a List type
+        /// </summary>
+        public string newUID(string type)
 		{
 			return type  + "-/" + Guid.NewGuid().ToString();
 		}
@@ -87,6 +96,9 @@ namespace Project2
             return true;
         }
 
+        /// <summary>
+        /// Finds and returns the trait corosponding to the UID given. optionaly it can delete the trait befor it returns it
+        /// </summary>
         public dynamic GetTrait(string uid, bool isDelete = false)
         {
 			string[] id = uid.Split("-/"); // "race", "religion", "career", "ability", "Resource"
@@ -153,8 +165,9 @@ namespace Project2
 			}
 		}
 
-      
-
+        /// <summary>
+        /// reads the traits UID and puts it in its type list
+        /// </summary>
         public bool saveToList(dynamic trait)
 		{
 			string[] id = trait.UID.Split("-/"); // "race", "religion", "career", "ability"

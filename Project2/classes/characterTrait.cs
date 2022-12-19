@@ -1,71 +1,84 @@
-/*
-class characterTrait
+using System;
+using System.Collections.Generic;
+
+
+namespace Project2
 {
-    
-    public characterTrait(string Name, string Image, string Desciption, int uid)
-    {
-        name  = Name;
-        image = Image;
-        description = Desciption;
-        UID = uid; //1**** for misc 2**** for resouce 3**** for ability 4**** for race
-        
+	public class characterTrait
+	{
+
+		public characterTrait(string uid)
+		{
+			UID = uid; //r-**** for resource 0-**** for misc 1-**** for ability 2-**** for race
+			Image = "";
+			Name = "";
+			Description = "";
+		}
+
+		public string Name { get; set; }
+		public string Image { get; set; }
+		public string Description { get; set; }
+		public string UID { get; set; }
+
+	}
+
+	public class majorTrait : characterTrait
+	{
+		public majorTrait(string uid) : base(uid)
+		{
+			Cost = new int();
+			CostTypes = new List<string>();
+            Exclusions = new List<string>();
+            Dependencies = new List<List<string>>();
+			FreeAbilities = new List<string>();
+			Discounts = new List<AmountUID>();
+			AffectedResources = new List<AmountUID>();
+			PlayerReq = new string("");
+		}
+
+		public class AmountUID
+		{
+			public AmountUID(string uid, int amount)
+			{
+				UID = uid;
+				Amount = amount;
+			}
+			public string UID { get; set; }
+			public int Amount { get; set; }
+		}
+
+		public int Cost { get; set; }
+		public List<string> CostTypes { get; set; }
+        public List<string> Exclusions { get; set; }
+        public List<List<string>> Dependencies { get; set; }
+		public List<string> FreeAbilities { get; set; }
+		public List<AmountUID> Discounts { get; set; }
+		public List<AmountUID> AffectedResources { get; set; }
+		public string PlayerReq { get; set; }
+
+		public void deleteContent()
+		{
+			this.Name = "";
+			this.Image = "";
+			this.Description = "";
+			this.Cost = new int();
+			this.CostTypes = new List<string>();
+            this.Exclusions = new List<string>();
+            this.FreeAbilities = new List<string>();
+			this.Discounts = new List<AmountUID>();
+			this.AffectedResources = new List<AmountUID>();
+			this.Dependencies = new List<List<string>>();
+        }
+	}
+
+	public class resourceTrait : characterTrait
+	{
+		public resourceTrait(string uid) : base(uid)
+		{
+			Type = 3;
+        }
+
+		public int Type { get; set; }
+        public string TypeName { get; set; }
     }
-    public string name{get; set;}
-    public string image{get; set;}
-    public string description{get; set;}
-    public int UID{get; set;}
 }
-
-class resource
-{
-    //todo: find ud af hvordan denne class er bygget op
-}
-
-class race : characterTrait
-{
-    public race(string Name, string image, string Desc, int uid, List<int> StarterRes, List<int> AmountList, List<int> StarterAbility, string PlayerRestrict ) : base(Name, image, Desc, uid)
-    {
-        stRes = StarterRes;
-        amList = AmountList;
-        stAbl = StarterAbility;
-        plRest = PlayerRestrict;
-    }
-
-    public List<int> stRes {get; set;}
-    public List<int> amList {get; set;}
-    public List<int> stAbl {get; set;}
-    public string plRest {get; set;}
-}
-
-class ability : characterTrait
-{
-    public ability(string Name, string image, string Desc, int uid, List<int> RaceRequirement, List<int> CareerRequirement, List<int> AbilityRequirement) : base(Name, image, Desc, uid)
-    {
-        raceReq = RaceRequirement;
-        careerReq = CareerRequirement;
-        abilReq = AbilityRequirement;
-    }
-
-    public List<int> raceReq {get; set;}
-    public List<int> careerReq {get; set;}
-    public List<int> abilReq {get; set;}
-    public int cost {get; set;}
-    
-}
-
-class career : characterTrait
-{
-    public career(string Name, string Image, string Desciption, int uid) : base(Name, Image, Desciption, uid)
-    {
-
-    }
-}
-
-class religion : characterTrait
-{
-    public religion(string Name, string Image, string Desciption, int uid) : base(Name, Image, Desciption, uid)
-    {
-
-    }
-}
-*/

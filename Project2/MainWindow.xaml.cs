@@ -110,7 +110,7 @@ namespace Project2
 
         private void onclickSave(object sender, MouseButtonEventArgs e)
         {
-            CurrentConfig.TestWriteToJson();
+            CurrentConfig.WriteToJson();
             MessageBox.Show("Config JSON file saved to destination");
         }
 
@@ -131,14 +131,14 @@ namespace Project2
 
         private void onclickZip(object sender, MouseButtonEventArgs e)
         {
-            if (File.Exists(CurrentConfig.SaveDestination + "test.zip"))
+            if (File.Exists(CurrentConfig.SaveDestination + "Configuration.zip"))
             {
-                File.Delete(CurrentConfig.SaveDestination + "test.zip");
+                File.Delete(CurrentConfig.SaveDestination + "Configuration.zip");
             }
-            using (ZipArchive zip = ZipFile.Open(CurrentConfig.SaveDestination + "test.zip", ZipArchiveMode.Create))
+            using (ZipArchive zip = ZipFile.Open(CurrentConfig.SaveDestination + "Configuration.zip", ZipArchiveMode.Create))
             {
-                CurrentConfig.TestWriteToJson("test.json");
-                zip.CreateEntryFromFile((CurrentConfig.SaveDestination + "test.json"), "Configuration.json");
+                CurrentConfig.WriteToJson("Rules.json");
+                zip.CreateEntryFromFile((CurrentConfig.SaveDestination + "Rules.json"), "Configuration.json");
                 foreach (galleryIcon icon in CurrentConfig.IcoList)
                 {
                     zip.CreateEntryFromFile(icon.imgPath, icon.imgName);

@@ -97,6 +97,9 @@ namespace Project2
 			}
         }
 
+        /// <summary>
+        /// adds a row to hold a or requrement
+        /// </summary>
         private void OnClickAddRequirmentsList(object sender, EventArgs e)
 		{
 			this.InitializeComponent();
@@ -107,7 +110,10 @@ namespace Project2
 			ListRequirements.SelectedIndex = ListRequirements.Items.Count - 1;
 		}
 
-		private void OnClickDeleteRequirmentsList(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Deletes the selected row
+        /// </summary>
+        private void OnClickDeleteRequirmentsList(object sender, RoutedEventArgs e)
 		{
 			var index = ListRequirements.SelectedIndex;
 			if (index >= 0)
@@ -117,6 +123,9 @@ namespace Project2
 			}
 		}
 
+        /// <summary>
+        /// Adds a and requrement to the selected row
+        /// </summary>
         private void OnClickAddRequirment(object sender, EventArgs e)
         {
             this.InitializeComponent();
@@ -190,8 +199,8 @@ namespace Project2
 
         private void OnClick_AddCostType(object sender, EventArgs e)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the currency combobox
 			comboBoxOne.Text = "Select currency";
@@ -209,8 +218,8 @@ namespace Project2
 
 			this.ListCosts.Items.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
 			ListCosts.SelectedIndex = ListCosts.Items.Count - 1;
-			lstAbility.SelectedIndex = SelIndex;	//applies saved ability selection
-		}
+			lstAbility.SelectedIndex = SelIndex;    //applies saved index selection
+        }
 
 		private void OnClick_DeleteCostType(object sender, EventArgs e)
 		{
@@ -223,8 +232,8 @@ namespace Project2
 		}
 		private void OnClick_AddGrantedResouce(object sender, EventArgs e)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 			StackPanel stackPanel = new StackPanel();
 			stackPanel.Orientation = Orientation.Horizontal;
 
@@ -257,8 +266,8 @@ namespace Project2
 
 			this.ListGrantedResources.Items.Add(stackPanel);
 			ListGrantedResources.SelectedIndex = ListGrantedResources.Items.Count - 1;
-			lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
-		}
+			lstAbility.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 		/// <summary>
 		/// deletes selected Starter Resources 
 		/// </summary>
@@ -274,8 +283,8 @@ namespace Project2
 
 		private void OnClick_AddExclusion(object sender, EventArgs e)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the recouse combobox
 			comboBoxOne.Text = "Select Stat";
@@ -310,8 +319,8 @@ namespace Project2
 
 			this.ListExclusion.Items.Add(comboBoxOne);
 			ListExclusion.SelectedIndex = ListExclusion.Items.Count - 1;
-			lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
-		}
+			lstAbility.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		private void OnClick_DeleteExclusion(object sender, EventArgs e)
 		{
@@ -325,8 +334,8 @@ namespace Project2
 
 		private void OnClick_AddDiscount(object sender, EventArgs e)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 			StackPanel stackPanelDiscounts = new StackPanel();
 			stackPanelDiscounts.Orientation = Orientation.Horizontal;
 
@@ -375,8 +384,8 @@ namespace Project2
 
 			this.ListDiscounts.Items.Add(stackPanelDiscounts);
 			ListDiscounts.SelectedIndex = ListDiscounts.Items.Count - 1;
-			lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
-		}
+			lstAbility.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		/// <summary>
 		/// deletes selected Starter Resources 
@@ -620,9 +629,9 @@ namespace Project2
 
 		private void SaveAbility(int index = -1)
 		{
-			int SelIndex = lstAbility.SelectedIndex;  //saves selected ability so it is not lost
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected index so it is not lost
 
-			string UID = "";
+            string UID = "";
 			if (index == -1)    //is true when funtion is called via a button
 			{
 				if (lstAbility.SelectedIndex >= 0)
@@ -718,8 +727,8 @@ namespace Project2
 					AbilityCollection.Add(ability);
 				}
 
-				lstAbility.SelectedIndex = SelIndex;  //applies saved ability selection
-			}
+				lstAbility.SelectedIndex = SelIndex;  //applies saved index selection
+            }
 		}
 
 		/// <summary>
