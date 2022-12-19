@@ -47,7 +47,7 @@ namespace Project2
 		}
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }	//keeps track of what index to use
-		private ObservableCollection<majorTrait> RaceCollection;   //itemSource for lstRaces ListVeiw
+		public ObservableCollection<majorTrait> RaceCollection;   //itemSource for lstRaces ListVeiw
 
 		/// <summary>
 		/// sets page to MainWindow
@@ -63,7 +63,7 @@ namespace Project2
 		/// <summary>
 		/// adds a new empty race to Current config and newrace
 		/// </summary>
-		private void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
+		public void btnRaces_ClickAdd(object sender, RoutedEventArgs e)
 		{
 			majorTrait tempRace = new majorTrait(CurrentConfig.newUID("RacList")) { Name = "new race" };	//makes the new race object
 			CurrentConfig.saveToList(tempRace);
@@ -74,7 +74,7 @@ namespace Project2
         /// <summary>
 		/// deletes race from both CurrentConfig and newrace
 		/// </summary>
-        private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
+        public void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
 		{
             var index = lstRaces.SelectedIndex;
 			if (index >= 0)
@@ -208,23 +208,17 @@ namespace Project2
 
 		private void ListSelectionRaceChanged(object sender, RoutedEventArgs e)
 		{
-
-            System.Diagnostics.Debug.WriteLine("last selected index: " + CurrentIndex);
-            System.Diagnostics.Debug.WriteLine("lstRaces index: " + lstRaces.SelectedIndex);
             int SelIndex = lstRaces.SelectedIndex;  //saves selected race so it is not lost
             if (lstRaces.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
             {
                 if (CurrentIndex >= 0)  //skips saving the previus selected race if -1
                 {
-                    System.Diagnostics.Debug.WriteLine("save");
                     SaveRace(CurrentIndex);
                     ListStarterAbilities.Items.Clear();
                     ListStarterResources.Items.Clear();
                 }
                 CurrentIndex = lstRaces.SelectedIndex;
                 majorTrait currentMT = CurrentConfig.RacList[CurrentIndex];	//gets the trait to be loaded
-                System.Diagnostics.Debug.WriteLine("the newly selected index: " + CurrentIndex);
-                System.Diagnostics.Debug.WriteLine("Majortrait name " + CurrentConfig.RacList[CurrentIndex].Name);
 
                 (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
 

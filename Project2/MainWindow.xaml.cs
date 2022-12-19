@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
+using Project2;
 
 namespace Project2
 {
@@ -32,6 +33,12 @@ namespace Project2
             InitializeComponent();
         }
         public config CurrentConfig { get; set; }
+
+        private void btn_ClickUnitTest(object sender, RoutedEventArgs e)
+        {
+            unitTest Test = new unitTest();
+            Test.unitTests();
+        }
 
         private void RaceMainMenu_MouseClick(object sender, MouseButtonEventArgs e)
         {
@@ -108,13 +115,13 @@ namespace Project2
             //TextBlock myTextBlock = "Empty";
         }
 
-        private void onclickSave(object sender, MouseButtonEventArgs e)
+        public void onclickSave(object sender, RoutedEventArgs e)
         {
             CurrentConfig.TestWriteToJson();
             MessageBox.Show("Config JSON file saved to destination");
         }
 
-        private void onclickLoad(object sender, MouseButtonEventArgs e)
+        public void onclickLoad(object sender, RoutedEventArgs e)
         {
             OpenFileDialog theFileDialog = new OpenFileDialog();
             theFileDialog.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";

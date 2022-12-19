@@ -90,6 +90,7 @@
                     </Border>
                 </StackPanel>
             </Label>
+            <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="69" Height="21" Margin="918,629,0,0" x:Name="btnAbilityAdd" Click="btn_ClickUnitTest" Content="UnitTest" Background="LightBlue" />
             <!--<Label  HorizontalAlignment="Left" Margin="35,412,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="14" Height="209" Width="315" RenderTransformOrigin="0.5,0.5" MouseDoubleClick="AddMainMenu_MouseDoubleClick">
                 <StackPanel Orientation="Vertical">
                     <TextBlock HorizontalAlignment="Center"><Run Text="Add"/></TextBlock>
