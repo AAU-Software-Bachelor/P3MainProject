@@ -42,7 +42,6 @@ namespace Project2
         int CurrentIndex { get; set; }
         private ObservableCollection<majorTrait> ReligionCollection;
 
-
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
@@ -137,10 +136,10 @@ namespace Project2
 
         private void OnReligionChanged(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstReligion.SelectedIndex;  //saves selected race so it is not lost
-            if (lstReligion.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
+            int SelIndex = lstReligion.SelectedIndex;  //saves selected index so it is not lost
+            if (lstReligion.SelectedIndex >= 0)    //lstReligion.SelectedIndex returns -1 if nothing is selected
             {
-                if (CurrentIndex >= 0)  //skips saving the previus selected race if -1
+                if (CurrentIndex >= 0)  //skips saving the previus selected Religion if -1
                 {
                     SaveReligion(CurrentIndex);
                     ListAffectedResources.Items.Clear();
@@ -175,7 +174,7 @@ namespace Project2
                 CurrentIndex = -1;
                 ListAffectedResources.Items.Clear();
             }
-            lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
+            lstReligion.SelectedIndex = SelIndex;  //applies saved index selection
         }
 
         private void OnClickSaveReligion(object sender, RoutedEventArgs e)
@@ -185,7 +184,7 @@ namespace Project2
 
         private void SaveReligion(int index = -1)
         {
-            int SelIndex = lstReligion.SelectedIndex;  //saves selected race so it is not lost
+            int SelIndex = lstReligion.SelectedIndex;  //saves selected index so it is not lost
 
             string UID = "";
             if (index == -1)    //is true when funtion is called via a button
@@ -231,7 +230,7 @@ namespace Project2
                     ReligionCollection.Add(religion);
                 }
 
-                lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
+                lstReligion.SelectedIndex = SelIndex;  //applies saved index selection
             }
         }
         /// <summary>
