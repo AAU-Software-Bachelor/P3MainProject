@@ -125,6 +125,10 @@ namespace Project2
                 string fullFileName = theFileDialog.FileName;
                 string jsonString = File.ReadAllText(fullFileName);
                 CurrentConfig = JsonSerializer.Deserialize<config>(jsonString);
+                if (File.Exists(CurrentConfig.SaveDestination) == false)
+                {
+                    CurrentConfig.SaveDestination = theFileDialog.InitialDirectory;
+                }
                 MessageBox.Show("Config JSON file read and loaded");
             }
         }
