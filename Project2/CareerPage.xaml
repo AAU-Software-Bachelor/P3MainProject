@@ -95,6 +95,8 @@
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" x:Name="btnCareerSave" Click="OnClickSaveCareer" Content="SAVE" Background="SpringGreen"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,469,0,0" Click="btnCareer_ClickCopy" Content="COPY" Background="LightBlue" />
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="60,469,0,0" x:Name="btnCareerSort" Click="btnCareer_ClickSort" Content="Sort" Background="LightBlue" />
+
     </Grid>
 
 

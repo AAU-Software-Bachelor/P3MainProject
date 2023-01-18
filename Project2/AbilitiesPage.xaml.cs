@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -36,6 +37,7 @@ namespace Project2
             RequireTypeBox.Items.Add("Career");
             RequireTypeBox.Items.Add("Religion");
             RequireTypeBox.SelectedIndex = 0;
+			currentConfig.SortAllLists("Name");
 			AbilityCollection = new ObservableCollection<majorTrait>();
 			foreach (majorTrait ability in CurrentConfig.AbiList) //adds all abilities to ObservableCollection AbilityCollection
 			{
@@ -745,5 +747,24 @@ namespace Project2
 				(sender as TextBox).Text = "";
 			}
 		}
+
+        public void SortListView(ListView listView, string sortBy)
+        {
+            listView.Items.SortDescriptions.Clear();
+            listView.Items.SortDescriptions.Add(new SortDescription(sortBy, ListSortDirection.Ascending));
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void btnAbility_ClickSort(object sender, RoutedEventArgs e)
+		{
+			int SelIndex = lstAbility.SelectedIndex;  //saves selected index so it is not lost
+            SortListView(lstAbility, "Name");
+            lstAbility.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 	}
 }

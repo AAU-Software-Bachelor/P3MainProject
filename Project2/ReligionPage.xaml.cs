@@ -30,6 +30,7 @@ namespace Project2
             CurrentConfig = currentConfig;
             InitializeComponent();
             ReligionCollection = new ObservableCollection<majorTrait>();
+            currentConfig.SortAllLists("Name");
             foreach (majorTrait religion in CurrentConfig.RelList) //adds all religion to ObservableCollection ReligionCollection
             {
                 ReligionCollection.Add(religion);

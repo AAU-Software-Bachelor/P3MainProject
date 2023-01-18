@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -37,7 +38,8 @@ namespace Project2
 			CurrentConfig = currentConfig;
 			InitializeComponent();
 			RaceCollection = new ObservableCollection<majorTrait>();
-			foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+            currentConfig.SortAllLists("Name");
+            foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
 			{
 				RaceCollection.Add(race);
 			}
@@ -359,10 +361,22 @@ namespace Project2
             }
         }
 
-		private void ChangeIcon_click(object sender, RoutedEventArgs e)
-		{
+        public void SortListView(ListView listView, string sortBy)
+        {
+            listView.Items.SortDescriptions.Clear();
+            listView.Items.SortDescriptions.Add(new SortDescription(sortBy, ListSortDirection.Ascending));
 
-		}
+        }
+
+        private void btnRaces_ClickSort(object sender, RoutedEventArgs e)
+        {
+            SortListView(lstRaces, "Name");
+        }
+
+        private void ChangeIcon_click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
     }
 }

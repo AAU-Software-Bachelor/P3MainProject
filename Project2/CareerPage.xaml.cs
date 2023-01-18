@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -36,7 +37,8 @@ namespace Project2
             RequireTypeBox.Items.Add("Career");
             RequireTypeBox.Items.Add("Religion");
 			RequireTypeBox.SelectedIndex= 0;
-			CareerCollection = new ObservableCollection<majorTrait>();
+            currentConfig.SortAllLists("Name");
+            CareerCollection = new ObservableCollection<majorTrait>();
 			foreach (majorTrait Career in CurrentConfig.CarList) //adds all Career to ObservableCollection CareerCollection
 			{
 				CareerCollection.Add(Career);
@@ -792,5 +794,17 @@ namespace Project2
 				(sender as TextBox).Text = "";
 			}
 		}
+
+        public void SortListView(ListView listView, string sortBy)
+        {
+            listView.Items.SortDescriptions.Clear();
+            listView.Items.SortDescriptions.Add(new SortDescription(sortBy, ListSortDirection.Ascending));
+
+        }
+
+        private void btnCareer_ClickSort(object sender, RoutedEventArgs e)
+		{
+            SortListView(lstCareer, "Name");
+        }
 	}
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -165,10 +166,23 @@ namespace Project2
 			}
 		}
 
-        /// <summary>
-        /// reads the traits UID and puts it in its type list
-        /// </summary>
-        public bool saveToList(dynamic trait)
+
+        public void SortAllLists(string sortBy)
+        {
+            RacList = RacList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+            AbiList = AbiList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+            CarList = CarList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+            RelList = RelList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+            IteList = IteList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+            ResList = ResList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+            IcoList = IcoList.OrderBy(x => x.GetType().GetProperty(sortBy).GetValue(x, null)).ToList();
+        }
+    
+
+    /// <summary>
+    /// reads the traits UID and puts it in its type list
+    /// </summary>
+    public bool saveToList(dynamic trait)
 		{
 			string[] id = trait.UID.Split("-/"); // "race", "religion", "career", "ability"
 

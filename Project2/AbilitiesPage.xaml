@@ -87,6 +87,7 @@
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" x:Name="btnAbilityDelete_Copy" Click="OnClickSaveAbility" Content="SAVE" Background="SpringGreen"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,469,0,0" Click="btnAbility_ClickCopy" Content="COPY" Background="LightBlue" />
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="60,469,0,0" x:Name="btnAbilitySort" Click="btnAbility_ClickSort" Content="Sort" Background="LightBlue" />
     </Grid>
 
 

@@ -35,7 +35,8 @@ namespace Project2
 			CurrentConfig = currentConfig;
 			InitializeComponent();
 			ResourceCollection = new ObservableCollection<resourceTrait>();
-			foreach (resourceTrait Resource in CurrentConfig.ResList) //adds all Recources to ObservableCollection ResourceCollection
+            currentConfig.SortAllLists("Name");
+            foreach (resourceTrait Resource in CurrentConfig.ResList) //adds all Recources to ObservableCollection ResourceCollection
 			{
 				ResourceCollection.Add(Resource);
 			}

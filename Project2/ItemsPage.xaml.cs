@@ -22,6 +22,7 @@ using static Project2.ItemPage;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
+using System.ComponentModel;
 
 namespace Project2
 {
@@ -36,6 +37,7 @@ namespace Project2
             CurrentConfig = currentConfig;
             InitializeComponent();
             ItemCollection = new ObservableCollection<majorTrait>();
+            currentConfig.SortAllLists("Name");
             foreach (majorTrait Item in CurrentConfig.IteList) //adds all Items to ObservableCollection ItemCollection
             {
                 ItemCollection.Add(Item);
@@ -328,6 +330,22 @@ namespace Project2
             {
                 (sender as TextBox).Text = "";
             }
+        }
+
+
+        //<summary>
+        //Sorts the Itemslist alphbeticaly.
+        //<summary>
+        public void SortListView(ListView listView, string sortBy)
+        {
+            listView.Items.SortDescriptions.Clear();
+            listView.Items.SortDescriptions.Add(new SortDescription(sortBy, ListSortDirection.Ascending));
+
+        }
+
+        private void btnItems_ClickSort(object sender, RoutedEventArgs e)
+        {
+            SortListView(lstItems, "Name");
         }
 
         private void ChangeIcon_click(object sender, RoutedEventArgs e)
