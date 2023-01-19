@@ -33,7 +33,6 @@
 
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="23,20,1112,394"/>
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,126,1112,370"/>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,181,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
             <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="214,40,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="182" Height="150"/>
             <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="191" Text=""/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
@@ -58,6 +57,7 @@
             <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="-216,16,0,0" TextWrapping="Wrap" KeyUp="searchbar_KeyUp" Text="" VerticalAlignment="Top" Width="191" BorderThickness="1,1,1,1" BorderBrush="Black"/>
             <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,239,0,0" Height="32" Width="97"/>
             <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,159,0,0" Height="32" Width="97"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,181,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
         </Grid>
         <Label Content="Race Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="229" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="221,37,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="15"/>

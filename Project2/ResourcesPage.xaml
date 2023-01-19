@@ -32,9 +32,6 @@
 
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="23,17,1020,457"/>
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,165,1020,440"/>
-
-
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,219,0,0" TextWrapping="Wrap" Text="resource name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
             <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="25,260,0,0" TextWrapping="Wrap" Text="resource description" VerticalAlignment="Top" Width="365" Height="178"/>
             <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-105,370,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="OnClickSaveResource"/>
             <Grid Margin="434,62,518,417" Background="Gray" x:Name="GridRadioButtons">
@@ -55,6 +52,7 @@
             </Grid>
             <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,239,0,0" Height="32" Width="97"/>
             <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,198,0,0" Height="32" Width="97"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,219,0,0" TextWrapping="Wrap" Text="resource name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
         </Grid>
         <Label Content="Resource Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="295" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="296,37,0,0" VerticalAlignment="Top" Height="46" Width="206" FontWeight="Bold" FontSize="15"/>

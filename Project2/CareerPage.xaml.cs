@@ -822,24 +822,24 @@ namespace Project2
             string searchText = (this.FindName("searchbar") as TextBox).Text;
             if (searchText != "")
             {
-                CareerCollection.Clear();
+                MTCollection.Clear();
                 foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
                 {
                     if (career.Name.ToLower().Contains(searchText.ToLower()))
                     {
-                        CareerCollection.Add(career);
+                        MTCollection.Add(career);
                     }
                 }
-                lstCareer.SelectedIndex = 0;
+                lstMTraits.SelectedIndex = 0;
             }
             else
             {
-                CareerCollection.Clear();
+                MTCollection.Clear();
                 foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
                 {
-                    CareerCollection.Add(career);
+                    MTCollection.Add(career);
                 }
-                lstCareer.SelectedIndex = 0;
+                lstMTraits.SelectedIndex = 0;
             }
         }
     }

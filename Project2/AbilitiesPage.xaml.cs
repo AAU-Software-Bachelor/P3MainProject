@@ -831,24 +831,24 @@ namespace Project2
             string searchText = (this.FindName("searchbar") as TextBox).Text;
             if (searchText != "")
             {
-                AbilityCollection.Clear();
+                MTCollection.Clear();
                 foreach (majorTrait ability in CurrentConfig.AbiList) //adds all races to ObservableCollection RaceCollection
                 {
                     if (ability.Name.ToLower().Contains(searchText.ToLower()))
                     {
-                        AbilityCollection.Add(ability);
+                        MTCollection.Add(ability);
                     }
                 }
-                lstAbility.SelectedIndex = 0;
+                lstMTraits.SelectedIndex = 0;
             }
             else
             {
-                AbilityCollection.Clear();
+                MTCollection.Clear();
                 foreach (majorTrait ability in CurrentConfig.AbiList) //adds all races to ObservableCollection RaceCollection
 				{
-                    AbilityCollection.Add(ability);
+                    MTCollection.Add(ability);
                 }
-                lstAbility.SelectedIndex = 0;
+                lstMTraits.SelectedIndex = 0;
             }
         }
     }

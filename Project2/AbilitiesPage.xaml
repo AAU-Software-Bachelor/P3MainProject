@@ -16,7 +16,7 @@
             </Border>
         </Label>
 
-        <ListView x:Name="lstAbility" Margin="17,143,1321,312" Grid.Row="0" SelectionChanged="OnAbilityChanged">
+        <ListView x:Name="lstMTraits" Margin="17,143,1321,312" Grid.Row="0" SelectionChanged="OnAbilityChanged">
 
             <ListView.View>
                 <GridView x:Name="grdNames">
@@ -31,8 +31,7 @@
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
                 <Button Width="105"  Height="26" Content="Click to Upload"/>
             </StackPanel>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341" Height="175" Text="Description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,296,254">
                 <Grid>
                     <Label Content="Requirements" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
@@ -66,6 +65,7 @@
                     <Button Width="46" VerticalAlignment="Top" Margin="243,202,0,0" Height="20" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteDiscount" Background="red" Grid.ColumnSpan="2"/>
                 </Grid>
             </Border>
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,127,0,0" Height="32" Width="97"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="746,381,296,10">
                 <Grid Margin="0,-3,-14,3">
                     <Label Content="Acquisition Cost :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
@@ -86,9 +86,7 @@
                     <Button Width="46" VerticalAlignment="Top" Margin="233,304,0,0" Height="26" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteExclusion" Background="red"/>
                 </Grid>
             </Border>
-
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,195,0,0" Height="32" Width="97"/>
-            <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,239,0,0" Height="32" Width="97"/>
+            <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,173,0,0" Height="32" Width="97"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="102,381,895,10">
                 <Grid>
                     <Label Content="Given Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
@@ -97,6 +95,7 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteFreeAbilities" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
 
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" Click="OnClickSaveAbility" Content="SAVE" Background="SpringGreen"/>
