@@ -198,6 +198,32 @@ namespace Project2
 				lstResources.SelectedIndex = SelIndex;  //applies saved index selection
             }
 		}
-	}
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ResourceCollection.Clear();
+                foreach (resourceTrait resource in CurrentConfig.ResList)
+                {
+                    if (resource.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ResourceCollection.Add(resource);
+                    }
+                }
+                lstResources.SelectedIndex = 0;
+            }
+            else
+            {
+                ResourceCollection.Clear();
+                foreach (resourceTrait resource in CurrentConfig.ResList)
+                {
+                    ResourceCollection.Add(resource);
+                }
+                lstResources.SelectedIndex = 0;
+            }
+        }
+    }
 }
 

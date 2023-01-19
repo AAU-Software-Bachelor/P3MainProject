@@ -248,6 +248,32 @@ namespace Project2
             }
         }
 
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ReligionCollection.Clear();
+                foreach (majorTrait religion in CurrentConfig.RelList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (religion.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ReligionCollection.Add(religion);
+                    }
+                }
+                lstReligion.SelectedIndex = 0;
+            }
+            else
+            {
+                ReligionCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    ReligionCollection.Add(race);
+                }
+                lstReligion.SelectedIndex = 0;
+            }
+        }
+
         private void ChangeIcon_click(object sender, RoutedEventArgs e)
         {
 

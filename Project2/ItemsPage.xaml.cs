@@ -330,6 +330,32 @@ namespace Project2
             }
         }
 
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ItemCollection.Clear();
+                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (item.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ItemCollection.Add(item);
+                    }
+                }
+                lstItems.SelectedIndex = 0;
+            }
+            else
+            {
+                ItemCollection.Clear();
+                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
+                {
+                    ItemCollection.Add(item);
+                }
+                lstItems.SelectedIndex = 0;
+            }
+        }
+
         private void ChangeIcon_click(object sender, RoutedEventArgs e)
         {
 
