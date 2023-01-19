@@ -816,5 +816,31 @@ namespace Project2
 				(sender as TextBox).Text = "";
 			}
 		}
-	}
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                CareerCollection.Clear();
+                foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (career.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        CareerCollection.Add(career);
+                    }
+                }
+                lstCareer.SelectedIndex = 0;
+            }
+            else
+            {
+                CareerCollection.Clear();
+                foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
+                {
+                    CareerCollection.Add(career);
+                }
+                lstCareer.SelectedIndex = 0;
+            }
+        }
+    }
 }

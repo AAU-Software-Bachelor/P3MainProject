@@ -344,6 +344,7 @@ namespace Project2
             }
 		}
 
+
 		/// <summary>
 		/// Validates input in "amount" textbox to only allow integers.
 		/// </summary>
@@ -364,5 +365,30 @@ namespace Project2
 
 		}
 
-    }
+		private void searchbar_KeyUp(object sender, KeyEventArgs e)
+		{
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                RaceCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (race.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        RaceCollection.Add(race);
+                    }
+                }
+                lstRaces.SelectedIndex = 0;
+            }
+            else
+            {
+                RaceCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    RaceCollection.Add(race);
+                }
+                lstRaces.SelectedIndex = 0;
+            }
+        }
+	}
 }

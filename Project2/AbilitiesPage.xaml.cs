@@ -825,5 +825,31 @@ namespace Project2
 				(sender as TextBox).Text = "";
 			}
 		}
-	}
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                AbilityCollection.Clear();
+                foreach (majorTrait ability in CurrentConfig.AbiList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (ability.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        AbilityCollection.Add(ability);
+                    }
+                }
+                lstAbility.SelectedIndex = 0;
+            }
+            else
+            {
+                AbilityCollection.Clear();
+                foreach (majorTrait ability in CurrentConfig.AbiList) //adds all races to ObservableCollection RaceCollection
+				{
+                    AbilityCollection.Add(ability);
+                }
+                lstAbility.SelectedIndex = 0;
+            }
+        }
+    }
 }
