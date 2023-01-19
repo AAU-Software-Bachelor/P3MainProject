@@ -26,7 +26,7 @@ namespace Project2
 	{
 		public majorTrait(string uid) : base(uid)
 		{
-			Cost = new int();
+			Cost = 0;
 			CostTypes = new List<string>();
             Exclusions = new List<string>();
             Dependencies = new List<List<string>>();
@@ -60,8 +60,9 @@ namespace Project2
 		{
 			this.Name = "";
 			this.Image = "";
+			this.PlayerReq = "";
 			this.Description = "";
-			this.Cost = new int();
+			this.Cost = 0;
 			this.CostTypes = new List<string>();
             this.Exclusions = new List<string>();
             this.FreeAbilities = new List<string>();

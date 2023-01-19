@@ -10,20 +10,20 @@
     <Grid Background="White" Margin="0,0,10,10">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
         <Label Content="Ablity editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
-        <Label Grid.Row="0" x:Name="AblityBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="AbilitiesMainMenu_MouseDoubleClick" Width="136" Height="46">
+        <Label Grid.Row="0" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="MainMenu_MouseClick" Width="136" Height="46">
             <Border Background="LightBlue" Padding="10,5,10,5" >
                 <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
             </Border>
         </Label>
-        <ListView x:Name="lstAbility" Margin="17,99,1321,312" Grid.Row="0" SelectionChanged="OnAbilityChanged">
+        <ListView x:Name="lstMTraits" Margin="17,99,1321,312" Grid.Row="0" SelectionChanged="OnAbilityChanged">
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,443,0,0" x:Name="btnAbilityAdd" Click="btnAbility_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,443,0,0" x:Name="btnAbilityDelete" Click="btnAbility_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,443,0,0" Click="btnAbility_ClickAdd" Content="ADD" Background="LightBlue" ></Button>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="21" Margin="60,443,0,0" Click="btnAbility_ClickDelete" Content="DELETE" Background="OrangeRed"></Button>
         <Grid Background="#FFFF84FF" Margin="224,99,40,26">
             <StackPanel Orientation="Vertical" Margin="33,29,1124,391">
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
@@ -44,9 +44,9 @@
             <Border BorderBrush="Black" BorderThickness="1" Margin="978,381,10,10">
                 <Grid>
                     <Label Content="Granted Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListGrantedResources" Margin="10,38,10,35"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddGrantedResouce"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteGrantedResouce"/>
+                    <ListView x:Name="ListAffectedResources" Margin="10,38,10,35"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddAffectedResources"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteAffectedResources"/>
 
                 </Grid>
             </Border>
@@ -84,8 +84,16 @@
                     <Button Width="46" VerticalAlignment="Top" Margin="233,304,0,0" Height="26" HorizontalAlignment="Left" ClickMode="Press" Content="DELETE" Click="OnClick_DeleteExclusion" Background="red"/>
                 </Grid>
             </Border>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="102,381,895,10">
+                <Grid>
+                    <Label Content="Given Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
+                    <ListView x:Name="ListFreeAbilities" Margin="10,38,10,35"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" Click="OnClickAddFreeAbilities" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteFreeAbilities" ClickMode="Press" Background="OrangeRed"/>
+                </Grid>
+            </Border>
         </Grid>
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" x:Name="btnAbilityDelete_Copy" Click="OnClickSaveAbility" Content="SAVE" Background="SpringGreen"/>
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" Click="OnClickSaveAbility" Content="SAVE" Background="SpringGreen"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,469,0,0" Click="btnAbility_ClickCopy" Content="COPY" Background="LightBlue" />
     </Grid>
 
