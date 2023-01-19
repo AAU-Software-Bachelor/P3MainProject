@@ -365,6 +365,12 @@ namespace Project2
 
 		}
 
+
+		private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+		}
+
 		private void searchbar_KeyUp(object sender, KeyEventArgs e)
 		{
             string searchText = (this.FindName("searchbar") as TextBox).Text;
@@ -390,5 +396,6 @@ namespace Project2
                 lstRaces.SelectedIndex = 0;
             }
         }
+
 	}
 }

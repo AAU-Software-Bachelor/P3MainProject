@@ -30,7 +30,10 @@
 
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="25,19,1076,474"/>
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="24,154,1075,446"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Height="178" Text="Description"/>
+
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,195,0,0" TextWrapping="Wrap" Text="Religion name" VerticalAlignment="Top" Width="365" BorderThickness="0,0,0,2" BorderBrush="Black" />
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="365" Height="178" Text="Religion description"/>
+
             <Border BorderThickness="1" Margin="437,52,68,239">
                 <Grid Background="White" Margin="0,0,442,-1">
                     <Label Content="Affected Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>

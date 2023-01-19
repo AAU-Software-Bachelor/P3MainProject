@@ -33,8 +33,11 @@
 
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="23,20,1112,394"/>
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,126,1112,370"/>
+
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,212,0,0" TextWrapping="Wrap" Text="Race name" VerticalAlignment="Top" Width="363" BorderThickness="0,0,0,2" BorderBrush="Black" TextChanged="nameBox_TextChanged"/>
             <TextBox x:Name="playerReqBox" HorizontalAlignment="Left" Margin="214,40,0,0" TextWrapping="Wrap" Text="Player Requirements" VerticalAlignment="Top" Width="182" Height="150"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="191" Text=""/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Height="192" Text="Race description"/>
+
             <Border BorderBrush="Black" BorderThickness="1" Margin="434,29,71,268">
                 <Grid>
                     <Label Content="Starter Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
