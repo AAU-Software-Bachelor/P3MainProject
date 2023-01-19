@@ -83,13 +83,32 @@ namespace Project2
                 lstRaces.SelectedIndex = RaceCollection.Count - 1;
             }	
 		}
+        private void btnRaces_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstRaces.SelectedIndex;
+			if (index >= 0)
+			{
+				majorTrait tempRace = new majorTrait(CurrentConfig.newUID("RacList"))
+				{
+					Name = CurrentConfig.RacList[index].Name,
+					Description = CurrentConfig.RacList[index].Description,
+					AffectedResources = CurrentConfig.RacList[index].AffectedResources,
+					FreeAbilities = CurrentConfig.RacList[index].FreeAbilities,
+					PlayerReq = CurrentConfig.RacList[index].PlayerReq
+				};
+				CurrentConfig.saveToList(tempRace);
+				RaceCollection.Add(tempRace);
+				lstRaces.SelectedIndex = RaceCollection.Count - 1;
+			}
 
-		/// <summary>
-		/// adds a combobox with all Abilities fron CurrentConfig as selectables
-		/// </summary>
-		private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
+        }
+
+        /// <summary>
+        /// adds a combobox with all Abilities fron CurrentConfig as selectables
+        /// </summary>
+        private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
 		{
-			int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
+			int SelIndex = lstRaces.SelectedIndex;	//saves selected index so it is not lost
 			ComboBox comboBox = new ComboBox();
 			comboBox.IsReadOnly = true;
 			comboBox.IsDropDownOpen = false;
@@ -103,8 +122,8 @@ namespace Project2
 			}
 
 			this.ListStarterAbilities.Items.Add(comboBox);
-			lstRaces.SelectedIndex = SelIndex;	//applies saved race selection
-		}
+			lstRaces.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 		/// <summary>
 		/// Deletes selected starterAbility
 		/// </summary>
@@ -122,8 +141,8 @@ namespace Project2
 		/// </summary>
 		private void OnClickAddStarterResources(object sender, RoutedEventArgs e)
 		{
-			int SelIndex = lstRaces.SelectedIndex;  //saves selected race so it is not lost
-			StackPanel stackPanel = new StackPanel();
+			int SelIndex = lstRaces.SelectedIndex;  //saves selected index so it is not lost
+            StackPanel stackPanel = new StackPanel();
 			stackPanel.Orientation = Orientation.Horizontal;
 
 			ComboBox comboBoxOne = new ComboBox();	//starts on the recouse combobox
@@ -154,8 +173,8 @@ namespace Project2
 
 
 			this.ListStarterResources.Items.Add(stackPanel);
-			lstRaces.SelectedIndex = SelIndex;	//applies saved race selection
-		}
+			lstRaces.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		/// <summary>
 		/// deletes selected Starter Resources 
@@ -192,7 +211,7 @@ namespace Project2
 
             System.Diagnostics.Debug.WriteLine("last selected index: " + CurrentIndex);
             System.Diagnostics.Debug.WriteLine("lstRaces index: " + lstRaces.SelectedIndex);
-            int SelIndex = lstRaces.SelectedIndex;  //saves selected race so it is not lost
+            int SelIndex = lstRaces.SelectedIndex;  //saves selected index so it is not lost
             if (lstRaces.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
             {
                 if (CurrentIndex >= 0)  //skips saving the previus selected race if -1
@@ -250,7 +269,7 @@ namespace Project2
                 ListStarterAbilities.Items.Clear();
                 ListStarterResources.Items.Clear();
             }
-            lstRaces.SelectedIndex = SelIndex;  //applies saved race selection
+            lstRaces.SelectedIndex = SelIndex;  //applies saved index selection
 
         }
 		/// <summary>
@@ -266,9 +285,9 @@ namespace Project2
 		/// </summary>
 		private void SaveRace(int index = -1)
 		{
-			int SelIndex = lstRaces.SelectedIndex;	//saves selected race so it is not lost
+			int SelIndex = lstRaces.SelectedIndex;  //saves selected index so it is not lost
 
-			string UID = "";
+            string UID = "";
 			if (index == -1)	//is true when funtion is called via a button
 			{
 				if (lstRaces.SelectedIndex >= 0)
@@ -321,9 +340,10 @@ namespace Project2
 					RaceCollection.Add(race);
 				}
 
-				lstRaces.SelectedIndex = SelIndex;  //applies saved race selection
-			}
+				lstRaces.SelectedIndex = SelIndex;  //applies saved index selection
+            }
 		}
+
 
 		/// <summary>
 		/// Validates input in "amount" textbox to only allow integers.
@@ -345,9 +365,37 @@ namespace Project2
 
 		}
 
+
 		private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 
 		}
+
+		private void searchbar_KeyUp(object sender, KeyEventArgs e)
+		{
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                RaceCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (race.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        RaceCollection.Add(race);
+                    }
+                }
+                lstRaces.SelectedIndex = 0;
+            }
+            else
+            {
+                RaceCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    RaceCollection.Add(race);
+                }
+                lstRaces.SelectedIndex = 0;
+            }
+        }
+
 	}
 }

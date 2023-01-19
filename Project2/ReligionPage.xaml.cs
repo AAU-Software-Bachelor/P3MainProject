@@ -42,7 +42,6 @@ namespace Project2
         int CurrentIndex { get; set; }
         private ObservableCollection<majorTrait> ReligionCollection;
 
-
         private void ReligionMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
@@ -67,6 +66,23 @@ namespace Project2
                 lstReligion.SelectedIndex = ReligionCollection.Count - 1;
             }
         }
+        private void btnReligion_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstReligion.SelectedIndex;
+            if (index >= 0)
+            {
+                majorTrait tempReligion = new majorTrait(CurrentConfig.newUID("RelList"))
+                {
+                    AffectedResources = CurrentConfig.RelList[index].AffectedResources,
+                    Name = CurrentConfig.RelList[index].Name,
+                    Description = CurrentConfig.RelList[index].Description
+                };   //makes the new religion object
+                CurrentConfig.saveToList(tempReligion);
+                ReligionCollection.Add(tempReligion);
+                lstReligion.SelectedIndex = ReligionCollection.Count - 1;
+            }
+        }
+
         private void OnClickAddAffectedResources(object sender, RoutedEventArgs e)
         {
             this.InitializeComponent();
@@ -120,10 +136,10 @@ namespace Project2
 
         private void OnReligionChanged(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstReligion.SelectedIndex;  //saves selected race so it is not lost
-            if (lstReligion.SelectedIndex >= 0)    //lstRaces.SelectedIndex returns -1 if nothing is selected
+            int SelIndex = lstReligion.SelectedIndex;  //saves selected index so it is not lost
+            if (lstReligion.SelectedIndex >= 0)    //lstReligion.SelectedIndex returns -1 if nothing is selected
             {
-                if (CurrentIndex >= 0)  //skips saving the previus selected race if -1
+                if (CurrentIndex >= 0)  //skips saving the previus selected Religion if -1
                 {
                     SaveReligion(CurrentIndex);
                     ListAffectedResources.Items.Clear();
@@ -158,7 +174,7 @@ namespace Project2
                 CurrentIndex = -1;
                 ListAffectedResources.Items.Clear();
             }
-            lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
+            lstReligion.SelectedIndex = SelIndex;  //applies saved index selection
         }
 
         private void OnClickSaveReligion(object sender, RoutedEventArgs e)
@@ -168,7 +184,7 @@ namespace Project2
 
         private void SaveReligion(int index = -1)
         {
-            int SelIndex = lstReligion.SelectedIndex;  //saves selected race so it is not lost
+            int SelIndex = lstReligion.SelectedIndex;  //saves selected index so it is not lost
 
             string UID = "";
             if (index == -1)    //is true when funtion is called via a button
@@ -214,7 +230,7 @@ namespace Project2
                     ReligionCollection.Add(religion);
                 }
 
-                lstReligion.SelectedIndex = SelIndex;  //applies saved race selection
+                lstReligion.SelectedIndex = SelIndex;  //applies saved index selection
             }
         }
         /// <summary>
@@ -229,6 +245,32 @@ namespace Project2
             catch
             {
                 (sender as TextBox).Text = "";
+            }
+        }
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ReligionCollection.Clear();
+                foreach (majorTrait religion in CurrentConfig.RelList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (religion.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ReligionCollection.Add(religion);
+                    }
+                }
+                lstReligion.SelectedIndex = 0;
+            }
+            else
+            {
+                ReligionCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    ReligionCollection.Add(race);
+                }
+                lstReligion.SelectedIndex = 0;
             }
         }
 

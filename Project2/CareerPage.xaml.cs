@@ -36,22 +36,22 @@ namespace Project2
             RequireTypeBox.Items.Add("Career");
             RequireTypeBox.Items.Add("Religion");
 			RequireTypeBox.SelectedIndex= 0;
-			CareerCollection = new ObservableCollection<majorTrait>();
-			foreach (majorTrait Career in CurrentConfig.CarList) //adds all Career to ObservableCollection CareerCollection
+			MTCollection = new ObservableCollection<majorTrait>();
+			foreach (majorTrait Career in CurrentConfig.CarList) //adds all Career to ObservableCollection MTCollection
 			{
-				CareerCollection.Add(Career);
+				MTCollection.Add(Career);
 			}
-			lstCareer.ItemsSource = CareerCollection;
+			lstMTraits.ItemsSource = MTCollection;
 			CurrentIndex = -1;  //skip the next use of CurrentIndex
-			lstCareer.SelectedIndex = 0;
+			lstMTraits.SelectedIndex = 0;
 
         }
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }  //keeps track of what index to use
-		private ObservableCollection<majorTrait> CareerCollection;   //itemSource for lstCareer ListVeiw
+		private ObservableCollection<majorTrait> MTCollection;   //itemSource for lstMTraits ListVeiw
 
 
-		private void CareerMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		private void MainMenu_MouseClick(object sender, MouseButtonEventArgs e)
 		{
 
 			MainWindow mainWindow = new MainWindow(CurrentConfig);
@@ -62,25 +62,46 @@ namespace Project2
 		{
 			majorTrait tempCareer = new majorTrait(CurrentConfig.newUID("CarList")) { Name = "new Career" };   //makes the new Career object
 			CurrentConfig.saveToList(tempCareer);
-			CareerCollection.Add(tempCareer);
-			lstCareer.SelectedIndex = CareerCollection.Count - 1;
+			MTCollection.Add(tempCareer);
+			lstMTraits.SelectedIndex = MTCollection.Count - 1;
 		}
 
 		private void btnCareer_ClickDelete(object sender, EventArgs e)
 		{
-			var index = lstCareer.SelectedIndex;
+			var index = lstMTraits.SelectedIndex;
 			if (index >= 0)
 			{
-				CareerCollection.Remove(CurrentConfig.GetTrait(CareerCollection[index].UID, true)); //gets the Career to be deleteted via GetTrait while it deletes it, and deletes its counterpart in CareerCollection
-				lstCareer.SelectedIndex = CareerCollection.Count - 1;
+				MTCollection.Remove(CurrentConfig.GetTrait(MTCollection[index].UID, true)); //gets the Career to be deleteted via GetTrait while it deletes it, and deletes its counterpart in MTCollection
+				lstMTraits.SelectedIndex = MTCollection.Count - 1;
 			}
 		}
+        private void btnCareer_ClickCopy(object sender, EventArgs e)
+        {
+            var index = lstMTraits.SelectedIndex;
+			if (index >= 0)
+			{
+				majorTrait tempCareer = new majorTrait(CurrentConfig.newUID("CarList"))
+				{
+					Name = CurrentConfig.CarList[index].Name,
+					Description = CurrentConfig.CarList[index].Description,
+					FreeAbilities = CurrentConfig.CarList[index].FreeAbilities,
+					Discounts = CurrentConfig.CarList[index].Discounts,
+					Dependencies = CurrentConfig.CarList[index].Dependencies,
+					AffectedResources = CurrentConfig.CarList[index].AffectedResources,
+					Exclusions = CurrentConfig.CarList[index].Exclusions,
+					Cost = CurrentConfig.CarList[index].Cost,
+					CostTypes = CurrentConfig.CarList[index].CostTypes
+                };   //makes the new Career object
+				CurrentConfig.saveToList(tempCareer);
+				MTCollection.Add(tempCareer);
+				lstMTraits.SelectedIndex = MTCollection.Count - 1;
+			}
+        }
 
-
-		private void OnClickAddStarterAbilities(object sender, EventArgs e)
+        private void OnClickAddFreeAbilities(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected caeer so it is not lost
-			ComboBox comboBox = new ComboBox();
+			int SelIndex = lstMTraits.SelectedIndex;  //saves selected index so it is not lost
+            ComboBox comboBox = new ComboBox();
 			comboBox.IsReadOnly = true;
 			comboBox.IsDropDownOpen = false;
 			comboBox.Margin = new Thickness(5, 5, 0, 0);
@@ -88,25 +109,31 @@ namespace Project2
 			comboBox.Width = 185;
 			comboBox.DisplayMemberPath = "Name";
 			foreach (majorTrait abi in CurrentConfig.AbiList)   //adds all abilities from CurrentConfig to the combobox
-			{
-				comboBox.Items.Add(abi);
-			}
+            {
+                if (abi != lstMTraits.SelectedItem)
+                {
+                    comboBox.Items.Add(abi);
+                }
+            }
 
-			this.ListStarterAbilities.Items.Add(comboBox);
-			lstCareer.SelectedIndex = SelIndex;  //applies saved career selection
-		}
+			this.ListFreeAbilities.Items.Add(comboBox);
+			lstMTraits.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 		/// <summary>
 		/// Deletes selected starterAbility
 		/// </summary>
-		private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
+		private void OnClickDeleteFreeAbilities(object sender, RoutedEventArgs e)
 		{
-			var index = ListStarterAbilities.SelectedIndex;
+			var index = ListFreeAbilities.SelectedIndex;
 			if (index >= 0)
 			{
-				ListStarterAbilities.Items.RemoveAt(index);
+				ListFreeAbilities.Items.RemoveAt(index);
 			}
 		}
 
+        /// <summary>
+        /// adds a row to hold a or requrement
+        /// </summary>
         private void OnClickAddRequirmentsList(object sender, EventArgs e)
         {
             this.InitializeComponent();
@@ -117,6 +144,9 @@ namespace Project2
             ListRequirements.SelectedIndex = ListRequirements.Items.Count - 1;
         }
 
+        /// <summary>
+        /// Deletes the selected row
+        /// </summary>
         private void OnClickDeleteRequirmentsList(object sender, RoutedEventArgs e)
 		{
 			var index = ListRequirements.SelectedIndex;
@@ -126,6 +156,9 @@ namespace Project2
 			}
 		}
 
+        /// <summary>
+        /// Adds a and requrement to the selected row
+        /// </summary>
         private void OnClickAddRequirment(object sender, EventArgs e)
         {
             this.InitializeComponent();
@@ -148,28 +181,40 @@ namespace Project2
                     case "Race":
                         foreach (majorTrait MT in CurrentConfig.RacList)
                         {
-                            comboBoxSelection.Items.Add(MT);
+                            if (MT != lstMTraits.SelectedItem)
+                            {
+                                comboBoxSelection.Items.Add(MT);
+                            }
                         }
                         break;
 
                     case "Ability":
                         foreach (majorTrait MT in CurrentConfig.AbiList)
                         {
-                            comboBoxSelection.Items.Add(MT);
+                            if (MT != lstMTraits.SelectedItem)
+                            {
+                                comboBoxSelection.Items.Add(MT);
+                            }
                         }
                         break;
 
                     case "Career":
                         foreach (majorTrait MT in CurrentConfig.CarList)
                         {
-                            comboBoxSelection.Items.Add(MT);
+                            if (MT != lstMTraits.SelectedItem)
+                            {
+                                comboBoxSelection.Items.Add(MT);
+                            }
                         }
                         break;
 
                     case "Religion":
                         foreach (majorTrait MT in CurrentConfig.RelList)
                         {
-                            comboBoxSelection.Items.Add(MT);
+                            if (MT != lstMTraits.SelectedItem)
+                            {
+                                comboBoxSelection.Items.Add(MT);
+                            }
                         }
                         break;
                 }
@@ -199,8 +244,8 @@ namespace Project2
 
         private void OnClick_AddCostType(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstMTraits.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the currency combobox
 			comboBoxOne.Text = "Select currency";
@@ -212,13 +257,16 @@ namespace Project2
 
 			comboBoxOne.DisplayMemberPath = "Name";
 			foreach (resourceTrait res in CurrentConfig.ResList)
-			{
-				comboBoxOne.Items.Add(res);
-			}
+            {
+                if (res != lstMTraits.SelectedItem)
+                {
+                    comboBoxOne.Items.Add(res);
+                }
+            }
 
 			this.ListCosts.Items.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
-			lstCareer.SelectedIndex = SelIndex;    //applies saved Career selection
-		}
+			lstMTraits.SelectedIndex = SelIndex;    //applies saved index selection
+        }
 
 		private void OnClick_DeleteCostType(object sender, EventArgs e)
 		{
@@ -228,10 +276,10 @@ namespace Project2
 				ListCosts.Items.RemoveAt(index);
 			}
 		}
-		private void OnClick_AddGrantedResouce(object sender, EventArgs e)
+		private void OnClick_AddAffectedResources(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstMTraits.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 			StackPanel stackPanel = new StackPanel();
 			stackPanel.Orientation = Orientation.Horizontal;
 
@@ -245,10 +293,12 @@ namespace Project2
 
 			comboBoxOne.DisplayMemberPath = "Name";
 			foreach (resourceTrait res in CurrentConfig.ResList)
-			{
-				comboBoxOne.Items.Add(res);
-			}
-
+            {
+                if (res != lstMTraits.SelectedItem)
+                {
+                    comboBoxOne.Items.Add(res);
+                }
+            }
 
 			stackPanel.Children.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
 
@@ -262,25 +312,25 @@ namespace Project2
 			stackPanel.Children.Add(textBox);   //makes the textbox a child of the stackpanel
 
 
-			this.ListGrantedResources.Items.Add(stackPanel);
-			lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-		}
+			this.ListAffectedResources.Items.Add(stackPanel);
+			lstMTraits.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 		/// <summary>
 		/// deletes selected Starter Resources 
 		/// </summary>
-		private void OnClick_DeleteGrantedResouce(object sender, EventArgs e)
+		private void OnClick_DeleteAffectedResources(object sender, EventArgs e)
 		{
-			var index = ListGrantedResources.SelectedIndex;
+			var index = ListAffectedResources.SelectedIndex;
 			if (index >= 0)
 			{
-				ListGrantedResources.Items.RemoveAt(index);
+				ListAffectedResources.Items.RemoveAt(index);
 			}
 		}
 
 		private void OnClick_AddExclusion(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstMTraits.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 
 			ComboBox comboBoxOne = new ComboBox();  //starts on the recouse combobox
 			comboBoxOne.Text = "Select Stat";
@@ -293,30 +343,39 @@ namespace Project2
 			string[] name = ((sender as Button).Content.ToString()).Split(' ');
 			if (name[1] == "CAREER")
 			{
-				foreach (majorTrait car in CurrentConfig.CarList)
+				foreach (majorTrait MT in CurrentConfig.CarList)
 				{
-					comboBoxOne.Items.Add(car);
-				}
+                    if (MT != lstMTraits.SelectedItem)
+                    {
+                        comboBoxOne.Items.Add(MT);
+                    }
+                }
 			}
 			else if (name[1] == "ABILITY")
 			{
-				foreach (majorTrait abi in CurrentConfig.AbiList)
+				foreach (majorTrait MT in CurrentConfig.AbiList)
 				{
-					comboBoxOne.Items.Add(abi);
-				}
+                    if (MT != lstMTraits.SelectedItem)
+                    {
+                        comboBoxOne.Items.Add(MT);
+                    }
+                }
 			}
 			else if (name[1] == "RACE")
 			{
-				foreach (majorTrait rac in CurrentConfig.RacList)
+				foreach (majorTrait MT in CurrentConfig.RacList)
 				{
-					comboBoxOne.Items.Add(rac);
-				}
+                    if (MT != lstMTraits.SelectedItem)
+                    {
+                        comboBoxOne.Items.Add(MT);
+                    }
+                }
 			}
 
 			this.ListExclusion.Items.Add(comboBoxOne);
 			ListExclusion.SelectedIndex = ListExclusion.Items.Count - 1;
-			lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-		}
+			lstMTraits.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		private void OnClick_DeleteExclusion(object sender, EventArgs e)
 		{
@@ -330,8 +389,8 @@ namespace Project2
 
 		private void OnClick_AddDiscount(object sender, EventArgs e)
 		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
-			this.InitializeComponent();
+			int SelIndex = lstMTraits.SelectedIndex;  //saves selected index so it is not lost
+            this.InitializeComponent();
 			StackPanel stackPanelDiscounts = new StackPanel();
 			stackPanelDiscounts.Orientation = Orientation.Horizontal;
 
@@ -346,24 +405,33 @@ namespace Project2
 			string[] name = ((sender as Button).Content.ToString()).Split(' ');
 			if (name[1] == "CAREER")
 			{
-				foreach (majorTrait car in CurrentConfig.CarList)
+				foreach (majorTrait MT in CurrentConfig.CarList)
 				{
-					comboBoxOne.Items.Add(car);
-				}
+                    if (MT != lstMTraits.SelectedItem)
+                    {
+                        comboBoxOne.Items.Add(MT);
+                    }
+                }
 			}
 			else if (name[1] == "ABILITY")
 			{
-				foreach (majorTrait abi in CurrentConfig.AbiList)
+				foreach (majorTrait MT in CurrentConfig.AbiList)
 				{
-					comboBoxOne.Items.Add(abi);
-				}
+                    if (MT != lstMTraits.SelectedItem)
+                    {
+                        comboBoxOne.Items.Add(MT);
+                    }
+                }
 			}
 			else if (name[1] == "RACE")
 			{
-				foreach (majorTrait rac in CurrentConfig.RacList)
+				foreach (majorTrait MT in CurrentConfig.RacList)
 				{
-					comboBoxOne.Items.Add(rac);
-				}
+                    if (MT != lstMTraits.SelectedItem)
+                    {
+                        comboBoxOne.Items.Add(MT);
+                    }
+                }
 			}
 
 			stackPanelDiscounts.Children.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
@@ -379,8 +447,8 @@ namespace Project2
 
 
 			this.ListDiscounts.Items.Add(stackPanelDiscounts);
-			lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-		}
+			lstMTraits.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 		/// <summary>
 		/// deletes selected Starter Resources 
@@ -411,164 +479,138 @@ namespace Project2
 
 
 		private void CareerChange(object sender, EventArgs e)
-		{
-			if (lstCareer.SelectedIndex >= 0)    //lstCareer.SelectedIndex returns -1 if nothing is selected
-			{
-				if (CurrentIndex >= 0)
-				{
-					SaveCareer(CurrentIndex);
-					ListRequirements.Items.Clear();
-					ListGrantedResources.Items.Clear();
-					ListDiscounts.Items.Clear();
-					ListCosts.Items.Clear();
-					ListStarterAbilities.Items.Clear();
+        {
+            if (lstMTraits.SelectedIndex >= 0)    //lstMTraits.SelectedIndex returns -1 if nothing is selected
+            {
+                if (CurrentIndex >= 0)
+                {
+                    SaveCareer(CurrentIndex);
+                    ListRequirements.Items.Clear();
+                    ListAffectedResources.Items.Clear();
+                    ListDiscounts.Items.Clear();
+                    ListCosts.Items.Clear();
+                    ListFreeAbilities.Items.Clear();
                     ListExclusion.Items.Clear();
-
-
+                    (this.FindName("nameBox") as TextBox).Text = "";
+                    (this.FindName("descBox") as TextBox).Text = "";
+                    (this.FindName("costBox") as TextBox).Text = "";
                 }
-				CurrentIndex = lstCareer.SelectedIndex;
-				majorTrait currentMT = CurrentConfig.CarList[CurrentIndex]; //gets the trait to be loaded
+                CurrentIndex = lstMTraits.SelectedIndex;
+                majorTrait currentMT = CurrentConfig.CarList[CurrentIndex]; //gets the trait to be loaded
 
-				(this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
-				(this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
+                (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
+                (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
-				foreach (AmountUID AffRes in currentMT.AffectedResources)
-				{
-					OnClick_AddGrantedResouce(sender, e);
-				}
-				int ind = 0;
-				string TempUID;
-				foreach (StackPanel PANEL in (this.FindName("ListGrantedResources") as ListView).Items)
-				{
-					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-					{
-						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
-						{
-							AmountUID tempAffRes = currentMT.AffectedResources[ind];
-							box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
-							textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
-						}
-					}
-					ind++;
-				}
+                foreach (AmountUID AffRes in currentMT.AffectedResources)
+                {
+                    OnClick_AddAffectedResources(sender, e);
+                }
+                int ind = 0;
+                string TempUID;
+                foreach (StackPanel PANEL in (this.FindName("ListAffectedResources") as ListView).Items)
+                {
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+                        {
+                            AmountUID tempAffRes = currentMT.AffectedResources[ind];
+                            box.SelectedItem = CurrentConfig.GetTrait(tempAffRes.UID); //selects the starter resources in the comboboxes
+                            textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
+                        }
+                    }
+                    ind++;
+                }
 
-				(this.FindName("costBox") as TextBox).Text = currentMT.Cost.ToString();
-				foreach (string CostType in currentMT.CostTypes)
-				{
-					OnClick_AddCostType(sender, e);
-				}
-				ind = 0;
-				foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
-				{
-					TempUID = currentMT.CostTypes[ind];
-					BOX.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, TempUID));
-					ind++;
-				}
+                (this.FindName("costBox") as TextBox).Text = currentMT.Cost.ToString();
+                foreach (string CostType in currentMT.CostTypes)
+                {
+                    OnClick_AddCostType(sender, e);
+                }
+                ind = 0;
+                foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
+                {
+                    TempUID = currentMT.CostTypes[ind];
+                    BOX.SelectedItem = CurrentConfig.GetTrait(TempUID);
+                    ind++;
+                }
 
                 foreach (string FreeAbil in currentMT.FreeAbilities)    //makes the needed comboboxes to hold the free abilities
                 {
-                    OnClickAddStarterAbilities(sender, e);
+                    OnClickAddFreeAbilities(sender, e);
                 }
                 ind = 0;
-                foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
+                foreach (ComboBox BOX in (this.FindName("ListFreeAbilities") as ListView).Items)
                 {
                     TempUID = currentMT.FreeAbilities[ind];
-                    BOX.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, TempUID));    //selects the free abilities in the comboboxes
+                    BOX.SelectedItem = CurrentConfig.GetTrait(TempUID);    //selects the free abilities in the comboboxes
                     ind++;
                 }
 
                 foreach (string str in currentMT.Exclusions)
-				{
-					string[] typeid = str.Split("-/");
-					if (typeid[0] == "RacList")
-					{
-						Button nsender = new Button() { Content = "ADD RACE" };
-						OnClick_AddExclusion(nsender, e);
-					}
-					else if (typeid[0] == "AbiList")
-					{
-						Button nsender = new Button() { Content = "ADD ABILITY" };
-						OnClick_AddExclusion(nsender, e);
-					}
-					else if (typeid[0] == "CarList")
-					{
-						Button nsender = new Button() { Content = "ADD CAREER" };
-						OnClick_AddExclusion(nsender, e);
-					}
-				}
+                {
+                    string[] typeid = str.Split("-/");
+                    if (typeid[0] == "RacList")
+                    {
+                        Button nsender = new Button() { Content = "ADD RACE" };
+                        OnClick_AddExclusion(nsender, e);
+                    }
+                    else if (typeid[0] == "AbiList")
 
-				ind = 0;
-				ListView ltr = (this.FindName("ListExclusion") as ListView);
-				foreach (ComboBox box in ltr.Items)
-				{
-					string tempID = currentMT.Exclusions[ind]; //test
-					string[] ID = tempID.Split("-/");
-					if (ID[0] == "CarList")
-					{
-						box.SelectedIndex = CurrentConfig.CarList.FindIndex(i => string.Equals(i.UID, tempID));
-					}
-					else if (ID[0] == "RacList")
-					{
-						box.SelectedIndex = CurrentConfig.RacList.FindIndex(i => string.Equals(i.UID, tempID));
-					}
-					else if (ID[0] == "RelList")
-					{
-						box.SelectedIndex = CurrentConfig.RelList.FindIndex(i => string.Equals(i.UID, tempID));
-					}
-					else if (ID[0] == "AbiList")
-					{
-						box.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, tempID));
-					}
-					ind++;
-				}
+                    {
+                        Button nsender = new Button() { Content = "ADD ABILITY" };
+                        OnClick_AddExclusion(nsender, e);
+                    }
+                    else if (typeid[0] == "CarList")
+                    {
+                        Button nsender = new Button() { Content = "ADD CAREER" };
+                        OnClick_AddExclusion(nsender, e);
+                    }
+                }
 
-				foreach (AmountUID Disc in currentMT.Discounts)
-				{
-					string[] Condui = Disc.UID.Split("-/");
-					if (Condui[0] == "RacList")
-					{
-						Button nsender = new Button() { Content = "ADD RACE" };
-						OnClick_AddDiscount(nsender, e);
-					}
-					else if (Condui[0] == "AbiList")
+                ind = 0;
+                ListView ltr = (this.FindName("ListExclusion") as ListView);
+                foreach (ComboBox box in ltr.Items)
+                {
+                    box.SelectedItem = CurrentConfig.GetTrait(currentMT.Exclusions[ind]);
+                    ind++;
+                }
 
-					{
-						Button nsender = new Button() { Content = "ADD ABILITY" };
-						OnClick_AddDiscount(nsender, e);
-					}
-					else if (Condui[0] == "CarList")
-					{
-						Button nsender = new Button() { Content = "ADD CAREER" };
-						OnClick_AddDiscount(nsender, e);
-					}
 
-				}
-				ind = 0;
-				foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
-				{
-					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-					{
-						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
-						{
-							AmountUID tempDisc = currentMT.Discounts[ind];
-							string[] ID = tempDisc.UID.Split("-/");
-							if (ID[0] == "CarList")
-							{
-								box.SelectedIndex = CurrentConfig.CarList.FindIndex(i => string.Equals(i.UID, tempDisc.UID));
-							}
-							else if (ID[0] == "RacList")
-							{
-								box.SelectedIndex = CurrentConfig.RacList.FindIndex(i => string.Equals(i.UID, tempDisc.UID));
-							}
-							else if (ID[0] == "AbiList")
-							{
-								box.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, tempDisc.UID));
-							}
-							textBox.Text = tempDisc.Amount.ToString();  //sets the right amounts in the textboxes
-						}
-					}
-					ind++;
-				}
+                foreach (AmountUID Disc in currentMT.Discounts)
+                {
+                    string[] Condui = Disc.UID.Split("-/");
+                    if (Condui[0] == "RacList")
+                    {
+                        Button nsender = new Button() { Content = "ADD RACE" };
+                        OnClick_AddDiscount(nsender, e);
+                    }
+                    else if (Condui[0] == "AbiList")
+
+                    {
+                        Button nsender = new Button() { Content = "ADD ABILITY" };
+                        OnClick_AddDiscount(nsender, e);
+                    }
+                    else if (Condui[0] == "CarList")
+                    {
+                        Button nsender = new Button() { Content = "ADD CAREER" };
+                        OnClick_AddDiscount(nsender, e);
+                    }
+
+                }
+                ind = 0;
+                foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
+                {
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+                        {
+                            AmountUID tempDisc = currentMT.Discounts[ind];
+                            box.SelectedItem = CurrentConfig.GetTrait(tempDisc.UID);
+                            textBox.Text = tempDisc.Amount.ToString();  //sets the right amounts in the textboxes
+                        }
+                    }
+                    ind++;
+                }
 
                 string[] id;
                 ind = 0;
@@ -607,148 +649,163 @@ namespace Project2
                 {
                     foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
                     {
-                        box.SelectedItem = CurrentConfig.GetTrait(currentMT.Dependencies[ind][ind2]);
+                        try
+                        {
+                            box.SelectedItem = CurrentConfig.GetTrait(currentMT.Dependencies[ind][ind2]);
+                        }
+                        catch { }
                         ind2++;
                     }
                     ind2 = 0;
                     ind++;
                 }
-
             }
-			else
-			{
-				CurrentIndex = -1;
-				ListRequirements.Items.Clear();
-				ListGrantedResources.Items.Clear();
-				ListDiscounts.Items.Clear();
-				ListCosts.Items.Clear();
-				ListExclusion.Items.Clear();
-                ListStarterAbilities.Items.Clear();
+            else
+            {
+                CurrentIndex = -1;
+                ListRequirements.Items.Clear();
+                ListAffectedResources.Items.Clear();
+                ListDiscounts.Items.Clear();
+                ListCosts.Items.Clear();
+                ListFreeAbilities.Items.Clear();
+                ListExclusion.Items.Clear();
+                (this.FindName("nameBox") as TextBox).Text = "";
+                (this.FindName("descBox") as TextBox).Text = "";
+                (this.FindName("costBox") as TextBox).Text = "";
             }
-		}
+        }
 
-		private void OnClickSaveCareer(object sender, EventArgs e)
+        private void OnClickSaveCareer(object sender, EventArgs e)
 		{
 			SaveCareer();
 		}
 
 		private void SaveCareer(int index = -1)
-		{
-			int SelIndex = lstCareer.SelectedIndex;  //saves selected Career so it is not lost
+        {
+            int SelIndex = lstMTraits.SelectedIndex;  //saves selected index so it is not lost
 
-			string UID = "";
-			if (index == -1)    //is true when funtion is called via a button
-			{
-				if (lstCareer.SelectedIndex >= 0)
-				{
-					UID = CurrentConfig.CarList[lstCareer.SelectedIndex].UID;    //uses the selected index to find the wanted UID
-					index = CurrentConfig.CarList.FindIndex(i => string.Equals(i.UID, UID));
-				}
-			}
-			else
-			{
-				UID = CurrentConfig.CarList[index].UID; //uses the given index to find the wanted UID
-			}
-			if (UID != "")
-			{
-				majorTrait currentMT = CurrentConfig.GetTrait(UID);
-				currentMT.deleteContent();
+            string UID = "";
+            if (index == -1)    //is true when funtion is called via a button
+            {
+                if (lstMTraits.SelectedIndex >= 0)
+                {
+                    UID = CurrentConfig.CarList[lstMTraits.SelectedIndex].UID;    //uses the selected index to find the wanted UID
+                    index = CurrentConfig.CarList.FindIndex(i => string.Equals(i.UID, UID));
+                }
+            }
+            else
+            {
+                UID = CurrentConfig.CarList[index].UID; //uses the given index to find the wanted UID
+            }
+            if (UID != "")
+            {
+                majorTrait currentMT = CurrentConfig.GetTrait(UID);
+                currentMT.deleteContent();
 
-				currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
-				currentMT.Description = (this.FindName("descBox") as TextBox).Text;
-				currentMT.Cost = int.Parse((this.FindName("costBox") as TextBox).Text);
+                currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
+                currentMT.Description = (this.FindName("descBox") as TextBox).Text;
+                string textcost = (this.FindName("costBox") as TextBox).Text;
+                if (textcost != "")
+                {
+                    currentMT.Cost = int.Parse(textcost);
+                }
+                else
+                {
+                    currentMT.Cost = 0;
+                }
 
-				foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
-				{
-					if (BOX.SelectedIndex >= 0)
-					{
-						string TempUID = CurrentConfig.AbiList[BOX.SelectedIndex].UID;
-						currentMT.FreeAbilities.Add(TempUID); // saves the free abilities
-					}
-				}
+                foreach (StackPanel PANEL in (this.FindName("ListAffectedResources") as ListView).Items)
+                {
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+                        {
+                            if (box.SelectedIndex >= 0 & textBox.Text != "")
+                            {
+                                string TempUID = (box.SelectedItem as resourceTrait).UID;  //gets the affected rescource
+                                int TempVal = int.Parse(textBox.Text);  //gets the value
+                                currentMT.AffectedResources.Add(new AmountUID(TempUID, TempVal));   //saves the affected rescources and their values
+                            }
+                        }
+                    }
+                }
 
-				foreach (StackPanel PANEL in (this.FindName("ListGrantedResources") as ListView).Items)
-				{
-					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-					{
-						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
-						{
-							if (box.SelectedIndex >= 0 & textBox.Text != "")
-							{
-								string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
-								int TempVal = int.Parse(textBox.Text);  //gets the value
-								currentMT.AffectedResources.Add(new AmountUID(TempUID, TempVal));   //saves the affected rescources and their values
-							}
-						}
-					}
-				}
+                foreach (ComboBox BOX in (this.FindName("ListFreeAbilities") as ListView).Items)
+                {
+                    if (BOX.SelectedIndex >= 0)
+                    {
+                        string TempUID = (BOX.SelectedItem as majorTrait).UID;
+                        currentMT.FreeAbilities.Add(TempUID); // saves the free abilities
+                    }
+                }
 
-				foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
-				{
-					if (BOX.SelectedIndex >= 0)
-					{
-						string TempUID = CurrentConfig.ResList[BOX.SelectedIndex].UID;
-						currentMT.CostTypes.Add(TempUID);
-					}
-				}
+                foreach (ComboBox BOX in (this.FindName("ListCosts") as ListView).Items)
+                {
+                    if (BOX.SelectedIndex >= 0)
+                    {
+                        string TempUID = (BOX.SelectedItem as resourceTrait).UID;
+                        currentMT.CostTypes.Add(TempUID);
+                    }
+                }
 
-				foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
-				{
-					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-					{
-						foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
-						{
-							if (box.SelectedItem != null & textBox.Text != "")
-							{
-								currentMT.Discounts.Add(new AmountUID((box.SelectedItem as majorTrait).UID, int.Parse(textBox.Text)));
-							}
-						}
-					}
-				}
+                foreach (StackPanel PANEL in (this.FindName("ListDiscounts") as ListView).Items)
+                {
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
+                        {
+                            if (box.SelectedItem != null & textBox.Text != "")
+                            {
+                                currentMT.Discounts.Add(new AmountUID((box.SelectedItem as majorTrait).UID, int.Parse(textBox.Text)));
+                            }
+                        }
+                    }
+                }
 
-				foreach (ComboBox box in (this.FindName("ListExclusion") as ListView).Items.OfType<ComboBox>())
-				{
-					if (box.SelectedItem != null)
-					{
-						currentMT.Exclusions.Add((box.SelectedItem as majorTrait).UID);
-					}
-				}
+                foreach (ComboBox box in (this.FindName("ListExclusion") as ListView).Items.OfType<ComboBox>())
+                {
+                    if (box.SelectedItem != null)
+                    {
+                        currentMT.Exclusions.Add((box.SelectedItem as majorTrait).UID);
+                    }
+                }
 
-				int ind = 0;
-				foreach (StackPanel PANEL in (this.FindName("ListRequirements") as ListView).Items)
-				{
-					currentMT.Dependencies.Add(new List<string>());
-					foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-					{
-						if (box.SelectedItem != null)
-						{
-							currentMT.Dependencies[ind].Add((box.SelectedItem as majorTrait).UID);
-						}
-					}
-					if (currentMT.Dependencies[ind].Count == 0)
-					{
-						currentMT.Dependencies.RemoveAt(ind);
-						ind--;
-					}
-					ind++;
-				}
+                int ind = 0;
+                foreach (StackPanel PANEL in (this.FindName("ListRequirements") as ListView).Items)
+                {
+                    currentMT.Dependencies.Add(new List<string>());
+                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
+                    {
+                        if (box.SelectedItem != null)
+                        {
+                            currentMT.Dependencies[ind].Add((box.SelectedItem as majorTrait).UID);
+                        }
+                    }
+                    if (currentMT.Dependencies[ind].Count == 0)
+                    {
+                        currentMT.Dependencies.RemoveAt(ind);
+                        ind--;
+                    }
+                    ind++;
+                }
 
 
-				CurrentConfig.CarList[index] = currentMT;
-				CareerCollection.Clear(); // clears the list
-				foreach (majorTrait Career in CurrentConfig.CarList)  //rewrites the list.
-				{
-					CareerCollection.Add(Career);
-				}
 
-				lstCareer.SelectedIndex = SelIndex;  //applies saved Career selection
-			}
-		}
+                CurrentConfig.CarList[index] = currentMT;
+                MTCollection.Clear(); // clears the list
+                foreach (majorTrait Career in CurrentConfig.CarList)  //rewrites the list.
+                {
+                    MTCollection.Add(Career);
+                }
 
-		/// <summary>
-		/// Validates input in "amount" textbox to only allow integers.
-		/// </summary>
-		private void NumberValidationTextBox(object sender, EventArgs e)
+                lstMTraits.SelectedIndex = SelIndex;  //applies saved index selection
+            }
+        }
+
+        /// <summary>
+        /// Validates input in "amount" textbox to only allow integers.
+        /// </summary>
+        private void NumberValidationTextBox(object sender, EventArgs e)
 		{
 			try
 			{
@@ -759,5 +816,31 @@ namespace Project2
 				(sender as TextBox).Text = "";
 			}
 		}
-	}
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                MTCollection.Clear();
+                foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (career.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        MTCollection.Add(career);
+                    }
+                }
+                lstMTraits.SelectedIndex = 0;
+            }
+            else
+            {
+                MTCollection.Clear();
+                foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
+                {
+                    MTCollection.Add(career);
+                }
+                lstMTraits.SelectedIndex = 0;
+            }
+        }
+    }
 }

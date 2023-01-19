@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,8 +21,7 @@ using static Project2.ResourcePage;
 using static Project2.resourceTrait;
 using static Project2.GalleryWindow;
 using static Project2.galleryIcon;
-
-
+using System.Diagnostics;
 
 namespace Project2
 {
@@ -67,14 +66,32 @@ namespace Project2
 			var index = lstResources.SelectedIndex;
 			if (index >= 0)
 			{
-				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in newrace
-			}
+				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the Resource to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ResourceCollection
+            }
 		}
+        private void btnResource_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstResources.SelectedIndex;
+			if (index >= 0)
+			{
+				resourceTrait newResource = new resourceTrait(CurrentConfig.newUID("ResList"))
+				{
+					Description = CurrentConfig.ResList[index].Description,
+					Name = CurrentConfig.ResList[index].Name,
+					Type = ResourceCollection[index].Type,
+					TypeName = CurrentConfig.ResList[index].TypeName
+                };
+
+				ResourceCollection.Add(newResource);
+				CurrentConfig.saveToList(newResource);
+				lstResources.SelectedIndex = ResourceCollection.Count - 1;
+			}
+        }
 
         private void OnResourceChanged (object sender, RoutedEventArgs e)
 		{
-			int SelIndex = lstResources.SelectedIndex;  //saves selected resource so it is not lost
-			if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
+			int SelIndex = lstResources.SelectedIndex;  //saves selected index so it is not lost
+            if (lstResources.SelectedIndex >= 0)    //lstResources.SelectedIndex returns -1 if nothing is selected
 			{
 				if (CurrentIndex >= 0)  //skips saving the previus selected resource if -1
 				{
@@ -120,8 +137,8 @@ namespace Project2
 			{
 				CurrentIndex = -1;
 			}
-			lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
-		}
+			lstResources.SelectedIndex = SelIndex;  //applies saved index selection
+        }
 
 
 		public void ChangeIcon_click(object sender, RoutedEventArgs e)
@@ -140,14 +157,14 @@ namespace Project2
 			SaveResource();
 		}
 
-		/// <summary>
-		/// Saves everything in the indexed race to the current config. if no index is given then it saves the currently selected race.
-		/// </summary>
-		private void SaveResource(int index = -1)
+        /// <summary>
+        /// Saves everything in the indexed Resource to the current config. if no index is given then it saves the currently selected Resource.
+        /// </summary>
+        private void SaveResource(int index = -1)
 		{
-			int SelIndex = lstResources.SelectedIndex;  //saves selected race so it is not lost
+			int SelIndex = lstResources.SelectedIndex;  //saves selected index so it is not lost
 
-			string UID = "";
+            string UID = "";
 			if (index == -1)    //is true when funtion is called via a button
 			{
 				if (lstResources.SelectedIndex >= 0)
@@ -176,6 +193,24 @@ namespace Project2
 					}
 				}
 
+                switch (currentRT.Type)
+                {
+					case 0:
+						currentRT.TypeName = "Stat";
+                        break;
+                    case 1:
+                        currentRT.TypeName = "XP";
+                        break;
+                    case 2:
+                        currentRT.TypeName = "Currency";
+                        break;
+                    case 3:
+                        currentRT.TypeName = "Misc";
+                        break;
+
+                }
+
+
 				CurrentConfig.ResList[index] = currentRT;
 				ResourceCollection.Clear();    // clears the list
 				foreach (resourceTrait res in CurrentConfig.ResList)  //rewrites the list.
@@ -183,9 +218,35 @@ namespace Project2
 					ResourceCollection.Add(res);
 				}
 
-				lstResources.SelectedIndex = SelIndex;  //applies saved resource selection
-			}
+				lstResources.SelectedIndex = SelIndex;  //applies saved index selection
+            }
 		}
-	}
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ResourceCollection.Clear();
+                foreach (resourceTrait resource in CurrentConfig.ResList)
+                {
+                    if (resource.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ResourceCollection.Add(resource);
+                    }
+                }
+                lstResources.SelectedIndex = 0;
+            }
+            else
+            {
+                ResourceCollection.Clear();
+                foreach (resourceTrait resource in CurrentConfig.ResList)
+                {
+                    ResourceCollection.Add(resource);
+                }
+                lstResources.SelectedIndex = 0;
+            }
+        }
+    }
 }
 

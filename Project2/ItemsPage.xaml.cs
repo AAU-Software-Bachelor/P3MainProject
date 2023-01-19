@@ -77,9 +77,27 @@ namespace Project2
             var index = lstItems.SelectedIndex;
             if (index >= 0)
             {
-                ItemCollection.Remove(CurrentConfig.GetTrait(ItemCollection[index].UID, true)); //gets the Item to be deleteted via GetTrait while it deletes it, and deletes its counterpart in RaceCollection
+                ItemCollection.Remove(CurrentConfig.GetTrait(ItemCollection[index].UID, true)); //gets the Item to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ItemCollection
                 lstItems.SelectedIndex = ItemCollection.Count - 1;
             }
+        }
+        private void btnItems_ClickCopy(object sender, RoutedEventArgs e)
+        {
+            var index = lstItems.SelectedIndex;
+            if (index >= 0)
+            {
+                majorTrait tempItem = new majorTrait(CurrentConfig.newUID("IteList"))
+                {
+                    Name = CurrentConfig.IteList[index].Name,
+                    Description = CurrentConfig.IteList[index].Description,
+                    AffectedResources = CurrentConfig.IteList[index].AffectedResources,
+                    FreeAbilities = CurrentConfig.IteList[index].FreeAbilities
+                };   //makes the new Item object
+                CurrentConfig.saveToList(tempItem);
+                ItemCollection.Add(tempItem);
+                lstItems.SelectedIndex = ItemCollection.Count - 1;
+            }
+
         }
 
         /// <summary>
@@ -87,7 +105,7 @@ namespace Project2
         /// </summary>
         private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected Item so it is not lost
+            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
             this.InitializeComponent();
             ComboBox comboBox = new ComboBox();
             comboBox.IsReadOnly = true;
@@ -102,7 +120,7 @@ namespace Project2
             }
 
             this.ListStarterAbilities.Items.Add(comboBox);
-            lstItems.SelectedIndex = SelIndex;  //applies saved Item selection
+            lstItems.SelectedIndex = SelIndex;  //applies saved index selection
         }
         /// <summary>
         /// Deletes selected starterAbility
@@ -121,7 +139,7 @@ namespace Project2
         /// </summary>
         private void OnClickAddStarterResources(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected Item so it is not lost
+            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
             this.InitializeComponent();
             StackPanel stackPanel = new StackPanel();
             stackPanel.Orientation = Orientation.Horizontal;
@@ -154,7 +172,7 @@ namespace Project2
 
 
             this.ListStarterResources.Items.Add(stackPanel);
-            lstItems.SelectedIndex = SelIndex;  //applies saved Item selection
+            lstItems.SelectedIndex = SelIndex;  //applies saved index selection
         }
 
         /// <summary>
@@ -173,7 +191,7 @@ namespace Project2
         /// </summary>
         private void OnItemChanged(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected Item so it is not lost
+            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
             if (lstItems.SelectedIndex >= 0)    //lstItems.SelectedIndex returns -1 if nothing is selected
             {
                 if (CurrentIndex >= 0)  //skips saving the previus selected Item if -1
@@ -225,7 +243,7 @@ namespace Project2
                 ListStarterAbilities.Items.Clear();
                 ListStarterResources.Items.Clear();
             }
-            lstItems.SelectedIndex = SelIndex;  //applies saved Item selection
+            lstItems.SelectedIndex = SelIndex;  //applies saved index selection
         }
         /// <summary>
         /// works as a middle man between butons and SaveItem 
@@ -240,7 +258,7 @@ namespace Project2
         /// </summary>
         private void SaveItem(int index = -1)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected Item so it is not lost
+            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
 
             string UID = "";
             if (index == -1)    //is true when funtion is called via a button
@@ -293,7 +311,7 @@ namespace Project2
                 {
                     ItemCollection.Add(Item);
                 }
-                lstItems.SelectedIndex = SelIndex;  //applies saved Item selection
+                lstItems.SelectedIndex = SelIndex;  //applies saved index selection
             }
         }
 
@@ -309,6 +327,32 @@ namespace Project2
             catch
             {
                 (sender as TextBox).Text = "";
+            }
+        }
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ItemCollection.Clear();
+                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (item.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ItemCollection.Add(item);
+                    }
+                }
+                lstItems.SelectedIndex = 0;
+            }
+            else
+            {
+                ItemCollection.Clear();
+                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
+                {
+                    ItemCollection.Add(item);
+                }
+                lstItems.SelectedIndex = 0;
             }
         }
 
