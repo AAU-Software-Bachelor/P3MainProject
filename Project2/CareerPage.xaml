@@ -10,12 +10,14 @@
     <Grid Background="White" Margin="0,0,10,10">
         <Label Content="CMS EDITOR" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="46" Width="203" FontWeight="Bold" FontSize="30"/>
         <Label Content="Career editor" HorizontalAlignment="Left" Margin="224,34,0,0" VerticalAlignment="Top" Height="46" Width="160" FontWeight="Bold" FontSize="18"/>
-        <Label Grid.Row="0" x:Name="CareerBacktoMainMenu" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="CareerMainMenu_MouseDoubleClick" Width="136" Height="46">
+        <Label Grid.Row="0" HorizontalAlignment="Left" Margin="565,27,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" MouseLeftButtonUp="MainMenu_MouseClick" Width="136" Height="46">
             <Border Background="LightBlue" Padding="10,5,10,5" >
                 <TextBlock HorizontalAlignment="Center"><Run Text="Main Menu"/></TextBlock>
             </Border>
         </Label>
-        <ListView x:Name="lstCareer" Margin="17,143,1321,312" Grid.Row="0" SelectionChanged="OnCareerChanged">
+
+        <ListView x:Name="lstMTraits" Margin="17,99,1321,312" Grid.Row="0" SelectionChanged="OnCareerChanged">
+
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
@@ -44,9 +46,9 @@
             <Border BorderBrush="Black" BorderThickness="1" Margin="978,381,10,10">
                 <Grid>
                     <Label Content="Granted Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListGrantedResources" Margin="10,38,10,35"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddGrantedResouce"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteGrantedResouce"/>
+                    <ListView x:Name="ListAffectedResources" Margin="10,38,10,35"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" ClickMode="Press" Background="LightBlue" Click="OnClick_AddAffectedResources"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="46" ClickMode="Press" Background="red" Click="OnClick_DeleteAffectedResources"/>
 
                 </Grid>
             </Border>
@@ -77,9 +79,9 @@
             <Border BorderBrush="Black" BorderThickness="1" Margin="102,381,895,10">
                 <Grid>
                     <Label Content="Given Abilities" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
-                    <ListView x:Name="ListStarterAbilities" Margin="10,38,10,35"/>
-                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" Click="OnClickAddStarterAbilities" ClickMode="Press" Background="LightBlue"/>
-                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteStarterAbilities" ClickMode="Press" Background="OrangeRed"/>
+                    <ListView x:Name="ListFreeAbilities" Margin="10,38,10,35"/>
+                    <Button Content="ADD" HorizontalAlignment="Left" Margin="10,202,0,0" VerticalAlignment="Top" Height="20" Width="35" Click="OnClickAddFreeAbilities" ClickMode="Press" Background="LightBlue"/>
+                    <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteFreeAbilities" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
             <Border BorderBrush="Black" BorderThickness="1" Margin="978,29,10,254">
