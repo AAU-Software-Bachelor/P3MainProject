@@ -22,6 +22,7 @@ using static Project2.ItemPage;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
+using Project2.classes;
 
 namespace Project2
 {
@@ -74,12 +75,7 @@ namespace Project2
 		/// </summary>
         private void btnItems_ClickDelete(object sender, RoutedEventArgs e)
         {
-            var index = lstItems.SelectedIndex;
-            if (index >= 0)
-            {
-                ItemCollection.Remove(CurrentConfig.GetTrait(ItemCollection[index].UID, true)); //gets the Item to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ItemCollection
-                lstItems.SelectedIndex = ItemCollection.Count - 1;
-            }
+            Functionality.DeleteRes(CurrentConfig, lstItems, ItemCollection);
         }
         private void btnItems_ClickCopy(object sender, RoutedEventArgs e)
         {
@@ -327,6 +323,32 @@ namespace Project2
             catch
             {
                 (sender as TextBox).Text = "";
+            }
+        }
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ItemCollection.Clear();
+                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (item.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ItemCollection.Add(item);
+                    }
+                }
+                lstItems.SelectedIndex = 0;
+            }
+            else
+            {
+                ItemCollection.Clear();
+                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
+                {
+                    ItemCollection.Add(item);
+                }
+                lstItems.SelectedIndex = 0;
             }
         }
 

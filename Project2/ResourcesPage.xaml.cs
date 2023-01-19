@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -101,7 +101,28 @@ namespace Project2
 				CurrentIndex = lstResources.SelectedIndex;
 				resourceTrait currentRT = CurrentConfig.ResList[CurrentIndex]; //gets the trait to be loaded
 
-				(this.FindName("nameBox") as TextBox).Text = currentRT.Name; //sets text to the name from the current MajorTrait object
+                /*if (currentRT.Image == (CurrentConfig.PlaceholderImage.ToString()))
+                {
+                    System.Diagnostics.Debug.WriteLine("ONE: we have an image at: " + currentRT.Image);
+                    System.Diagnostics.Debug.WriteLine("ONE: we have an image at: " + CurrentConfig.PlaceholderImage);
+                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentRT.Image, UriKind.Absolute));
+                    //(this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.PlaceholderImage, UriKind.Relative));
+                    System.Diagnostics.Debug.WriteLine("TWO: we have an image at: " + currentRT.Image);
+                }
+                else if(currentRT.Image == string.Empty)
+                {
+                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.PlaceholderImage, UriKind.Relative));
+                    //currentRT.Image = (this.FindName("ChosenImage") as Image).ToString();
+                }*/
+                if (currentRT.Image != string.Empty)
+                {
+                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentRT.Image, UriKind.Absolute));
+                }
+                else
+                {
+                    (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.PlaceholderImage, UriKind.Relative));
+                }
+                (this.FindName("nameBox") as TextBox).Text = currentRT.Name; //sets text to the name from the current MajorTrait object
 				(this.FindName("descBox") as TextBox).Text = currentRT.Description;  //sets text to the description from the current MajorTrait object
 
                 foreach (RadioButton rd in (this.FindName("GridRadioButtons") as Grid).Children.OfType<RadioButton>())
@@ -127,7 +148,8 @@ namespace Project2
 			string imgSource = newWindow.uploadFile(sender, e);
 			System.Diagnostics.Debug.WriteLine("we have an image at: " +imgSource);
             ChosenImage.Source = new BitmapImage(new Uri(imgSource, UriKind.Absolute));
-
+			resourceTrait currentRT = CurrentConfig.ResList[CurrentIndex];
+			currentRT.Image = ChosenImage.Source.ToString();
         }
 
         private void OnClickSaveResource(object sender, RoutedEventArgs e)
@@ -159,6 +181,7 @@ namespace Project2
 			{
 				resourceTrait currentRT = CurrentConfig.GetTrait(UID);
 
+				currentRT.Image = (this.FindName("ChosenImage") as Image).ToString();
 				currentRT.Name = (this.FindName("nameBox") as TextBox).Text;
 				currentRT.Description = (this.FindName("descBox") as TextBox).Text;
 
@@ -198,6 +221,32 @@ namespace Project2
 				lstResources.SelectedIndex = SelIndex;  //applies saved index selection
             }
 		}
-	}
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ResourceCollection.Clear();
+                foreach (resourceTrait resource in CurrentConfig.ResList)
+                {
+                    if (resource.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ResourceCollection.Add(resource);
+                    }
+                }
+                lstResources.SelectedIndex = 0;
+            }
+            else
+            {
+                ResourceCollection.Clear();
+                foreach (resourceTrait resource in CurrentConfig.ResList)
+                {
+                    ResourceCollection.Add(resource);
+                }
+                lstResources.SelectedIndex = 0;
+            }
+        }
+    }
 }
 

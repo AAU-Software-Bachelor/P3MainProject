@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2.classes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -76,12 +77,7 @@ namespace Project2
 		/// </summary>
         private void btnRaces_ClickDelete(object sender, RoutedEventArgs e)
 		{
-            var index = lstRaces.SelectedIndex;
-			if (index >= 0)
-			{
-				RaceCollection.Remove(CurrentConfig.GetTrait(RaceCollection[index].UID, true)); //gets the race to be deleteted via GetTrait while it deletes it, and deletes its counterpart in RaceCollection
-                lstRaces.SelectedIndex = RaceCollection.Count - 1;
-            }	
+			Functionality.DeleteRes(CurrentConfig, lstRaces, RaceCollection);	
 		}
         private void btnRaces_ClickCopy(object sender, RoutedEventArgs e)
         {
@@ -344,6 +340,7 @@ namespace Project2
             }
 		}
 
+
 		/// <summary>
 		/// Validates input in "amount" textbox to only allow integers.
 		/// </summary>
@@ -364,5 +361,37 @@ namespace Project2
 
 		}
 
-    }
+
+		private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+		}
+
+		private void searchbar_KeyUp(object sender, KeyEventArgs e)
+		{
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                RaceCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (race.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        RaceCollection.Add(race);
+                    }
+                }
+                lstRaces.SelectedIndex = 0;
+            }
+            else
+            {
+                RaceCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    RaceCollection.Add(race);
+                }
+                lstRaces.SelectedIndex = 0;
+            }
+        }
+
+	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2.classes;
+using System;
 using System.Collections.Generic;
 
 using System.Collections.ObjectModel;
@@ -59,12 +60,7 @@ namespace Project2
 
         private void btnReligion_ClickDelete(object sender, RoutedEventArgs e)
         {
-            var index = lstReligion.SelectedIndex;
-            if (index >= 0)
-            {
-                ReligionCollection.Remove(CurrentConfig.GetTrait(ReligionCollection[index].UID, true)); //gets the religion to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ReligionCollection
-                lstReligion.SelectedIndex = ReligionCollection.Count - 1;
-            }
+            Functionality.DeleteRes(CurrentConfig, lstReligion, ReligionCollection);
         }
         private void btnReligion_ClickCopy(object sender, RoutedEventArgs e)
         {
@@ -245,6 +241,32 @@ namespace Project2
             catch
             {
                 (sender as TextBox).Text = "";
+            }
+        }
+
+        private void searchbar_KeyUp(object sender, KeyEventArgs e)
+        {
+            string searchText = (this.FindName("searchbar") as TextBox).Text;
+            if (searchText != "")
+            {
+                ReligionCollection.Clear();
+                foreach (majorTrait religion in CurrentConfig.RelList) //adds all races to ObservableCollection RaceCollection
+                {
+                    if (religion.Name.ToLower().Contains(searchText.ToLower()))
+                    {
+                        ReligionCollection.Add(religion);
+                    }
+                }
+                lstReligion.SelectedIndex = 0;
+            }
+            else
+            {
+                ReligionCollection.Clear();
+                foreach (majorTrait race in CurrentConfig.RacList) //adds all races to ObservableCollection RaceCollection
+                {
+                    ReligionCollection.Add(race);
+                }
+                lstReligion.SelectedIndex = 0;
             }
         }
 
