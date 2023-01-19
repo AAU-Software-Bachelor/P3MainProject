@@ -34,8 +34,6 @@
 
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="23,17,1020,457"/>
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,165,1020,440"/>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,227,0,0" TextWrapping="Wrap" Text="Resource name" VerticalAlignment="Top" Width="365" BorderThickness="0,0,0,2" BorderBrush="Black" />
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="25,245,0,0" TextWrapping="Wrap" Text="Resource description" VerticalAlignment="Top" Width="365" Height="178"/>
 
             <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-105,370,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="OnClickSaveResource"/>
             <Grid Margin="434,62,518,417" Background="Gray" x:Name="GridRadioButtons">
@@ -55,12 +53,15 @@
                 <RadioButton Grid.Row="2" Grid.Column="1" x:Name="MISCRadioButton" Tag="3" Content="Misc." GroupName="ResourceTypeGrpRadioButtons"/>
             </Grid>
             <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,239,0,0" Height="32" Width="97"/>
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,198,0,0" Height="32" Width="97"/>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,219,0,0" TextWrapping="Wrap" Text="resource name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,203,0,0" Height="32" Width="97"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="25,259,0,0" TextWrapping="Wrap" Text="Resource description" VerticalAlignment="Top" Width="365" Height="178"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,227,0,0" TextWrapping="Wrap" Text="Resource name" VerticalAlignment="Top" Width="365" BorderThickness="0,0,0,2" BorderBrush="Black" />
+
         </Grid>
         <Label Content="Resource Editor" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="63" Width="295" FontWeight="Bold" FontSize="38"/>
         <Label Content="CMS Editor" HorizontalAlignment="Left" Margin="296,37,0,0" VerticalAlignment="Top" Height="46" Width="206" FontWeight="Bold" FontSize="15"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,495,0,0" Click="btnResource_ClickCopy" Content="COPY" Background="LightBlue" />
+        <Label Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,97,0,0" Height="30" Width="172"/>
         <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="19,118,0,0" TextWrapping="Wrap" KeyUp="searchbar_KeyUp" Text="" VerticalAlignment="Top" Width="191" BorderThickness="1,1,1,1" BorderBrush="Black"/>
     </Grid>
 </Page>

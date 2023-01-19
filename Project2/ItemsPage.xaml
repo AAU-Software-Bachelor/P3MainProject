@@ -39,10 +39,6 @@
 
             <Border BorderBrush="Black" BorderThickness="1" Margin="32,10,914,351"></Border>
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="39,21,921,385"/>
-            <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="39,137,921,357"/>
-
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,195,0,0" TextWrapping="Wrap" Text="Item name" VerticalAlignment="Top" Width="290" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Item description"/>
 
             <Border BorderBrush="Black" BorderThickness="1" Margin="346,38,441,266">
                 <Grid Margin="1,-2,-1,2">
@@ -67,11 +63,15 @@
                 </Grid>
             </Border>
             <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-105,370,0,0" VerticalAlignment="Top" Height="21" Width="92" Click="OnClickSaveItem"/>
-            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,182,0,0" Height="32" Width="97"/>
-            <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,239,0,0" Height="32" Width="97"/>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,204,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <Label Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,170,0,0" Height="32" Width="97"/>
+            <Label Content="Description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,214,0,0" Height="32" Width="97"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,195,0,0" TextWrapping="Wrap" Text="Item name" VerticalAlignment="Top" Width="290" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="39,137,921,357"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Item description"/>
+
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,495,0,0" Click="btnItems_ClickCopy" Content="COPY" Background="LightBlue" />
+        <Label Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,94,0,0" Height="30" Width="172"/>
         <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="17,117,0,0" TextWrapping="Wrap" KeyUp="searchbar_KeyUp" Text="" VerticalAlignment="Top" Width="191" BorderThickness="1,1,1,1" BorderBrush="Black"/>
     </Grid>
 </Page>

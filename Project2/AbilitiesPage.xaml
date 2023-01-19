@@ -31,7 +31,6 @@
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
                 <Button Width="105"  Height="26" Content="Click to Upload"/>
             </StackPanel>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341" Height="175" Text="Description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,296,254">
                 <Grid>
                     <Label Content="Requirements" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
@@ -95,11 +94,13 @@
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="50,202,0,0" VerticalAlignment="Top" Height="20" Width="53" Click="OnClickDeleteFreeAbilities" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
             </Border>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="332" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="341" Height="175" Text="Description"/>
 
         </Grid>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="92" Height="21" Margin="120,443,0,0" Click="OnClickSaveAbility" Content="SAVE" Background="SpringGreen"/>
         <Button HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" Height="21" Margin="17,469,0,0" Click="btnAbility_ClickCopy" Content="COPY" Background="LightBlue" />
+        <Label Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,96,0,0" Height="30" Width="172"/>
         <TextBox x:Name="searchbar" HorizontalAlignment="Left" Margin="17,117,0,0" TextWrapping="Wrap" KeyUp="searchbar_KeyUp" Text="" VerticalAlignment="Top" Width="191" BorderThickness="1,1,1,1" BorderBrush="Black"/>
     </Grid>
 
