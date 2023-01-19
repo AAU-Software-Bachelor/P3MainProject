@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2.classes;
+using System;
 using System.Collections.Generic;
 
 using System.Collections.ObjectModel;
@@ -59,12 +60,7 @@ namespace Project2
 
         private void btnReligion_ClickDelete(object sender, RoutedEventArgs e)
         {
-            var index = lstReligion.SelectedIndex;
-            if (index >= 0)
-            {
-                ReligionCollection.Remove(CurrentConfig.GetTrait(ReligionCollection[index].UID, true)); //gets the religion to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ReligionCollection
-                lstReligion.SelectedIndex = ReligionCollection.Count - 1;
-            }
+            Functionality.DeleteRes(CurrentConfig, lstReligion, ReligionCollection);
         }
         private void btnReligion_ClickCopy(object sender, RoutedEventArgs e)
         {

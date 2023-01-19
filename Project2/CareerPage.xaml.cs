@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project2.classes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -68,12 +69,7 @@ namespace Project2
 
 		private void btnCareer_ClickDelete(object sender, EventArgs e)
 		{
-			var index = lstMTraits.SelectedIndex;
-			if (index >= 0)
-			{
-				MTCollection.Remove(CurrentConfig.GetTrait(MTCollection[index].UID, true)); //gets the Career to be deleteted via GetTrait while it deletes it, and deletes its counterpart in MTCollection
-				lstMTraits.SelectedIndex = MTCollection.Count - 1;
-			}
+            Functionality.DeleteRes(CurrentConfig, lstMTraits, MTCollection);
 		}
         private void btnCareer_ClickCopy(object sender, EventArgs e)
         {

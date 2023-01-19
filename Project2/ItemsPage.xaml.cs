@@ -22,6 +22,7 @@ using static Project2.ItemPage;
 using static System.Net.Mime.MediaTypeNames;
 using Application = System.Windows.Application;
 using Image = System.Windows.Controls.Image;
+using Project2.classes;
 
 namespace Project2
 {
@@ -74,12 +75,7 @@ namespace Project2
 		/// </summary>
         private void btnItems_ClickDelete(object sender, RoutedEventArgs e)
         {
-            var index = lstItems.SelectedIndex;
-            if (index >= 0)
-            {
-                ItemCollection.Remove(CurrentConfig.GetTrait(ItemCollection[index].UID, true)); //gets the Item to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ItemCollection
-                lstItems.SelectedIndex = ItemCollection.Count - 1;
-            }
+            Functionality.DeleteRes(CurrentConfig, lstItems, ItemCollection);
         }
         private void btnItems_ClickCopy(object sender, RoutedEventArgs e)
         {

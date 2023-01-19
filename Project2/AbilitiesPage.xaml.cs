@@ -1,4 +1,5 @@
 ﻿using ControlzEx.Standard;
+using Project2.classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,12 +68,7 @@ namespace Project2
 
 		private void btnAbility_ClickDelete(object sender, EventArgs e)
 		{
-			var index = lstMTraits.SelectedIndex;
-			if (index >= 0)
-			{
-				MTCollection.Remove(CurrentConfig.GetTrait(MTCollection[index].UID, true)); //gets the ability to be deleteted via GetTrait while it deletes it, and deletes its counterpart in MTCollection
-				lstMTraits.SelectedIndex = MTCollection.Count - 1;
-			}
+			Functionality.DeleteRes(CurrentConfig, lstMTraits, MTCollection);
 		}
 		private void btnAbility_ClickCopy(object sender, EventArgs e)
 		{
