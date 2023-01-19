@@ -345,5 +345,9 @@ namespace Project2
 
 		}
 
-    }
+		private void nameBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+
+		}
+	}
 }

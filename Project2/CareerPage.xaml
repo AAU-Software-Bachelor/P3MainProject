@@ -29,8 +29,8 @@
                 <Image x:Name="imagePicture" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Height="64" Width="85"/>
                 <Button Width="105"  Height="26" Content="Click to Upload"/>
             </StackPanel>
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,158,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Description"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" BorderThickness="0,0,0,2" BorderBrush="Black" Text="Career name"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Career description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="379,29,296,254">
                 <Grid>
                     <Label Content="Requirements" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>

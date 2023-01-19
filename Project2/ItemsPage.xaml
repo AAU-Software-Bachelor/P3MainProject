@@ -42,8 +42,8 @@
             <Image x:Name="ChosenImage" Source="/Images/Gallery.png" Stretch="Fill" RenderTransformOrigin="0.5,0.5" Margin="39,21,921,385"/>
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="39,137,921,357"/>
 
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,182,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black"/>
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text=""/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="33,195,0,0" TextWrapping="Wrap" Text="Item name" VerticalAlignment="Top" Width="290" BorderThickness="0,0,0,2" BorderBrush="Black"/>
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="33,213,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Height="175" Text="Item description"/>
             <Border BorderBrush="Black" BorderThickness="1" Margin="346,38,441,266">
                 <Grid Margin="1,-2,-1,2">
                     <Grid.ColumnDefinitions>

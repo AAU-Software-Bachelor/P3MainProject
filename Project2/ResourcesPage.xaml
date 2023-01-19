@@ -20,7 +20,7 @@
         <ListView x:Name="lstResources" Margin="18,99,1319,286" Grid.Row="0" SelectionChanged="OnResourceChanged">
             <ListView.View>
                 <GridView x:Name="grdNames" >
-                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Name" Width="110" DisplayMemberBinding="{Binding Name}"/>
                     <GridViewColumn Header="Type" Width="80" DisplayMemberBinding="{Binding type}"/>
                 </GridView>
             </ListView.View>
@@ -34,8 +34,8 @@
             <Button Content="Change Icon" Click="ChangeIcon_click"  Margin="23,165,1020,440"/>
 
 
-            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,227,0,0" TextWrapping="Wrap" Text="resource name" VerticalAlignment="Top" Width="120" BorderThickness="0,0,0,2" BorderBrush="Black" />
-            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="25,245,0,0" TextWrapping="Wrap" Text="resource description" VerticalAlignment="Top" Width="365" Height="178"/>
+            <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="25,227,0,0" TextWrapping="Wrap" Text="Resource name" VerticalAlignment="Top" Width="365" BorderThickness="0,0,0,2" BorderBrush="Black" />
+            <TextBox x:Name="descBox" HorizontalAlignment="Left" Margin="25,245,0,0" TextWrapping="Wrap" Text="Resource description" VerticalAlignment="Top" Width="365" Height="178"/>
             <Button Background="SpringGreen" Content="SAVE" HorizontalAlignment="Left" Margin="-105,370,0,0" VerticalAlignment="Top" Height="21" Width="88" Click="OnClickSaveResource"/>
             <Grid Margin="434,62,518,417" Background="Gray" x:Name="GridRadioButtons">
                 <Grid.ColumnDefinitions>
