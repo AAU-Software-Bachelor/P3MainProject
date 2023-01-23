@@ -16,7 +16,7 @@
             </Border>
         </Label>
 
-        <ListView x:Name="lstMTraits" Margin="17,143,1321,312" Grid.Row="0" SelectionChanged="OnAbilityChanged">
+        <ListView x:Name="lstTraits" Margin="17,143,1321,312" Grid.Row="0" SelectionChanged="OnAbilityChanged">
 
             <ListView.View>
                 <GridView x:Name="grdNames">

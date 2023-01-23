@@ -38,18 +38,18 @@ namespace Project2
             RequireTypeBox.Items.Add("Religion");
 			RequireTypeBox.SelectedIndex= 0;
 			MTCollection = new ObservableCollection<majorTrait>();
-			foreach (majorTrait Career in CurrentConfig.CarList) //adds all Career to ObservableCollection MTCollection
+			foreach (majorTrait Career in CurrentConfig.CarList) //adds all Career to ObservableCollection TraitCollection
 			{
 				MTCollection.Add(Career);
 			}
 			lstMTraits.ItemsSource = MTCollection;
-			CurrentIndex = -1;  //skip the next use of CurrentIndex
+			CurrentIndex = -1;  //skip the next use of LastSelected
 			lstMTraits.SelectedIndex = 0;
 
         }
 		public config CurrentConfig { get; set; }
 		int CurrentIndex { get; set; }  //keeps track of what index to use
-		private ObservableCollection<majorTrait> MTCollection;   //itemSource for lstMTraits ListVeiw
+		private ObservableCollection<majorTrait> MTCollection;   //itemSource for lstTraits ListVeiw
 
 
 		private void MainMenu_MouseClick(object sender, MouseButtonEventArgs e)
@@ -476,7 +476,7 @@ namespace Project2
 
 		private void CareerChange(object sender, EventArgs e)
         {
-            if (lstMTraits.SelectedIndex >= 0)    //lstMTraits.SelectedIndex returns -1 if nothing is selected
+            if (lstMTraits.SelectedIndex >= 0)    //lstTraits.SelectedIndex returns -1 if nothing is selected
             {
                 if (CurrentIndex >= 0)
                 {
@@ -815,28 +815,7 @@ namespace Project2
 
         private void searchbar_KeyUp(object sender, KeyEventArgs e)
         {
-            string searchText = (this.FindName("searchbar") as TextBox).Text;
-            if (searchText != "")
-            {
-                MTCollection.Clear();
-                foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
-                {
-                    if (career.Name.ToLower().Contains(searchText.ToLower()))
-                    {
-                        MTCollection.Add(career);
-                    }
-                }
-                lstMTraits.SelectedIndex = 0;
-            }
-            else
-            {
-                MTCollection.Clear();
-                foreach (majorTrait career in CurrentConfig.CarList) //adds all races to ObservableCollection RaceCollection
-                {
-                    MTCollection.Add(career);
-                }
-                lstMTraits.SelectedIndex = 0;
-            }
+            Functionality.searchbarMT(searchbar, MTCollection, CurrentConfig.CarList, lstMTraits);
         }
     }
 }

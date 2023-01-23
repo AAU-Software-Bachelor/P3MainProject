@@ -43,7 +43,7 @@ namespace Project2
 				RaceCollection.Add(race);
 			}
 			lstRaces.ItemsSource = RaceCollection;
-			CurrentIndex = -1;	//skip the next use of CurrentIndex
+			CurrentIndex = -1;	//skip the next use of LastSelected
 			lstRaces.SelectedIndex = 0;
 		}
 		public config CurrentConfig { get; set; }

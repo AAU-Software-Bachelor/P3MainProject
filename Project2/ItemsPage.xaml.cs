@@ -42,7 +42,7 @@ namespace Project2
                 ItemCollection.Add(Item);
             }
             lstItems.ItemsSource = ItemCollection;
-            CurrentIndex = -1;  //skip the next use of CurrentIndex
+            CurrentIndex = -1;  //skip the next use of LastSelected
             lstItems.SelectedIndex = 0;
         }
         public config CurrentConfig { get; set; }

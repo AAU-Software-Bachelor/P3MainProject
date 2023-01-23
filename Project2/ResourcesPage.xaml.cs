@@ -40,7 +40,7 @@ namespace Project2
 				ResourceCollection.Add(Resource);
 			}
 			lstResources.ItemsSource = ResourceCollection;
-			CurrentIndex = -1;  //skip the next use of CurrentIndex
+			CurrentIndex = -1;  //skip the next use of LastSelected
 			lstResources.SelectedIndex = 0;
 		}
 		config CurrentConfig { get; set; }

@@ -36,7 +36,7 @@ namespace Project2
                 ReligionCollection.Add(religion);
             }
             lstReligion.ItemsSource = ReligionCollection;
-            CurrentIndex = -1;  //skip the next use of CurrentIndex
+            CurrentIndex = -1;  //skip the next use of LastSelected
             lstReligion.SelectedIndex = 0;
         }
         public config CurrentConfig { get; set; }
