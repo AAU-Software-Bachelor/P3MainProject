@@ -125,7 +125,7 @@ namespace Project2
         }
 		private void OnClick_DeleteDiscount(object sender, RoutedEventArgs e)
 		{
-			Functionality.DeleteDiscount(ListDiscounts);
+			Functionality.Deleteselected(ListDiscounts);
 		}
 
 		bool amworkingonchange = false;
@@ -134,7 +134,7 @@ namespace Project2
 			if (amworkingonchange == false)
 			{
 				amworkingonchange = true;
-				Functionality.MTChange(CurrentConfig, LastSelected, lstTraits, nameBox, descBox, costBox, ListAffectedResources, ListFreeAbilities, ListCosts, ListDiscounts, ListExclusion, ListRequirements, RequireTypeBox);
+				Functionality.MTChange(CurrentConfig, CurrentConfig.AbiList, LastSelected, lstTraits, nameBox, descBox, costBox, ListAffectedResources, ListFreeAbilities, ListCosts, ListDiscounts, ListExclusion, ListRequirements, RequireTypeBox);
 				amworkingonchange = false;
 			}
 		}
@@ -144,7 +144,7 @@ namespace Project2
 		}
 		private void SaveAbility(majorTrait? trait = null)
 		{
-			Functionality.SaveMTrait(CurrentConfig, trait, lstTraits, nameBox,descBox,costBox,ListAffectedResources,ListFreeAbilities,ListCosts,ListDiscounts,ListExclusion,ListRequirements);
+			Functionality.SaveMTrait(CurrentConfig, CurrentConfig.AbiList, trait, lstTraits, nameBox,descBox,costBox,ListAffectedResources,ListFreeAbilities,ListCosts,ListDiscounts,ListExclusion,ListRequirements);
             Functionality.searchbarMT(searchbar, TraitCollection, CurrentConfig.AbiList, lstTraits);
         }
         private void NumberValidationTextBox(object sender, EventArgs e)

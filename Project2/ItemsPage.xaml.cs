@@ -36,29 +36,26 @@ namespace Project2
         {
             CurrentConfig = currentConfig;
             InitializeComponent();
-            ItemCollection = new ObservableCollection<majorTrait>();
-            foreach (majorTrait Item in CurrentConfig.IteList) //adds all Items to ObservableCollection ItemCollection
+            TraitCollection = new ObservableCollection<majorTrait>();
+            foreach (majorTrait Item in CurrentConfig.IteList) //adds all Items to ObservableCollection TraitCollection
             {
-                ItemCollection.Add(Item);
+                TraitCollection.Add(Item);
             }
-            lstItems.ItemsSource = ItemCollection;
-            CurrentIndex = -1;  //skip the next use of LastSelected
-            lstItems.SelectedIndex = 0;
+            lstTraits.ItemsSource = TraitCollection;
+            LastSelected = new majorTrait("");  //keeps track of what object to save
+            lstTraits.SelectedIndex = 0;
         }
         public config CurrentConfig { get; set; }
-        int CurrentIndex { get; set; }  //keeps track of what index to use
-        private ObservableCollection<majorTrait> ItemCollection;   //itemSource for lstItems ListVeiw
+        public majorTrait LastSelected { get; set; }
+        private ObservableCollection<majorTrait> TraitCollection;   //itemSource for lstTraits ListVeiw
 
         /// <summary>
         /// sets page to MainWindow
         /// </summary>
         private void ItemMainMenu_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow(CurrentConfig);
-            Application.Current.MainWindow.Content = mainWindow;
+            Functionality.MainMenu(CurrentConfig);
         }
-
-
         /// <summary>
         /// adds a new empty Item to Current config and newItem
         /// </summary>
@@ -66,8 +63,8 @@ namespace Project2
         {
             majorTrait tempItem = new majorTrait(CurrentConfig.newUID("IteList")) { Name = "new Item" };   //makes the new Item object
             CurrentConfig.saveToList(tempItem);
-            ItemCollection.Add(tempItem);
-            lstItems.SelectedIndex = ItemCollection.Count - 1;
+            TraitCollection.Add(tempItem);
+            lstTraits.SelectedIndex = TraitCollection.Count - 1;
 
         }
         /// <summary>
@@ -75,25 +72,11 @@ namespace Project2
 		/// </summary>
         private void btnItems_ClickDelete(object sender, RoutedEventArgs e)
         {
-            Functionality.DeleteRes(CurrentConfig, lstItems, ItemCollection);
+            Functionality.DeleteRes(CurrentConfig, lstTraits, TraitCollection);
         }
         private void btnItems_ClickCopy(object sender, RoutedEventArgs e)
         {
-            var index = lstItems.SelectedIndex;
-            if (index >= 0)
-            {
-                majorTrait tempItem = new majorTrait(CurrentConfig.newUID("IteList"))
-                {
-                    Name = CurrentConfig.IteList[index].Name,
-                    Description = CurrentConfig.IteList[index].Description,
-                    AffectedResources = CurrentConfig.IteList[index].AffectedResources,
-                    FreeAbilities = CurrentConfig.IteList[index].FreeAbilities
-                };   //makes the new Item object
-                CurrentConfig.saveToList(tempItem);
-                ItemCollection.Add(tempItem);
-                lstItems.SelectedIndex = ItemCollection.Count - 1;
-            }
-
+            Functionality.MTCopy(lstTraits, TraitCollection, CurrentConfig, "IteList");
         }
 
         /// <summary>
@@ -101,33 +84,14 @@ namespace Project2
         /// </summary>
         private void OnClickAddStarterAbilities(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
-            this.InitializeComponent();
-            ComboBox comboBox = new ComboBox();
-            comboBox.IsReadOnly = true;
-            comboBox.IsDropDownOpen = false;
-            comboBox.Margin = new Thickness(5, 5, 0, 0);
-            comboBox.Height = 24;
-            comboBox.Width = 185;
-            comboBox.DisplayMemberPath = "Name";
-            foreach (majorTrait abi in CurrentConfig.AbiList)  //adds all abilities from CurrentConfig to the combobox
-            {
-                comboBox.Items.Add(abi);
-            }
-
-            this.ListStarterAbilities.Items.Add(comboBox);
-            lstItems.SelectedIndex = SelIndex;  //applies saved index selection
+            Functionality.AddFreeAbilities(lstTraits, ListStarterAbilities, CurrentConfig);
         }
         /// <summary>
         /// Deletes selected starterAbility
         /// </summary>
         private void OnClickDeleteStarterAbilities(object sender, RoutedEventArgs e)
         {
-            var index = ListStarterAbilities.SelectedIndex;
-            if (index >= 0)
-            {
-                ListStarterAbilities.Items.RemoveAt(index);
-            }
+            Functionality.Deleteselected(ListStarterAbilities);
         }
 
         /// <summary>
@@ -135,40 +99,7 @@ namespace Project2
         /// </summary>
         private void OnClickAddStarterResources(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
-            this.InitializeComponent();
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.Orientation = Orientation.Horizontal;
-
-            ComboBox comboBoxOne = new ComboBox();  //starts on the recouse combobox
-            comboBoxOne.Text = "Select Stat";
-            comboBoxOne.IsReadOnly = true;
-            comboBoxOne.IsDropDownOpen = false;
-            comboBoxOne.Margin = new Thickness(5, 5, 0, 0);
-            comboBoxOne.Height = 24;
-            comboBoxOne.Width = 185;
-
-            comboBoxOne.DisplayMemberPath = "Name";
-            foreach (resourceTrait res in CurrentConfig.ResList)
-            {
-                comboBoxOne.Items.Add(res);
-            }
-
-
-            stackPanel.Children.Add(comboBoxOne);   //makes the combobox a child of the stackpanel
-
-            TextBox textBox = new TextBox();    //starts on the number only textbox
-            textBox.Margin = new Thickness(15, 13, 0, 0);
-            textBox.Width = 40;
-            textBox.Height = 24;
-            textBox.VerticalAlignment = VerticalAlignment.Top;
-            textBox.TextChanged += NumberValidationTextBox;
-
-            stackPanel.Children.Add(textBox);   //makes the textbox a child of the stackpanel
-
-
-            this.ListStarterResources.Items.Add(stackPanel);
-            lstItems.SelectedIndex = SelIndex;  //applies saved index selection
+            Functionality.AddAffectedResources(lstTraits, ListAffectedResources, CurrentConfig);
         }
 
         /// <summary>
@@ -176,70 +107,14 @@ namespace Project2
         /// </summary>
         private void OnClickDeleteStarterResources(object sender, RoutedEventArgs e)
         {
-            var index = ListStarterResources.SelectedIndex;
-            if (index >= 0)
-            {
-                ListStarterResources.Items.RemoveAt(index);
-            }
+            Functionality.Deleteselected(ListAffectedResources);
         }
         /// <summary>
         ///	Saves the current Item (if it exists) via SaveItem() and loads up the new one that was clicked.
         /// </summary>
         private void OnItemChanged(object sender, RoutedEventArgs e)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
-            if (lstItems.SelectedIndex >= 0)    //lstItems.SelectedIndex returns -1 if nothing is selected
-            {
-                if (CurrentIndex >= 0)  //skips saving the previus selected Item if -1
-                {
-                    SaveItem(CurrentIndex);
-                    ListStarterAbilities.Items.Clear();
-                    ListStarterResources.Items.Clear();
-                }
-                CurrentIndex = lstItems.SelectedIndex;
-                majorTrait currentMT = CurrentConfig.IteList[CurrentIndex]; //gets the trait to be loaded
-
-                (this.FindName("nameBox") as TextBox).Text = currentMT.Name; //sets text to the name from the current MajorTrait object
-                (this.FindName("descBox") as TextBox).Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
-
-                foreach (string FreeAbil in currentMT.FreeAbilities)    //makes the needed comboboxes to hold the free abilities
-                {
-                    OnClickAddStarterAbilities(sender, e);
-                }
-                int ind = 0;
-                string TempUID;
-                foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
-                {
-                    TempUID = currentMT.FreeAbilities[ind];
-                    BOX.SelectedIndex = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, TempUID));   //selects the free abilities in the comboboxes
-                    ind++;
-                }
-                foreach (AmountUID affRes in currentMT.AffectedResources)	//makes the needed comboboxes to hold the starter resources
-                {
-                    OnClickAddStarterResources(sender, e);
-                }
-                ind = 0;
-                foreach (StackPanel PANEL in (this.FindName("ListStarterResources") as ListView).Items)
-                {
-                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-                    {
-                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
-                        {
-                            AmountUID tempAffRes = currentMT.AffectedResources[ind];
-                            box.SelectedIndex = CurrentConfig.ResList.FindIndex(i => string.Equals(i.UID, tempAffRes.UID)); //selects the starter resources in the comboboxes
-                            textBox.Text = tempAffRes.Amount.ToString(); //sets the right amounts in the textboxes
-                        }
-                    }
-                    ind++;
-                }
-            }
-            else
-            {
-                CurrentIndex = -1;
-                ListStarterAbilities.Items.Clear();
-                ListStarterResources.Items.Clear();
-            }
-            lstItems.SelectedIndex = SelIndex;  //applies saved index selection
+            Functionality.MTChange(CurrentConfig, CurrentConfig.IteList, LastSelected, lstTraits, nameBox, descBox, ListAffectedResources: ListAffectedResources, ListFreeAbilities: ListStarterAbilities);
         }
         /// <summary>
         /// works as a middle man between butons and SaveItem 
@@ -254,14 +129,14 @@ namespace Project2
         /// </summary>
         private void SaveItem(int index = -1)
         {
-            int SelIndex = lstItems.SelectedIndex;  //saves selected index so it is not lost
+            int SelIndex = lstTraits.SelectedIndex;  //saves selected index so it is not lost
 
             string UID = "";
             if (index == -1)    //is true when funtion is called via a button
             {
-                if (lstItems.SelectedIndex >= 0)
+                if (lstTraits.SelectedIndex >= 0)
                 {
-                    UID = CurrentConfig.IteList[lstItems.SelectedIndex].UID;    //uses the selected index to find the wanted UID
+                    UID = CurrentConfig.IteList[lstTraits.SelectedIndex].UID;    //uses the selected index to find the wanted UID
                     index = CurrentConfig.IteList.FindIndex(i => string.Equals(i.UID, UID));
                 }
             }
@@ -302,12 +177,12 @@ namespace Project2
                     }
                 }
                 CurrentConfig.IteList[index] = currentMT;
-                ItemCollection.Clear(); // clears the list
+                TraitCollection.Clear(); // clears the list
                 foreach (majorTrait Item in CurrentConfig.IteList)  //rewrites the list.
                 {
-                    ItemCollection.Add(Item);
+                    TraitCollection.Add(Item);
                 }
-                lstItems.SelectedIndex = SelIndex;  //applies saved index selection
+                lstTraits.SelectedIndex = SelIndex;  //applies saved index selection
             }
         }
 
@@ -331,24 +206,24 @@ namespace Project2
             string searchText = (this.FindName("searchbar") as TextBox).Text;
             if (searchText != "")
             {
-                ItemCollection.Clear();
+                TraitCollection.Clear();
                 foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
                 {
                     if (item.Name.ToLower().Contains(searchText.ToLower()))
                     {
-                        ItemCollection.Add(item);
+                        TraitCollection.Add(item);
                     }
                 }
-                lstItems.SelectedIndex = 0;
+                lstTraits.SelectedIndex = 0;
             }
             else
             {
-                ItemCollection.Clear();
+                TraitCollection.Clear();
                 foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
                 {
-                    ItemCollection.Add(item);
+                    TraitCollection.Add(item);
                 }
-                lstItems.SelectedIndex = 0;
+                lstTraits.SelectedIndex = 0;
             }
         }
 

@@ -445,15 +445,6 @@ namespace Project2.classes
 			ListDiscounts.SelectedIndex = ListDiscounts.Items.Count - 1;
 			lstTraits.SelectedIndex = SelIndex;  //applies saved index selection
 		}
-		public static void DeleteDiscount(ListView ListDiscounts)
-		{
-			var index = ListDiscounts.SelectedIndex;
-			if (index >= 0)
-			{
-				ListDiscounts.Items.RemoveAt(index);
-				ListDiscounts.SelectedIndex = ListDiscounts.Items.Count - 1;
-			}
-		}
 		/// <summary>
 		/// Validates input in "amount" textbox to only allow integers.
 		/// </summary>
@@ -468,7 +459,7 @@ namespace Project2.classes
 				(sender as TextBox).Text = "";
 			}
 		}
-		public static void SaveMTrait(config CurrentConfig, majorTrait trait, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null)
+		public static void SaveMTrait(config CurrentConfig, List<majorTrait> MTList, majorTrait trait, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null)
 		{
 			if (trait == null)
 			{
@@ -480,14 +471,14 @@ namespace Project2.classes
 			{
 				if (lstTraits.SelectedIndex >= 0)
 				{
-					index = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, (lstTraits.SelectedItem as majorTrait).UID));
+					index = MTList.FindIndex(i => string.Equals(i.UID, (lstTraits.SelectedItem as majorTrait).UID));
 				}
 			}
 			else
 			{
-				index = CurrentConfig.AbiList.FindIndex(i => string.Equals(i.UID, trait.UID));
+				index = MTList.FindIndex(i => string.Equals(i.UID, trait.UID));
 			}
-			string UID = CurrentConfig.AbiList[index].UID; //uses the given index to find the wanted UID
+			string UID = MTList[index].UID; //uses the given index to find the wanted UID
 			majorTrait currentMT = CurrentConfig.GetTrait(UID);
 			currentMT.deleteContent();
 
@@ -584,19 +575,19 @@ namespace Project2.classes
 					ind++;
 				}
 			}
-			
-			CurrentConfig.AbiList[index] = currentMT;
+
+            MTList[index] = currentMT;
 			object sender = new object();
 			EventArgs e = new EventArgs();
 			lstTraits.SelectedIndex = SelIndex;  //applies saved index selection
 		}
-		public static void MTChange(config CurrentConfig, majorTrait LastSelected, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null, ComboBox? RequireTypeBox = null)
+		public static void MTChange(config CurrentConfig, List<majorTrait> MTlist, majorTrait LastSelected, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null, ComboBox? RequireTypeBox = null)
 		{
 			if (lstTraits.SelectedIndex >= 0)    //lstTraits.SelectedIndex returns -1 if nothing is selected
 			{
 				if (!LastSelected.UID.Equals(""))
 				{
-					Functionality.SaveMTrait(CurrentConfig, LastSelected, lstTraits, nameBox, descBox, costBox, ListAffectedResources, ListFreeAbilities, ListCosts, ListDiscounts, ListExclusion, ListRequirements);
+					Functionality.SaveMTrait(CurrentConfig, MTlist, LastSelected, lstTraits, nameBox, descBox, costBox, ListAffectedResources, ListFreeAbilities, ListCosts, ListDiscounts, ListExclusion, ListRequirements);
 					nameBox.Text = "";
 					descBox.Text = "";
 				}

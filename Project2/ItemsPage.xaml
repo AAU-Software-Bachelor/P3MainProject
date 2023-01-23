@@ -21,7 +21,7 @@
                 </Border>
             </StackPanel>
         </Label>
-        <ListView x:Name="lstItems" Margin="17,143,177,286" Grid.Row="0" SelectionChanged="OnItemChanged">
+        <ListView x:Name="lstTraits" Margin="17,143,177,286" Grid.Row="0" SelectionChanged="OnItemChanged">
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}"/>
@@ -57,7 +57,7 @@
                 <Grid>
                     <Label Content="Gained Resources" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="28" Width="154" FontWeight="Bold" FontSize="14"/>
                     <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,12,0,0" Height="32" Width="97" FontWeight="Bold"/>
-                    <ListView x:Name="ListStarterResources" Margin="10,38,10,36"/>
+                    <ListView x:Name="ListAffectedResources" Margin="10,38,10,36"/>
                     <Button Content="ADD" HorizontalAlignment="Left" Margin="10,198,0,0" VerticalAlignment="Top" Height="21" Width="35" Click="OnClickAddStarterResources" ClickMode="Press" Background="LightBlue"/>
                     <Button Content="DELETE" HorizontalAlignment="Left" Margin="53,198,0,0" VerticalAlignment="Top" Height="21" Width="52" Click="OnClickDeleteStarterResources" ClickMode="Press" Background="OrangeRed"/>
                 </Grid>
