@@ -105,7 +105,7 @@ namespace Project2.classes
 			if (searchbar.Text != "")
 			{
 				MTCollection.Clear();
-				foreach (majorTrait ability in MTLst) //adds all races to ObservableCollection RaceCollection
+				foreach (majorTrait ability in MTLst) //adds all races to ObservableCollection TraitCollection
 				{
 					if (ability.Name.ToLower().Contains(searchbar.Text.ToLower()))
 					{
@@ -116,7 +116,7 @@ namespace Project2.classes
 			else
 			{
 				MTCollection.Clear();
-				foreach (majorTrait ability in MTLst) //adds all races to ObservableCollection RaceCollection
+				foreach (majorTrait ability in MTLst) //adds all races to ObservableCollection TraitCollection
 				{
 					MTCollection.Add(ability);
 				}
@@ -459,7 +459,7 @@ namespace Project2.classes
 				(sender as TextBox).Text = "";
 			}
 		}
-		public static void SaveMTrait(config CurrentConfig, List<majorTrait> MTList, majorTrait trait, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null)
+		public static void SaveMTrait(config CurrentConfig, List<majorTrait> MTList, majorTrait trait, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null, TextBox? playerReqBox = null)
 		{
 			if (trait == null)
 			{
@@ -484,6 +484,11 @@ namespace Project2.classes
 
 			currentMT.Name = nameBox.Text;
 			currentMT.Description = descBox.Text;
+			if (playerReqBox != null)
+			{
+				currentMT.PlayerReq = playerReqBox.Text;
+			}
+
 			if (ListAffectedResources != null)
 			{
 				foreach (StackPanel PANEL in ListAffectedResources.Items)
@@ -581,7 +586,7 @@ namespace Project2.classes
 			EventArgs e = new EventArgs();
 			lstTraits.SelectedIndex = SelIndex;  //applies saved index selection
 		}
-		public static void MTChange(config CurrentConfig, List<majorTrait> MTlist, majorTrait LastSelected, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null, ComboBox? RequireTypeBox = null)
+		public static void MTChange(config CurrentConfig, List<majorTrait> MTlist, majorTrait LastSelected, ListView lstTraits, TextBox nameBox, TextBox descBox, TextBox? costBox = null, ListView? ListAffectedResources = null, ListView? ListFreeAbilities = null, ListView? ListCosts = null, ListView? ListDiscounts = null, ListView? ListExclusion = null, ListView? ListRequirements = null, ComboBox? RequireTypeBox = null, TextBox? playerReqBox = null)
 		{
 			if (lstTraits.SelectedIndex >= 0)    //lstTraits.SelectedIndex returns -1 if nothing is selected
 			{
@@ -596,8 +601,11 @@ namespace Project2.classes
 				nameBox.Text = currentMT.Name; //sets text to the name from the current MajorTrait object
 				descBox.Text = currentMT.Description;  //sets text to the description from the current MajorTrait object
 
-
-				if (ListAffectedResources != null)
+                if (playerReqBox != null)
+                {
+					playerReqBox.Text = currentMT.PlayerReq;
+                }
+                if (ListAffectedResources != null)
                 {
                     ListAffectedResources.Items.Clear();
                     foreach (AmountUID AffRes in currentMT.AffectedResources)
@@ -772,6 +780,10 @@ namespace Project2.classes
 			else
 			{
 				LastSelected = new majorTrait("");
+                if (playerReqBox != null)
+                {
+                    playerReqBox.Text = "";
+                }
                 if (ListRequirements != null && ListExclusion != null)
                 {
                     ListRequirements.Items.Clear();

@@ -109,12 +109,18 @@ namespace Project2
         {
             Functionality.Deleteselected(ListAffectedResources);
         }
+        bool amworkingonchange = false;
         /// <summary>
         ///	Saves the current Item (if it exists) via SaveItem() and loads up the new one that was clicked.
         /// </summary>
         private void OnItemChanged(object sender, RoutedEventArgs e)
         {
-            Functionality.MTChange(CurrentConfig, CurrentConfig.IteList, LastSelected, lstTraits, nameBox, descBox, ListAffectedResources: ListAffectedResources, ListFreeAbilities: ListStarterAbilities);
+            if (amworkingonchange == false)
+            {
+                amworkingonchange = true;
+                Functionality.MTChange(CurrentConfig, CurrentConfig.IteList, LastSelected, lstTraits, nameBox, descBox, ListAffectedResources: ListAffectedResources, ListFreeAbilities: ListStarterAbilities);
+                amworkingonchange = false;
+            }
         }
         /// <summary>
         /// works as a middle man between butons and SaveItem 
@@ -129,61 +135,7 @@ namespace Project2
         /// </summary>
         private void SaveItem(int index = -1)
         {
-            int SelIndex = lstTraits.SelectedIndex;  //saves selected index so it is not lost
-
-            string UID = "";
-            if (index == -1)    //is true when funtion is called via a button
-            {
-                if (lstTraits.SelectedIndex >= 0)
-                {
-                    UID = CurrentConfig.IteList[lstTraits.SelectedIndex].UID;    //uses the selected index to find the wanted UID
-                    index = CurrentConfig.IteList.FindIndex(i => string.Equals(i.UID, UID));
-                }
-            }
-            else
-            {
-                UID = CurrentConfig.IteList[index].UID; //uses the given index to find the wanted UID
-            }
-            if (UID != "")
-            {
-                majorTrait currentMT = CurrentConfig.GetTrait(UID);
-                currentMT.deleteContent();
-
-                currentMT.Name = (this.FindName("nameBox") as TextBox).Text;
-                currentMT.Description = (this.FindName("descBox") as TextBox).Text;
-
-                foreach (ComboBox BOX in (this.FindName("ListStarterAbilities") as ListView).Items)
-                {
-                    if (BOX.SelectedIndex >= 0)
-                    {
-                        string TempUID = CurrentConfig.AbiList[BOX.SelectedIndex].UID;
-                        currentMT.FreeAbilities.Add(TempUID); // saves the free abilities
-                    }
-                }
-
-                foreach (StackPanel PANEL in (this.FindName("ListStarterResources") as ListView).Items)
-                {
-                    foreach (ComboBox box in PANEL.Children.OfType<ComboBox>())
-                    {
-                        foreach (TextBox textBox in PANEL.Children.OfType<TextBox>())
-                        {
-                            if (box.SelectedIndex >= 0 & textBox.Text != "")
-                            {
-                                string TempUID = CurrentConfig.ResList[box.SelectedIndex].UID;  //gets the affected rescource
-                                int TempVal = int.Parse(textBox.Text);  //gets the value
-                                currentMT.AffectedResources.Add(new AmountUID(TempUID, TempVal));  //saves the affected rescources and their values
-                            }
-                        }
-                    }
-                }
-                CurrentConfig.IteList[index] = currentMT;
-                TraitCollection.Clear(); // clears the list
-                foreach (majorTrait Item in CurrentConfig.IteList)  //rewrites the list.
-                {
-                    TraitCollection.Add(Item);
-                }
-                lstTraits.SelectedIndex = SelIndex;  //applies saved index selection
-            }
+            Functionality.SaveMTrait(CurrentConfig, CurrentConfig.IteList, LastSelected, lstTraits, nameBox, descBox, ListAffectedResources:ListAffectedResources, ListFreeAbilities:ListStarterAbilities);
         }
 
         /// <summary>
@@ -191,40 +143,12 @@ namespace Project2
         /// </summary>
         private void NumberValidationTextBox(object sender, EventArgs e)
         {
-            try
-            {
-                int.Parse((sender as TextBox).Text); //if Parse is unsuccessful, text is something other than integer
-            }
-            catch
-            {
-                (sender as TextBox).Text = "";
-            }
+            Functionality.NumberValidationTextBox(sender, e);
         }
 
         private void searchbar_KeyUp(object sender, KeyEventArgs e)
         {
-            string searchText = (this.FindName("searchbar") as TextBox).Text;
-            if (searchText != "")
-            {
-                TraitCollection.Clear();
-                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
-                {
-                    if (item.Name.ToLower().Contains(searchText.ToLower()))
-                    {
-                        TraitCollection.Add(item);
-                    }
-                }
-                lstTraits.SelectedIndex = 0;
-            }
-            else
-            {
-                TraitCollection.Clear();
-                foreach (majorTrait item in CurrentConfig.IteList) //adds all races to ObservableCollection RaceCollection
-                {
-                    TraitCollection.Add(item);
-                }
-                lstTraits.SelectedIndex = 0;
-            }
+            Functionality.searchbarMT(searchbar, TraitCollection, CurrentConfig.IteList, lstTraits);
         }
 
         private void ChangeIcon_click(object sender, RoutedEventArgs e)

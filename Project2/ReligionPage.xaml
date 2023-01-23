@@ -16,7 +16,7 @@
                 </Border>
             </StackPanel>
         </Label>
-        <ListView x:Name="lstReligion" Margin="17,143,1314,338" Grid.Row="0" SelectionChanged="OnReligionChanged">
+        <ListView x:Name="lstTraits" Margin="17,143,1314,338" Grid.Row="0" SelectionChanged="OnReligionChanged">
             <ListView.View>
                 <GridView x:Name="grdNames">
                     <GridViewColumn Header="Name" Width="170" DisplayMemberBinding="{Binding Name}"/>
