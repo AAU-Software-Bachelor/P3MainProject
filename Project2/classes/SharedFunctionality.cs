@@ -80,6 +80,7 @@ namespace Project2.classes
 		}
 
 		//Deletes all references to the string toBeDeleted in different ways according to the runTimeType of T
+		//Loops from end to avoid skips
         static void delete<T>(List<T> list, string toBeDeleted)
 		{
 			List<List<string>>? temp = list as List<List<string>>;
