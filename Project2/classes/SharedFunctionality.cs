@@ -10,16 +10,32 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using static Project2.majorTrait;
 using System.Reflection;
+using System.Diagnostics;
+using System.Windows.Documents;
+using System.Windows.Media.TextFormatting;
 
 namespace Project2.classes
 {
 	internal class Functionality
 	{
-		public static void DeleteRes(config currentConfig, ListView uiList, ObservableCollection<majorTrait> collection)
+        public static void DeleteResource(config currentConfig, ListView uiList, ObservableCollection<majorTrait>? collection = null)
+		{
+
+		}
+
+        public static void deleteMajorTrait(config currentConfig, ListView uiList, ObservableCollection<majorTrait>? collection = null, ObservableCollection<resourceTrait>? resourceCollection = null)
 		{
 			var index = uiList.SelectedIndex;
-
-			List<string> RequiredBy = GetDependencyReferences(currentConfig, collection[index].UID);
+			List<string> RequiredBy;
+			if(collection != null){
+                RequiredBy = GetDependencyReferences(currentConfig, collection[index].UID);
+            } else if (resourceCollection != null) {
+                RequiredBy = GetDependencyReferences(currentConfig, resourceCollection[index].UID);
+            } else
+			{
+				throw new ArgumentNullException("Only one of resourceCollection and collection can be null");
+			}
+            
 			if (index >= 0)
 			{
 				if (RequiredBy.Count() > 0)
@@ -34,36 +50,94 @@ namespace Project2.classes
 
 					if (result.Equals(MessageBoxResult.Yes))
 					{
-						DeleteDependencies(currentConfig, collection[index].UID, RequiredBy);
+                        if (collection != null)
+                        {
+                            DeleteDependencies(currentConfig, collection[index].UID, RequiredBy);
+                        }
+                        else 
+                        {
+                            DeleteDependencies(currentConfig, resourceCollection![index].UID, RequiredBy);
+                        }
+                        
 					}
 					else if (result.Equals(MessageBoxResult.Cancel))
 					{
 						return;
 					}
 				}
-				collection.Remove(currentConfig.GetTrait(collection[index].UID, true)); //gets the ability to be deleteted via GetTrait while it deletes it, and deletes its counterpart in AbilityCollection
-				uiList.SelectedIndex = collection.Count - 1;
+
+                //gets the ability to be deleteted via GetTrait while it deletes it, and deletes its counterpart in AbilityCollection
+                if (collection != null)
+                {
+                    collection.Remove(currentConfig.GetTrait(collection[index].UID, true));
+                    uiList.SelectedIndex = collection.Count - 1;
+                }
+                else
+                {
+                    resourceCollection!.Remove(currentConfig.GetTrait(resourceCollection![index].UID, true));
+                    uiList.SelectedIndex = resourceCollection!.Count - 1;
+                }
+				
 			}
 		}
 
-		private static void DeleteDependencies(config currentConfig, string toBeDeleted, List<string> dependers)
+        static void delete<T>(List<T> list, string toBeDeleted)
+		{
+			List<List<string>>? temp = list as List<List<string>>;
+			if(temp != null)
+			{
+                foreach (List<string> orList in temp)
+                {
+                    for (int i = 0; i < orList.Count(); i++)
+                    {
+                        if (orList[i] == toBeDeleted)
+                        {
+                            orList.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+
+			List<string>? stringTemp = list as List<string> ;
+			if(stringTemp != null)
+			{
+                for (int i = 0; i < stringTemp.Count(); i++)
+                {
+                    if (stringTemp[i] == toBeDeleted)
+                    {
+                        stringTemp.RemoveAt(i);
+                    }
+                }
+            }
+
+			List<AmountUID>? amountUIDs = list as List<AmountUID>;
+			if(amountUIDs != null)
+			{
+                for (int i = 0; i < amountUIDs.Count(); i++)
+                {
+                    if (amountUIDs[i].UID == toBeDeleted)
+                    {
+                        amountUIDs.RemoveAt(i);
+                    }
+                }
+            }
+        }
+
+
+        private static void DeleteDependencies(config currentConfig, string toBeDeleted, List<string> dependers)
 		{
 			foreach (string depender in dependers)
 			{
-				majorTrait? temp = currentConfig.GetTrait(depender) as majorTrait;
-				if (temp != null)
+				majorTrait? major = currentConfig.GetTrait(depender) as majorTrait;
+				if (major != null)
 				{
-					foreach (List<string> orList in temp.Dependencies)
-					{
-						for (int i = 0; i < orList.Count(); i++)
-						{
-							if (orList[i] == toBeDeleted)
-							{
-								orList.RemoveAt(i);
-							}
-						}
-					}
-				}
+					delete(major.Dependencies, toBeDeleted);
+                    delete(major.CostTypes, toBeDeleted);
+                    delete(major.AffectedResources, toBeDeleted);
+                    delete(major.Discounts, toBeDeleted);
+                    delete(major.FreeAbilities, toBeDeleted);
+                    delete(major.Exclusions, toBeDeleted);
+                }
 			}
 		}
 		private static List<string> GetDependencyReferences(config currentConfig, string RequirementUId)
@@ -73,25 +147,84 @@ namespace Project2.classes
 			requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.CarList));
 			requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.RacList));
 			requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.RelList));
-			requiredByList = requiredByList.Distinct().ToList();
+            requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.IteList));
+            requiredByList = requiredByList.Distinct().ToList();
 			return requiredByList;
 		}
-		static List<string> GetDependencyReferencesPartTwo(string RequirementUId, List<majorTrait> list)
+
+		static List<string> GetDependencyReferencesPartThree<T>(T list, string uid, string majorUID)
 		{
-			List<string> requiredByList = new List<string>();
+			List<string> result = new List<string>();
+            if (majorUID == "AbiList-/b7d51243-91a6-4315-ac7b-0ef713c3fd24") Debug.WriteLine("Found krigerpræst");
+            List<List<string>>? requirements = list as List<List<string>>;
+			if(requirements != null)
+			{
+                foreach (List<string> orList in requirements)
+                {
+                    foreach (string dependency in orList)
+                    {
+                        if (dependency == uid)
+                        {
+                            result.Add(majorUID);
+                        }
+                    }
+                }
+            }
+
+			List<string>? stringList = list as List<string>;
+			if(stringList != null)
+			{
+                foreach (string cost in stringList)
+                {
+                    if (uid == cost)
+                    {
+                        result.Add(majorUID);
+                    }
+                }
+            }
+
+			List<AmountUID>? amountUIDs = list as List<AmountUID>;
+			if(amountUIDs != null)
+			{
+                foreach (AmountUID discount in amountUIDs)
+                {
+                    if (uid == discount.UID)
+                    {
+                        result.Add(majorUID);
+                    }
+                }
+            }
+			return result;
+		}
+
+
+
+
+        static List<string> GetDependencyReferencesPartTwo(string RequirementUId, List<majorTrait> list)
+		{
+            Debug.WriteLine(list.Count() + " asdklasdklmasklmdakmdls");
+            List<string> requiredByList = new List<string>();
 			foreach (majorTrait major in list)
 			{
-				foreach (List<string> orList in major.Dependencies)
-				{
-					foreach (string dependency in orList)
-					{
-						if (dependency == RequirementUId)
-						{
-							requiredByList.Add(major.UID);
-						}
-					}
-				}
-			}
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Dependencies, RequirementUId, major.UID));
+				if (requiredByList.Count() > 0) continue;
+
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.CostTypes, RequirementUId, major.UID));
+                if (requiredByList.Count() > 0) continue;
+
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.AffectedResources, RequirementUId, major.UID));
+                if (requiredByList.Count() > 0) continue;
+
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Discounts, RequirementUId, major.UID));
+                if (requiredByList.Count() > 0) continue;
+
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.FreeAbilities, RequirementUId, major.UID));
+                if (requiredByList.Count() > 0) continue;
+
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Exclusions, RequirementUId, major.UID));
+                if (requiredByList.Count() > 0) continue;
+            }
+
 			return requiredByList;
 		}
 		public static void MainMenu(config CurrentConfig)

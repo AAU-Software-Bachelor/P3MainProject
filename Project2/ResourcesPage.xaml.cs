@@ -22,6 +22,7 @@ using static Project2.resourceTrait;
 using static Project2.GalleryWindow;
 using static Project2.galleryIcon;
 using System.Diagnostics;
+using Project2.classes;
 
 namespace Project2
 {
@@ -63,11 +64,14 @@ namespace Project2
 
 		private void btnResource_ClickDelete(object sender, RoutedEventArgs e)
 		{
+			Functionality.deleteMajorTrait(CurrentConfig, lstResources, resourceCollection: ResourceCollection);
+			/*
 			var index = lstResources.SelectedIndex;
 			if (index >= 0)
 			{
 				ResourceCollection.Remove(CurrentConfig.GetTrait(ResourceCollection[index].UID, true)); //gets the Resource to be deleteted via GetTrait while it deletes it, and deletes its counterpart in ResourceCollection
             }
+			*/
 		}
         private void btnResource_ClickCopy(object sender, RoutedEventArgs e)
         {
@@ -114,6 +118,7 @@ namespace Project2
                     (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.PlaceholderImage, UriKind.Relative));
                     //currentRT.Image = (this.FindName("ChosenImage") as Image).ToString();
                 }*/
+				/*
                 if (currentRT.Image != string.Empty)
                 {
                     (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(currentRT.Image, UriKind.Absolute));
@@ -122,6 +127,7 @@ namespace Project2
                 {
                     (this.FindName("ChosenImage") as Image).Source = new BitmapImage(new Uri(CurrentConfig.PlaceholderImage, UriKind.Relative));
                 }
+				*/
                 (this.FindName("nameBox") as TextBox).Text = currentRT.Name; //sets text to the name from the current MajorTrait object
 				(this.FindName("descBox") as TextBox).Text = currentRT.Description;  //sets text to the description from the current MajorTrait object
 

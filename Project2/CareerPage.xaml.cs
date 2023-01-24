@@ -66,7 +66,7 @@ namespace Project2
 
         private void btnCareer_ClickDelete(object sender, EventArgs e)
         {
-            Functionality.DeleteRes(CurrentConfig, lstTraits, TraitCollection);
+            Functionality.deleteMajorTrait(CurrentConfig, lstTraits, TraitCollection);
         }
         private void btnCareer_ClickCopy(object sender, EventArgs e)
         {

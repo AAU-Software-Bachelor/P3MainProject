@@ -57,7 +57,7 @@ namespace Project2
         }
         private void btnReligion_ClickDelete(object sender, RoutedEventArgs e)
         {
-            Functionality.DeleteRes(CurrentConfig, lstTraits, TraitCollection);
+            Functionality.deleteMajorTrait(CurrentConfig, lstTraits, TraitCollection);
         }
         private void btnReligion_ClickCopy(object sender, RoutedEventArgs e)
         {

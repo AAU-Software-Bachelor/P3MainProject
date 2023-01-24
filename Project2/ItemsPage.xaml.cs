@@ -72,7 +72,7 @@ namespace Project2
 		/// </summary>
         private void btnItems_ClickDelete(object sender, RoutedEventArgs e)
         {
-            Functionality.DeleteRes(CurrentConfig, lstTraits, TraitCollection);
+            Functionality.deleteMajorTrait(CurrentConfig, lstTraits, TraitCollection);
         }
         private void btnItems_ClickCopy(object sender, RoutedEventArgs e)
         {
