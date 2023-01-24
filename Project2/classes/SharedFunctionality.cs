@@ -13,16 +13,13 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Windows.Documents;
 using System.Windows.Media.TextFormatting;
+using System.Security.Cryptography;
 
 namespace Project2.classes
 {
 	internal class Functionality
 	{
-        public static void DeleteResource(config currentConfig, ListView uiList, ObservableCollection<majorTrait>? collection = null)
-		{
-
-		}
-
+		//Handles the basic- and input-logic for the deletion of a trait
         public static void deleteMajorTrait(config currentConfig, ListView uiList, ObservableCollection<majorTrait>? collection = null, ObservableCollection<resourceTrait>? resourceCollection = null)
 		{
 			var index = uiList.SelectedIndex;
@@ -81,6 +78,7 @@ namespace Project2.classes
 			}
 		}
 
+		//Deletes all references to the string toBeDeleted in different ways according to the runTimeType of T
         static void delete<T>(List<T> list, string toBeDeleted)
 		{
 			List<List<string>>? temp = list as List<List<string>>;
@@ -123,7 +121,7 @@ namespace Project2.classes
             }
         }
 
-
+		//After clicking ok to the prompt this function uses the list dependers to delete all references
         private static void DeleteDependencies(config currentConfig, string toBeDeleted, List<string> dependers)
 		{
 			foreach (string depender in dependers)
@@ -140,6 +138,7 @@ namespace Project2.classes
                 }
 			}
 		}
+		//Returns a distinct list of UID's that would be affected by the removal of RequirementUid
 		private static List<string> GetDependencyReferences(config currentConfig, string RequirementUId)
 		{
 			List<string> requiredByList = new List<string>();
@@ -148,14 +147,34 @@ namespace Project2.classes
 			requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.RacList));
 			requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.RelList));
             requiredByList.AddRange(GetDependencyReferencesPartTwo(RequirementUId, currentConfig.IteList));
+			//Remove duplicates
             requiredByList = requiredByList.Distinct().ToList();
 			return requiredByList;
 		}
 
-		static List<string> GetDependencyReferencesPartThree<T>(T list, string uid, string majorUID)
+		//Makes a list of the affected traits
+        static List<string> GetDependencyReferencesPartTwo(string toBeDeleted, List<majorTrait> list)
+        {
+            List<string> requiredByList = new List<string>();
+            foreach (majorTrait major in list)
+            {
+				//Using AddRange instead of add so we can't add an empty entry.
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Dependencies, toBeDeleted, major.UID));                
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.CostTypes, toBeDeleted, major.UID));                
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.AffectedResources, toBeDeleted, major.UID));                
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Discounts, toBeDeleted, major.UID));                
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.FreeAbilities, toBeDeleted, major.UID));
+                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Exclusions, toBeDeleted, major.UID));
+            }
+
+            return requiredByList;
+        }
+
+		//Returns a list of length 0 or 1. If length is 1, the majorUID trait would affected by the removal of the uid trait
+        static List<string> GetDependencyReferencesPartThree<T>(T list, string uid, string majorUID)
 		{
 			List<string> result = new List<string>();
-            if (majorUID == "AbiList-/b7d51243-91a6-4315-ac7b-0ef713c3fd24") Debug.WriteLine("Found krigerpræst");
+            if (majorUID == "asdklasdklmasklmdakmdls") Debug.WriteLine("Found krigerpræst");
             List<List<string>>? requirements = list as List<List<string>>;
 			if(requirements != null)
 			{
@@ -170,12 +189,15 @@ namespace Project2.classes
                     }
                 }
             }
-
-			List<string>? stringList = list as List<string>;
+            Debug.WriteLineIf(uid == "AbiList-/b29ec719-ffde-46c8-8588-9d64c6d37e68", "HP-3 Cost");
+            List<string>? stringList = list as List<string>;
 			if(stringList != null)
 			{
+                Debug.WriteLineIf(uid == "AbiList-/b29ec719-ffde-46c8-8588-9d64c6d37e68", "HP-3 Cost");
                 foreach (string cost in stringList)
                 {
+                    Debug.WriteLineIf(uid == "AbiList-/b29ec719-ffde-46c8-8588-9d64c6d37e68", "HP-3");
+                    Debug.WriteLineIf(uid == "AbiList-/b29ec719-ffde-46c8-8588-9d64c6d37e68", cost);
                     if (uid == cost)
                     {
                         result.Add(majorUID);
@@ -196,43 +218,14 @@ namespace Project2.classes
             }
 			return result;
 		}
-
-
-
-
-        static List<string> GetDependencyReferencesPartTwo(string RequirementUId, List<majorTrait> list)
-		{
-            Debug.WriteLine(list.Count() + " asdklasdklmasklmdakmdls");
-            List<string> requiredByList = new List<string>();
-			foreach (majorTrait major in list)
-			{
-                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Dependencies, RequirementUId, major.UID));
-				if (requiredByList.Count() > 0) continue;
-
-                requiredByList.AddRange(GetDependencyReferencesPartThree(major.CostTypes, RequirementUId, major.UID));
-                if (requiredByList.Count() > 0) continue;
-
-                requiredByList.AddRange(GetDependencyReferencesPartThree(major.AffectedResources, RequirementUId, major.UID));
-                if (requiredByList.Count() > 0) continue;
-
-                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Discounts, RequirementUId, major.UID));
-                if (requiredByList.Count() > 0) continue;
-
-                requiredByList.AddRange(GetDependencyReferencesPartThree(major.FreeAbilities, RequirementUId, major.UID));
-                if (requiredByList.Count() > 0) continue;
-
-                requiredByList.AddRange(GetDependencyReferencesPartThree(major.Exclusions, RequirementUId, major.UID));
-                if (requiredByList.Count() > 0) continue;
-            }
-
-			return requiredByList;
-		}
+		//Opens a new menu
 		public static void MainMenu(config CurrentConfig)
 		{
 			MainWindow mainWindow = new MainWindow(CurrentConfig);
 			Application.Current.MainWindow.Content = mainWindow;
 		}
 
+		//Filters the searchBar
 		public static void searchbarMT(TextBox searchbar, ObservableCollection<majorTrait> MTCollection, List<majorTrait> MTLst, ListView lstTraits)
 		{
 			if (searchbar.Text != "")
@@ -256,6 +249,7 @@ namespace Project2.classes
 			}
 			lstTraits.SelectedIndex = 0;
 		}
+
         public static void MTCopy(ListView lstTraits, ObservableCollection<majorTrait> TraitCollection, config CurrentConfig, string type)
         {
             majorTrait? trait = lstTraits.SelectedItem as majorTrait;
