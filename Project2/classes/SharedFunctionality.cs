@@ -14,6 +14,7 @@ using System.Diagnostics;
 using System.Windows.Documents;
 using System.Windows.Media.TextFormatting;
 using System.Security.Cryptography;
+using System.Collections;
 
 namespace Project2.classes
 {
@@ -86,20 +87,24 @@ namespace Project2.classes
 			{
                 foreach (List<string> orList in temp)
                 {
-                    for (int i = 0; i < orList.Count(); i++)
+                    for (int i = orList.Count() - 1; i >= 0; i--)
                     {
                         if (orList[i] == toBeDeleted)
                         {
                             orList.RemoveAt(i);
                         }
-                    }
+					}
+				}
+                for (int i = 0; i < temp.Count(); i++)
+                {
+                    if (temp[i].Count() < 1) { temp.RemoveAt(i); }
                 }
             }
 
 			List<string>? stringTemp = list as List<string> ;
 			if(stringTemp != null)
 			{
-                for (int i = 0; i < stringTemp.Count(); i++)
+                for (int i = stringTemp.Count() - 1; i >= 0; i--)
                 {
                     if (stringTemp[i] == toBeDeleted)
                     {
@@ -111,7 +116,7 @@ namespace Project2.classes
 			List<AmountUID>? amountUIDs = list as List<AmountUID>;
 			if(amountUIDs != null)
 			{
-                for (int i = 0; i < amountUIDs.Count(); i++)
+                for (int i = amountUIDs.Count() - 1; i >= 0; i--)
                 {
                     if (amountUIDs[i].UID == toBeDeleted)
                     {
