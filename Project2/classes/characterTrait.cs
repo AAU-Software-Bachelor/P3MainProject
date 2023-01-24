@@ -70,7 +70,12 @@ namespace Project2
 			this.AffectedResources = new List<AmountUID>();
 			this.Dependencies = new List<List<string>>();
         }
-	}
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
 
 	public class resourceTrait : characterTrait
 	{
